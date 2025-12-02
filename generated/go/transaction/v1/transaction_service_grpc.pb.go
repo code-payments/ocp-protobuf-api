@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.21.12
-// source: transaction/v2/transaction_service.proto
+// source: transaction/v1/transaction_service.proto
 
 package transaction
 
@@ -104,7 +104,7 @@ func NewTransactionClient(cc grpc.ClientConnInterface) TransactionClient {
 }
 
 func (c *transactionClient) SubmitIntent(ctx context.Context, opts ...grpc.CallOption) (Transaction_SubmitIntentClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Transaction_ServiceDesc.Streams[0], "/ocp.transaction.v2.Transaction/SubmitIntent", opts...)
+	stream, err := c.cc.NewStream(ctx, &Transaction_ServiceDesc.Streams[0], "/ocp.transaction.v1.Transaction/SubmitIntent", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -136,7 +136,7 @@ func (x *transactionSubmitIntentClient) Recv() (*SubmitIntentResponse, error) {
 
 func (c *transactionClient) GetIntentMetadata(ctx context.Context, in *GetIntentMetadataRequest, opts ...grpc.CallOption) (*GetIntentMetadataResponse, error) {
 	out := new(GetIntentMetadataResponse)
-	err := c.cc.Invoke(ctx, "/ocp.transaction.v2.Transaction/GetIntentMetadata", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ocp.transaction.v1.Transaction/GetIntentMetadata", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -145,7 +145,7 @@ func (c *transactionClient) GetIntentMetadata(ctx context.Context, in *GetIntent
 
 func (c *transactionClient) GetLimits(ctx context.Context, in *GetLimitsRequest, opts ...grpc.CallOption) (*GetLimitsResponse, error) {
 	out := new(GetLimitsResponse)
-	err := c.cc.Invoke(ctx, "/ocp.transaction.v2.Transaction/GetLimits", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ocp.transaction.v1.Transaction/GetLimits", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -154,7 +154,7 @@ func (c *transactionClient) GetLimits(ctx context.Context, in *GetLimitsRequest,
 
 func (c *transactionClient) CanWithdrawToAccount(ctx context.Context, in *CanWithdrawToAccountRequest, opts ...grpc.CallOption) (*CanWithdrawToAccountResponse, error) {
 	out := new(CanWithdrawToAccountResponse)
-	err := c.cc.Invoke(ctx, "/ocp.transaction.v2.Transaction/CanWithdrawToAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ocp.transaction.v1.Transaction/CanWithdrawToAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -163,7 +163,7 @@ func (c *transactionClient) CanWithdrawToAccount(ctx context.Context, in *CanWit
 
 func (c *transactionClient) Airdrop(ctx context.Context, in *AirdropRequest, opts ...grpc.CallOption) (*AirdropResponse, error) {
 	out := new(AirdropResponse)
-	err := c.cc.Invoke(ctx, "/ocp.transaction.v2.Transaction/Airdrop", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ocp.transaction.v1.Transaction/Airdrop", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -172,7 +172,7 @@ func (c *transactionClient) Airdrop(ctx context.Context, in *AirdropRequest, opt
 
 func (c *transactionClient) VoidGiftCard(ctx context.Context, in *VoidGiftCardRequest, opts ...grpc.CallOption) (*VoidGiftCardResponse, error) {
 	out := new(VoidGiftCardResponse)
-	err := c.cc.Invoke(ctx, "/ocp.transaction.v2.Transaction/VoidGiftCard", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ocp.transaction.v1.Transaction/VoidGiftCard", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -180,7 +180,7 @@ func (c *transactionClient) VoidGiftCard(ctx context.Context, in *VoidGiftCardRe
 }
 
 func (c *transactionClient) StartSwap(ctx context.Context, opts ...grpc.CallOption) (Transaction_StartSwapClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Transaction_ServiceDesc.Streams[1], "/ocp.transaction.v2.Transaction/StartSwap", opts...)
+	stream, err := c.cc.NewStream(ctx, &Transaction_ServiceDesc.Streams[1], "/ocp.transaction.v1.Transaction/StartSwap", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -212,7 +212,7 @@ func (x *transactionStartSwapClient) Recv() (*StartSwapResponse, error) {
 
 func (c *transactionClient) GetSwap(ctx context.Context, in *GetSwapRequest, opts ...grpc.CallOption) (*GetSwapResponse, error) {
 	out := new(GetSwapResponse)
-	err := c.cc.Invoke(ctx, "/ocp.transaction.v2.Transaction/GetSwap", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ocp.transaction.v1.Transaction/GetSwap", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -221,7 +221,7 @@ func (c *transactionClient) GetSwap(ctx context.Context, in *GetSwapRequest, opt
 
 func (c *transactionClient) GetPendingSwaps(ctx context.Context, in *GetPendingSwapsRequest, opts ...grpc.CallOption) (*GetPendingSwapsResponse, error) {
 	out := new(GetPendingSwapsResponse)
-	err := c.cc.Invoke(ctx, "/ocp.transaction.v2.Transaction/GetPendingSwaps", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ocp.transaction.v1.Transaction/GetPendingSwaps", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -229,7 +229,7 @@ func (c *transactionClient) GetPendingSwaps(ctx context.Context, in *GetPendingS
 }
 
 func (c *transactionClient) Swap(ctx context.Context, opts ...grpc.CallOption) (Transaction_SwapClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Transaction_ServiceDesc.Streams[2], "/ocp.transaction.v2.Transaction/Swap", opts...)
+	stream, err := c.cc.NewStream(ctx, &Transaction_ServiceDesc.Streams[2], "/ocp.transaction.v1.Transaction/Swap", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -420,7 +420,7 @@ func _Transaction_GetIntentMetadata_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ocp.transaction.v2.Transaction/GetIntentMetadata",
+		FullMethod: "/ocp.transaction.v1.Transaction/GetIntentMetadata",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TransactionServer).GetIntentMetadata(ctx, req.(*GetIntentMetadataRequest))
@@ -438,7 +438,7 @@ func _Transaction_GetLimits_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ocp.transaction.v2.Transaction/GetLimits",
+		FullMethod: "/ocp.transaction.v1.Transaction/GetLimits",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TransactionServer).GetLimits(ctx, req.(*GetLimitsRequest))
@@ -456,7 +456,7 @@ func _Transaction_CanWithdrawToAccount_Handler(srv interface{}, ctx context.Cont
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ocp.transaction.v2.Transaction/CanWithdrawToAccount",
+		FullMethod: "/ocp.transaction.v1.Transaction/CanWithdrawToAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TransactionServer).CanWithdrawToAccount(ctx, req.(*CanWithdrawToAccountRequest))
@@ -474,7 +474,7 @@ func _Transaction_Airdrop_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ocp.transaction.v2.Transaction/Airdrop",
+		FullMethod: "/ocp.transaction.v1.Transaction/Airdrop",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TransactionServer).Airdrop(ctx, req.(*AirdropRequest))
@@ -492,7 +492,7 @@ func _Transaction_VoidGiftCard_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ocp.transaction.v2.Transaction/VoidGiftCard",
+		FullMethod: "/ocp.transaction.v1.Transaction/VoidGiftCard",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TransactionServer).VoidGiftCard(ctx, req.(*VoidGiftCardRequest))
@@ -536,7 +536,7 @@ func _Transaction_GetSwap_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ocp.transaction.v2.Transaction/GetSwap",
+		FullMethod: "/ocp.transaction.v1.Transaction/GetSwap",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TransactionServer).GetSwap(ctx, req.(*GetSwapRequest))
@@ -554,7 +554,7 @@ func _Transaction_GetPendingSwaps_Handler(srv interface{}, ctx context.Context, 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ocp.transaction.v2.Transaction/GetPendingSwaps",
+		FullMethod: "/ocp.transaction.v1.Transaction/GetPendingSwaps",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TransactionServer).GetPendingSwaps(ctx, req.(*GetPendingSwapsRequest))
@@ -592,7 +592,7 @@ func (x *transactionSwapServer) Recv() (*SwapRequest, error) {
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Transaction_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "ocp.transaction.v2.Transaction",
+	ServiceName: "ocp.transaction.v1.Transaction",
 	HandlerType: (*TransactionServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -644,5 +644,5 @@ var Transaction_ServiceDesc = grpc.ServiceDesc{
 			ClientStreams: true,
 		},
 	},
-	Metadata: "transaction/v2/transaction_service.proto",
+	Metadata: "transaction/v1/transaction_service.proto",
 }

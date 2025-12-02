@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.28.1
 // 	protoc        v3.21.12
-// source: transaction/v2/transaction_service.proto
+// source: transaction/v1/transaction_service.proto
 
 package transaction
 
@@ -58,11 +58,11 @@ func (x AirdropType) String() string {
 }
 
 func (AirdropType) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[0].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[0].Descriptor()
 }
 
 func (AirdropType) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[0]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[0]
 }
 
 func (x AirdropType) Number() protoreflect.EnumNumber {
@@ -71,7 +71,7 @@ func (x AirdropType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use AirdropType.Descriptor instead.
 func (AirdropType) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{0}
 }
 
 type FundingSource int32
@@ -104,11 +104,11 @@ func (x FundingSource) String() string {
 }
 
 func (FundingSource) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[1].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[1].Descriptor()
 }
 
 func (FundingSource) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[1]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[1]
 }
 
 func (x FundingSource) Number() protoreflect.EnumNumber {
@@ -117,7 +117,7 @@ func (x FundingSource) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use FundingSource.Descriptor instead.
 func (FundingSource) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{1}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{1}
 }
 
 type SubmitIntentResponse_Success_Code int32
@@ -148,11 +148,11 @@ func (x SubmitIntentResponse_Success_Code) String() string {
 }
 
 func (SubmitIntentResponse_Success_Code) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[2].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[2].Descriptor()
 }
 
 func (SubmitIntentResponse_Success_Code) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[2]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[2]
 }
 
 func (x SubmitIntentResponse_Success_Code) Number() protoreflect.EnumNumber {
@@ -161,7 +161,7 @@ func (x SubmitIntentResponse_Success_Code) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SubmitIntentResponse_Success_Code.Descriptor instead.
 func (SubmitIntentResponse_Success_Code) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{1, 1, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{1, 1, 0}
 }
 
 type SubmitIntentResponse_Error_Code int32
@@ -204,11 +204,11 @@ func (x SubmitIntentResponse_Error_Code) String() string {
 }
 
 func (SubmitIntentResponse_Error_Code) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[3].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[3].Descriptor()
 }
 
 func (SubmitIntentResponse_Error_Code) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[3]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[3]
 }
 
 func (x SubmitIntentResponse_Error_Code) Number() protoreflect.EnumNumber {
@@ -217,7 +217,7 @@ func (x SubmitIntentResponse_Error_Code) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SubmitIntentResponse_Error_Code.Descriptor instead.
 func (SubmitIntentResponse_Error_Code) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{1, 2, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{1, 2, 0}
 }
 
 type GetIntentMetadataResponse_Result int32
@@ -250,11 +250,11 @@ func (x GetIntentMetadataResponse_Result) String() string {
 }
 
 func (GetIntentMetadataResponse_Result) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[4].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[4].Descriptor()
 }
 
 func (GetIntentMetadataResponse_Result) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[4]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[4]
 }
 
 func (x GetIntentMetadataResponse_Result) Number() protoreflect.EnumNumber {
@@ -263,7 +263,7 @@ func (x GetIntentMetadataResponse_Result) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use GetIntentMetadataResponse_Result.Descriptor instead.
 func (GetIntentMetadataResponse_Result) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{3, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{3, 0}
 }
 
 type GetLimitsResponse_Result int32
@@ -293,11 +293,11 @@ func (x GetLimitsResponse_Result) String() string {
 }
 
 func (GetLimitsResponse_Result) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[5].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[5].Descriptor()
 }
 
 func (GetLimitsResponse_Result) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[5]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[5]
 }
 
 func (x GetLimitsResponse_Result) Number() protoreflect.EnumNumber {
@@ -306,7 +306,7 @@ func (x GetLimitsResponse_Result) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use GetLimitsResponse_Result.Descriptor instead.
 func (GetLimitsResponse_Result) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{5, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{5, 0}
 }
 
 type CanWithdrawToAccountResponse_AccountType int32
@@ -342,11 +342,11 @@ func (x CanWithdrawToAccountResponse_AccountType) String() string {
 }
 
 func (CanWithdrawToAccountResponse_AccountType) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[6].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[6].Descriptor()
 }
 
 func (CanWithdrawToAccountResponse_AccountType) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[6]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[6]
 }
 
 func (x CanWithdrawToAccountResponse_AccountType) Number() protoreflect.EnumNumber {
@@ -355,7 +355,7 @@ func (x CanWithdrawToAccountResponse_AccountType) Number() protoreflect.EnumNumb
 
 // Deprecated: Use CanWithdrawToAccountResponse_AccountType.Descriptor instead.
 func (CanWithdrawToAccountResponse_AccountType) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{7, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{7, 0}
 }
 
 type AirdropResponse_Result int32
@@ -393,11 +393,11 @@ func (x AirdropResponse_Result) String() string {
 }
 
 func (AirdropResponse_Result) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[7].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[7].Descriptor()
 }
 
 func (AirdropResponse_Result) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[7]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[7]
 }
 
 func (x AirdropResponse_Result) Number() protoreflect.EnumNumber {
@@ -406,7 +406,7 @@ func (x AirdropResponse_Result) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use AirdropResponse_Result.Descriptor instead.
 func (AirdropResponse_Result) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{9, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{9, 0}
 }
 
 type VoidGiftCardResponse_Result int32
@@ -448,11 +448,11 @@ func (x VoidGiftCardResponse_Result) String() string {
 }
 
 func (VoidGiftCardResponse_Result) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[8].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[8].Descriptor()
 }
 
 func (VoidGiftCardResponse_Result) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[8]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[8]
 }
 
 func (x VoidGiftCardResponse_Result) Number() protoreflect.EnumNumber {
@@ -461,7 +461,7 @@ func (x VoidGiftCardResponse_Result) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use VoidGiftCardResponse_Result.Descriptor instead.
 func (VoidGiftCardResponse_Result) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{11, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{11, 0}
 }
 
 type StartSwapResponse_Success_Code int32
@@ -491,11 +491,11 @@ func (x StartSwapResponse_Success_Code) String() string {
 }
 
 func (StartSwapResponse_Success_Code) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[9].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[9].Descriptor()
 }
 
 func (StartSwapResponse_Success_Code) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[9]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[9]
 }
 
 func (x StartSwapResponse_Success_Code) Number() protoreflect.EnumNumber {
@@ -504,7 +504,7 @@ func (x StartSwapResponse_Success_Code) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use StartSwapResponse_Success_Code.Descriptor instead.
 func (StartSwapResponse_Success_Code) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{13, 1, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{13, 1, 0}
 }
 
 type StartSwapResponse_Error_Code int32
@@ -543,11 +543,11 @@ func (x StartSwapResponse_Error_Code) String() string {
 }
 
 func (StartSwapResponse_Error_Code) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[10].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[10].Descriptor()
 }
 
 func (StartSwapResponse_Error_Code) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[10]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[10]
 }
 
 func (x StartSwapResponse_Error_Code) Number() protoreflect.EnumNumber {
@@ -556,7 +556,7 @@ func (x StartSwapResponse_Error_Code) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use StartSwapResponse_Error_Code.Descriptor instead.
 func (StartSwapResponse_Error_Code) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{13, 2, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{13, 2, 0}
 }
 
 type GetSwapResponse_Result int32
@@ -592,11 +592,11 @@ func (x GetSwapResponse_Result) String() string {
 }
 
 func (GetSwapResponse_Result) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[11].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[11].Descriptor()
 }
 
 func (GetSwapResponse_Result) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[11]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[11]
 }
 
 func (x GetSwapResponse_Result) Number() protoreflect.EnumNumber {
@@ -605,7 +605,7 @@ func (x GetSwapResponse_Result) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use GetSwapResponse_Result.Descriptor instead.
 func (GetSwapResponse_Result) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{15, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{15, 0}
 }
 
 type GetPendingSwapsResponse_Result int32
@@ -638,11 +638,11 @@ func (x GetPendingSwapsResponse_Result) String() string {
 }
 
 func (GetPendingSwapsResponse_Result) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[12].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[12].Descriptor()
 }
 
 func (GetPendingSwapsResponse_Result) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[12]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[12]
 }
 
 func (x GetPendingSwapsResponse_Result) Number() protoreflect.EnumNumber {
@@ -651,7 +651,7 @@ func (x GetPendingSwapsResponse_Result) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use GetPendingSwapsResponse_Result.Descriptor instead.
 func (GetPendingSwapsResponse_Result) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{17, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{17, 0}
 }
 
 type SwapResponse_Success_Code int32
@@ -686,11 +686,11 @@ func (x SwapResponse_Success_Code) String() string {
 }
 
 func (SwapResponse_Success_Code) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[13].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[13].Descriptor()
 }
 
 func (SwapResponse_Success_Code) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[13]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[13]
 }
 
 func (x SwapResponse_Success_Code) Number() protoreflect.EnumNumber {
@@ -699,7 +699,7 @@ func (x SwapResponse_Success_Code) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SwapResponse_Success_Code.Descriptor instead.
 func (SwapResponse_Success_Code) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{19, 1, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{19, 1, 0}
 }
 
 type SwapResponse_Error_Code int32
@@ -742,11 +742,11 @@ func (x SwapResponse_Error_Code) String() string {
 }
 
 func (SwapResponse_Error_Code) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[14].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[14].Descriptor()
 }
 
 func (SwapResponse_Error_Code) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[14]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[14]
 }
 
 func (x SwapResponse_Error_Code) Number() protoreflect.EnumNumber {
@@ -755,7 +755,7 @@ func (x SwapResponse_Error_Code) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SwapResponse_Error_Code.Descriptor instead.
 func (SwapResponse_Error_Code) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{19, 2, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{19, 2, 0}
 }
 
 type OpenAccountsMetadata_AccountSet int32
@@ -788,11 +788,11 @@ func (x OpenAccountsMetadata_AccountSet) String() string {
 }
 
 func (OpenAccountsMetadata_AccountSet) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[15].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[15].Descriptor()
 }
 
 func (OpenAccountsMetadata_AccountSet) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[15]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[15]
 }
 
 func (x OpenAccountsMetadata_AccountSet) Number() protoreflect.EnumNumber {
@@ -801,7 +801,7 @@ func (x OpenAccountsMetadata_AccountSet) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use OpenAccountsMetadata_AccountSet.Descriptor instead.
 func (OpenAccountsMetadata_AccountSet) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{21, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{21, 0}
 }
 
 type FeePaymentAction_FeeType int32
@@ -834,11 +834,11 @@ func (x FeePaymentAction_FeeType) String() string {
 }
 
 func (FeePaymentAction_FeeType) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[16].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[16].Descriptor()
 }
 
 func (FeePaymentAction_FeeType) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[16]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[16]
 }
 
 func (x FeePaymentAction_FeeType) Number() protoreflect.EnumNumber {
@@ -847,7 +847,7 @@ func (x FeePaymentAction_FeeType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use FeePaymentAction_FeeType.Descriptor instead.
 func (FeePaymentAction_FeeType) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{29, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{29, 0}
 }
 
 type DeniedErrorDetails_Code int32
@@ -878,11 +878,11 @@ func (x DeniedErrorDetails_Code) String() string {
 }
 
 func (DeniedErrorDetails_Code) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[17].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[17].Descriptor()
 }
 
 func (DeniedErrorDetails_Code) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[17]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[17]
 }
 
 func (x DeniedErrorDetails_Code) Number() protoreflect.EnumNumber {
@@ -891,7 +891,7 @@ func (x DeniedErrorDetails_Code) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use DeniedErrorDetails_Code.Descriptor instead.
 func (DeniedErrorDetails_Code) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{39, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{39, 0}
 }
 
 type SwapMetadata_State int32
@@ -945,11 +945,11 @@ func (x SwapMetadata_State) String() string {
 }
 
 func (SwapMetadata_State) Descriptor() protoreflect.EnumDescriptor {
-	return file_transaction_v2_transaction_service_proto_enumTypes[18].Descriptor()
+	return file_transaction_v1_transaction_service_proto_enumTypes[18].Descriptor()
 }
 
 func (SwapMetadata_State) Type() protoreflect.EnumType {
-	return &file_transaction_v2_transaction_service_proto_enumTypes[18]
+	return &file_transaction_v1_transaction_service_proto_enumTypes[18]
 }
 
 func (x SwapMetadata_State) Number() protoreflect.EnumNumber {
@@ -958,7 +958,7 @@ func (x SwapMetadata_State) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SwapMetadata_State.Descriptor instead.
 func (SwapMetadata_State) EnumDescriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{45, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{45, 0}
 }
 
 type SubmitIntentRequest struct {
@@ -976,7 +976,7 @@ type SubmitIntentRequest struct {
 func (x *SubmitIntentRequest) Reset() {
 	*x = SubmitIntentRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[0]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -989,7 +989,7 @@ func (x *SubmitIntentRequest) String() string {
 func (*SubmitIntentRequest) ProtoMessage() {}
 
 func (x *SubmitIntentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[0]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1002,7 +1002,7 @@ func (x *SubmitIntentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitIntentRequest.ProtoReflect.Descriptor instead.
 func (*SubmitIntentRequest) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{0}
 }
 
 func (m *SubmitIntentRequest) GetRequest() isSubmitIntentRequest_Request {
@@ -1058,7 +1058,7 @@ type SubmitIntentResponse struct {
 func (x *SubmitIntentResponse) Reset() {
 	*x = SubmitIntentResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[1]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1071,7 +1071,7 @@ func (x *SubmitIntentResponse) String() string {
 func (*SubmitIntentResponse) ProtoMessage() {}
 
 func (x *SubmitIntentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[1]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1084,7 +1084,7 @@ func (x *SubmitIntentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitIntentResponse.ProtoReflect.Descriptor instead.
 func (*SubmitIntentResponse) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{1}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (m *SubmitIntentResponse) GetResponse() isSubmitIntentResponse_Response {
@@ -1156,7 +1156,7 @@ type GetIntentMetadataRequest struct {
 func (x *GetIntentMetadataRequest) Reset() {
 	*x = GetIntentMetadataRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[2]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1169,7 +1169,7 @@ func (x *GetIntentMetadataRequest) String() string {
 func (*GetIntentMetadataRequest) ProtoMessage() {}
 
 func (x *GetIntentMetadataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[2]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1182,7 +1182,7 @@ func (x *GetIntentMetadataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetIntentMetadataRequest.ProtoReflect.Descriptor instead.
 func (*GetIntentMetadataRequest) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{2}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetIntentMetadataRequest) GetIntentId() *v1.IntentId {
@@ -1211,14 +1211,14 @@ type GetIntentMetadataResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Result   GetIntentMetadataResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=ocp.transaction.v2.GetIntentMetadataResponse_Result" json:"result,omitempty"`
+	Result   GetIntentMetadataResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=ocp.transaction.v1.GetIntentMetadataResponse_Result" json:"result,omitempty"`
 	Metadata *Metadata                        `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 }
 
 func (x *GetIntentMetadataResponse) Reset() {
 	*x = GetIntentMetadataResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[3]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1231,7 +1231,7 @@ func (x *GetIntentMetadataResponse) String() string {
 func (*GetIntentMetadataResponse) ProtoMessage() {}
 
 func (x *GetIntentMetadataResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[3]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1244,7 +1244,7 @@ func (x *GetIntentMetadataResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetIntentMetadataResponse.ProtoReflect.Descriptor instead.
 func (*GetIntentMetadataResponse) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{3}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetIntentMetadataResponse) GetResult() GetIntentMetadataResponse_Result {
@@ -1282,7 +1282,7 @@ type GetLimitsRequest struct {
 func (x *GetLimitsRequest) Reset() {
 	*x = GetLimitsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[4]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1295,7 +1295,7 @@ func (x *GetLimitsRequest) String() string {
 func (*GetLimitsRequest) ProtoMessage() {}
 
 func (x *GetLimitsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[4]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1308,7 +1308,7 @@ func (x *GetLimitsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLimitsRequest.ProtoReflect.Descriptor instead.
 func (*GetLimitsRequest) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{4}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GetLimitsRequest) GetOwner() *v1.SolanaAccountId {
@@ -1337,7 +1337,7 @@ type GetLimitsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Result GetLimitsResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=ocp.transaction.v2.GetLimitsResponse_Result" json:"result,omitempty"`
+	Result GetLimitsResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=ocp.transaction.v1.GetLimitsResponse_Result" json:"result,omitempty"`
 	// Send limits keyed by currency
 	SendLimitsByCurrency map[string]*SendLimit `protobuf:"bytes,2,rep,name=send_limits_by_currency,json=sendLimitsByCurrency,proto3" json:"send_limits_by_currency,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// The amount of USD transacted since the consumption timestamp
@@ -1347,7 +1347,7 @@ type GetLimitsResponse struct {
 func (x *GetLimitsResponse) Reset() {
 	*x = GetLimitsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[5]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1360,7 +1360,7 @@ func (x *GetLimitsResponse) String() string {
 func (*GetLimitsResponse) ProtoMessage() {}
 
 func (x *GetLimitsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[5]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1373,7 +1373,7 @@ func (x *GetLimitsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLimitsResponse.ProtoReflect.Descriptor instead.
 func (*GetLimitsResponse) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{5}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetLimitsResponse) GetResult() GetLimitsResponse_Result {
@@ -1412,7 +1412,7 @@ type CanWithdrawToAccountRequest struct {
 func (x *CanWithdrawToAccountRequest) Reset() {
 	*x = CanWithdrawToAccountRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[6]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1425,7 +1425,7 @@ func (x *CanWithdrawToAccountRequest) String() string {
 func (*CanWithdrawToAccountRequest) ProtoMessage() {}
 
 func (x *CanWithdrawToAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[6]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1438,7 +1438,7 @@ func (x *CanWithdrawToAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CanWithdrawToAccountRequest.ProtoReflect.Descriptor instead.
 func (*CanWithdrawToAccountRequest) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{6}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CanWithdrawToAccountRequest) GetAccount() *v1.SolanaAccountId {
@@ -1470,7 +1470,7 @@ type CanWithdrawToAccountResponse struct {
 	// Metadata so the client knows how to withdraw to the account. Server cannot
 	// provide precalculated addresses in this response to maintain non-custodial
 	// status.
-	AccountType CanWithdrawToAccountResponse_AccountType `protobuf:"varint,2,opt,name=account_type,json=accountType,proto3,enum=ocp.transaction.v2.CanWithdrawToAccountResponse_AccountType" json:"account_type,omitempty"`
+	AccountType CanWithdrawToAccountResponse_AccountType `protobuf:"varint,2,opt,name=account_type,json=accountType,proto3,enum=ocp.transaction.v1.CanWithdrawToAccountResponse_AccountType" json:"account_type,omitempty"`
 	// ATA requires initialization before the withdrawal can occur. Server may not
 	// subsidize the account creation, so a fee may be required.
 	RequiresInitialization bool `protobuf:"varint,3,opt,name=requires_initialization,json=requiresInitialization,proto3" json:"requires_initialization,omitempty"`
@@ -1489,7 +1489,7 @@ type CanWithdrawToAccountResponse struct {
 func (x *CanWithdrawToAccountResponse) Reset() {
 	*x = CanWithdrawToAccountResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[7]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1502,7 +1502,7 @@ func (x *CanWithdrawToAccountResponse) String() string {
 func (*CanWithdrawToAccountResponse) ProtoMessage() {}
 
 func (x *CanWithdrawToAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[7]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1515,7 +1515,7 @@ func (x *CanWithdrawToAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CanWithdrawToAccountResponse.ProtoReflect.Descriptor instead.
 func (*CanWithdrawToAccountResponse) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{7}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CanWithdrawToAccountResponse) GetIsValidPaymentDestination() bool {
@@ -1552,7 +1552,7 @@ type AirdropRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The type of airdrop to claim
-	AirdropType AirdropType `protobuf:"varint,1,opt,name=airdrop_type,json=airdropType,proto3,enum=ocp.transaction.v2.AirdropType" json:"airdrop_type,omitempty"`
+	AirdropType AirdropType `protobuf:"varint,1,opt,name=airdrop_type,json=airdropType,proto3,enum=ocp.transaction.v1.AirdropType" json:"airdrop_type,omitempty"`
 	// The owner account to airdrop core mint tokens to
 	Owner *v1.SolanaAccountId `protobuf:"bytes,2,opt,name=owner,proto3" json:"owner,omitempty"`
 	// The signature is of serialize(AirdropRequest) without this field set
@@ -1564,7 +1564,7 @@ type AirdropRequest struct {
 func (x *AirdropRequest) Reset() {
 	*x = AirdropRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[8]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1577,7 +1577,7 @@ func (x *AirdropRequest) String() string {
 func (*AirdropRequest) ProtoMessage() {}
 
 func (x *AirdropRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[8]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1590,7 +1590,7 @@ func (x *AirdropRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AirdropRequest.ProtoReflect.Descriptor instead.
 func (*AirdropRequest) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{8}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *AirdropRequest) GetAirdropType() AirdropType {
@@ -1619,7 +1619,7 @@ type AirdropResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Result AirdropResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=ocp.transaction.v2.AirdropResponse_Result" json:"result,omitempty"`
+	Result AirdropResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=ocp.transaction.v1.AirdropResponse_Result" json:"result,omitempty"`
 	// Exchange data for the amount of core mint tokens airdropped when successful
 	ExchangeData *ExchangeData `protobuf:"bytes,2,opt,name=exchange_data,json=exchangeData,proto3" json:"exchange_data,omitempty"`
 }
@@ -1627,7 +1627,7 @@ type AirdropResponse struct {
 func (x *AirdropResponse) Reset() {
 	*x = AirdropResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[9]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1640,7 +1640,7 @@ func (x *AirdropResponse) String() string {
 func (*AirdropResponse) ProtoMessage() {}
 
 func (x *AirdropResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[9]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1653,7 +1653,7 @@ func (x *AirdropResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AirdropResponse.ProtoReflect.Descriptor instead.
 func (*AirdropResponse) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{9}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *AirdropResponse) GetResult() AirdropResponse_Result {
@@ -1688,7 +1688,7 @@ type VoidGiftCardRequest struct {
 func (x *VoidGiftCardRequest) Reset() {
 	*x = VoidGiftCardRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[10]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1701,7 +1701,7 @@ func (x *VoidGiftCardRequest) String() string {
 func (*VoidGiftCardRequest) ProtoMessage() {}
 
 func (x *VoidGiftCardRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[10]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1714,7 +1714,7 @@ func (x *VoidGiftCardRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VoidGiftCardRequest.ProtoReflect.Descriptor instead.
 func (*VoidGiftCardRequest) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{10}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *VoidGiftCardRequest) GetOwner() *v1.SolanaAccountId {
@@ -1743,13 +1743,13 @@ type VoidGiftCardResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Result VoidGiftCardResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=ocp.transaction.v2.VoidGiftCardResponse_Result" json:"result,omitempty"`
+	Result VoidGiftCardResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=ocp.transaction.v1.VoidGiftCardResponse_Result" json:"result,omitempty"`
 }
 
 func (x *VoidGiftCardResponse) Reset() {
 	*x = VoidGiftCardResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[11]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1762,7 +1762,7 @@ func (x *VoidGiftCardResponse) String() string {
 func (*VoidGiftCardResponse) ProtoMessage() {}
 
 func (x *VoidGiftCardResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[11]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1775,7 +1775,7 @@ func (x *VoidGiftCardResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VoidGiftCardResponse.ProtoReflect.Descriptor instead.
 func (*VoidGiftCardResponse) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{11}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *VoidGiftCardResponse) GetResult() VoidGiftCardResponse_Result {
@@ -1800,7 +1800,7 @@ type StartSwapRequest struct {
 func (x *StartSwapRequest) Reset() {
 	*x = StartSwapRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[12]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1813,7 +1813,7 @@ func (x *StartSwapRequest) String() string {
 func (*StartSwapRequest) ProtoMessage() {}
 
 func (x *StartSwapRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[12]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1826,7 +1826,7 @@ func (x *StartSwapRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartSwapRequest.ProtoReflect.Descriptor instead.
 func (*StartSwapRequest) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{12}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (m *StartSwapRequest) GetRequest() isStartSwapRequest_Request {
@@ -1882,7 +1882,7 @@ type StartSwapResponse struct {
 func (x *StartSwapResponse) Reset() {
 	*x = StartSwapResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[13]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1895,7 +1895,7 @@ func (x *StartSwapResponse) String() string {
 func (*StartSwapResponse) ProtoMessage() {}
 
 func (x *StartSwapResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[13]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1908,7 +1908,7 @@ func (x *StartSwapResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartSwapResponse.ProtoReflect.Descriptor instead.
 func (*StartSwapResponse) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{13}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (m *StartSwapResponse) GetResponse() isStartSwapResponse_Response {
@@ -1977,7 +1977,7 @@ type GetSwapRequest struct {
 func (x *GetSwapRequest) Reset() {
 	*x = GetSwapRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[14]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1990,7 +1990,7 @@ func (x *GetSwapRequest) String() string {
 func (*GetSwapRequest) ProtoMessage() {}
 
 func (x *GetSwapRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[14]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2003,7 +2003,7 @@ func (x *GetSwapRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSwapRequest.ProtoReflect.Descriptor instead.
 func (*GetSwapRequest) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{14}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetSwapRequest) GetId() *v1.SwapId {
@@ -2032,14 +2032,14 @@ type GetSwapResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Result GetSwapResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=ocp.transaction.v2.GetSwapResponse_Result" json:"result,omitempty"`
+	Result GetSwapResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=ocp.transaction.v1.GetSwapResponse_Result" json:"result,omitempty"`
 	Swap   *SwapMetadata          `protobuf:"bytes,2,opt,name=swap,proto3" json:"swap,omitempty"`
 }
 
 func (x *GetSwapResponse) Reset() {
 	*x = GetSwapResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[15]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2052,7 +2052,7 @@ func (x *GetSwapResponse) String() string {
 func (*GetSwapResponse) ProtoMessage() {}
 
 func (x *GetSwapResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[15]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2065,7 +2065,7 @@ func (x *GetSwapResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSwapResponse.ProtoReflect.Descriptor instead.
 func (*GetSwapResponse) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{15}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetSwapResponse) GetResult() GetSwapResponse_Result {
@@ -2097,7 +2097,7 @@ type GetPendingSwapsRequest struct {
 func (x *GetPendingSwapsRequest) Reset() {
 	*x = GetPendingSwapsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[16]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2110,7 +2110,7 @@ func (x *GetPendingSwapsRequest) String() string {
 func (*GetPendingSwapsRequest) ProtoMessage() {}
 
 func (x *GetPendingSwapsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[16]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2123,7 +2123,7 @@ func (x *GetPendingSwapsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPendingSwapsRequest.ProtoReflect.Descriptor instead.
 func (*GetPendingSwapsRequest) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{16}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetPendingSwapsRequest) GetOwner() *v1.SolanaAccountId {
@@ -2145,14 +2145,14 @@ type GetPendingSwapsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Result GetPendingSwapsResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=ocp.transaction.v2.GetPendingSwapsResponse_Result" json:"result,omitempty"`
+	Result GetPendingSwapsResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=ocp.transaction.v1.GetPendingSwapsResponse_Result" json:"result,omitempty"`
 	Swaps  []*SwapMetadata                `protobuf:"bytes,2,rep,name=swaps,proto3" json:"swaps,omitempty"`
 }
 
 func (x *GetPendingSwapsResponse) Reset() {
 	*x = GetPendingSwapsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[17]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2165,7 +2165,7 @@ func (x *GetPendingSwapsResponse) String() string {
 func (*GetPendingSwapsResponse) ProtoMessage() {}
 
 func (x *GetPendingSwapsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[17]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2178,7 +2178,7 @@ func (x *GetPendingSwapsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPendingSwapsResponse.ProtoReflect.Descriptor instead.
 func (*GetPendingSwapsResponse) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{17}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetPendingSwapsResponse) GetResult() GetPendingSwapsResponse_Result {
@@ -2210,7 +2210,7 @@ type SwapRequest struct {
 func (x *SwapRequest) Reset() {
 	*x = SwapRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[18]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2223,7 +2223,7 @@ func (x *SwapRequest) String() string {
 func (*SwapRequest) ProtoMessage() {}
 
 func (x *SwapRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[18]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2236,7 +2236,7 @@ func (x *SwapRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwapRequest.ProtoReflect.Descriptor instead.
 func (*SwapRequest) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{18}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (m *SwapRequest) GetRequest() isSwapRequest_Request {
@@ -2292,7 +2292,7 @@ type SwapResponse struct {
 func (x *SwapResponse) Reset() {
 	*x = SwapResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[19]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2305,7 +2305,7 @@ func (x *SwapResponse) String() string {
 func (*SwapResponse) ProtoMessage() {}
 
 func (x *SwapResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[19]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2318,7 +2318,7 @@ func (x *SwapResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwapResponse.ProtoReflect.Descriptor instead.
 func (*SwapResponse) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{19}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (m *SwapResponse) GetResponse() isSwapResponse_Response {
@@ -2389,7 +2389,7 @@ type Metadata struct {
 func (x *Metadata) Reset() {
 	*x = Metadata{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[20]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2402,7 +2402,7 @@ func (x *Metadata) String() string {
 func (*Metadata) ProtoMessage() {}
 
 func (x *Metadata) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[20]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2415,7 +2415,7 @@ func (x *Metadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Metadata.ProtoReflect.Descriptor instead.
 func (*Metadata) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{20}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (m *Metadata) GetType() isMetadata_Type {
@@ -2499,7 +2499,7 @@ type OpenAccountsMetadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccountSet OpenAccountsMetadata_AccountSet `protobuf:"varint,1,opt,name=account_set,json=accountSet,proto3,enum=ocp.transaction.v2.OpenAccountsMetadata_AccountSet" json:"account_set,omitempty"`
+	AccountSet OpenAccountsMetadata_AccountSet `protobuf:"varint,1,opt,name=account_set,json=accountSet,proto3,enum=ocp.transaction.v1.OpenAccountsMetadata_AccountSet" json:"account_set,omitempty"`
 	// The mint that this action will be operating against
 	Mint *v1.SolanaAccountId `protobuf:"bytes,2,opt,name=mint,proto3" json:"mint,omitempty"`
 }
@@ -2507,7 +2507,7 @@ type OpenAccountsMetadata struct {
 func (x *OpenAccountsMetadata) Reset() {
 	*x = OpenAccountsMetadata{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[21]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2520,7 +2520,7 @@ func (x *OpenAccountsMetadata) String() string {
 func (*OpenAccountsMetadata) ProtoMessage() {}
 
 func (x *OpenAccountsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[21]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2533,7 +2533,7 @@ func (x *OpenAccountsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OpenAccountsMetadata.ProtoReflect.Descriptor instead.
 func (*OpenAccountsMetadata) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{21}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *OpenAccountsMetadata) GetAccountSet() OpenAccountsMetadata_AccountSet {
@@ -2600,7 +2600,7 @@ type SendPublicPaymentMetadata struct {
 func (x *SendPublicPaymentMetadata) Reset() {
 	*x = SendPublicPaymentMetadata{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[22]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2613,7 +2613,7 @@ func (x *SendPublicPaymentMetadata) String() string {
 func (*SendPublicPaymentMetadata) ProtoMessage() {}
 
 func (x *SendPublicPaymentMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[22]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2626,7 +2626,7 @@ func (x *SendPublicPaymentMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendPublicPaymentMetadata.ProtoReflect.Descriptor instead.
 func (*SendPublicPaymentMetadata) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{22}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *SendPublicPaymentMetadata) GetSource() *v1.SolanaAccountId {
@@ -2707,7 +2707,7 @@ type ReceivePaymentsPubliclyMetadata struct {
 func (x *ReceivePaymentsPubliclyMetadata) Reset() {
 	*x = ReceivePaymentsPubliclyMetadata{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[23]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2720,7 +2720,7 @@ func (x *ReceivePaymentsPubliclyMetadata) String() string {
 func (*ReceivePaymentsPubliclyMetadata) ProtoMessage() {}
 
 func (x *ReceivePaymentsPubliclyMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[23]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2733,7 +2733,7 @@ func (x *ReceivePaymentsPubliclyMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReceivePaymentsPubliclyMetadata.ProtoReflect.Descriptor instead.
 func (*ReceivePaymentsPubliclyMetadata) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{23}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ReceivePaymentsPubliclyMetadata) GetSource() *v1.SolanaAccountId {
@@ -2800,7 +2800,7 @@ type PublicDistributionMetadata struct {
 func (x *PublicDistributionMetadata) Reset() {
 	*x = PublicDistributionMetadata{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[24]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2813,7 +2813,7 @@ func (x *PublicDistributionMetadata) String() string {
 func (*PublicDistributionMetadata) ProtoMessage() {}
 
 func (x *PublicDistributionMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[24]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2826,7 +2826,7 @@ func (x *PublicDistributionMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PublicDistributionMetadata.ProtoReflect.Descriptor instead.
 func (*PublicDistributionMetadata) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{24}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *PublicDistributionMetadata) GetSource() *v1.SolanaAccountId {
@@ -2875,7 +2875,7 @@ type Action struct {
 func (x *Action) Reset() {
 	*x = Action{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[25]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2888,7 +2888,7 @@ func (x *Action) String() string {
 func (*Action) ProtoMessage() {}
 
 func (x *Action) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[25]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2901,7 +2901,7 @@ func (x *Action) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Action.ProtoReflect.Descriptor instead.
 func (*Action) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{25}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *Action) GetId() uint32 {
@@ -3003,7 +3003,7 @@ type OpenAccountAction struct {
 func (x *OpenAccountAction) Reset() {
 	*x = OpenAccountAction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[26]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3016,7 +3016,7 @@ func (x *OpenAccountAction) String() string {
 func (*OpenAccountAction) ProtoMessage() {}
 
 func (x *OpenAccountAction) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[26]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3029,7 +3029,7 @@ func (x *OpenAccountAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OpenAccountAction.ProtoReflect.Descriptor instead.
 func (*OpenAccountAction) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{26}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *OpenAccountAction) GetAccountType() v1.AccountType {
@@ -3102,7 +3102,7 @@ type NoPrivacyTransferAction struct {
 func (x *NoPrivacyTransferAction) Reset() {
 	*x = NoPrivacyTransferAction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[27]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3115,7 +3115,7 @@ func (x *NoPrivacyTransferAction) String() string {
 func (*NoPrivacyTransferAction) ProtoMessage() {}
 
 func (x *NoPrivacyTransferAction) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[27]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3128,7 +3128,7 @@ func (x *NoPrivacyTransferAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NoPrivacyTransferAction.ProtoReflect.Descriptor instead.
 func (*NoPrivacyTransferAction) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{27}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *NoPrivacyTransferAction) GetAuthority() *v1.SolanaAccountId {
@@ -3194,7 +3194,7 @@ type NoPrivacyWithdrawAction struct {
 func (x *NoPrivacyWithdrawAction) Reset() {
 	*x = NoPrivacyWithdrawAction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[28]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3207,7 +3207,7 @@ func (x *NoPrivacyWithdrawAction) String() string {
 func (*NoPrivacyWithdrawAction) ProtoMessage() {}
 
 func (x *NoPrivacyWithdrawAction) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[28]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3220,7 +3220,7 @@ func (x *NoPrivacyWithdrawAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NoPrivacyWithdrawAction.ProtoReflect.Descriptor instead.
 func (*NoPrivacyWithdrawAction) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{28}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *NoPrivacyWithdrawAction) GetAuthority() *v1.SolanaAccountId {
@@ -3279,7 +3279,7 @@ type FeePaymentAction struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The type of fee being operated on
-	Type FeePaymentAction_FeeType `protobuf:"varint,1,opt,name=type,proto3,enum=ocp.transaction.v2.FeePaymentAction_FeeType" json:"type,omitempty"`
+	Type FeePaymentAction_FeeType `protobuf:"varint,1,opt,name=type,proto3,enum=ocp.transaction.v1.FeePaymentAction_FeeType" json:"type,omitempty"`
 	// The public key of the private key that has authority over source
 	Authority *v1.SolanaAccountId `protobuf:"bytes,2,opt,name=authority,proto3" json:"authority,omitempty"`
 	// The source account where funds are transferred from
@@ -3293,7 +3293,7 @@ type FeePaymentAction struct {
 func (x *FeePaymentAction) Reset() {
 	*x = FeePaymentAction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[29]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3306,7 +3306,7 @@ func (x *FeePaymentAction) String() string {
 func (*FeePaymentAction) ProtoMessage() {}
 
 func (x *FeePaymentAction) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[29]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3319,7 +3319,7 @@ func (x *FeePaymentAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FeePaymentAction.ProtoReflect.Descriptor instead.
 func (*FeePaymentAction) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{29}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *FeePaymentAction) GetType() FeePaymentAction_FeeType {
@@ -3385,7 +3385,7 @@ type ServerParameter struct {
 func (x *ServerParameter) Reset() {
 	*x = ServerParameter{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[30]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[30]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3398,7 +3398,7 @@ func (x *ServerParameter) String() string {
 func (*ServerParameter) ProtoMessage() {}
 
 func (x *ServerParameter) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[30]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[30]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3411,7 +3411,7 @@ func (x *ServerParameter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServerParameter.ProtoReflect.Descriptor instead.
 func (*ServerParameter) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{30}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *ServerParameter) GetActionId() uint32 {
@@ -3507,7 +3507,7 @@ type NoncedTransactionMetadata struct {
 func (x *NoncedTransactionMetadata) Reset() {
 	*x = NoncedTransactionMetadata{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[31]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3520,7 +3520,7 @@ func (x *NoncedTransactionMetadata) String() string {
 func (*NoncedTransactionMetadata) ProtoMessage() {}
 
 func (x *NoncedTransactionMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[31]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3533,7 +3533,7 @@ func (x *NoncedTransactionMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NoncedTransactionMetadata.ProtoReflect.Descriptor instead.
 func (*NoncedTransactionMetadata) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{31}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *NoncedTransactionMetadata) GetNonce() *v1.SolanaAccountId {
@@ -3559,7 +3559,7 @@ type OpenAccountServerParameter struct {
 func (x *OpenAccountServerParameter) Reset() {
 	*x = OpenAccountServerParameter{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[32]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[32]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3572,7 +3572,7 @@ func (x *OpenAccountServerParameter) String() string {
 func (*OpenAccountServerParameter) ProtoMessage() {}
 
 func (x *OpenAccountServerParameter) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[32]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[32]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3585,7 +3585,7 @@ func (x *OpenAccountServerParameter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OpenAccountServerParameter.ProtoReflect.Descriptor instead.
 func (*OpenAccountServerParameter) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{32}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{32}
 }
 
 type NoPrivacyTransferServerParameter struct {
@@ -3597,7 +3597,7 @@ type NoPrivacyTransferServerParameter struct {
 func (x *NoPrivacyTransferServerParameter) Reset() {
 	*x = NoPrivacyTransferServerParameter{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[33]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3610,7 +3610,7 @@ func (x *NoPrivacyTransferServerParameter) String() string {
 func (*NoPrivacyTransferServerParameter) ProtoMessage() {}
 
 func (x *NoPrivacyTransferServerParameter) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[33]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3623,7 +3623,7 @@ func (x *NoPrivacyTransferServerParameter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NoPrivacyTransferServerParameter.ProtoReflect.Descriptor instead.
 func (*NoPrivacyTransferServerParameter) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{33}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{33}
 }
 
 type NoPrivacyWithdrawServerParameter struct {
@@ -3635,7 +3635,7 @@ type NoPrivacyWithdrawServerParameter struct {
 func (x *NoPrivacyWithdrawServerParameter) Reset() {
 	*x = NoPrivacyWithdrawServerParameter{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[34]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3648,7 +3648,7 @@ func (x *NoPrivacyWithdrawServerParameter) String() string {
 func (*NoPrivacyWithdrawServerParameter) ProtoMessage() {}
 
 func (x *NoPrivacyWithdrawServerParameter) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[34]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3661,7 +3661,7 @@ func (x *NoPrivacyWithdrawServerParameter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NoPrivacyWithdrawServerParameter.ProtoReflect.Descriptor instead.
 func (*NoPrivacyWithdrawServerParameter) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{34}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{34}
 }
 
 type FeePaymentServerParameter struct {
@@ -3678,7 +3678,7 @@ type FeePaymentServerParameter struct {
 func (x *FeePaymentServerParameter) Reset() {
 	*x = FeePaymentServerParameter{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[35]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[35]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3691,7 +3691,7 @@ func (x *FeePaymentServerParameter) String() string {
 func (*FeePaymentServerParameter) ProtoMessage() {}
 
 func (x *FeePaymentServerParameter) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[35]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[35]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3704,7 +3704,7 @@ func (x *FeePaymentServerParameter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FeePaymentServerParameter.ProtoReflect.Descriptor instead.
 func (*FeePaymentServerParameter) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{35}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *FeePaymentServerParameter) GetDestination() *v1.SolanaAccountId {
@@ -3730,7 +3730,7 @@ type ErrorDetails struct {
 func (x *ErrorDetails) Reset() {
 	*x = ErrorDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[36]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[36]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3743,7 +3743,7 @@ func (x *ErrorDetails) String() string {
 func (*ErrorDetails) ProtoMessage() {}
 
 func (x *ErrorDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[36]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[36]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3756,7 +3756,7 @@ func (x *ErrorDetails) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ErrorDetails.ProtoReflect.Descriptor instead.
 func (*ErrorDetails) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{36}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{36}
 }
 
 func (m *ErrorDetails) GetType() isErrorDetails_Type {
@@ -3821,7 +3821,7 @@ type ReasonStringErrorDetails struct {
 func (x *ReasonStringErrorDetails) Reset() {
 	*x = ReasonStringErrorDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[37]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[37]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3834,7 +3834,7 @@ func (x *ReasonStringErrorDetails) String() string {
 func (*ReasonStringErrorDetails) ProtoMessage() {}
 
 func (x *ReasonStringErrorDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[37]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[37]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3847,7 +3847,7 @@ func (x *ReasonStringErrorDetails) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReasonStringErrorDetails.ProtoReflect.Descriptor instead.
 func (*ReasonStringErrorDetails) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{37}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *ReasonStringErrorDetails) GetReason() string {
@@ -3876,7 +3876,7 @@ type InvalidSignatureErrorDetails struct {
 func (x *InvalidSignatureErrorDetails) Reset() {
 	*x = InvalidSignatureErrorDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[38]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[38]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3889,7 +3889,7 @@ func (x *InvalidSignatureErrorDetails) String() string {
 func (*InvalidSignatureErrorDetails) ProtoMessage() {}
 
 func (x *InvalidSignatureErrorDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[38]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[38]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3902,7 +3902,7 @@ func (x *InvalidSignatureErrorDetails) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvalidSignatureErrorDetails.ProtoReflect.Descriptor instead.
 func (*InvalidSignatureErrorDetails) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{38}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *InvalidSignatureErrorDetails) GetActionId() uint32 {
@@ -3964,7 +3964,7 @@ type DeniedErrorDetails struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Code DeniedErrorDetails_Code `protobuf:"varint,1,opt,name=code,proto3,enum=ocp.transaction.v2.DeniedErrorDetails_Code" json:"code,omitempty"`
+	Code DeniedErrorDetails_Code `protobuf:"varint,1,opt,name=code,proto3,enum=ocp.transaction.v1.DeniedErrorDetails_Code" json:"code,omitempty"`
 	// Human readable string indicating the failure.
 	Reason string `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
 }
@@ -3972,7 +3972,7 @@ type DeniedErrorDetails struct {
 func (x *DeniedErrorDetails) Reset() {
 	*x = DeniedErrorDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[39]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[39]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3985,7 +3985,7 @@ func (x *DeniedErrorDetails) String() string {
 func (*DeniedErrorDetails) ProtoMessage() {}
 
 func (x *DeniedErrorDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[39]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[39]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3998,7 +3998,7 @@ func (x *DeniedErrorDetails) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeniedErrorDetails.ProtoReflect.Descriptor instead.
 func (*DeniedErrorDetails) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{39}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *DeniedErrorDetails) GetCode() DeniedErrorDetails_Code {
@@ -4039,7 +4039,7 @@ type ExchangeData struct {
 func (x *ExchangeData) Reset() {
 	*x = ExchangeData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[40]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[40]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4052,7 +4052,7 @@ func (x *ExchangeData) String() string {
 func (*ExchangeData) ProtoMessage() {}
 
 func (x *ExchangeData) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[40]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[40]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4065,7 +4065,7 @@ func (x *ExchangeData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExchangeData.ProtoReflect.Descriptor instead.
 func (*ExchangeData) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{40}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *ExchangeData) GetCurrency() string {
@@ -4118,7 +4118,7 @@ type ExchangeDataWithoutRate struct {
 func (x *ExchangeDataWithoutRate) Reset() {
 	*x = ExchangeDataWithoutRate{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[41]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[41]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4131,7 +4131,7 @@ func (x *ExchangeDataWithoutRate) String() string {
 func (*ExchangeDataWithoutRate) ProtoMessage() {}
 
 func (x *ExchangeDataWithoutRate) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[41]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[41]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4144,7 +4144,7 @@ func (x *ExchangeDataWithoutRate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExchangeDataWithoutRate.ProtoReflect.Descriptor instead.
 func (*ExchangeDataWithoutRate) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{41}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *ExchangeDataWithoutRate) GetCurrency() string {
@@ -4177,7 +4177,7 @@ type SendLimit struct {
 func (x *SendLimit) Reset() {
 	*x = SendLimit{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[42]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[42]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4190,7 +4190,7 @@ func (x *SendLimit) String() string {
 func (*SendLimit) ProtoMessage() {}
 
 func (x *SendLimit) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[42]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[42]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4203,7 +4203,7 @@ func (x *SendLimit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendLimit.ProtoReflect.Descriptor instead.
 func (*SendLimit) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{42}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *SendLimit) GetNextTransaction() float32 {
@@ -4243,7 +4243,7 @@ type VerifiedSwapMetadata struct {
 func (x *VerifiedSwapMetadata) Reset() {
 	*x = VerifiedSwapMetadata{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[43]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[43]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4256,7 +4256,7 @@ func (x *VerifiedSwapMetadata) String() string {
 func (*VerifiedSwapMetadata) ProtoMessage() {}
 
 func (x *VerifiedSwapMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[43]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[43]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4269,7 +4269,7 @@ func (x *VerifiedSwapMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifiedSwapMetadata.ProtoReflect.Descriptor instead.
 func (*VerifiedSwapMetadata) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{43}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{43}
 }
 
 func (m *VerifiedSwapMetadata) GetKind() isVerifiedSwapMetadata_Kind {
@@ -4312,7 +4312,7 @@ type VerifiedCurrencyCreatorSwapMetadata struct {
 func (x *VerifiedCurrencyCreatorSwapMetadata) Reset() {
 	*x = VerifiedCurrencyCreatorSwapMetadata{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[44]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[44]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4325,7 +4325,7 @@ func (x *VerifiedCurrencyCreatorSwapMetadata) String() string {
 func (*VerifiedCurrencyCreatorSwapMetadata) ProtoMessage() {}
 
 func (x *VerifiedCurrencyCreatorSwapMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[44]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[44]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4338,7 +4338,7 @@ func (x *VerifiedCurrencyCreatorSwapMetadata) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use VerifiedCurrencyCreatorSwapMetadata.ProtoReflect.Descriptor instead.
 func (*VerifiedCurrencyCreatorSwapMetadata) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{44}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *VerifiedCurrencyCreatorSwapMetadata) GetClientParameters() *StartSwapRequest_Start_CurrencyCreator {
@@ -4361,7 +4361,7 @@ type SwapMetadata struct {
 	unknownFields protoimpl.UnknownFields
 
 	VerifiedMetadata *VerifiedSwapMetadata `protobuf:"bytes,1,opt,name=verified_metadata,json=verifiedMetadata,proto3" json:"verified_metadata,omitempty"`
-	State            SwapMetadata_State    `protobuf:"varint,2,opt,name=state,proto3,enum=ocp.transaction.v2.SwapMetadata_State" json:"state,omitempty"`
+	State            SwapMetadata_State    `protobuf:"varint,2,opt,name=state,proto3,enum=ocp.transaction.v1.SwapMetadata_State" json:"state,omitempty"`
 	// The signature is of serialize(VerifiedSwapMetadata) using the private
 	// key of the owner account. Use this to guarantee that VerifiedSwapMetadata
 	// has not been tampered with.
@@ -4371,7 +4371,7 @@ type SwapMetadata struct {
 func (x *SwapMetadata) Reset() {
 	*x = SwapMetadata{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[45]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[45]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4384,7 +4384,7 @@ func (x *SwapMetadata) String() string {
 func (*SwapMetadata) ProtoMessage() {}
 
 func (x *SwapMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[45]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[45]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4397,7 +4397,7 @@ func (x *SwapMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwapMetadata.ProtoReflect.Descriptor instead.
 func (*SwapMetadata) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{45}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *SwapMetadata) GetVerifiedMetadata() *VerifiedSwapMetadata {
@@ -4444,7 +4444,7 @@ type SubmitIntentRequest_SubmitActions struct {
 func (x *SubmitIntentRequest_SubmitActions) Reset() {
 	*x = SubmitIntentRequest_SubmitActions{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[46]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[46]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4457,7 +4457,7 @@ func (x *SubmitIntentRequest_SubmitActions) String() string {
 func (*SubmitIntentRequest_SubmitActions) ProtoMessage() {}
 
 func (x *SubmitIntentRequest_SubmitActions) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[46]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[46]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4470,7 +4470,7 @@ func (x *SubmitIntentRequest_SubmitActions) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use SubmitIntentRequest_SubmitActions.ProtoReflect.Descriptor instead.
 func (*SubmitIntentRequest_SubmitActions) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{0, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{0, 0}
 }
 
 func (x *SubmitIntentRequest_SubmitActions) GetId() *v1.IntentId {
@@ -4524,7 +4524,7 @@ type SubmitIntentRequest_SubmitSignatures struct {
 func (x *SubmitIntentRequest_SubmitSignatures) Reset() {
 	*x = SubmitIntentRequest_SubmitSignatures{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[47]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[47]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4537,7 +4537,7 @@ func (x *SubmitIntentRequest_SubmitSignatures) String() string {
 func (*SubmitIntentRequest_SubmitSignatures) ProtoMessage() {}
 
 func (x *SubmitIntentRequest_SubmitSignatures) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[47]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[47]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4550,7 +4550,7 @@ func (x *SubmitIntentRequest_SubmitSignatures) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use SubmitIntentRequest_SubmitSignatures.ProtoReflect.Descriptor instead.
 func (*SubmitIntentRequest_SubmitSignatures) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{0, 1}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{0, 1}
 }
 
 func (x *SubmitIntentRequest_SubmitSignatures) GetSignatures() []*v1.Signature {
@@ -4575,7 +4575,7 @@ type SubmitIntentResponse_ServerParameters struct {
 func (x *SubmitIntentResponse_ServerParameters) Reset() {
 	*x = SubmitIntentResponse_ServerParameters{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[48]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[48]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4588,7 +4588,7 @@ func (x *SubmitIntentResponse_ServerParameters) String() string {
 func (*SubmitIntentResponse_ServerParameters) ProtoMessage() {}
 
 func (x *SubmitIntentResponse_ServerParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[48]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[48]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4601,7 +4601,7 @@ func (x *SubmitIntentResponse_ServerParameters) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use SubmitIntentResponse_ServerParameters.ProtoReflect.Descriptor instead.
 func (*SubmitIntentResponse_ServerParameters) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{1, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{1, 0}
 }
 
 func (x *SubmitIntentResponse_ServerParameters) GetServerParameters() []*ServerParameter {
@@ -4616,13 +4616,13 @@ type SubmitIntentResponse_Success struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Code SubmitIntentResponse_Success_Code `protobuf:"varint,1,opt,name=code,proto3,enum=ocp.transaction.v2.SubmitIntentResponse_Success_Code" json:"code,omitempty"`
+	Code SubmitIntentResponse_Success_Code `protobuf:"varint,1,opt,name=code,proto3,enum=ocp.transaction.v1.SubmitIntentResponse_Success_Code" json:"code,omitempty"`
 }
 
 func (x *SubmitIntentResponse_Success) Reset() {
 	*x = SubmitIntentResponse_Success{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[49]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[49]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4635,7 +4635,7 @@ func (x *SubmitIntentResponse_Success) String() string {
 func (*SubmitIntentResponse_Success) ProtoMessage() {}
 
 func (x *SubmitIntentResponse_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[49]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[49]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4648,7 +4648,7 @@ func (x *SubmitIntentResponse_Success) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitIntentResponse_Success.ProtoReflect.Descriptor instead.
 func (*SubmitIntentResponse_Success) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{1, 1}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{1, 1}
 }
 
 func (x *SubmitIntentResponse_Success) GetCode() SubmitIntentResponse_Success_Code {
@@ -4663,14 +4663,14 @@ type SubmitIntentResponse_Error struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Code         SubmitIntentResponse_Error_Code `protobuf:"varint,1,opt,name=code,proto3,enum=ocp.transaction.v2.SubmitIntentResponse_Error_Code" json:"code,omitempty"`
+	Code         SubmitIntentResponse_Error_Code `protobuf:"varint,1,opt,name=code,proto3,enum=ocp.transaction.v1.SubmitIntentResponse_Error_Code" json:"code,omitempty"`
 	ErrorDetails []*ErrorDetails                 `protobuf:"bytes,2,rep,name=error_details,json=errorDetails,proto3" json:"error_details,omitempty"`
 }
 
 func (x *SubmitIntentResponse_Error) Reset() {
 	*x = SubmitIntentResponse_Error{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[50]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[50]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4683,7 +4683,7 @@ func (x *SubmitIntentResponse_Error) String() string {
 func (*SubmitIntentResponse_Error) ProtoMessage() {}
 
 func (x *SubmitIntentResponse_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[50]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[50]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4696,7 +4696,7 @@ func (x *SubmitIntentResponse_Error) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitIntentResponse_Error.ProtoReflect.Descriptor instead.
 func (*SubmitIntentResponse_Error) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{1, 2}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{1, 2}
 }
 
 func (x *SubmitIntentResponse_Error) GetCode() SubmitIntentResponse_Error_Code {
@@ -4733,7 +4733,7 @@ type StartSwapRequest_Start struct {
 func (x *StartSwapRequest_Start) Reset() {
 	*x = StartSwapRequest_Start{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[52]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[52]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4746,7 +4746,7 @@ func (x *StartSwapRequest_Start) String() string {
 func (*StartSwapRequest_Start) ProtoMessage() {}
 
 func (x *StartSwapRequest_Start) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[52]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[52]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4759,7 +4759,7 @@ func (x *StartSwapRequest_Start) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartSwapRequest_Start.ProtoReflect.Descriptor instead.
 func (*StartSwapRequest_Start) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{12, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{12, 0}
 }
 
 func (m *StartSwapRequest_Start) GetKind() isStartSwapRequest_Start_Kind {
@@ -4812,7 +4812,7 @@ type StartSwapRequest_SubmitSignature struct {
 func (x *StartSwapRequest_SubmitSignature) Reset() {
 	*x = StartSwapRequest_SubmitSignature{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[53]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[53]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4825,7 +4825,7 @@ func (x *StartSwapRequest_SubmitSignature) String() string {
 func (*StartSwapRequest_SubmitSignature) ProtoMessage() {}
 
 func (x *StartSwapRequest_SubmitSignature) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[53]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[53]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4838,7 +4838,7 @@ func (x *StartSwapRequest_SubmitSignature) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartSwapRequest_SubmitSignature.ProtoReflect.Descriptor instead.
 func (*StartSwapRequest_SubmitSignature) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{12, 1}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{12, 1}
 }
 
 func (x *StartSwapRequest_SubmitSignature) GetSignature() *v1.Signature {
@@ -4863,7 +4863,7 @@ type StartSwapRequest_Start_CurrencyCreator struct {
 	// The amount to swap from the source mint in quarks.
 	Amount uint64 `protobuf:"varint,4,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Where "amount" of "from_mint" will be sent from to the VM swap PDA
-	FundingSource FundingSource `protobuf:"varint,5,opt,name=funding_source,json=fundingSource,proto3,enum=ocp.transaction.v2.FundingSource" json:"funding_source,omitempty"`
+	FundingSource FundingSource `protobuf:"varint,5,opt,name=funding_source,json=fundingSource,proto3,enum=ocp.transaction.v1.FundingSource" json:"funding_source,omitempty"`
 	// The ID of the "transaction" to lookup funding state.
 	//
 	// For SWAP_FUNDING_SOURCE_SUBMIT_INTENT, this value is the base58 encoded intent ID.
@@ -4873,7 +4873,7 @@ type StartSwapRequest_Start_CurrencyCreator struct {
 func (x *StartSwapRequest_Start_CurrencyCreator) Reset() {
 	*x = StartSwapRequest_Start_CurrencyCreator{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[54]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[54]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4886,7 +4886,7 @@ func (x *StartSwapRequest_Start_CurrencyCreator) String() string {
 func (*StartSwapRequest_Start_CurrencyCreator) ProtoMessage() {}
 
 func (x *StartSwapRequest_Start_CurrencyCreator) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[54]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[54]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4899,7 +4899,7 @@ func (x *StartSwapRequest_Start_CurrencyCreator) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use StartSwapRequest_Start_CurrencyCreator.ProtoReflect.Descriptor instead.
 func (*StartSwapRequest_Start_CurrencyCreator) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{12, 0, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{12, 0, 0}
 }
 
 func (x *StartSwapRequest_Start_CurrencyCreator) GetId() *v1.SwapId {
@@ -4958,7 +4958,7 @@ type StartSwapResponse_ServerParameters struct {
 func (x *StartSwapResponse_ServerParameters) Reset() {
 	*x = StartSwapResponse_ServerParameters{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[55]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[55]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4971,7 +4971,7 @@ func (x *StartSwapResponse_ServerParameters) String() string {
 func (*StartSwapResponse_ServerParameters) ProtoMessage() {}
 
 func (x *StartSwapResponse_ServerParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[55]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[55]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4984,7 +4984,7 @@ func (x *StartSwapResponse_ServerParameters) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use StartSwapResponse_ServerParameters.ProtoReflect.Descriptor instead.
 func (*StartSwapResponse_ServerParameters) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{13, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{13, 0}
 }
 
 func (m *StartSwapResponse_ServerParameters) GetKind() isStartSwapResponse_ServerParameters_Kind {
@@ -5017,13 +5017,13 @@ type StartSwapResponse_Success struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Code StartSwapResponse_Success_Code `protobuf:"varint,1,opt,name=code,proto3,enum=ocp.transaction.v2.StartSwapResponse_Success_Code" json:"code,omitempty"`
+	Code StartSwapResponse_Success_Code `protobuf:"varint,1,opt,name=code,proto3,enum=ocp.transaction.v1.StartSwapResponse_Success_Code" json:"code,omitempty"`
 }
 
 func (x *StartSwapResponse_Success) Reset() {
 	*x = StartSwapResponse_Success{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[56]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[56]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5036,7 +5036,7 @@ func (x *StartSwapResponse_Success) String() string {
 func (*StartSwapResponse_Success) ProtoMessage() {}
 
 func (x *StartSwapResponse_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[56]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[56]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5049,7 +5049,7 @@ func (x *StartSwapResponse_Success) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartSwapResponse_Success.ProtoReflect.Descriptor instead.
 func (*StartSwapResponse_Success) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{13, 1}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{13, 1}
 }
 
 func (x *StartSwapResponse_Success) GetCode() StartSwapResponse_Success_Code {
@@ -5064,14 +5064,14 @@ type StartSwapResponse_Error struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Code         StartSwapResponse_Error_Code `protobuf:"varint,1,opt,name=code,proto3,enum=ocp.transaction.v2.StartSwapResponse_Error_Code" json:"code,omitempty"`
+	Code         StartSwapResponse_Error_Code `protobuf:"varint,1,opt,name=code,proto3,enum=ocp.transaction.v1.StartSwapResponse_Error_Code" json:"code,omitempty"`
 	ErrorDetails []*ErrorDetails              `protobuf:"bytes,2,rep,name=error_details,json=errorDetails,proto3" json:"error_details,omitempty"`
 }
 
 func (x *StartSwapResponse_Error) Reset() {
 	*x = StartSwapResponse_Error{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[57]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[57]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5084,7 +5084,7 @@ func (x *StartSwapResponse_Error) String() string {
 func (*StartSwapResponse_Error) ProtoMessage() {}
 
 func (x *StartSwapResponse_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[57]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[57]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5097,7 +5097,7 @@ func (x *StartSwapResponse_Error) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartSwapResponse_Error.ProtoReflect.Descriptor instead.
 func (*StartSwapResponse_Error) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{13, 2}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{13, 2}
 }
 
 func (x *StartSwapResponse_Error) GetCode() StartSwapResponse_Error_Code {
@@ -5128,7 +5128,7 @@ type StartSwapResponse_ServerParameters_CurrencyCreator struct {
 func (x *StartSwapResponse_ServerParameters_CurrencyCreator) Reset() {
 	*x = StartSwapResponse_ServerParameters_CurrencyCreator{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[58]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[58]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5141,7 +5141,7 @@ func (x *StartSwapResponse_ServerParameters_CurrencyCreator) String() string {
 func (*StartSwapResponse_ServerParameters_CurrencyCreator) ProtoMessage() {}
 
 func (x *StartSwapResponse_ServerParameters_CurrencyCreator) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[58]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[58]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5154,7 +5154,7 @@ func (x *StartSwapResponse_ServerParameters_CurrencyCreator) ProtoReflect() prot
 
 // Deprecated: Use StartSwapResponse_ServerParameters_CurrencyCreator.ProtoReflect.Descriptor instead.
 func (*StartSwapResponse_ServerParameters_CurrencyCreator) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{13, 0, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{13, 0, 0}
 }
 
 func (x *StartSwapResponse_ServerParameters_CurrencyCreator) GetNonce() *v1.SolanaAccountId {
@@ -5186,7 +5186,7 @@ type SwapRequest_Initiate struct {
 func (x *SwapRequest_Initiate) Reset() {
 	*x = SwapRequest_Initiate{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[59]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[59]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5199,7 +5199,7 @@ func (x *SwapRequest_Initiate) String() string {
 func (*SwapRequest_Initiate) ProtoMessage() {}
 
 func (x *SwapRequest_Initiate) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[59]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[59]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5212,7 +5212,7 @@ func (x *SwapRequest_Initiate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwapRequest_Initiate.ProtoReflect.Descriptor instead.
 func (*SwapRequest_Initiate) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{18, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{18, 0}
 }
 
 func (m *SwapRequest_Initiate) GetKind() isSwapRequest_Initiate_Kind {
@@ -5264,7 +5264,7 @@ type SwapRequest_SubmitSignatures struct {
 func (x *SwapRequest_SubmitSignatures) Reset() {
 	*x = SwapRequest_SubmitSignatures{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[60]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[60]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5277,7 +5277,7 @@ func (x *SwapRequest_SubmitSignatures) String() string {
 func (*SwapRequest_SubmitSignatures) ProtoMessage() {}
 
 func (x *SwapRequest_SubmitSignatures) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[60]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[60]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5290,7 +5290,7 @@ func (x *SwapRequest_SubmitSignatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwapRequest_SubmitSignatures.ProtoReflect.Descriptor instead.
 func (*SwapRequest_SubmitSignatures) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{18, 1}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{18, 1}
 }
 
 func (x *SwapRequest_SubmitSignatures) GetSignatures() []*v1.Signature {
@@ -5330,7 +5330,7 @@ type SwapRequest_Initiate_Stateless struct {
 func (x *SwapRequest_Initiate_Stateless) Reset() {
 	*x = SwapRequest_Initiate_Stateless{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[61]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[61]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5343,7 +5343,7 @@ func (x *SwapRequest_Initiate_Stateless) String() string {
 func (*SwapRequest_Initiate_Stateless) ProtoMessage() {}
 
 func (x *SwapRequest_Initiate_Stateless) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[61]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[61]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5356,7 +5356,7 @@ func (x *SwapRequest_Initiate_Stateless) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwapRequest_Initiate_Stateless.ProtoReflect.Descriptor instead.
 func (*SwapRequest_Initiate_Stateless) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{18, 0, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{18, 0, 0}
 }
 
 func (x *SwapRequest_Initiate_Stateless) GetOwner() *v1.SolanaAccountId {
@@ -5430,7 +5430,7 @@ type SwapRequest_Initiate_Stateful struct {
 func (x *SwapRequest_Initiate_Stateful) Reset() {
 	*x = SwapRequest_Initiate_Stateful{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[62]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[62]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5443,7 +5443,7 @@ func (x *SwapRequest_Initiate_Stateful) String() string {
 func (*SwapRequest_Initiate_Stateful) ProtoMessage() {}
 
 func (x *SwapRequest_Initiate_Stateful) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[62]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[62]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5456,7 +5456,7 @@ func (x *SwapRequest_Initiate_Stateful) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwapRequest_Initiate_Stateful.ProtoReflect.Descriptor instead.
 func (*SwapRequest_Initiate_Stateful) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{18, 0, 1}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{18, 0, 1}
 }
 
 func (x *SwapRequest_Initiate_Stateful) GetSwapId() *v1.SwapId {
@@ -5502,7 +5502,7 @@ type SwapResponse_ServerParameters struct {
 func (x *SwapResponse_ServerParameters) Reset() {
 	*x = SwapResponse_ServerParameters{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[63]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[63]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5515,7 +5515,7 @@ func (x *SwapResponse_ServerParameters) String() string {
 func (*SwapResponse_ServerParameters) ProtoMessage() {}
 
 func (x *SwapResponse_ServerParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[63]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[63]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5528,7 +5528,7 @@ func (x *SwapResponse_ServerParameters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwapResponse_ServerParameters.ProtoReflect.Descriptor instead.
 func (*SwapResponse_ServerParameters) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{19, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{19, 0}
 }
 
 func (m *SwapResponse_ServerParameters) GetKind() isSwapResponse_ServerParameters_Kind {
@@ -5575,13 +5575,13 @@ type SwapResponse_Success struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Code SwapResponse_Success_Code `protobuf:"varint,1,opt,name=code,proto3,enum=ocp.transaction.v2.SwapResponse_Success_Code" json:"code,omitempty"`
+	Code SwapResponse_Success_Code `protobuf:"varint,1,opt,name=code,proto3,enum=ocp.transaction.v1.SwapResponse_Success_Code" json:"code,omitempty"`
 }
 
 func (x *SwapResponse_Success) Reset() {
 	*x = SwapResponse_Success{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[64]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[64]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5594,7 +5594,7 @@ func (x *SwapResponse_Success) String() string {
 func (*SwapResponse_Success) ProtoMessage() {}
 
 func (x *SwapResponse_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[64]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[64]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5607,7 +5607,7 @@ func (x *SwapResponse_Success) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwapResponse_Success.ProtoReflect.Descriptor instead.
 func (*SwapResponse_Success) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{19, 1}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{19, 1}
 }
 
 func (x *SwapResponse_Success) GetCode() SwapResponse_Success_Code {
@@ -5622,14 +5622,14 @@ type SwapResponse_Error struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Code         SwapResponse_Error_Code `protobuf:"varint,1,opt,name=code,proto3,enum=ocp.transaction.v2.SwapResponse_Error_Code" json:"code,omitempty"`
+	Code         SwapResponse_Error_Code `protobuf:"varint,1,opt,name=code,proto3,enum=ocp.transaction.v1.SwapResponse_Error_Code" json:"code,omitempty"`
 	ErrorDetails []*ErrorDetails         `protobuf:"bytes,2,rep,name=error_details,json=errorDetails,proto3" json:"error_details,omitempty"`
 }
 
 func (x *SwapResponse_Error) Reset() {
 	*x = SwapResponse_Error{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[65]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[65]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5642,7 +5642,7 @@ func (x *SwapResponse_Error) String() string {
 func (*SwapResponse_Error) ProtoMessage() {}
 
 func (x *SwapResponse_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[65]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[65]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5655,7 +5655,7 @@ func (x *SwapResponse_Error) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwapResponse_Error.ProtoReflect.Descriptor instead.
 func (*SwapResponse_Error) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{19, 2}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{19, 2}
 }
 
 func (x *SwapResponse_Error) GetCode() SwapResponse_Error_Code {
@@ -5710,7 +5710,7 @@ type SwapResponse_ServerParameters_CurrencyCreatorStateless struct {
 func (x *SwapResponse_ServerParameters_CurrencyCreatorStateless) Reset() {
 	*x = SwapResponse_ServerParameters_CurrencyCreatorStateless{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[66]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[66]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5723,7 +5723,7 @@ func (x *SwapResponse_ServerParameters_CurrencyCreatorStateless) String() string
 func (*SwapResponse_ServerParameters_CurrencyCreatorStateless) ProtoMessage() {}
 
 func (x *SwapResponse_ServerParameters_CurrencyCreatorStateless) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[66]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[66]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5736,7 +5736,7 @@ func (x *SwapResponse_ServerParameters_CurrencyCreatorStateless) ProtoReflect() 
 
 // Deprecated: Use SwapResponse_ServerParameters_CurrencyCreatorStateless.ProtoReflect.Descriptor instead.
 func (*SwapResponse_ServerParameters_CurrencyCreatorStateless) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{19, 0, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{19, 0, 0}
 }
 
 func (x *SwapResponse_ServerParameters_CurrencyCreatorStateless) GetPayer() *v1.SolanaAccountId {
@@ -5864,7 +5864,7 @@ type SwapResponse_ServerParameters_CurrencyCreatorStateful struct {
 func (x *SwapResponse_ServerParameters_CurrencyCreatorStateful) Reset() {
 	*x = SwapResponse_ServerParameters_CurrencyCreatorStateful{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[67]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[67]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5877,7 +5877,7 @@ func (x *SwapResponse_ServerParameters_CurrencyCreatorStateful) String() string 
 func (*SwapResponse_ServerParameters_CurrencyCreatorStateful) ProtoMessage() {}
 
 func (x *SwapResponse_ServerParameters_CurrencyCreatorStateful) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[67]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[67]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5890,7 +5890,7 @@ func (x *SwapResponse_ServerParameters_CurrencyCreatorStateful) ProtoReflect() p
 
 // Deprecated: Use SwapResponse_ServerParameters_CurrencyCreatorStateful.ProtoReflect.Descriptor instead.
 func (*SwapResponse_ServerParameters_CurrencyCreatorStateful) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{19, 0, 1}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{19, 0, 1}
 }
 
 func (x *SwapResponse_ServerParameters_CurrencyCreatorStateful) GetPayer() *v1.SolanaAccountId {
@@ -5957,7 +5957,7 @@ type PublicDistributionMetadata_Distribution struct {
 func (x *PublicDistributionMetadata_Distribution) Reset() {
 	*x = PublicDistributionMetadata_Distribution{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_transaction_v2_transaction_service_proto_msgTypes[68]
+		mi := &file_transaction_v1_transaction_service_proto_msgTypes[68]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5970,7 +5970,7 @@ func (x *PublicDistributionMetadata_Distribution) String() string {
 func (*PublicDistributionMetadata_Distribution) ProtoMessage() {}
 
 func (x *PublicDistributionMetadata_Distribution) ProtoReflect() protoreflect.Message {
-	mi := &file_transaction_v2_transaction_service_proto_msgTypes[68]
+	mi := &file_transaction_v1_transaction_service_proto_msgTypes[68]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5983,7 +5983,7 @@ func (x *PublicDistributionMetadata_Distribution) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use PublicDistributionMetadata_Distribution.ProtoReflect.Descriptor instead.
 func (*PublicDistributionMetadata_Distribution) Descriptor() ([]byte, []int) {
-	return file_transaction_v2_transaction_service_proto_rawDescGZIP(), []int{24, 0}
+	return file_transaction_v1_transaction_service_proto_rawDescGZIP(), []int{24, 0}
 }
 
 func (x *PublicDistributionMetadata_Distribution) GetDestination() *v1.SolanaAccountId {
@@ -6000,13 +6000,13 @@ func (x *PublicDistributionMetadata_Distribution) GetQuarks() uint64 {
 	return 0
 }
 
-var File_transaction_v2_transaction_service_proto protoreflect.FileDescriptor
+var File_transaction_v1_transaction_service_proto protoreflect.FileDescriptor
 
-var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
-	0x0a, 0x28, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2f, 0x76, 0x32,
+var file_transaction_v1_transaction_service_proto_rawDesc = []byte{
+	0x0a, 0x28, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2f, 0x76, 0x31,
 	0x2f, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x73, 0x65, 0x72,
 	0x76, 0x69, 0x63, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x12, 0x6f, 0x63, 0x70, 0x2e,
-	0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x1a, 0x15,
+	0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x1a, 0x15,
 	0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2f, 0x76, 0x31, 0x2f, 0x6d, 0x6f, 0x64, 0x65, 0x6c, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70,
@@ -6016,13 +6016,13 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x5e, 0x0a, 0x0e, 0x73, 0x75, 0x62, 0x6d, 0x69,
 	0x74, 0x5f, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
 	0x35, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x6e,
+	0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x6e,
 	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x41,
 	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x48, 0x00, 0x52, 0x0d, 0x73, 0x75, 0x62, 0x6d, 0x69, 0x74,
 	0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x67, 0x0a, 0x11, 0x73, 0x75, 0x62, 0x6d, 0x69,
 	0x74, 0x5f, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x73, 0x18, 0x02, 0x20, 0x01,
 	0x28, 0x0b, 0x32, 0x38, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63,
-	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x49, 0x6e,
+	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x49, 0x6e,
 	0x74, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x53, 0x75, 0x62, 0x6d,
 	0x69, 0x74, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x73, 0x48, 0x00, 0x52, 0x10,
 	0x73, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x73,
@@ -6036,12 +6036,12 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x42, 0x0a, 0xba, 0xe9, 0xc0, 0x03, 0x05, 0x8a, 0x01, 0x02,
 	0x10, 0x01, 0x52, 0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x12, 0x44, 0x0a, 0x08, 0x6d, 0x65, 0x74,
 	0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x6f, 0x63,
-	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32,
+	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31,
 	0x2e, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x42, 0x0a, 0xba, 0xe9, 0xc0, 0x03, 0x05,
 	0x8a, 0x01, 0x02, 0x10, 0x01, 0x52, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12,
 	0x43, 0x0a, 0x07, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b,
 	0x32, 0x1a, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69,
-	0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x0d, 0xba, 0xe9,
+	0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x0d, 0xba, 0xe9,
 	0xc0, 0x03, 0x08, 0x92, 0x01, 0x05, 0x08, 0x01, 0x10, 0x80, 0x08, 0x52, 0x07, 0x61, 0x63, 0x74,
 	0x69, 0x6f, 0x6e, 0x73, 0x12, 0x42, 0x0a, 0x09, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72,
 	0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63, 0x6f,
@@ -6058,42 +6058,42 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x69, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
 	0x12, 0x68, 0x0a, 0x11, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d,
 	0x65, 0x74, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x39, 0x2e, 0x6f, 0x63,
-	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32,
+	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31,
 	0x2e, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73,
 	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x50, 0x61, 0x72, 0x61,
 	0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x48, 0x00, 0x52, 0x10, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72,
 	0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x12, 0x4c, 0x0a, 0x07, 0x73, 0x75,
 	0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x30, 0x2e, 0x6f, 0x63,
-	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32,
+	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31,
 	0x2e, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73,
 	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x48, 0x00, 0x52,
 	0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x46, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f,
 	0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2e, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72,
-	0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x75, 0x62,
+	0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x75, 0x62,
 	0x6d, 0x69, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
 	0x65, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x48, 0x00, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72,
 	0x1a, 0x73, 0x0a, 0x10, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65,
 	0x74, 0x65, 0x72, 0x73, 0x12, 0x5f, 0x0a, 0x11, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x5f, 0x70,
 	0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32,
 	0x23, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x50, 0x61, 0x72, 0x61, 0x6d,
+	0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x50, 0x61, 0x72, 0x61, 0x6d,
 	0x65, 0x74, 0x65, 0x72, 0x42, 0x0d, 0xba, 0xe9, 0xc0, 0x03, 0x08, 0x92, 0x01, 0x05, 0x08, 0x01,
 	0x10, 0x80, 0x08, 0x52, 0x10, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x50, 0x61, 0x72, 0x61, 0x6d,
 	0x65, 0x74, 0x65, 0x72, 0x73, 0x1a, 0x64, 0x0a, 0x07, 0x53, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73,
 	0x12, 0x49, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x35,
 	0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
-	0x2e, 0x76, 0x32, 0x2e, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x6e, 0x74,
+	0x2e, 0x76, 0x31, 0x2e, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x6e, 0x74,
 	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73,
 	0x2e, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x22, 0x0e, 0x0a, 0x04, 0x43,
 	0x6f, 0x64, 0x65, 0x12, 0x06, 0x0a, 0x02, 0x4f, 0x4b, 0x10, 0x00, 0x1a, 0xe5, 0x01, 0x0a, 0x05,
 	0x45, 0x72, 0x72, 0x6f, 0x72, 0x12, 0x47, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20,
 	0x01, 0x28, 0x0e, 0x32, 0x33, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x49,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x49,
 	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x45, 0x72,
 	0x72, 0x6f, 0x72, 0x2e, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x45,
 	0x0a, 0x0d, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x5f, 0x64, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x18,
 	0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e,
-	0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72,
+	0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72,
 	0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x52, 0x0c, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x44, 0x65,
 	0x74, 0x61, 0x69, 0x6c, 0x73, 0x22, 0x4c, 0x0a, 0x04, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x0a, 0x0a,
 	0x06, 0x44, 0x45, 0x4e, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x12, 0x0a, 0x0e, 0x49, 0x4e, 0x56,
@@ -6119,12 +6119,12 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x61, 0x64, 0x61, 0x74, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4c, 0x0a,
 	0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x34, 0x2e,
 	0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e,
-	0x76, 0x32, 0x2e, 0x47, 0x65, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x74, 0x61,
+	0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x74, 0x61,
 	0x64, 0x61, 0x74, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x52, 0x65, 0x73,
 	0x75, 0x6c, 0x74, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x38, 0x0a, 0x08, 0x6d,
 	0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e,
 	0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e,
-	0x76, 0x32, 0x2e, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x52, 0x08, 0x6d, 0x65, 0x74,
+	0x76, 0x31, 0x2e, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x52, 0x08, 0x6d, 0x65, 0x74,
 	0x61, 0x64, 0x61, 0x74, 0x61, 0x22, 0x1f, 0x0a, 0x06, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12,
 	0x06, 0x0a, 0x02, 0x4f, 0x4b, 0x10, 0x00, 0x12, 0x0d, 0x0a, 0x09, 0x4e, 0x4f, 0x54, 0x5f, 0x46,
 	0x4f, 0x55, 0x4e, 0x44, 0x10, 0x01, 0x22, 0xe7, 0x01, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x4c, 0x69,
@@ -6145,13 +6145,13 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x22, 0x84, 0x03, 0x0a, 0x11, 0x47, 0x65, 0x74, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x73, 0x52, 0x65,
 	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x44, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x2c, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61,
-	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x47, 0x65, 0x74, 0x4c,
+	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4c,
 	0x69, 0x6d, 0x69, 0x74, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x52, 0x65,
 	0x73, 0x75, 0x6c, 0x74, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x76, 0x0a, 0x17,
 	0x73, 0x65, 0x6e, 0x64, 0x5f, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x73, 0x5f, 0x62, 0x79, 0x5f, 0x63,
 	0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x3f, 0x2e,
 	0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e,
-	0x76, 0x32, 0x2e, 0x47, 0x65, 0x74, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x73, 0x52, 0x65, 0x73, 0x70,
+	0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x73, 0x52, 0x65, 0x73, 0x70,
 	0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x65, 0x6e, 0x64, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x73, 0x42,
 	0x79, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x14,
 	0x73, 0x65, 0x6e, 0x64, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x73, 0x42, 0x79, 0x43, 0x75, 0x72, 0x72,
@@ -6163,7 +6163,7 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x72, 0x65, 0x6e, 0x63, 0x79, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65,
 	0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x33, 0x0a, 0x05,
 	0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x6f, 0x63,
-	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32,
+	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31,
 	0x2e, 0x53, 0x65, 0x6e, 0x64, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75,
 	0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0x10, 0x0a, 0x06, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12,
 	0x06, 0x0a, 0x02, 0x4f, 0x4b, 0x10, 0x00, 0x22, 0xa3, 0x01, 0x0a, 0x1b, 0x43, 0x61, 0x6e, 0x57,
@@ -6185,7 +6185,7 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x6d, 0x65, 0x6e, 0x74, 0x44, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12,
 	0x5f, 0x0a, 0x0c, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18,
 	0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x3c, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e,
-	0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x43, 0x61, 0x6e, 0x57, 0x69,
+	0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x61, 0x6e, 0x57, 0x69,
 	0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x54, 0x6f, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52,
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x54,
 	0x79, 0x70, 0x65, 0x52, 0x0b, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65,
@@ -6195,7 +6195,7 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x61, 0x6c, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x4a, 0x0a, 0x0a, 0x66, 0x65, 0x65,
 	0x5f, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2b, 0x2e,
 	0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e,
-	0x76, 0x32, 0x2e, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x57,
+	0x76, 0x31, 0x2e, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x57,
 	0x69, 0x74, 0x68, 0x6f, 0x75, 0x74, 0x52, 0x61, 0x74, 0x65, 0x52, 0x09, 0x66, 0x65, 0x65, 0x41,
 	0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x3e, 0x0a, 0x0b, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
 	0x54, 0x79, 0x70, 0x65, 0x12, 0x0b, 0x0a, 0x07, 0x55, 0x6e, 0x6b, 0x6e, 0x6f, 0x77, 0x6e, 0x10,
@@ -6205,7 +6205,7 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x50, 0x0a, 0x0c, 0x61, 0x69, 0x72, 0x64,
 	0x72, 0x6f, 0x70, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1f,
 	0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
-	0x2e, 0x76, 0x32, 0x2e, 0x41, 0x69, 0x72, 0x64, 0x72, 0x6f, 0x70, 0x54, 0x79, 0x70, 0x65, 0x42,
+	0x2e, 0x76, 0x31, 0x2e, 0x41, 0x69, 0x72, 0x64, 0x72, 0x6f, 0x70, 0x54, 0x79, 0x70, 0x65, 0x42,
 	0x0c, 0xba, 0xe9, 0xc0, 0x03, 0x07, 0x82, 0x01, 0x04, 0x20, 0x00, 0x20, 0x01, 0x52, 0x0b, 0x61,
 	0x69, 0x72, 0x64, 0x72, 0x6f, 0x70, 0x54, 0x79, 0x70, 0x65, 0x12, 0x40, 0x0a, 0x05, 0x6f, 0x77,
 	0x6e, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x6f, 0x63, 0x70, 0x2e,
@@ -6219,12 +6219,12 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x22, 0xd4, 0x01, 0x0a, 0x0f, 0x41, 0x69, 0x72, 0x64, 0x72, 0x6f, 0x70, 0x52, 0x65, 0x73, 0x70,
 	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x42, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x0e, 0x32, 0x2a, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73,
-	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x41, 0x69, 0x72, 0x64, 0x72, 0x6f,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x69, 0x72, 0x64, 0x72, 0x6f,
 	0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74,
 	0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x45, 0x0a, 0x0d, 0x65, 0x78, 0x63, 0x68,
 	0x61, 0x6e, 0x67, 0x65, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32,
 	0x20, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x44, 0x61, 0x74,
+	0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x44, 0x61, 0x74,
 	0x61, 0x52, 0x0c, 0x65, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x22,
 	0x36, 0x0a, 0x06, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x06, 0x0a, 0x02, 0x4f, 0x4b, 0x10,
 	0x00, 0x12, 0x0f, 0x0a, 0x0b, 0x55, 0x4e, 0x41, 0x56, 0x41, 0x49, 0x4c, 0x41, 0x42, 0x4c, 0x45,
@@ -6248,7 +6248,7 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x69, 0x64, 0x47, 0x69, 0x66, 0x74, 0x43, 0x61, 0x72, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
 	0x73, 0x65, 0x12, 0x47, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x0e, 0x32, 0x2f, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63,
-	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x56, 0x6f, 0x69, 0x64, 0x47, 0x69, 0x66, 0x74,
+	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x56, 0x6f, 0x69, 0x64, 0x47, 0x69, 0x66, 0x74,
 	0x43, 0x61, 0x72, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x52, 0x65, 0x73,
 	0x75, 0x6c, 0x74, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0x46, 0x0a, 0x06, 0x52,
 	0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x06, 0x0a, 0x02, 0x4f, 0x4b, 0x10, 0x00, 0x12, 0x0a, 0x0a,
@@ -6258,19 +6258,19 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x44, 0x10, 0x03, 0x22, 0xa4, 0x07, 0x0a, 0x10, 0x53, 0x74, 0x61, 0x72, 0x74, 0x53, 0x77, 0x61,
 	0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x42, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x72,
 	0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2a, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72,
-	0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x74, 0x61,
+	0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61,
 	0x72, 0x74, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x53, 0x74,
 	0x61, 0x72, 0x74, 0x48, 0x00, 0x52, 0x05, 0x73, 0x74, 0x61, 0x72, 0x74, 0x12, 0x61, 0x0a, 0x10,
 	0x73, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x5f, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65,
 	0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x34, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61,
-	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x74, 0x61, 0x72,
+	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x72,
 	0x74, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x53, 0x75, 0x62,
 	0x6d, 0x69, 0x74, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x48, 0x00, 0x52, 0x0f,
 	0x73, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x1a,
 	0xff, 0x04, 0x0a, 0x05, 0x53, 0x74, 0x61, 0x72, 0x74, 0x12, 0x67, 0x0a, 0x10, 0x63, 0x75, 0x72,
 	0x72, 0x65, 0x6e, 0x63, 0x79, 0x5f, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20,
 	0x01, 0x28, 0x0b, 0x32, 0x3a, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x53, 0x77,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x53, 0x77,
 	0x61, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x2e,
 	0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x43, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x48,
 	0x00, 0x52, 0x0f, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x43, 0x72, 0x65, 0x61, 0x74,
@@ -6300,7 +6300,7 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0xe9, 0xc0, 0x03, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
 	0x12, 0x54, 0x0a, 0x0e, 0x66, 0x75, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x5f, 0x73, 0x6f, 0x75, 0x72,
 	0x63, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x21, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74,
-	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x46, 0x75,
+	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x46, 0x75,
 	0x6e, 0x64, 0x69, 0x6e, 0x67, 0x53, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x42, 0x0a, 0xba, 0xe9, 0xc0,
 	0x03, 0x05, 0x82, 0x01, 0x02, 0x18, 0x01, 0x52, 0x0d, 0x66, 0x75, 0x6e, 0x64, 0x69, 0x6e, 0x67,
 	0x53, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x12, 0x2a, 0x0a, 0x0a, 0x66, 0x75, 0x6e, 0x64, 0x69, 0x6e,
@@ -6317,24 +6317,24 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x74, 0x61, 0x72, 0x74, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
 	0x12, 0x65, 0x0a, 0x11, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d,
 	0x65, 0x74, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x36, 0x2e, 0x6f, 0x63,
-	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32,
+	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31,
 	0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
 	0x73, 0x65, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74,
 	0x65, 0x72, 0x73, 0x48, 0x00, 0x52, 0x10, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x50, 0x61, 0x72,
 	0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x12, 0x49, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65,
 	0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2d, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74,
-	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x74,
+	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74,
 	0x61, 0x72, 0x74, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e,
 	0x53, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x48, 0x00, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65,
 	0x73, 0x73, 0x12, 0x43, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28,
 	0x0b, 0x32, 0x2b, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74,
-	0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x53, 0x77, 0x61, 0x70,
+	0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x53, 0x77, 0x61, 0x70,
 	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x48, 0x00,
 	0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x1a, 0xb0, 0x02, 0x0a, 0x10, 0x53, 0x65, 0x72, 0x76,
 	0x65, 0x72, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x12, 0x73, 0x0a, 0x10,
 	0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x5f, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x46, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61,
-	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x74, 0x61, 0x72,
+	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x72,
 	0x74, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x65,
 	0x72, 0x76, 0x65, 0x72, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x2e, 0x43,
 	0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x43, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x48, 0x00,
@@ -6352,18 +6352,18 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x69, 0x6e, 0x64, 0x12, 0x05, 0xb8, 0xe9, 0xc0, 0x03, 0x01, 0x1a, 0x61, 0x0a, 0x07, 0x53, 0x75,
 	0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x46, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20,
 	0x01, 0x28, 0x0e, 0x32, 0x32, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x53, 0x77,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x53, 0x77,
 	0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x75, 0x63, 0x63, 0x65,
 	0x73, 0x73, 0x2e, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x22, 0x0e, 0x0a,
 	0x04, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x06, 0x0a, 0x02, 0x4f, 0x4b, 0x10, 0x00, 0x1a, 0xcf, 0x01,
 	0x0a, 0x05, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x12, 0x44, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x30, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e,
-	0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74,
+	0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74,
 	0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x45, 0x72, 0x72,
 	0x6f, 0x72, 0x2e, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x45, 0x0a,
 	0x0d, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x5f, 0x64, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x18, 0x02,
 	0x20, 0x03, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73,
-	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x44,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x44,
 	0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x52, 0x0c, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x44, 0x65, 0x74,
 	0x61, 0x69, 0x6c, 0x73, 0x22, 0x39, 0x0a, 0x04, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x0a, 0x0a, 0x06,
 	0x44, 0x45, 0x4e, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x13, 0x0a, 0x0f, 0x53, 0x49, 0x47, 0x4e,
@@ -6386,11 +6386,11 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x01, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
 	0x73, 0x65, 0x12, 0x42, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x0e, 0x32, 0x2a, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63,
-	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x77, 0x61, 0x70, 0x52,
+	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x77, 0x61, 0x70, 0x52,
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x06,
 	0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x34, 0x0a, 0x04, 0x73, 0x77, 0x61, 0x70, 0x18, 0x02,
 	0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73,
-	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x4d, 0x65,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x4d, 0x65,
 	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x52, 0x04, 0x73, 0x77, 0x61, 0x70, 0x22, 0x2b, 0x0a, 0x06,
 	0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x06, 0x0a, 0x02, 0x4f, 0x4b, 0x10, 0x00, 0x12, 0x0d,
 	0x0a, 0x09, 0x4e, 0x4f, 0x54, 0x5f, 0x46, 0x4f, 0x55, 0x4e, 0x44, 0x10, 0x01, 0x12, 0x0a, 0x0a,
@@ -6408,36 +6408,36 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x65, 0x74, 0x50, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x53, 0x77, 0x61, 0x70, 0x73, 0x52, 0x65,
 	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4a, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x32, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61,
-	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x47, 0x65, 0x74, 0x50,
+	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x50,
 	0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x53, 0x77, 0x61, 0x70, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f,
 	0x6e, 0x73, 0x65, 0x2e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75,
 	0x6c, 0x74, 0x12, 0x43, 0x0a, 0x05, 0x73, 0x77, 0x61, 0x70, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28,
 	0x0b, 0x32, 0x20, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74,
-	0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x4d, 0x65, 0x74, 0x61, 0x64,
+	0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x4d, 0x65, 0x74, 0x61, 0x64,
 	0x61, 0x74, 0x61, 0x42, 0x0b, 0xba, 0xe9, 0xc0, 0x03, 0x06, 0x92, 0x01, 0x03, 0x10, 0x80, 0x08,
 	0x52, 0x05, 0x73, 0x77, 0x61, 0x70, 0x73, 0x22, 0x1f, 0x0a, 0x06, 0x52, 0x65, 0x73, 0x75, 0x6c,
 	0x74, 0x12, 0x06, 0x0a, 0x02, 0x4f, 0x4b, 0x10, 0x00, 0x12, 0x0d, 0x0a, 0x09, 0x4e, 0x4f, 0x54,
 	0x5f, 0x46, 0x4f, 0x55, 0x4e, 0x44, 0x10, 0x01, 0x22, 0xdc, 0x09, 0x0a, 0x0b, 0x53, 0x77, 0x61,
 	0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x46, 0x0a, 0x08, 0x69, 0x6e, 0x69, 0x74,
 	0x69, 0x61, 0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x6f, 0x63, 0x70,
-	0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e,
+	0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e,
 	0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x49, 0x6e, 0x69, 0x74,
 	0x69, 0x61, 0x74, 0x65, 0x48, 0x00, 0x52, 0x08, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x74, 0x65,
 	0x12, 0x5f, 0x0a, 0x11, 0x73, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x5f, 0x73, 0x69, 0x67, 0x6e, 0x61,
 	0x74, 0x75, 0x72, 0x65, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x30, 0x2e, 0x6f, 0x63,
-	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32,
+	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31,
 	0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x53, 0x75, 0x62,
 	0x6d, 0x69, 0x74, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x73, 0x48, 0x00, 0x52,
 	0x10, 0x73, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65,
 	0x73, 0x1a, 0xb5, 0x07, 0x0a, 0x08, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x74, 0x65, 0x12, 0x52,
 	0x0a, 0x09, 0x73, 0x74, 0x61, 0x74, 0x65, 0x6c, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x0b, 0x32, 0x32, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74,
-	0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65,
 	0x73, 0x74, 0x2e, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x74, 0x65, 0x2e, 0x53, 0x74, 0x61, 0x74,
 	0x65, 0x6c, 0x65, 0x73, 0x73, 0x48, 0x00, 0x52, 0x09, 0x73, 0x74, 0x61, 0x74, 0x65, 0x6c, 0x65,
 	0x73, 0x73, 0x12, 0x4f, 0x0a, 0x08, 0x73, 0x74, 0x61, 0x74, 0x65, 0x66, 0x75, 0x6c, 0x18, 0x02,
 	0x20, 0x01, 0x28, 0x0b, 0x32, 0x31, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73,
-	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x74, 0x65, 0x2e, 0x53,
 	0x74, 0x61, 0x74, 0x65, 0x66, 0x75, 0x6c, 0x48, 0x00, 0x52, 0x08, 0x73, 0x74, 0x61, 0x74, 0x65,
 	0x66, 0x75, 0x6c, 0x1a, 0xd2, 0x03, 0x0a, 0x09, 0x53, 0x74, 0x61, 0x74, 0x65, 0x6c, 0x65, 0x73,
@@ -6499,23 +6499,23 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x60, 0x0a, 0x11, 0x73, 0x65, 0x72, 0x76,
 	0x65, 0x72, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20,
 	0x01, 0x28, 0x0b, 0x32, 0x31, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x73,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x73,
 	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x50, 0x61, 0x72, 0x61,
 	0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x48, 0x00, 0x52, 0x10, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72,
 	0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x12, 0x44, 0x0a, 0x07, 0x73, 0x75,
 	0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x6f, 0x63,
-	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32,
+	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31,
 	0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x75,
 	0x63, 0x63, 0x65, 0x73, 0x73, 0x48, 0x00, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73,
 	0x12, 0x3e, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32,
 	0x26, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
 	0x65, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x48, 0x00, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72,
 	0x1a, 0xb8, 0x09, 0x0a, 0x10, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x50, 0x61, 0x72, 0x61, 0x6d,
 	0x65, 0x74, 0x65, 0x72, 0x73, 0x12, 0x8a, 0x01, 0x0a, 0x1a, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e,
 	0x63, 0x79, 0x5f, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x5f, 0x73, 0x74, 0x61, 0x74, 0x65,
 	0x6c, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x4a, 0x2e, 0x6f, 0x63, 0x70,
-	0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e,
+	0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e,
 	0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x65, 0x72,
 	0x76, 0x65, 0x72, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x2e, 0x43, 0x75,
 	0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x43, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x53, 0x74, 0x61,
@@ -6524,7 +6524,7 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x73, 0x73, 0x12, 0x87, 0x01, 0x0a, 0x19, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x5f,
 	0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x5f, 0x73, 0x74, 0x61, 0x74, 0x65, 0x66, 0x75, 0x6c,
 	0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x49, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61,
-	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x77, 0x61, 0x70,
+	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x77, 0x61, 0x70,
 	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x50,
 	0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x2e, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e,
 	0x63, 0x79, 0x43, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x53, 0x74, 0x61, 0x74, 0x65, 0x66, 0x75,
@@ -6589,7 +6589,7 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x6b, 0x69, 0x6e, 0x64, 0x12, 0x05, 0xb8, 0xe9, 0xc0, 0x03, 0x01, 0x1a, 0x7c, 0x0a, 0x07, 0x53,
 	0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x41, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x0e, 0x32, 0x2d, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73,
-	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65,
 	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x2e, 0x43,
 	0x6f, 0x64, 0x65, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x22, 0x2e, 0x0a, 0x04, 0x43, 0x6f, 0x64,
 	0x65, 0x12, 0x12, 0x0a, 0x0e, 0x53, 0x57, 0x41, 0x50, 0x5f, 0x53, 0x55, 0x42, 0x4d, 0x49, 0x54,
@@ -6597,11 +6597,11 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x4e, 0x41, 0x4c, 0x49, 0x5a, 0x45, 0x44, 0x10, 0x01, 0x1a, 0xdb, 0x01, 0x0a, 0x05, 0x45, 0x72,
 	0x72, 0x6f, 0x72, 0x12, 0x3f, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x0e, 0x32, 0x2b, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74,
-	0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f,
 	0x6e, 0x73, 0x65, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x2e, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x04,
 	0x63, 0x6f, 0x64, 0x65, 0x12, 0x45, 0x0a, 0x0d, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x5f, 0x64, 0x65,
 	0x74, 0x61, 0x69, 0x6c, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x6f, 0x63,
-	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32,
+	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31,
 	0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x52, 0x0c, 0x65,
 	0x72, 0x72, 0x6f, 0x72, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x22, 0x4a, 0x0a, 0x04, 0x43,
 	0x6f, 0x64, 0x65, 0x12, 0x0a, 0x0a, 0x06, 0x44, 0x45, 0x4e, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12,
@@ -6613,25 +6613,25 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x4f, 0x0a, 0x0d, 0x6f, 0x70, 0x65, 0x6e, 0x5f,
 	0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x28,
 	0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
-	0x2e, 0x76, 0x32, 0x2e, 0x4f, 0x70, 0x65, 0x6e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73,
+	0x2e, 0x76, 0x31, 0x2e, 0x4f, 0x70, 0x65, 0x6e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73,
 	0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x48, 0x00, 0x52, 0x0c, 0x6f, 0x70, 0x65, 0x6e,
 	0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x12, 0x5f, 0x0a, 0x13, 0x73, 0x65, 0x6e, 0x64,
 	0x5f, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x5f, 0x70, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x18,
 	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2d, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e,
-	0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x65, 0x6e, 0x64, 0x50,
+	0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x65, 0x6e, 0x64, 0x50,
 	0x75, 0x62, 0x6c, 0x69, 0x63, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x74, 0x61,
 	0x64, 0x61, 0x74, 0x61, 0x48, 0x00, 0x52, 0x11, 0x73, 0x65, 0x6e, 0x64, 0x50, 0x75, 0x62, 0x6c,
 	0x69, 0x63, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x71, 0x0a, 0x19, 0x72, 0x65, 0x63,
 	0x65, 0x69, 0x76, 0x65, 0x5f, 0x70, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x5f, 0x70, 0x75,
 	0x62, 0x6c, 0x69, 0x63, 0x6c, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x33, 0x2e, 0x6f,
 	0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76,
-	0x32, 0x2e, 0x52, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74,
+	0x31, 0x2e, 0x52, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74,
 	0x73, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x6c, 0x79, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
 	0x61, 0x48, 0x00, 0x52, 0x17, 0x72, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x50, 0x61, 0x79, 0x6d,
 	0x65, 0x6e, 0x74, 0x73, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x6c, 0x79, 0x12, 0x61, 0x0a, 0x13,
 	0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x5f, 0x64, 0x69, 0x73, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74,
 	0x69, 0x6f, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2e, 0x2e, 0x6f, 0x63, 0x70, 0x2e,
-	0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x50,
+	0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x50,
 	0x75, 0x62, 0x6c, 0x69, 0x63, 0x44, 0x69, 0x73, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x69, 0x6f,
 	0x6e, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x48, 0x00, 0x52, 0x12, 0x70, 0x75, 0x62,
 	0x6c, 0x69, 0x63, 0x44, 0x69, 0x73, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x69, 0x6f, 0x6e, 0x42,
@@ -6640,7 +6640,7 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x60, 0x0a, 0x0b, 0x61, 0x63, 0x63, 0x6f, 0x75,
 	0x6e, 0x74, 0x5f, 0x73, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x33, 0x2e, 0x6f,
 	0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76,
-	0x32, 0x2e, 0x4f, 0x70, 0x65, 0x6e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x4d, 0x65,
+	0x31, 0x2e, 0x4f, 0x70, 0x65, 0x6e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x4d, 0x65,
 	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x53, 0x65,
 	0x74, 0x42, 0x0a, 0xba, 0xe9, 0xc0, 0x03, 0x05, 0x82, 0x01, 0x02, 0x10, 0x01, 0x52, 0x0a, 0x61,
 	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x53, 0x65, 0x74, 0x12, 0x3e, 0x0a, 0x04, 0x6d, 0x69, 0x6e,
@@ -6668,7 +6668,7 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x69, 0x6f, 0x6e, 0x4f, 0x77, 0x6e, 0x65, 0x72, 0x12, 0x51, 0x0a, 0x0d, 0x65, 0x78, 0x63, 0x68,
 	0x61, 0x6e, 0x67, 0x65, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32,
 	0x20, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x44, 0x61, 0x74,
+	0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x44, 0x61, 0x74,
 	0x61, 0x42, 0x0a, 0xba, 0xe9, 0xc0, 0x03, 0x05, 0x8a, 0x01, 0x02, 0x10, 0x01, 0x52, 0x0c, 0x65,
 	0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x12, 0x23, 0x0a, 0x0d, 0x69,
 	0x73, 0x5f, 0x77, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x61, 0x6c, 0x18, 0x05, 0x20, 0x01,
@@ -6693,7 +6693,7 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x6a, 0x02, 0x08, 0x01, 0x52, 0x0c, 0x69, 0x73, 0x52, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x53, 0x65,
 	0x6e, 0x64, 0x12, 0x45, 0x0a, 0x0d, 0x65, 0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x5f, 0x64,
 	0x61, 0x74, 0x61, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x6f, 0x63, 0x70, 0x2e,
-	0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x45,
+	0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x45,
 	0x78, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x52, 0x0c, 0x65, 0x78, 0x63,
 	0x68, 0x61, 0x6e, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x12, 0x3e, 0x0a, 0x04, 0x6d, 0x69, 0x6e,
 	0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63, 0x6f,
@@ -6708,7 +6708,7 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x01, 0x02, 0x10, 0x01, 0x52, 0x06, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x12, 0x6d, 0x0a, 0x0d,
 	0x64, 0x69, 0x73, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x02, 0x20,
 	0x03, 0x28, 0x0b, 0x32, 0x3b, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x44,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x44,
 	0x69, 0x73, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x65, 0x74, 0x61, 0x64,
 	0x61, 0x74, 0x61, 0x2e, 0x44, 0x69, 0x73, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x69, 0x6f, 0x6e,
 	0x42, 0x0a, 0xba, 0xe9, 0xc0, 0x03, 0x05, 0x92, 0x01, 0x02, 0x08, 0x01, 0x52, 0x0d, 0x64, 0x69,
@@ -6729,23 +6729,23 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x01, 0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x12, 0x4a, 0x0a, 0x0c, 0x6f, 0x70, 0x65, 0x6e, 0x5f,
 	0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x25, 0x2e,
 	0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e,
-	0x76, 0x32, 0x2e, 0x4f, 0x70, 0x65, 0x6e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x63,
+	0x76, 0x31, 0x2e, 0x4f, 0x70, 0x65, 0x6e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x63,
 	0x74, 0x69, 0x6f, 0x6e, 0x48, 0x00, 0x52, 0x0b, 0x6f, 0x70, 0x65, 0x6e, 0x41, 0x63, 0x63, 0x6f,
 	0x75, 0x6e, 0x74, 0x12, 0x5d, 0x0a, 0x13, 0x6e, 0x6f, 0x5f, 0x70, 0x72, 0x69, 0x76, 0x61, 0x63,
 	0x79, 0x5f, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x2b, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69,
-	0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x4e, 0x6f, 0x50, 0x72, 0x69, 0x76, 0x61, 0x63, 0x79, 0x54,
+	0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x4e, 0x6f, 0x50, 0x72, 0x69, 0x76, 0x61, 0x63, 0x79, 0x54,
 	0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x48, 0x00, 0x52,
 	0x11, 0x6e, 0x6f, 0x50, 0x72, 0x69, 0x76, 0x61, 0x63, 0x79, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66,
 	0x65, 0x72, 0x12, 0x5d, 0x0a, 0x13, 0x6e, 0x6f, 0x5f, 0x70, 0x72, 0x69, 0x76, 0x61, 0x63, 0x79,
 	0x5f, 0x77, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32,
 	0x2b, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x4e, 0x6f, 0x50, 0x72, 0x69, 0x76, 0x61, 0x63, 0x79, 0x57, 0x69,
+	0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x4e, 0x6f, 0x50, 0x72, 0x69, 0x76, 0x61, 0x63, 0x79, 0x57, 0x69,
 	0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x48, 0x00, 0x52, 0x11,
 	0x6e, 0x6f, 0x50, 0x72, 0x69, 0x76, 0x61, 0x63, 0x79, 0x57, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61,
 	0x77, 0x12, 0x47, 0x0a, 0x0b, 0x66, 0x65, 0x65, 0x5f, 0x70, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74,
 	0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x24, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61,
-	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x46, 0x65, 0x65, 0x50,
+	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x46, 0x65, 0x65, 0x50,
 	0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x48, 0x00, 0x52, 0x0a,
 	0x66, 0x65, 0x65, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x42, 0x0d, 0x0a, 0x04, 0x74, 0x79,
 	0x70, 0x65, 0x12, 0x05, 0xb8, 0xe9, 0xc0, 0x03, 0x01, 0x22, 0xd9, 0x03, 0x0a, 0x11, 0x4f, 0x70,
@@ -6830,7 +6830,7 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x88, 0x03, 0x0a, 0x10, 0x46, 0x65, 0x65, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x41, 0x63,
 	0x74, 0x69, 0x6f, 0x6e, 0x12, 0x4c, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x0e, 0x32, 0x2c, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63,
-	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x46, 0x65, 0x65, 0x50, 0x61, 0x79, 0x6d, 0x65,
+	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x46, 0x65, 0x65, 0x50, 0x61, 0x79, 0x6d, 0x65,
 	0x6e, 0x74, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x46, 0x65, 0x65, 0x54, 0x79, 0x70, 0x65,
 	0x42, 0x0a, 0xba, 0xe9, 0xc0, 0x03, 0x05, 0x82, 0x01, 0x02, 0x20, 0x00, 0x52, 0x04, 0x74, 0x79,
 	0x70, 0x65, 0x12, 0x48, 0x0a, 0x09, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x18,
@@ -6856,31 +6856,31 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x0a, 0x09, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x0d, 0x52, 0x08, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x51, 0x0a, 0x06, 0x6e,
 	0x6f, 0x6e, 0x63, 0x65, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2d, 0x2e, 0x6f, 0x63,
-	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32,
+	0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31,
 	0x2e, 0x4e, 0x6f, 0x6e, 0x63, 0x65, 0x64, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69,
 	0x6f, 0x6e, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x42, 0x0a, 0xba, 0xe9, 0xc0, 0x03,
 	0x05, 0x92, 0x01, 0x02, 0x10, 0x01, 0x52, 0x06, 0x6e, 0x6f, 0x6e, 0x63, 0x65, 0x73, 0x12, 0x53,
 	0x0a, 0x0c, 0x6f, 0x70, 0x65, 0x6e, 0x5f, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03,
 	0x20, 0x01, 0x28, 0x0b, 0x32, 0x2e, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73,
-	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x4f, 0x70, 0x65, 0x6e, 0x41, 0x63,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x4f, 0x70, 0x65, 0x6e, 0x41, 0x63,
 	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x50, 0x61, 0x72, 0x61, 0x6d,
 	0x65, 0x74, 0x65, 0x72, 0x48, 0x00, 0x52, 0x0b, 0x6f, 0x70, 0x65, 0x6e, 0x41, 0x63, 0x63, 0x6f,
 	0x75, 0x6e, 0x74, 0x12, 0x66, 0x0a, 0x13, 0x6e, 0x6f, 0x5f, 0x70, 0x72, 0x69, 0x76, 0x61, 0x63,
 	0x79, 0x5f, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x34, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69,
-	0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x4e, 0x6f, 0x50, 0x72, 0x69, 0x76, 0x61, 0x63, 0x79, 0x54,
+	0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x4e, 0x6f, 0x50, 0x72, 0x69, 0x76, 0x61, 0x63, 0x79, 0x54,
 	0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x50, 0x61, 0x72,
 	0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x48, 0x00, 0x52, 0x11, 0x6e, 0x6f, 0x50, 0x72, 0x69, 0x76,
 	0x61, 0x63, 0x79, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x12, 0x66, 0x0a, 0x13, 0x6e,
 	0x6f, 0x5f, 0x70, 0x72, 0x69, 0x76, 0x61, 0x63, 0x79, 0x5f, 0x77, 0x69, 0x74, 0x68, 0x64, 0x72,
 	0x61, 0x77, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x34, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74,
-	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x4e, 0x6f,
+	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x4e, 0x6f,
 	0x50, 0x72, 0x69, 0x76, 0x61, 0x63, 0x79, 0x57, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x53,
 	0x65, 0x72, 0x76, 0x65, 0x72, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x48, 0x00,
 	0x52, 0x11, 0x6e, 0x6f, 0x50, 0x72, 0x69, 0x76, 0x61, 0x63, 0x79, 0x57, 0x69, 0x74, 0x68, 0x64,
 	0x72, 0x61, 0x77, 0x12, 0x50, 0x0a, 0x0b, 0x66, 0x65, 0x65, 0x5f, 0x70, 0x61, 0x79, 0x6d, 0x65,
 	0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2d, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74,
-	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x46, 0x65,
+	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x46, 0x65,
 	0x65, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x50, 0x61,
 	0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x48, 0x00, 0x52, 0x0a, 0x66, 0x65, 0x65, 0x50, 0x61,
 	0x79, 0x6d, 0x65, 0x6e, 0x74, 0x42, 0x0d, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x05, 0xb8,
@@ -6911,18 +6911,18 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x72, 0x6f, 0x72, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x12, 0x53, 0x0a, 0x0d, 0x72, 0x65,
 	0x61, 0x73, 0x6f, 0x6e, 0x5f, 0x73, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x0b, 0x32, 0x2c, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74,
-	0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x52, 0x65, 0x61, 0x73, 0x6f, 0x6e, 0x53, 0x74, 0x72,
+	0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x61, 0x73, 0x6f, 0x6e, 0x53, 0x74, 0x72,
 	0x69, 0x6e, 0x67, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x48,
 	0x00, 0x52, 0x0c, 0x72, 0x65, 0x61, 0x73, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x12,
 	0x5f, 0x0a, 0x11, 0x69, 0x6e, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x5f, 0x73, 0x69, 0x67, 0x6e, 0x61,
 	0x74, 0x75, 0x72, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x30, 0x2e, 0x6f, 0x63, 0x70,
-	0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e,
+	0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e,
 	0x49, 0x6e, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65,
 	0x45, 0x72, 0x72, 0x6f, 0x72, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x48, 0x00, 0x52, 0x10,
 	0x69, 0x6e, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65,
 	0x12, 0x40, 0x0a, 0x06, 0x64, 0x65, 0x6e, 0x69, 0x65, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x26, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69,
-	0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x44, 0x65, 0x6e, 0x69, 0x65, 0x64, 0x45, 0x72, 0x72, 0x6f,
+	0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6e, 0x69, 0x65, 0x64, 0x45, 0x72, 0x72, 0x6f,
 	0x72, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x48, 0x00, 0x52, 0x06, 0x64, 0x65, 0x6e, 0x69,
 	0x65, 0x64, 0x42, 0x0d, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x05, 0xb8, 0xe9, 0xc0, 0x03,
 	0x01, 0x22, 0x40, 0x0a, 0x18, 0x52, 0x65, 0x61, 0x73, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x69, 0x6e,
@@ -6952,7 +6952,7 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0xe9, 0xc0, 0x03, 0x01, 0x22, 0x94, 0x01, 0x0a, 0x12, 0x44, 0x65, 0x6e, 0x69, 0x65, 0x64, 0x45,
 	0x72, 0x72, 0x6f, 0x72, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x12, 0x3f, 0x0a, 0x04, 0x63,
 	0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x2b, 0x2e, 0x6f, 0x63, 0x70, 0x2e,
-	0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x44,
+	0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x44,
 	0x65, 0x6e, 0x69, 0x65, 0x64, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c,
 	0x73, 0x2e, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x24, 0x0a, 0x06,
 	0x72, 0x65, 0x61, 0x73, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x0c, 0xba, 0xe9,
@@ -6997,7 +6997,7 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x64, 0x0a, 0x10, 0x63, 0x75, 0x72, 0x72,
 	0x65, 0x6e, 0x63, 0x79, 0x5f, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x0b, 0x32, 0x37, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63,
-	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64,
+	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64,
 	0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x43, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x53,
 	0x77, 0x61, 0x70, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x48, 0x00, 0x52, 0x0f, 0x63,
 	0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x43, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x42, 0x0d,
@@ -7007,14 +7007,14 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x73, 0x0a, 0x11, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f,
 	0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x3a, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69,
-	0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x53, 0x77, 0x61, 0x70, 0x52,
+	0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x53, 0x77, 0x61, 0x70, 0x52,
 	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x2e, 0x43, 0x75, 0x72,
 	0x72, 0x65, 0x6e, 0x63, 0x79, 0x43, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x42, 0x0a, 0xba, 0xe9,
 	0xc0, 0x03, 0x05, 0x8a, 0x01, 0x02, 0x10, 0x01, 0x52, 0x10, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74,
 	0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x12, 0x7f, 0x0a, 0x11, 0x73, 0x65,
 	0x72, 0x76, 0x65, 0x72, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x18,
 	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x46, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e,
-	0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74,
+	0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74,
 	0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x65, 0x72,
 	0x76, 0x65, 0x72, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x2e, 0x43, 0x75,
 	0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x43, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x42, 0x0a, 0xba,
@@ -7023,13 +7023,13 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x53, 0x77, 0x61, 0x70, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x61, 0x0a, 0x11,
 	0x76, 0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64, 0x5f, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
 	0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72,
-	0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x56, 0x65, 0x72,
+	0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x56, 0x65, 0x72,
 	0x69, 0x66, 0x69, 0x65, 0x64, 0x53, 0x77, 0x61, 0x70, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
 	0x61, 0x42, 0x0a, 0xba, 0xe9, 0xc0, 0x03, 0x05, 0x8a, 0x01, 0x02, 0x10, 0x01, 0x52, 0x10, 0x76,
 	0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12,
 	0x48, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x26,
 	0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
-	0x2e, 0x76, 0x32, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61,
+	0x2e, 0x76, 0x31, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61,
 	0x2e, 0x53, 0x74, 0x61, 0x74, 0x65, 0x42, 0x0a, 0xba, 0xe9, 0xc0, 0x03, 0x05, 0x82, 0x01, 0x02,
 	0x20, 0x00, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x12, 0x42, 0x0a, 0x09, 0x73, 0x69, 0x67,
 	0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6f,
@@ -7056,180 +7056,180 @@ var file_transaction_v2_transaction_service_proto_rawDesc = []byte{
 	0x49, 0x4e, 0x54, 0x45, 0x4e, 0x54, 0x10, 0x01, 0x32, 0xdf, 0x07, 0x0a, 0x0b, 0x54, 0x72, 0x61,
 	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x65, 0x0a, 0x0c, 0x53, 0x75, 0x62, 0x6d,
 	0x69, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x12, 0x27, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74,
-	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x75,
+	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x75,
 	0x62, 0x6d, 0x69, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
 	0x74, 0x1a, 0x28, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74,
-	0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x49, 0x6e, 0x74,
+	0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x75, 0x62, 0x6d, 0x69, 0x74, 0x49, 0x6e, 0x74,
 	0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x28, 0x01, 0x30, 0x01, 0x12,
 	0x70, 0x0a, 0x11, 0x47, 0x65, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x74, 0x61,
 	0x64, 0x61, 0x74, 0x61, 0x12, 0x2c, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73,
-	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x47, 0x65, 0x74, 0x49, 0x6e, 0x74,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x49, 0x6e, 0x74,
 	0x65, 0x6e, 0x74, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65,
 	0x73, 0x74, 0x1a, 0x2d, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63,
-	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x47, 0x65, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x6e,
+	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x6e,
 	0x74, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
 	0x65, 0x12, 0x58, 0x0a, 0x09, 0x47, 0x65, 0x74, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x73, 0x12, 0x24,
 	0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
-	0x2e, 0x76, 0x32, 0x2e, 0x47, 0x65, 0x74, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x73, 0x52, 0x65, 0x71,
+	0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x73, 0x52, 0x65, 0x71,
 	0x75, 0x65, 0x73, 0x74, 0x1a, 0x25, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73,
-	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x47, 0x65, 0x74, 0x4c, 0x69, 0x6d,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4c, 0x69, 0x6d,
 	0x69, 0x74, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x79, 0x0a, 0x14, 0x43,
 	0x61, 0x6e, 0x57, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x54, 0x6f, 0x41, 0x63, 0x63, 0x6f,
 	0x75, 0x6e, 0x74, 0x12, 0x2f, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x43, 0x61, 0x6e, 0x57, 0x69, 0x74, 0x68,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x61, 0x6e, 0x57, 0x69, 0x74, 0x68,
 	0x64, 0x72, 0x61, 0x77, 0x54, 0x6f, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x71,
 	0x75, 0x65, 0x73, 0x74, 0x1a, 0x30, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73,
-	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x43, 0x61, 0x6e, 0x57, 0x69, 0x74,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x61, 0x6e, 0x57, 0x69, 0x74,
 	0x68, 0x64, 0x72, 0x61, 0x77, 0x54, 0x6f, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65,
 	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x52, 0x0a, 0x07, 0x41, 0x69, 0x72, 0x64, 0x72, 0x6f,
 	0x70, 0x12, 0x22, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74,
-	0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x41, 0x69, 0x72, 0x64, 0x72, 0x6f, 0x70, 0x52, 0x65,
+	0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x69, 0x72, 0x64, 0x72, 0x6f, 0x70, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x23, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e,
-	0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x41, 0x69, 0x72, 0x64, 0x72,
+	0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x69, 0x72, 0x64, 0x72,
 	0x6f, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x61, 0x0a, 0x0c, 0x56, 0x6f,
 	0x69, 0x64, 0x47, 0x69, 0x66, 0x74, 0x43, 0x61, 0x72, 0x64, 0x12, 0x27, 0x2e, 0x6f, 0x63, 0x70,
-	0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e,
+	0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e,
 	0x56, 0x6f, 0x69, 0x64, 0x47, 0x69, 0x66, 0x74, 0x43, 0x61, 0x72, 0x64, 0x52, 0x65, 0x71, 0x75,
 	0x65, 0x73, 0x74, 0x1a, 0x28, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x56, 0x6f, 0x69, 0x64, 0x47, 0x69, 0x66,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x56, 0x6f, 0x69, 0x64, 0x47, 0x69, 0x66,
 	0x74, 0x43, 0x61, 0x72, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x5c, 0x0a,
 	0x09, 0x53, 0x74, 0x61, 0x72, 0x74, 0x53, 0x77, 0x61, 0x70, 0x12, 0x24, 0x2e, 0x6f, 0x63, 0x70,
-	0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e,
+	0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e,
 	0x53, 0x74, 0x61, 0x72, 0x74, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
 	0x1a, 0x25, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69,
-	0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x53, 0x77, 0x61, 0x70, 0x52,
+	0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x53, 0x77, 0x61, 0x70, 0x52,
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x28, 0x01, 0x30, 0x01, 0x12, 0x52, 0x0a, 0x07, 0x47,
 	0x65, 0x74, 0x53, 0x77, 0x61, 0x70, 0x12, 0x22, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61,
-	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x47, 0x65, 0x74, 0x53,
+	0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x53,
 	0x77, 0x61, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x23, 0x2e, 0x6f, 0x63, 0x70,
-	0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e,
+	0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e,
 	0x47, 0x65, 0x74, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
 	0x6a, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x50, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x53, 0x77, 0x61,
 	0x70, 0x73, 0x12, 0x2a, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63,
-	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x47, 0x65, 0x74, 0x50, 0x65, 0x6e, 0x64, 0x69,
+	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x50, 0x65, 0x6e, 0x64, 0x69,
 	0x6e, 0x67, 0x53, 0x77, 0x61, 0x70, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2b,
 	0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
-	0x2e, 0x76, 0x32, 0x2e, 0x47, 0x65, 0x74, 0x50, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x53, 0x77,
+	0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x50, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x53, 0x77,
 	0x61, 0x70, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4d, 0x0a, 0x04, 0x53,
 	0x77, 0x61, 0x70, 0x12, 0x1f, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x71,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x71,
 	0x75, 0x65, 0x73, 0x74, 0x1a, 0x20, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x6e, 0x73,
-	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65,
 	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x28, 0x01, 0x30, 0x01, 0x42, 0x86, 0x01, 0x0a, 0x1e, 0x63,
 	0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x64, 0x65, 0x69, 0x6e, 0x63, 0x2e, 0x67, 0x65, 0x6e, 0x2e, 0x74,
-	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x32, 0x5a, 0x51, 0x67,
+	0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x5a, 0x51, 0x67,
 	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x64, 0x65, 0x2d, 0x70,
 	0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x2f, 0x6f, 0x63, 0x70, 0x2d, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x62, 0x75, 0x66, 0x2d, 0x61, 0x70, 0x69, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74,
 	0x65, 0x64, 0x2f, 0x67, 0x6f, 0x2f, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x2f, 0x76, 0x32, 0x3b, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
+	0x6e, 0x2f, 0x76, 0x31, 0x3b, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e,
 	0xa2, 0x02, 0x10, 0x41, 0x50, 0x42, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x56, 0x32, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6e, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
-	file_transaction_v2_transaction_service_proto_rawDescOnce sync.Once
-	file_transaction_v2_transaction_service_proto_rawDescData = file_transaction_v2_transaction_service_proto_rawDesc
+	file_transaction_v1_transaction_service_proto_rawDescOnce sync.Once
+	file_transaction_v1_transaction_service_proto_rawDescData = file_transaction_v1_transaction_service_proto_rawDesc
 )
 
-func file_transaction_v2_transaction_service_proto_rawDescGZIP() []byte {
-	file_transaction_v2_transaction_service_proto_rawDescOnce.Do(func() {
-		file_transaction_v2_transaction_service_proto_rawDescData = protoimpl.X.CompressGZIP(file_transaction_v2_transaction_service_proto_rawDescData)
+func file_transaction_v1_transaction_service_proto_rawDescGZIP() []byte {
+	file_transaction_v1_transaction_service_proto_rawDescOnce.Do(func() {
+		file_transaction_v1_transaction_service_proto_rawDescData = protoimpl.X.CompressGZIP(file_transaction_v1_transaction_service_proto_rawDescData)
 	})
-	return file_transaction_v2_transaction_service_proto_rawDescData
+	return file_transaction_v1_transaction_service_proto_rawDescData
 }
 
-var file_transaction_v2_transaction_service_proto_enumTypes = make([]protoimpl.EnumInfo, 19)
-var file_transaction_v2_transaction_service_proto_msgTypes = make([]protoimpl.MessageInfo, 69)
-var file_transaction_v2_transaction_service_proto_goTypes = []interface{}{
-	(AirdropType)(0),                                               // 0: ocp.transaction.v2.AirdropType
-	(FundingSource)(0),                                             // 1: ocp.transaction.v2.FundingSource
-	(SubmitIntentResponse_Success_Code)(0),                         // 2: ocp.transaction.v2.SubmitIntentResponse.Success.Code
-	(SubmitIntentResponse_Error_Code)(0),                           // 3: ocp.transaction.v2.SubmitIntentResponse.Error.Code
-	(GetIntentMetadataResponse_Result)(0),                          // 4: ocp.transaction.v2.GetIntentMetadataResponse.Result
-	(GetLimitsResponse_Result)(0),                                  // 5: ocp.transaction.v2.GetLimitsResponse.Result
-	(CanWithdrawToAccountResponse_AccountType)(0),                  // 6: ocp.transaction.v2.CanWithdrawToAccountResponse.AccountType
-	(AirdropResponse_Result)(0),                                    // 7: ocp.transaction.v2.AirdropResponse.Result
-	(VoidGiftCardResponse_Result)(0),                               // 8: ocp.transaction.v2.VoidGiftCardResponse.Result
-	(StartSwapResponse_Success_Code)(0),                            // 9: ocp.transaction.v2.StartSwapResponse.Success.Code
-	(StartSwapResponse_Error_Code)(0),                              // 10: ocp.transaction.v2.StartSwapResponse.Error.Code
-	(GetSwapResponse_Result)(0),                                    // 11: ocp.transaction.v2.GetSwapResponse.Result
-	(GetPendingSwapsResponse_Result)(0),                            // 12: ocp.transaction.v2.GetPendingSwapsResponse.Result
-	(SwapResponse_Success_Code)(0),                                 // 13: ocp.transaction.v2.SwapResponse.Success.Code
-	(SwapResponse_Error_Code)(0),                                   // 14: ocp.transaction.v2.SwapResponse.Error.Code
-	(OpenAccountsMetadata_AccountSet)(0),                           // 15: ocp.transaction.v2.OpenAccountsMetadata.AccountSet
-	(FeePaymentAction_FeeType)(0),                                  // 16: ocp.transaction.v2.FeePaymentAction.FeeType
-	(DeniedErrorDetails_Code)(0),                                   // 17: ocp.transaction.v2.DeniedErrorDetails.Code
-	(SwapMetadata_State)(0),                                        // 18: ocp.transaction.v2.SwapMetadata.State
-	(*SubmitIntentRequest)(nil),                                    // 19: ocp.transaction.v2.SubmitIntentRequest
-	(*SubmitIntentResponse)(nil),                                   // 20: ocp.transaction.v2.SubmitIntentResponse
-	(*GetIntentMetadataRequest)(nil),                               // 21: ocp.transaction.v2.GetIntentMetadataRequest
-	(*GetIntentMetadataResponse)(nil),                              // 22: ocp.transaction.v2.GetIntentMetadataResponse
-	(*GetLimitsRequest)(nil),                                       // 23: ocp.transaction.v2.GetLimitsRequest
-	(*GetLimitsResponse)(nil),                                      // 24: ocp.transaction.v2.GetLimitsResponse
-	(*CanWithdrawToAccountRequest)(nil),                            // 25: ocp.transaction.v2.CanWithdrawToAccountRequest
-	(*CanWithdrawToAccountResponse)(nil),                           // 26: ocp.transaction.v2.CanWithdrawToAccountResponse
-	(*AirdropRequest)(nil),                                         // 27: ocp.transaction.v2.AirdropRequest
-	(*AirdropResponse)(nil),                                        // 28: ocp.transaction.v2.AirdropResponse
-	(*VoidGiftCardRequest)(nil),                                    // 29: ocp.transaction.v2.VoidGiftCardRequest
-	(*VoidGiftCardResponse)(nil),                                   // 30: ocp.transaction.v2.VoidGiftCardResponse
-	(*StartSwapRequest)(nil),                                       // 31: ocp.transaction.v2.StartSwapRequest
-	(*StartSwapResponse)(nil),                                      // 32: ocp.transaction.v2.StartSwapResponse
-	(*GetSwapRequest)(nil),                                         // 33: ocp.transaction.v2.GetSwapRequest
-	(*GetSwapResponse)(nil),                                        // 34: ocp.transaction.v2.GetSwapResponse
-	(*GetPendingSwapsRequest)(nil),                                 // 35: ocp.transaction.v2.GetPendingSwapsRequest
-	(*GetPendingSwapsResponse)(nil),                                // 36: ocp.transaction.v2.GetPendingSwapsResponse
-	(*SwapRequest)(nil),                                            // 37: ocp.transaction.v2.SwapRequest
-	(*SwapResponse)(nil),                                           // 38: ocp.transaction.v2.SwapResponse
-	(*Metadata)(nil),                                               // 39: ocp.transaction.v2.Metadata
-	(*OpenAccountsMetadata)(nil),                                   // 40: ocp.transaction.v2.OpenAccountsMetadata
-	(*SendPublicPaymentMetadata)(nil),                              // 41: ocp.transaction.v2.SendPublicPaymentMetadata
-	(*ReceivePaymentsPubliclyMetadata)(nil),                        // 42: ocp.transaction.v2.ReceivePaymentsPubliclyMetadata
-	(*PublicDistributionMetadata)(nil),                             // 43: ocp.transaction.v2.PublicDistributionMetadata
-	(*Action)(nil),                                                 // 44: ocp.transaction.v2.Action
-	(*OpenAccountAction)(nil),                                      // 45: ocp.transaction.v2.OpenAccountAction
-	(*NoPrivacyTransferAction)(nil),                                // 46: ocp.transaction.v2.NoPrivacyTransferAction
-	(*NoPrivacyWithdrawAction)(nil),                                // 47: ocp.transaction.v2.NoPrivacyWithdrawAction
-	(*FeePaymentAction)(nil),                                       // 48: ocp.transaction.v2.FeePaymentAction
-	(*ServerParameter)(nil),                                        // 49: ocp.transaction.v2.ServerParameter
-	(*NoncedTransactionMetadata)(nil),                              // 50: ocp.transaction.v2.NoncedTransactionMetadata
-	(*OpenAccountServerParameter)(nil),                             // 51: ocp.transaction.v2.OpenAccountServerParameter
-	(*NoPrivacyTransferServerParameter)(nil),                       // 52: ocp.transaction.v2.NoPrivacyTransferServerParameter
-	(*NoPrivacyWithdrawServerParameter)(nil),                       // 53: ocp.transaction.v2.NoPrivacyWithdrawServerParameter
-	(*FeePaymentServerParameter)(nil),                              // 54: ocp.transaction.v2.FeePaymentServerParameter
-	(*ErrorDetails)(nil),                                           // 55: ocp.transaction.v2.ErrorDetails
-	(*ReasonStringErrorDetails)(nil),                               // 56: ocp.transaction.v2.ReasonStringErrorDetails
-	(*InvalidSignatureErrorDetails)(nil),                           // 57: ocp.transaction.v2.InvalidSignatureErrorDetails
-	(*DeniedErrorDetails)(nil),                                     // 58: ocp.transaction.v2.DeniedErrorDetails
-	(*ExchangeData)(nil),                                           // 59: ocp.transaction.v2.ExchangeData
-	(*ExchangeDataWithoutRate)(nil),                                // 60: ocp.transaction.v2.ExchangeDataWithoutRate
-	(*SendLimit)(nil),                                              // 61: ocp.transaction.v2.SendLimit
-	(*VerifiedSwapMetadata)(nil),                                   // 62: ocp.transaction.v2.VerifiedSwapMetadata
-	(*VerifiedCurrencyCreatorSwapMetadata)(nil),                    // 63: ocp.transaction.v2.VerifiedCurrencyCreatorSwapMetadata
-	(*SwapMetadata)(nil),                                           // 64: ocp.transaction.v2.SwapMetadata
-	(*SubmitIntentRequest_SubmitActions)(nil),                      // 65: ocp.transaction.v2.SubmitIntentRequest.SubmitActions
-	(*SubmitIntentRequest_SubmitSignatures)(nil),                   // 66: ocp.transaction.v2.SubmitIntentRequest.SubmitSignatures
-	(*SubmitIntentResponse_ServerParameters)(nil),                  // 67: ocp.transaction.v2.SubmitIntentResponse.ServerParameters
-	(*SubmitIntentResponse_Success)(nil),                           // 68: ocp.transaction.v2.SubmitIntentResponse.Success
-	(*SubmitIntentResponse_Error)(nil),                             // 69: ocp.transaction.v2.SubmitIntentResponse.Error
-	nil,                                                            // 70: ocp.transaction.v2.GetLimitsResponse.SendLimitsByCurrencyEntry
-	(*StartSwapRequest_Start)(nil),                                 // 71: ocp.transaction.v2.StartSwapRequest.Start
-	(*StartSwapRequest_SubmitSignature)(nil),                       // 72: ocp.transaction.v2.StartSwapRequest.SubmitSignature
-	(*StartSwapRequest_Start_CurrencyCreator)(nil),                 // 73: ocp.transaction.v2.StartSwapRequest.Start.CurrencyCreator
-	(*StartSwapResponse_ServerParameters)(nil),                     // 74: ocp.transaction.v2.StartSwapResponse.ServerParameters
-	(*StartSwapResponse_Success)(nil),                              // 75: ocp.transaction.v2.StartSwapResponse.Success
-	(*StartSwapResponse_Error)(nil),                                // 76: ocp.transaction.v2.StartSwapResponse.Error
-	(*StartSwapResponse_ServerParameters_CurrencyCreator)(nil),     // 77: ocp.transaction.v2.StartSwapResponse.ServerParameters.CurrencyCreator
-	(*SwapRequest_Initiate)(nil),                                   // 78: ocp.transaction.v2.SwapRequest.Initiate
-	(*SwapRequest_SubmitSignatures)(nil),                           // 79: ocp.transaction.v2.SwapRequest.SubmitSignatures
-	(*SwapRequest_Initiate_Stateless)(nil),                         // 80: ocp.transaction.v2.SwapRequest.Initiate.Stateless
-	(*SwapRequest_Initiate_Stateful)(nil),                          // 81: ocp.transaction.v2.SwapRequest.Initiate.Stateful
-	(*SwapResponse_ServerParameters)(nil),                          // 82: ocp.transaction.v2.SwapResponse.ServerParameters
-	(*SwapResponse_Success)(nil),                                   // 83: ocp.transaction.v2.SwapResponse.Success
-	(*SwapResponse_Error)(nil),                                     // 84: ocp.transaction.v2.SwapResponse.Error
-	(*SwapResponse_ServerParameters_CurrencyCreatorStateless)(nil), // 85: ocp.transaction.v2.SwapResponse.ServerParameters.CurrencyCreatorStateless
-	(*SwapResponse_ServerParameters_CurrencyCreatorStateful)(nil),  // 86: ocp.transaction.v2.SwapResponse.ServerParameters.CurrencyCreatorStateful
-	(*PublicDistributionMetadata_Distribution)(nil),                // 87: ocp.transaction.v2.PublicDistributionMetadata.Distribution
+var file_transaction_v1_transaction_service_proto_enumTypes = make([]protoimpl.EnumInfo, 19)
+var file_transaction_v1_transaction_service_proto_msgTypes = make([]protoimpl.MessageInfo, 69)
+var file_transaction_v1_transaction_service_proto_goTypes = []interface{}{
+	(AirdropType)(0),                                               // 0: ocp.transaction.v1.AirdropType
+	(FundingSource)(0),                                             // 1: ocp.transaction.v1.FundingSource
+	(SubmitIntentResponse_Success_Code)(0),                         // 2: ocp.transaction.v1.SubmitIntentResponse.Success.Code
+	(SubmitIntentResponse_Error_Code)(0),                           // 3: ocp.transaction.v1.SubmitIntentResponse.Error.Code
+	(GetIntentMetadataResponse_Result)(0),                          // 4: ocp.transaction.v1.GetIntentMetadataResponse.Result
+	(GetLimitsResponse_Result)(0),                                  // 5: ocp.transaction.v1.GetLimitsResponse.Result
+	(CanWithdrawToAccountResponse_AccountType)(0),                  // 6: ocp.transaction.v1.CanWithdrawToAccountResponse.AccountType
+	(AirdropResponse_Result)(0),                                    // 7: ocp.transaction.v1.AirdropResponse.Result
+	(VoidGiftCardResponse_Result)(0),                               // 8: ocp.transaction.v1.VoidGiftCardResponse.Result
+	(StartSwapResponse_Success_Code)(0),                            // 9: ocp.transaction.v1.StartSwapResponse.Success.Code
+	(StartSwapResponse_Error_Code)(0),                              // 10: ocp.transaction.v1.StartSwapResponse.Error.Code
+	(GetSwapResponse_Result)(0),                                    // 11: ocp.transaction.v1.GetSwapResponse.Result
+	(GetPendingSwapsResponse_Result)(0),                            // 12: ocp.transaction.v1.GetPendingSwapsResponse.Result
+	(SwapResponse_Success_Code)(0),                                 // 13: ocp.transaction.v1.SwapResponse.Success.Code
+	(SwapResponse_Error_Code)(0),                                   // 14: ocp.transaction.v1.SwapResponse.Error.Code
+	(OpenAccountsMetadata_AccountSet)(0),                           // 15: ocp.transaction.v1.OpenAccountsMetadata.AccountSet
+	(FeePaymentAction_FeeType)(0),                                  // 16: ocp.transaction.v1.FeePaymentAction.FeeType
+	(DeniedErrorDetails_Code)(0),                                   // 17: ocp.transaction.v1.DeniedErrorDetails.Code
+	(SwapMetadata_State)(0),                                        // 18: ocp.transaction.v1.SwapMetadata.State
+	(*SubmitIntentRequest)(nil),                                    // 19: ocp.transaction.v1.SubmitIntentRequest
+	(*SubmitIntentResponse)(nil),                                   // 20: ocp.transaction.v1.SubmitIntentResponse
+	(*GetIntentMetadataRequest)(nil),                               // 21: ocp.transaction.v1.GetIntentMetadataRequest
+	(*GetIntentMetadataResponse)(nil),                              // 22: ocp.transaction.v1.GetIntentMetadataResponse
+	(*GetLimitsRequest)(nil),                                       // 23: ocp.transaction.v1.GetLimitsRequest
+	(*GetLimitsResponse)(nil),                                      // 24: ocp.transaction.v1.GetLimitsResponse
+	(*CanWithdrawToAccountRequest)(nil),                            // 25: ocp.transaction.v1.CanWithdrawToAccountRequest
+	(*CanWithdrawToAccountResponse)(nil),                           // 26: ocp.transaction.v1.CanWithdrawToAccountResponse
+	(*AirdropRequest)(nil),                                         // 27: ocp.transaction.v1.AirdropRequest
+	(*AirdropResponse)(nil),                                        // 28: ocp.transaction.v1.AirdropResponse
+	(*VoidGiftCardRequest)(nil),                                    // 29: ocp.transaction.v1.VoidGiftCardRequest
+	(*VoidGiftCardResponse)(nil),                                   // 30: ocp.transaction.v1.VoidGiftCardResponse
+	(*StartSwapRequest)(nil),                                       // 31: ocp.transaction.v1.StartSwapRequest
+	(*StartSwapResponse)(nil),                                      // 32: ocp.transaction.v1.StartSwapResponse
+	(*GetSwapRequest)(nil),                                         // 33: ocp.transaction.v1.GetSwapRequest
+	(*GetSwapResponse)(nil),                                        // 34: ocp.transaction.v1.GetSwapResponse
+	(*GetPendingSwapsRequest)(nil),                                 // 35: ocp.transaction.v1.GetPendingSwapsRequest
+	(*GetPendingSwapsResponse)(nil),                                // 36: ocp.transaction.v1.GetPendingSwapsResponse
+	(*SwapRequest)(nil),                                            // 37: ocp.transaction.v1.SwapRequest
+	(*SwapResponse)(nil),                                           // 38: ocp.transaction.v1.SwapResponse
+	(*Metadata)(nil),                                               // 39: ocp.transaction.v1.Metadata
+	(*OpenAccountsMetadata)(nil),                                   // 40: ocp.transaction.v1.OpenAccountsMetadata
+	(*SendPublicPaymentMetadata)(nil),                              // 41: ocp.transaction.v1.SendPublicPaymentMetadata
+	(*ReceivePaymentsPubliclyMetadata)(nil),                        // 42: ocp.transaction.v1.ReceivePaymentsPubliclyMetadata
+	(*PublicDistributionMetadata)(nil),                             // 43: ocp.transaction.v1.PublicDistributionMetadata
+	(*Action)(nil),                                                 // 44: ocp.transaction.v1.Action
+	(*OpenAccountAction)(nil),                                      // 45: ocp.transaction.v1.OpenAccountAction
+	(*NoPrivacyTransferAction)(nil),                                // 46: ocp.transaction.v1.NoPrivacyTransferAction
+	(*NoPrivacyWithdrawAction)(nil),                                // 47: ocp.transaction.v1.NoPrivacyWithdrawAction
+	(*FeePaymentAction)(nil),                                       // 48: ocp.transaction.v1.FeePaymentAction
+	(*ServerParameter)(nil),                                        // 49: ocp.transaction.v1.ServerParameter
+	(*NoncedTransactionMetadata)(nil),                              // 50: ocp.transaction.v1.NoncedTransactionMetadata
+	(*OpenAccountServerParameter)(nil),                             // 51: ocp.transaction.v1.OpenAccountServerParameter
+	(*NoPrivacyTransferServerParameter)(nil),                       // 52: ocp.transaction.v1.NoPrivacyTransferServerParameter
+	(*NoPrivacyWithdrawServerParameter)(nil),                       // 53: ocp.transaction.v1.NoPrivacyWithdrawServerParameter
+	(*FeePaymentServerParameter)(nil),                              // 54: ocp.transaction.v1.FeePaymentServerParameter
+	(*ErrorDetails)(nil),                                           // 55: ocp.transaction.v1.ErrorDetails
+	(*ReasonStringErrorDetails)(nil),                               // 56: ocp.transaction.v1.ReasonStringErrorDetails
+	(*InvalidSignatureErrorDetails)(nil),                           // 57: ocp.transaction.v1.InvalidSignatureErrorDetails
+	(*DeniedErrorDetails)(nil),                                     // 58: ocp.transaction.v1.DeniedErrorDetails
+	(*ExchangeData)(nil),                                           // 59: ocp.transaction.v1.ExchangeData
+	(*ExchangeDataWithoutRate)(nil),                                // 60: ocp.transaction.v1.ExchangeDataWithoutRate
+	(*SendLimit)(nil),                                              // 61: ocp.transaction.v1.SendLimit
+	(*VerifiedSwapMetadata)(nil),                                   // 62: ocp.transaction.v1.VerifiedSwapMetadata
+	(*VerifiedCurrencyCreatorSwapMetadata)(nil),                    // 63: ocp.transaction.v1.VerifiedCurrencyCreatorSwapMetadata
+	(*SwapMetadata)(nil),                                           // 64: ocp.transaction.v1.SwapMetadata
+	(*SubmitIntentRequest_SubmitActions)(nil),                      // 65: ocp.transaction.v1.SubmitIntentRequest.SubmitActions
+	(*SubmitIntentRequest_SubmitSignatures)(nil),                   // 66: ocp.transaction.v1.SubmitIntentRequest.SubmitSignatures
+	(*SubmitIntentResponse_ServerParameters)(nil),                  // 67: ocp.transaction.v1.SubmitIntentResponse.ServerParameters
+	(*SubmitIntentResponse_Success)(nil),                           // 68: ocp.transaction.v1.SubmitIntentResponse.Success
+	(*SubmitIntentResponse_Error)(nil),                             // 69: ocp.transaction.v1.SubmitIntentResponse.Error
+	nil,                                                            // 70: ocp.transaction.v1.GetLimitsResponse.SendLimitsByCurrencyEntry
+	(*StartSwapRequest_Start)(nil),                                 // 71: ocp.transaction.v1.StartSwapRequest.Start
+	(*StartSwapRequest_SubmitSignature)(nil),                       // 72: ocp.transaction.v1.StartSwapRequest.SubmitSignature
+	(*StartSwapRequest_Start_CurrencyCreator)(nil),                 // 73: ocp.transaction.v1.StartSwapRequest.Start.CurrencyCreator
+	(*StartSwapResponse_ServerParameters)(nil),                     // 74: ocp.transaction.v1.StartSwapResponse.ServerParameters
+	(*StartSwapResponse_Success)(nil),                              // 75: ocp.transaction.v1.StartSwapResponse.Success
+	(*StartSwapResponse_Error)(nil),                                // 76: ocp.transaction.v1.StartSwapResponse.Error
+	(*StartSwapResponse_ServerParameters_CurrencyCreator)(nil),     // 77: ocp.transaction.v1.StartSwapResponse.ServerParameters.CurrencyCreator
+	(*SwapRequest_Initiate)(nil),                                   // 78: ocp.transaction.v1.SwapRequest.Initiate
+	(*SwapRequest_SubmitSignatures)(nil),                           // 79: ocp.transaction.v1.SwapRequest.SubmitSignatures
+	(*SwapRequest_Initiate_Stateless)(nil),                         // 80: ocp.transaction.v1.SwapRequest.Initiate.Stateless
+	(*SwapRequest_Initiate_Stateful)(nil),                          // 81: ocp.transaction.v1.SwapRequest.Initiate.Stateful
+	(*SwapResponse_ServerParameters)(nil),                          // 82: ocp.transaction.v1.SwapResponse.ServerParameters
+	(*SwapResponse_Success)(nil),                                   // 83: ocp.transaction.v1.SwapResponse.Success
+	(*SwapResponse_Error)(nil),                                     // 84: ocp.transaction.v1.SwapResponse.Error
+	(*SwapResponse_ServerParameters_CurrencyCreatorStateless)(nil), // 85: ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateless
+	(*SwapResponse_ServerParameters_CurrencyCreatorStateful)(nil),  // 86: ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateful
+	(*PublicDistributionMetadata_Distribution)(nil),                // 87: ocp.transaction.v1.PublicDistributionMetadata.Distribution
 	(*v1.IntentId)(nil),                                            // 88: ocp.common.v1.IntentId
 	(*v1.SolanaAccountId)(nil),                                     // 89: ocp.common.v1.SolanaAccountId
 	(*v1.Signature)(nil),                                           // 90: ocp.common.v1.Signature
@@ -7241,185 +7241,185 @@ var file_transaction_v2_transaction_service_proto_goTypes = []interface{}{
 	(*v1.Hash)(nil),                                                // 96: ocp.common.v1.Hash
 	(*v1.SolanaAddressLookupTable)(nil),                            // 97: ocp.common.v1.SolanaAddressLookupTable
 }
-var file_transaction_v2_transaction_service_proto_depIdxs = []int32{
-	65,  // 0: ocp.transaction.v2.SubmitIntentRequest.submit_actions:type_name -> ocp.transaction.v2.SubmitIntentRequest.SubmitActions
-	66,  // 1: ocp.transaction.v2.SubmitIntentRequest.submit_signatures:type_name -> ocp.transaction.v2.SubmitIntentRequest.SubmitSignatures
-	67,  // 2: ocp.transaction.v2.SubmitIntentResponse.server_parameters:type_name -> ocp.transaction.v2.SubmitIntentResponse.ServerParameters
-	68,  // 3: ocp.transaction.v2.SubmitIntentResponse.success:type_name -> ocp.transaction.v2.SubmitIntentResponse.Success
-	69,  // 4: ocp.transaction.v2.SubmitIntentResponse.error:type_name -> ocp.transaction.v2.SubmitIntentResponse.Error
-	88,  // 5: ocp.transaction.v2.GetIntentMetadataRequest.intent_id:type_name -> ocp.common.v1.IntentId
-	89,  // 6: ocp.transaction.v2.GetIntentMetadataRequest.owner:type_name -> ocp.common.v1.SolanaAccountId
-	90,  // 7: ocp.transaction.v2.GetIntentMetadataRequest.signature:type_name -> ocp.common.v1.Signature
-	4,   // 8: ocp.transaction.v2.GetIntentMetadataResponse.result:type_name -> ocp.transaction.v2.GetIntentMetadataResponse.Result
-	39,  // 9: ocp.transaction.v2.GetIntentMetadataResponse.metadata:type_name -> ocp.transaction.v2.Metadata
-	89,  // 10: ocp.transaction.v2.GetLimitsRequest.owner:type_name -> ocp.common.v1.SolanaAccountId
-	90,  // 11: ocp.transaction.v2.GetLimitsRequest.signature:type_name -> ocp.common.v1.Signature
-	91,  // 12: ocp.transaction.v2.GetLimitsRequest.consumed_since:type_name -> google.protobuf.Timestamp
-	5,   // 13: ocp.transaction.v2.GetLimitsResponse.result:type_name -> ocp.transaction.v2.GetLimitsResponse.Result
-	70,  // 14: ocp.transaction.v2.GetLimitsResponse.send_limits_by_currency:type_name -> ocp.transaction.v2.GetLimitsResponse.SendLimitsByCurrencyEntry
-	89,  // 15: ocp.transaction.v2.CanWithdrawToAccountRequest.account:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 16: ocp.transaction.v2.CanWithdrawToAccountRequest.mint:type_name -> ocp.common.v1.SolanaAccountId
-	6,   // 17: ocp.transaction.v2.CanWithdrawToAccountResponse.account_type:type_name -> ocp.transaction.v2.CanWithdrawToAccountResponse.AccountType
-	60,  // 18: ocp.transaction.v2.CanWithdrawToAccountResponse.fee_amount:type_name -> ocp.transaction.v2.ExchangeDataWithoutRate
-	0,   // 19: ocp.transaction.v2.AirdropRequest.airdrop_type:type_name -> ocp.transaction.v2.AirdropType
-	89,  // 20: ocp.transaction.v2.AirdropRequest.owner:type_name -> ocp.common.v1.SolanaAccountId
-	90,  // 21: ocp.transaction.v2.AirdropRequest.signature:type_name -> ocp.common.v1.Signature
-	7,   // 22: ocp.transaction.v2.AirdropResponse.result:type_name -> ocp.transaction.v2.AirdropResponse.Result
-	59,  // 23: ocp.transaction.v2.AirdropResponse.exchange_data:type_name -> ocp.transaction.v2.ExchangeData
-	89,  // 24: ocp.transaction.v2.VoidGiftCardRequest.owner:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 25: ocp.transaction.v2.VoidGiftCardRequest.gift_card_vault:type_name -> ocp.common.v1.SolanaAccountId
-	90,  // 26: ocp.transaction.v2.VoidGiftCardRequest.signature:type_name -> ocp.common.v1.Signature
-	8,   // 27: ocp.transaction.v2.VoidGiftCardResponse.result:type_name -> ocp.transaction.v2.VoidGiftCardResponse.Result
-	71,  // 28: ocp.transaction.v2.StartSwapRequest.start:type_name -> ocp.transaction.v2.StartSwapRequest.Start
-	72,  // 29: ocp.transaction.v2.StartSwapRequest.submit_signature:type_name -> ocp.transaction.v2.StartSwapRequest.SubmitSignature
-	74,  // 30: ocp.transaction.v2.StartSwapResponse.server_parameters:type_name -> ocp.transaction.v2.StartSwapResponse.ServerParameters
-	75,  // 31: ocp.transaction.v2.StartSwapResponse.success:type_name -> ocp.transaction.v2.StartSwapResponse.Success
-	76,  // 32: ocp.transaction.v2.StartSwapResponse.error:type_name -> ocp.transaction.v2.StartSwapResponse.Error
-	92,  // 33: ocp.transaction.v2.GetSwapRequest.id:type_name -> ocp.common.v1.SwapId
-	89,  // 34: ocp.transaction.v2.GetSwapRequest.owner:type_name -> ocp.common.v1.SolanaAccountId
-	90,  // 35: ocp.transaction.v2.GetSwapRequest.signature:type_name -> ocp.common.v1.Signature
-	11,  // 36: ocp.transaction.v2.GetSwapResponse.result:type_name -> ocp.transaction.v2.GetSwapResponse.Result
-	64,  // 37: ocp.transaction.v2.GetSwapResponse.swap:type_name -> ocp.transaction.v2.SwapMetadata
-	89,  // 38: ocp.transaction.v2.GetPendingSwapsRequest.owner:type_name -> ocp.common.v1.SolanaAccountId
-	90,  // 39: ocp.transaction.v2.GetPendingSwapsRequest.signature:type_name -> ocp.common.v1.Signature
-	12,  // 40: ocp.transaction.v2.GetPendingSwapsResponse.result:type_name -> ocp.transaction.v2.GetPendingSwapsResponse.Result
-	64,  // 41: ocp.transaction.v2.GetPendingSwapsResponse.swaps:type_name -> ocp.transaction.v2.SwapMetadata
-	78,  // 42: ocp.transaction.v2.SwapRequest.initiate:type_name -> ocp.transaction.v2.SwapRequest.Initiate
-	79,  // 43: ocp.transaction.v2.SwapRequest.submit_signatures:type_name -> ocp.transaction.v2.SwapRequest.SubmitSignatures
-	82,  // 44: ocp.transaction.v2.SwapResponse.server_parameters:type_name -> ocp.transaction.v2.SwapResponse.ServerParameters
-	83,  // 45: ocp.transaction.v2.SwapResponse.success:type_name -> ocp.transaction.v2.SwapResponse.Success
-	84,  // 46: ocp.transaction.v2.SwapResponse.error:type_name -> ocp.transaction.v2.SwapResponse.Error
-	40,  // 47: ocp.transaction.v2.Metadata.open_accounts:type_name -> ocp.transaction.v2.OpenAccountsMetadata
-	41,  // 48: ocp.transaction.v2.Metadata.send_public_payment:type_name -> ocp.transaction.v2.SendPublicPaymentMetadata
-	42,  // 49: ocp.transaction.v2.Metadata.receive_payments_publicly:type_name -> ocp.transaction.v2.ReceivePaymentsPubliclyMetadata
-	43,  // 50: ocp.transaction.v2.Metadata.public_distribution:type_name -> ocp.transaction.v2.PublicDistributionMetadata
-	15,  // 51: ocp.transaction.v2.OpenAccountsMetadata.account_set:type_name -> ocp.transaction.v2.OpenAccountsMetadata.AccountSet
-	89,  // 52: ocp.transaction.v2.OpenAccountsMetadata.mint:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 53: ocp.transaction.v2.SendPublicPaymentMetadata.source:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 54: ocp.transaction.v2.SendPublicPaymentMetadata.destination:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 55: ocp.transaction.v2.SendPublicPaymentMetadata.destination_owner:type_name -> ocp.common.v1.SolanaAccountId
-	59,  // 56: ocp.transaction.v2.SendPublicPaymentMetadata.exchange_data:type_name -> ocp.transaction.v2.ExchangeData
-	89,  // 57: ocp.transaction.v2.SendPublicPaymentMetadata.mint:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 58: ocp.transaction.v2.ReceivePaymentsPubliclyMetadata.source:type_name -> ocp.common.v1.SolanaAccountId
-	59,  // 59: ocp.transaction.v2.ReceivePaymentsPubliclyMetadata.exchange_data:type_name -> ocp.transaction.v2.ExchangeData
-	89,  // 60: ocp.transaction.v2.ReceivePaymentsPubliclyMetadata.mint:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 61: ocp.transaction.v2.PublicDistributionMetadata.source:type_name -> ocp.common.v1.SolanaAccountId
-	87,  // 62: ocp.transaction.v2.PublicDistributionMetadata.distributions:type_name -> ocp.transaction.v2.PublicDistributionMetadata.Distribution
-	89,  // 63: ocp.transaction.v2.PublicDistributionMetadata.mint:type_name -> ocp.common.v1.SolanaAccountId
-	45,  // 64: ocp.transaction.v2.Action.open_account:type_name -> ocp.transaction.v2.OpenAccountAction
-	46,  // 65: ocp.transaction.v2.Action.no_privacy_transfer:type_name -> ocp.transaction.v2.NoPrivacyTransferAction
-	47,  // 66: ocp.transaction.v2.Action.no_privacy_withdraw:type_name -> ocp.transaction.v2.NoPrivacyWithdrawAction
-	48,  // 67: ocp.transaction.v2.Action.fee_payment:type_name -> ocp.transaction.v2.FeePaymentAction
-	93,  // 68: ocp.transaction.v2.OpenAccountAction.account_type:type_name -> ocp.common.v1.AccountType
-	89,  // 69: ocp.transaction.v2.OpenAccountAction.owner:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 70: ocp.transaction.v2.OpenAccountAction.authority:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 71: ocp.transaction.v2.OpenAccountAction.token:type_name -> ocp.common.v1.SolanaAccountId
-	90,  // 72: ocp.transaction.v2.OpenAccountAction.authority_signature:type_name -> ocp.common.v1.Signature
-	89,  // 73: ocp.transaction.v2.OpenAccountAction.mint:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 74: ocp.transaction.v2.NoPrivacyTransferAction.authority:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 75: ocp.transaction.v2.NoPrivacyTransferAction.source:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 76: ocp.transaction.v2.NoPrivacyTransferAction.destination:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 77: ocp.transaction.v2.NoPrivacyTransferAction.mint:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 78: ocp.transaction.v2.NoPrivacyWithdrawAction.authority:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 79: ocp.transaction.v2.NoPrivacyWithdrawAction.source:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 80: ocp.transaction.v2.NoPrivacyWithdrawAction.destination:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 81: ocp.transaction.v2.NoPrivacyWithdrawAction.mint:type_name -> ocp.common.v1.SolanaAccountId
-	16,  // 82: ocp.transaction.v2.FeePaymentAction.type:type_name -> ocp.transaction.v2.FeePaymentAction.FeeType
-	89,  // 83: ocp.transaction.v2.FeePaymentAction.authority:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 84: ocp.transaction.v2.FeePaymentAction.source:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 85: ocp.transaction.v2.FeePaymentAction.mint:type_name -> ocp.common.v1.SolanaAccountId
-	50,  // 86: ocp.transaction.v2.ServerParameter.nonces:type_name -> ocp.transaction.v2.NoncedTransactionMetadata
-	51,  // 87: ocp.transaction.v2.ServerParameter.open_account:type_name -> ocp.transaction.v2.OpenAccountServerParameter
-	52,  // 88: ocp.transaction.v2.ServerParameter.no_privacy_transfer:type_name -> ocp.transaction.v2.NoPrivacyTransferServerParameter
-	53,  // 89: ocp.transaction.v2.ServerParameter.no_privacy_withdraw:type_name -> ocp.transaction.v2.NoPrivacyWithdrawServerParameter
-	54,  // 90: ocp.transaction.v2.ServerParameter.fee_payment:type_name -> ocp.transaction.v2.FeePaymentServerParameter
-	89,  // 91: ocp.transaction.v2.NoncedTransactionMetadata.nonce:type_name -> ocp.common.v1.SolanaAccountId
-	94,  // 92: ocp.transaction.v2.NoncedTransactionMetadata.blockhash:type_name -> ocp.common.v1.Blockhash
-	89,  // 93: ocp.transaction.v2.FeePaymentServerParameter.destination:type_name -> ocp.common.v1.SolanaAccountId
-	56,  // 94: ocp.transaction.v2.ErrorDetails.reason_string:type_name -> ocp.transaction.v2.ReasonStringErrorDetails
-	57,  // 95: ocp.transaction.v2.ErrorDetails.invalid_signature:type_name -> ocp.transaction.v2.InvalidSignatureErrorDetails
-	58,  // 96: ocp.transaction.v2.ErrorDetails.denied:type_name -> ocp.transaction.v2.DeniedErrorDetails
-	95,  // 97: ocp.transaction.v2.InvalidSignatureErrorDetails.expected_transaction:type_name -> ocp.common.v1.Transaction
-	96,  // 98: ocp.transaction.v2.InvalidSignatureErrorDetails.expected_vixn_hash:type_name -> ocp.common.v1.Hash
-	90,  // 99: ocp.transaction.v2.InvalidSignatureErrorDetails.provided_signature:type_name -> ocp.common.v1.Signature
-	17,  // 100: ocp.transaction.v2.DeniedErrorDetails.code:type_name -> ocp.transaction.v2.DeniedErrorDetails.Code
-	89,  // 101: ocp.transaction.v2.ExchangeData.mint:type_name -> ocp.common.v1.SolanaAccountId
-	63,  // 102: ocp.transaction.v2.VerifiedSwapMetadata.currency_creator:type_name -> ocp.transaction.v2.VerifiedCurrencyCreatorSwapMetadata
-	73,  // 103: ocp.transaction.v2.VerifiedCurrencyCreatorSwapMetadata.client_parameters:type_name -> ocp.transaction.v2.StartSwapRequest.Start.CurrencyCreator
-	77,  // 104: ocp.transaction.v2.VerifiedCurrencyCreatorSwapMetadata.server_parameters:type_name -> ocp.transaction.v2.StartSwapResponse.ServerParameters.CurrencyCreator
-	62,  // 105: ocp.transaction.v2.SwapMetadata.verified_metadata:type_name -> ocp.transaction.v2.VerifiedSwapMetadata
-	18,  // 106: ocp.transaction.v2.SwapMetadata.state:type_name -> ocp.transaction.v2.SwapMetadata.State
-	90,  // 107: ocp.transaction.v2.SwapMetadata.signature:type_name -> ocp.common.v1.Signature
-	88,  // 108: ocp.transaction.v2.SubmitIntentRequest.SubmitActions.id:type_name -> ocp.common.v1.IntentId
-	89,  // 109: ocp.transaction.v2.SubmitIntentRequest.SubmitActions.owner:type_name -> ocp.common.v1.SolanaAccountId
-	39,  // 110: ocp.transaction.v2.SubmitIntentRequest.SubmitActions.metadata:type_name -> ocp.transaction.v2.Metadata
-	44,  // 111: ocp.transaction.v2.SubmitIntentRequest.SubmitActions.actions:type_name -> ocp.transaction.v2.Action
-	90,  // 112: ocp.transaction.v2.SubmitIntentRequest.SubmitActions.signature:type_name -> ocp.common.v1.Signature
-	90,  // 113: ocp.transaction.v2.SubmitIntentRequest.SubmitSignatures.signatures:type_name -> ocp.common.v1.Signature
-	49,  // 114: ocp.transaction.v2.SubmitIntentResponse.ServerParameters.server_parameters:type_name -> ocp.transaction.v2.ServerParameter
-	2,   // 115: ocp.transaction.v2.SubmitIntentResponse.Success.code:type_name -> ocp.transaction.v2.SubmitIntentResponse.Success.Code
-	3,   // 116: ocp.transaction.v2.SubmitIntentResponse.Error.code:type_name -> ocp.transaction.v2.SubmitIntentResponse.Error.Code
-	55,  // 117: ocp.transaction.v2.SubmitIntentResponse.Error.error_details:type_name -> ocp.transaction.v2.ErrorDetails
-	61,  // 118: ocp.transaction.v2.GetLimitsResponse.SendLimitsByCurrencyEntry.value:type_name -> ocp.transaction.v2.SendLimit
-	73,  // 119: ocp.transaction.v2.StartSwapRequest.Start.currency_creator:type_name -> ocp.transaction.v2.StartSwapRequest.Start.CurrencyCreator
-	89,  // 120: ocp.transaction.v2.StartSwapRequest.Start.owner:type_name -> ocp.common.v1.SolanaAccountId
-	90,  // 121: ocp.transaction.v2.StartSwapRequest.Start.signature:type_name -> ocp.common.v1.Signature
-	90,  // 122: ocp.transaction.v2.StartSwapRequest.SubmitSignature.signature:type_name -> ocp.common.v1.Signature
-	92,  // 123: ocp.transaction.v2.StartSwapRequest.Start.CurrencyCreator.id:type_name -> ocp.common.v1.SwapId
-	89,  // 124: ocp.transaction.v2.StartSwapRequest.Start.CurrencyCreator.from_mint:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 125: ocp.transaction.v2.StartSwapRequest.Start.CurrencyCreator.to_mint:type_name -> ocp.common.v1.SolanaAccountId
-	1,   // 126: ocp.transaction.v2.StartSwapRequest.Start.CurrencyCreator.funding_source:type_name -> ocp.transaction.v2.FundingSource
-	77,  // 127: ocp.transaction.v2.StartSwapResponse.ServerParameters.currency_creator:type_name -> ocp.transaction.v2.StartSwapResponse.ServerParameters.CurrencyCreator
-	9,   // 128: ocp.transaction.v2.StartSwapResponse.Success.code:type_name -> ocp.transaction.v2.StartSwapResponse.Success.Code
-	10,  // 129: ocp.transaction.v2.StartSwapResponse.Error.code:type_name -> ocp.transaction.v2.StartSwapResponse.Error.Code
-	55,  // 130: ocp.transaction.v2.StartSwapResponse.Error.error_details:type_name -> ocp.transaction.v2.ErrorDetails
-	89,  // 131: ocp.transaction.v2.StartSwapResponse.ServerParameters.CurrencyCreator.nonce:type_name -> ocp.common.v1.SolanaAccountId
-	94,  // 132: ocp.transaction.v2.StartSwapResponse.ServerParameters.CurrencyCreator.blockhash:type_name -> ocp.common.v1.Blockhash
-	80,  // 133: ocp.transaction.v2.SwapRequest.Initiate.stateless:type_name -> ocp.transaction.v2.SwapRequest.Initiate.Stateless
-	81,  // 134: ocp.transaction.v2.SwapRequest.Initiate.stateful:type_name -> ocp.transaction.v2.SwapRequest.Initiate.Stateful
-	90,  // 135: ocp.transaction.v2.SwapRequest.SubmitSignatures.signatures:type_name -> ocp.common.v1.Signature
-	89,  // 136: ocp.transaction.v2.SwapRequest.Initiate.Stateless.owner:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 137: ocp.transaction.v2.SwapRequest.Initiate.Stateless.from_mint:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 138: ocp.transaction.v2.SwapRequest.Initiate.Stateless.to_mint:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 139: ocp.transaction.v2.SwapRequest.Initiate.Stateless.swap_authority:type_name -> ocp.common.v1.SolanaAccountId
-	90,  // 140: ocp.transaction.v2.SwapRequest.Initiate.Stateless.signature:type_name -> ocp.common.v1.Signature
-	92,  // 141: ocp.transaction.v2.SwapRequest.Initiate.Stateful.swap_id:type_name -> ocp.common.v1.SwapId
-	89,  // 142: ocp.transaction.v2.SwapRequest.Initiate.Stateful.owner:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 143: ocp.transaction.v2.SwapRequest.Initiate.Stateful.swap_authority:type_name -> ocp.common.v1.SolanaAccountId
-	90,  // 144: ocp.transaction.v2.SwapRequest.Initiate.Stateful.signature:type_name -> ocp.common.v1.Signature
-	85,  // 145: ocp.transaction.v2.SwapResponse.ServerParameters.currency_creator_stateless:type_name -> ocp.transaction.v2.SwapResponse.ServerParameters.CurrencyCreatorStateless
-	86,  // 146: ocp.transaction.v2.SwapResponse.ServerParameters.currency_creator_stateful:type_name -> ocp.transaction.v2.SwapResponse.ServerParameters.CurrencyCreatorStateful
-	13,  // 147: ocp.transaction.v2.SwapResponse.Success.code:type_name -> ocp.transaction.v2.SwapResponse.Success.Code
-	14,  // 148: ocp.transaction.v2.SwapResponse.Error.code:type_name -> ocp.transaction.v2.SwapResponse.Error.Code
-	55,  // 149: ocp.transaction.v2.SwapResponse.Error.error_details:type_name -> ocp.transaction.v2.ErrorDetails
-	89,  // 150: ocp.transaction.v2.SwapResponse.ServerParameters.CurrencyCreatorStateless.payer:type_name -> ocp.common.v1.SolanaAccountId
-	94,  // 151: ocp.transaction.v2.SwapResponse.ServerParameters.CurrencyCreatorStateless.recent_blockhash:type_name -> ocp.common.v1.Blockhash
-	97,  // 152: ocp.transaction.v2.SwapResponse.ServerParameters.CurrencyCreatorStateless.alts:type_name -> ocp.common.v1.SolanaAddressLookupTable
-	89,  // 153: ocp.transaction.v2.SwapResponse.ServerParameters.CurrencyCreatorStateless.memory_account:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 154: ocp.transaction.v2.SwapResponse.ServerParameters.CurrencyCreatorStateful.payer:type_name -> ocp.common.v1.SolanaAccountId
-	97,  // 155: ocp.transaction.v2.SwapResponse.ServerParameters.CurrencyCreatorStateful.alts:type_name -> ocp.common.v1.SolanaAddressLookupTable
-	89,  // 156: ocp.transaction.v2.SwapResponse.ServerParameters.CurrencyCreatorStateful.memory_account:type_name -> ocp.common.v1.SolanaAccountId
-	89,  // 157: ocp.transaction.v2.PublicDistributionMetadata.Distribution.destination:type_name -> ocp.common.v1.SolanaAccountId
-	19,  // 158: ocp.transaction.v2.Transaction.SubmitIntent:input_type -> ocp.transaction.v2.SubmitIntentRequest
-	21,  // 159: ocp.transaction.v2.Transaction.GetIntentMetadata:input_type -> ocp.transaction.v2.GetIntentMetadataRequest
-	23,  // 160: ocp.transaction.v2.Transaction.GetLimits:input_type -> ocp.transaction.v2.GetLimitsRequest
-	25,  // 161: ocp.transaction.v2.Transaction.CanWithdrawToAccount:input_type -> ocp.transaction.v2.CanWithdrawToAccountRequest
-	27,  // 162: ocp.transaction.v2.Transaction.Airdrop:input_type -> ocp.transaction.v2.AirdropRequest
-	29,  // 163: ocp.transaction.v2.Transaction.VoidGiftCard:input_type -> ocp.transaction.v2.VoidGiftCardRequest
-	31,  // 164: ocp.transaction.v2.Transaction.StartSwap:input_type -> ocp.transaction.v2.StartSwapRequest
-	33,  // 165: ocp.transaction.v2.Transaction.GetSwap:input_type -> ocp.transaction.v2.GetSwapRequest
-	35,  // 166: ocp.transaction.v2.Transaction.GetPendingSwaps:input_type -> ocp.transaction.v2.GetPendingSwapsRequest
-	37,  // 167: ocp.transaction.v2.Transaction.Swap:input_type -> ocp.transaction.v2.SwapRequest
-	20,  // 168: ocp.transaction.v2.Transaction.SubmitIntent:output_type -> ocp.transaction.v2.SubmitIntentResponse
-	22,  // 169: ocp.transaction.v2.Transaction.GetIntentMetadata:output_type -> ocp.transaction.v2.GetIntentMetadataResponse
-	24,  // 170: ocp.transaction.v2.Transaction.GetLimits:output_type -> ocp.transaction.v2.GetLimitsResponse
-	26,  // 171: ocp.transaction.v2.Transaction.CanWithdrawToAccount:output_type -> ocp.transaction.v2.CanWithdrawToAccountResponse
-	28,  // 172: ocp.transaction.v2.Transaction.Airdrop:output_type -> ocp.transaction.v2.AirdropResponse
-	30,  // 173: ocp.transaction.v2.Transaction.VoidGiftCard:output_type -> ocp.transaction.v2.VoidGiftCardResponse
-	32,  // 174: ocp.transaction.v2.Transaction.StartSwap:output_type -> ocp.transaction.v2.StartSwapResponse
-	34,  // 175: ocp.transaction.v2.Transaction.GetSwap:output_type -> ocp.transaction.v2.GetSwapResponse
-	36,  // 176: ocp.transaction.v2.Transaction.GetPendingSwaps:output_type -> ocp.transaction.v2.GetPendingSwapsResponse
-	38,  // 177: ocp.transaction.v2.Transaction.Swap:output_type -> ocp.transaction.v2.SwapResponse
+var file_transaction_v1_transaction_service_proto_depIdxs = []int32{
+	65,  // 0: ocp.transaction.v1.SubmitIntentRequest.submit_actions:type_name -> ocp.transaction.v1.SubmitIntentRequest.SubmitActions
+	66,  // 1: ocp.transaction.v1.SubmitIntentRequest.submit_signatures:type_name -> ocp.transaction.v1.SubmitIntentRequest.SubmitSignatures
+	67,  // 2: ocp.transaction.v1.SubmitIntentResponse.server_parameters:type_name -> ocp.transaction.v1.SubmitIntentResponse.ServerParameters
+	68,  // 3: ocp.transaction.v1.SubmitIntentResponse.success:type_name -> ocp.transaction.v1.SubmitIntentResponse.Success
+	69,  // 4: ocp.transaction.v1.SubmitIntentResponse.error:type_name -> ocp.transaction.v1.SubmitIntentResponse.Error
+	88,  // 5: ocp.transaction.v1.GetIntentMetadataRequest.intent_id:type_name -> ocp.common.v1.IntentId
+	89,  // 6: ocp.transaction.v1.GetIntentMetadataRequest.owner:type_name -> ocp.common.v1.SolanaAccountId
+	90,  // 7: ocp.transaction.v1.GetIntentMetadataRequest.signature:type_name -> ocp.common.v1.Signature
+	4,   // 8: ocp.transaction.v1.GetIntentMetadataResponse.result:type_name -> ocp.transaction.v1.GetIntentMetadataResponse.Result
+	39,  // 9: ocp.transaction.v1.GetIntentMetadataResponse.metadata:type_name -> ocp.transaction.v1.Metadata
+	89,  // 10: ocp.transaction.v1.GetLimitsRequest.owner:type_name -> ocp.common.v1.SolanaAccountId
+	90,  // 11: ocp.transaction.v1.GetLimitsRequest.signature:type_name -> ocp.common.v1.Signature
+	91,  // 12: ocp.transaction.v1.GetLimitsRequest.consumed_since:type_name -> google.protobuf.Timestamp
+	5,   // 13: ocp.transaction.v1.GetLimitsResponse.result:type_name -> ocp.transaction.v1.GetLimitsResponse.Result
+	70,  // 14: ocp.transaction.v1.GetLimitsResponse.send_limits_by_currency:type_name -> ocp.transaction.v1.GetLimitsResponse.SendLimitsByCurrencyEntry
+	89,  // 15: ocp.transaction.v1.CanWithdrawToAccountRequest.account:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 16: ocp.transaction.v1.CanWithdrawToAccountRequest.mint:type_name -> ocp.common.v1.SolanaAccountId
+	6,   // 17: ocp.transaction.v1.CanWithdrawToAccountResponse.account_type:type_name -> ocp.transaction.v1.CanWithdrawToAccountResponse.AccountType
+	60,  // 18: ocp.transaction.v1.CanWithdrawToAccountResponse.fee_amount:type_name -> ocp.transaction.v1.ExchangeDataWithoutRate
+	0,   // 19: ocp.transaction.v1.AirdropRequest.airdrop_type:type_name -> ocp.transaction.v1.AirdropType
+	89,  // 20: ocp.transaction.v1.AirdropRequest.owner:type_name -> ocp.common.v1.SolanaAccountId
+	90,  // 21: ocp.transaction.v1.AirdropRequest.signature:type_name -> ocp.common.v1.Signature
+	7,   // 22: ocp.transaction.v1.AirdropResponse.result:type_name -> ocp.transaction.v1.AirdropResponse.Result
+	59,  // 23: ocp.transaction.v1.AirdropResponse.exchange_data:type_name -> ocp.transaction.v1.ExchangeData
+	89,  // 24: ocp.transaction.v1.VoidGiftCardRequest.owner:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 25: ocp.transaction.v1.VoidGiftCardRequest.gift_card_vault:type_name -> ocp.common.v1.SolanaAccountId
+	90,  // 26: ocp.transaction.v1.VoidGiftCardRequest.signature:type_name -> ocp.common.v1.Signature
+	8,   // 27: ocp.transaction.v1.VoidGiftCardResponse.result:type_name -> ocp.transaction.v1.VoidGiftCardResponse.Result
+	71,  // 28: ocp.transaction.v1.StartSwapRequest.start:type_name -> ocp.transaction.v1.StartSwapRequest.Start
+	72,  // 29: ocp.transaction.v1.StartSwapRequest.submit_signature:type_name -> ocp.transaction.v1.StartSwapRequest.SubmitSignature
+	74,  // 30: ocp.transaction.v1.StartSwapResponse.server_parameters:type_name -> ocp.transaction.v1.StartSwapResponse.ServerParameters
+	75,  // 31: ocp.transaction.v1.StartSwapResponse.success:type_name -> ocp.transaction.v1.StartSwapResponse.Success
+	76,  // 32: ocp.transaction.v1.StartSwapResponse.error:type_name -> ocp.transaction.v1.StartSwapResponse.Error
+	92,  // 33: ocp.transaction.v1.GetSwapRequest.id:type_name -> ocp.common.v1.SwapId
+	89,  // 34: ocp.transaction.v1.GetSwapRequest.owner:type_name -> ocp.common.v1.SolanaAccountId
+	90,  // 35: ocp.transaction.v1.GetSwapRequest.signature:type_name -> ocp.common.v1.Signature
+	11,  // 36: ocp.transaction.v1.GetSwapResponse.result:type_name -> ocp.transaction.v1.GetSwapResponse.Result
+	64,  // 37: ocp.transaction.v1.GetSwapResponse.swap:type_name -> ocp.transaction.v1.SwapMetadata
+	89,  // 38: ocp.transaction.v1.GetPendingSwapsRequest.owner:type_name -> ocp.common.v1.SolanaAccountId
+	90,  // 39: ocp.transaction.v1.GetPendingSwapsRequest.signature:type_name -> ocp.common.v1.Signature
+	12,  // 40: ocp.transaction.v1.GetPendingSwapsResponse.result:type_name -> ocp.transaction.v1.GetPendingSwapsResponse.Result
+	64,  // 41: ocp.transaction.v1.GetPendingSwapsResponse.swaps:type_name -> ocp.transaction.v1.SwapMetadata
+	78,  // 42: ocp.transaction.v1.SwapRequest.initiate:type_name -> ocp.transaction.v1.SwapRequest.Initiate
+	79,  // 43: ocp.transaction.v1.SwapRequest.submit_signatures:type_name -> ocp.transaction.v1.SwapRequest.SubmitSignatures
+	82,  // 44: ocp.transaction.v1.SwapResponse.server_parameters:type_name -> ocp.transaction.v1.SwapResponse.ServerParameters
+	83,  // 45: ocp.transaction.v1.SwapResponse.success:type_name -> ocp.transaction.v1.SwapResponse.Success
+	84,  // 46: ocp.transaction.v1.SwapResponse.error:type_name -> ocp.transaction.v1.SwapResponse.Error
+	40,  // 47: ocp.transaction.v1.Metadata.open_accounts:type_name -> ocp.transaction.v1.OpenAccountsMetadata
+	41,  // 48: ocp.transaction.v1.Metadata.send_public_payment:type_name -> ocp.transaction.v1.SendPublicPaymentMetadata
+	42,  // 49: ocp.transaction.v1.Metadata.receive_payments_publicly:type_name -> ocp.transaction.v1.ReceivePaymentsPubliclyMetadata
+	43,  // 50: ocp.transaction.v1.Metadata.public_distribution:type_name -> ocp.transaction.v1.PublicDistributionMetadata
+	15,  // 51: ocp.transaction.v1.OpenAccountsMetadata.account_set:type_name -> ocp.transaction.v1.OpenAccountsMetadata.AccountSet
+	89,  // 52: ocp.transaction.v1.OpenAccountsMetadata.mint:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 53: ocp.transaction.v1.SendPublicPaymentMetadata.source:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 54: ocp.transaction.v1.SendPublicPaymentMetadata.destination:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 55: ocp.transaction.v1.SendPublicPaymentMetadata.destination_owner:type_name -> ocp.common.v1.SolanaAccountId
+	59,  // 56: ocp.transaction.v1.SendPublicPaymentMetadata.exchange_data:type_name -> ocp.transaction.v1.ExchangeData
+	89,  // 57: ocp.transaction.v1.SendPublicPaymentMetadata.mint:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 58: ocp.transaction.v1.ReceivePaymentsPubliclyMetadata.source:type_name -> ocp.common.v1.SolanaAccountId
+	59,  // 59: ocp.transaction.v1.ReceivePaymentsPubliclyMetadata.exchange_data:type_name -> ocp.transaction.v1.ExchangeData
+	89,  // 60: ocp.transaction.v1.ReceivePaymentsPubliclyMetadata.mint:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 61: ocp.transaction.v1.PublicDistributionMetadata.source:type_name -> ocp.common.v1.SolanaAccountId
+	87,  // 62: ocp.transaction.v1.PublicDistributionMetadata.distributions:type_name -> ocp.transaction.v1.PublicDistributionMetadata.Distribution
+	89,  // 63: ocp.transaction.v1.PublicDistributionMetadata.mint:type_name -> ocp.common.v1.SolanaAccountId
+	45,  // 64: ocp.transaction.v1.Action.open_account:type_name -> ocp.transaction.v1.OpenAccountAction
+	46,  // 65: ocp.transaction.v1.Action.no_privacy_transfer:type_name -> ocp.transaction.v1.NoPrivacyTransferAction
+	47,  // 66: ocp.transaction.v1.Action.no_privacy_withdraw:type_name -> ocp.transaction.v1.NoPrivacyWithdrawAction
+	48,  // 67: ocp.transaction.v1.Action.fee_payment:type_name -> ocp.transaction.v1.FeePaymentAction
+	93,  // 68: ocp.transaction.v1.OpenAccountAction.account_type:type_name -> ocp.common.v1.AccountType
+	89,  // 69: ocp.transaction.v1.OpenAccountAction.owner:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 70: ocp.transaction.v1.OpenAccountAction.authority:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 71: ocp.transaction.v1.OpenAccountAction.token:type_name -> ocp.common.v1.SolanaAccountId
+	90,  // 72: ocp.transaction.v1.OpenAccountAction.authority_signature:type_name -> ocp.common.v1.Signature
+	89,  // 73: ocp.transaction.v1.OpenAccountAction.mint:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 74: ocp.transaction.v1.NoPrivacyTransferAction.authority:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 75: ocp.transaction.v1.NoPrivacyTransferAction.source:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 76: ocp.transaction.v1.NoPrivacyTransferAction.destination:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 77: ocp.transaction.v1.NoPrivacyTransferAction.mint:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 78: ocp.transaction.v1.NoPrivacyWithdrawAction.authority:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 79: ocp.transaction.v1.NoPrivacyWithdrawAction.source:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 80: ocp.transaction.v1.NoPrivacyWithdrawAction.destination:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 81: ocp.transaction.v1.NoPrivacyWithdrawAction.mint:type_name -> ocp.common.v1.SolanaAccountId
+	16,  // 82: ocp.transaction.v1.FeePaymentAction.type:type_name -> ocp.transaction.v1.FeePaymentAction.FeeType
+	89,  // 83: ocp.transaction.v1.FeePaymentAction.authority:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 84: ocp.transaction.v1.FeePaymentAction.source:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 85: ocp.transaction.v1.FeePaymentAction.mint:type_name -> ocp.common.v1.SolanaAccountId
+	50,  // 86: ocp.transaction.v1.ServerParameter.nonces:type_name -> ocp.transaction.v1.NoncedTransactionMetadata
+	51,  // 87: ocp.transaction.v1.ServerParameter.open_account:type_name -> ocp.transaction.v1.OpenAccountServerParameter
+	52,  // 88: ocp.transaction.v1.ServerParameter.no_privacy_transfer:type_name -> ocp.transaction.v1.NoPrivacyTransferServerParameter
+	53,  // 89: ocp.transaction.v1.ServerParameter.no_privacy_withdraw:type_name -> ocp.transaction.v1.NoPrivacyWithdrawServerParameter
+	54,  // 90: ocp.transaction.v1.ServerParameter.fee_payment:type_name -> ocp.transaction.v1.FeePaymentServerParameter
+	89,  // 91: ocp.transaction.v1.NoncedTransactionMetadata.nonce:type_name -> ocp.common.v1.SolanaAccountId
+	94,  // 92: ocp.transaction.v1.NoncedTransactionMetadata.blockhash:type_name -> ocp.common.v1.Blockhash
+	89,  // 93: ocp.transaction.v1.FeePaymentServerParameter.destination:type_name -> ocp.common.v1.SolanaAccountId
+	56,  // 94: ocp.transaction.v1.ErrorDetails.reason_string:type_name -> ocp.transaction.v1.ReasonStringErrorDetails
+	57,  // 95: ocp.transaction.v1.ErrorDetails.invalid_signature:type_name -> ocp.transaction.v1.InvalidSignatureErrorDetails
+	58,  // 96: ocp.transaction.v1.ErrorDetails.denied:type_name -> ocp.transaction.v1.DeniedErrorDetails
+	95,  // 97: ocp.transaction.v1.InvalidSignatureErrorDetails.expected_transaction:type_name -> ocp.common.v1.Transaction
+	96,  // 98: ocp.transaction.v1.InvalidSignatureErrorDetails.expected_vixn_hash:type_name -> ocp.common.v1.Hash
+	90,  // 99: ocp.transaction.v1.InvalidSignatureErrorDetails.provided_signature:type_name -> ocp.common.v1.Signature
+	17,  // 100: ocp.transaction.v1.DeniedErrorDetails.code:type_name -> ocp.transaction.v1.DeniedErrorDetails.Code
+	89,  // 101: ocp.transaction.v1.ExchangeData.mint:type_name -> ocp.common.v1.SolanaAccountId
+	63,  // 102: ocp.transaction.v1.VerifiedSwapMetadata.currency_creator:type_name -> ocp.transaction.v1.VerifiedCurrencyCreatorSwapMetadata
+	73,  // 103: ocp.transaction.v1.VerifiedCurrencyCreatorSwapMetadata.client_parameters:type_name -> ocp.transaction.v1.StartSwapRequest.Start.CurrencyCreator
+	77,  // 104: ocp.transaction.v1.VerifiedCurrencyCreatorSwapMetadata.server_parameters:type_name -> ocp.transaction.v1.StartSwapResponse.ServerParameters.CurrencyCreator
+	62,  // 105: ocp.transaction.v1.SwapMetadata.verified_metadata:type_name -> ocp.transaction.v1.VerifiedSwapMetadata
+	18,  // 106: ocp.transaction.v1.SwapMetadata.state:type_name -> ocp.transaction.v1.SwapMetadata.State
+	90,  // 107: ocp.transaction.v1.SwapMetadata.signature:type_name -> ocp.common.v1.Signature
+	88,  // 108: ocp.transaction.v1.SubmitIntentRequest.SubmitActions.id:type_name -> ocp.common.v1.IntentId
+	89,  // 109: ocp.transaction.v1.SubmitIntentRequest.SubmitActions.owner:type_name -> ocp.common.v1.SolanaAccountId
+	39,  // 110: ocp.transaction.v1.SubmitIntentRequest.SubmitActions.metadata:type_name -> ocp.transaction.v1.Metadata
+	44,  // 111: ocp.transaction.v1.SubmitIntentRequest.SubmitActions.actions:type_name -> ocp.transaction.v1.Action
+	90,  // 112: ocp.transaction.v1.SubmitIntentRequest.SubmitActions.signature:type_name -> ocp.common.v1.Signature
+	90,  // 113: ocp.transaction.v1.SubmitIntentRequest.SubmitSignatures.signatures:type_name -> ocp.common.v1.Signature
+	49,  // 114: ocp.transaction.v1.SubmitIntentResponse.ServerParameters.server_parameters:type_name -> ocp.transaction.v1.ServerParameter
+	2,   // 115: ocp.transaction.v1.SubmitIntentResponse.Success.code:type_name -> ocp.transaction.v1.SubmitIntentResponse.Success.Code
+	3,   // 116: ocp.transaction.v1.SubmitIntentResponse.Error.code:type_name -> ocp.transaction.v1.SubmitIntentResponse.Error.Code
+	55,  // 117: ocp.transaction.v1.SubmitIntentResponse.Error.error_details:type_name -> ocp.transaction.v1.ErrorDetails
+	61,  // 118: ocp.transaction.v1.GetLimitsResponse.SendLimitsByCurrencyEntry.value:type_name -> ocp.transaction.v1.SendLimit
+	73,  // 119: ocp.transaction.v1.StartSwapRequest.Start.currency_creator:type_name -> ocp.transaction.v1.StartSwapRequest.Start.CurrencyCreator
+	89,  // 120: ocp.transaction.v1.StartSwapRequest.Start.owner:type_name -> ocp.common.v1.SolanaAccountId
+	90,  // 121: ocp.transaction.v1.StartSwapRequest.Start.signature:type_name -> ocp.common.v1.Signature
+	90,  // 122: ocp.transaction.v1.StartSwapRequest.SubmitSignature.signature:type_name -> ocp.common.v1.Signature
+	92,  // 123: ocp.transaction.v1.StartSwapRequest.Start.CurrencyCreator.id:type_name -> ocp.common.v1.SwapId
+	89,  // 124: ocp.transaction.v1.StartSwapRequest.Start.CurrencyCreator.from_mint:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 125: ocp.transaction.v1.StartSwapRequest.Start.CurrencyCreator.to_mint:type_name -> ocp.common.v1.SolanaAccountId
+	1,   // 126: ocp.transaction.v1.StartSwapRequest.Start.CurrencyCreator.funding_source:type_name -> ocp.transaction.v1.FundingSource
+	77,  // 127: ocp.transaction.v1.StartSwapResponse.ServerParameters.currency_creator:type_name -> ocp.transaction.v1.StartSwapResponse.ServerParameters.CurrencyCreator
+	9,   // 128: ocp.transaction.v1.StartSwapResponse.Success.code:type_name -> ocp.transaction.v1.StartSwapResponse.Success.Code
+	10,  // 129: ocp.transaction.v1.StartSwapResponse.Error.code:type_name -> ocp.transaction.v1.StartSwapResponse.Error.Code
+	55,  // 130: ocp.transaction.v1.StartSwapResponse.Error.error_details:type_name -> ocp.transaction.v1.ErrorDetails
+	89,  // 131: ocp.transaction.v1.StartSwapResponse.ServerParameters.CurrencyCreator.nonce:type_name -> ocp.common.v1.SolanaAccountId
+	94,  // 132: ocp.transaction.v1.StartSwapResponse.ServerParameters.CurrencyCreator.blockhash:type_name -> ocp.common.v1.Blockhash
+	80,  // 133: ocp.transaction.v1.SwapRequest.Initiate.stateless:type_name -> ocp.transaction.v1.SwapRequest.Initiate.Stateless
+	81,  // 134: ocp.transaction.v1.SwapRequest.Initiate.stateful:type_name -> ocp.transaction.v1.SwapRequest.Initiate.Stateful
+	90,  // 135: ocp.transaction.v1.SwapRequest.SubmitSignatures.signatures:type_name -> ocp.common.v1.Signature
+	89,  // 136: ocp.transaction.v1.SwapRequest.Initiate.Stateless.owner:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 137: ocp.transaction.v1.SwapRequest.Initiate.Stateless.from_mint:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 138: ocp.transaction.v1.SwapRequest.Initiate.Stateless.to_mint:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 139: ocp.transaction.v1.SwapRequest.Initiate.Stateless.swap_authority:type_name -> ocp.common.v1.SolanaAccountId
+	90,  // 140: ocp.transaction.v1.SwapRequest.Initiate.Stateless.signature:type_name -> ocp.common.v1.Signature
+	92,  // 141: ocp.transaction.v1.SwapRequest.Initiate.Stateful.swap_id:type_name -> ocp.common.v1.SwapId
+	89,  // 142: ocp.transaction.v1.SwapRequest.Initiate.Stateful.owner:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 143: ocp.transaction.v1.SwapRequest.Initiate.Stateful.swap_authority:type_name -> ocp.common.v1.SolanaAccountId
+	90,  // 144: ocp.transaction.v1.SwapRequest.Initiate.Stateful.signature:type_name -> ocp.common.v1.Signature
+	85,  // 145: ocp.transaction.v1.SwapResponse.ServerParameters.currency_creator_stateless:type_name -> ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateless
+	86,  // 146: ocp.transaction.v1.SwapResponse.ServerParameters.currency_creator_stateful:type_name -> ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateful
+	13,  // 147: ocp.transaction.v1.SwapResponse.Success.code:type_name -> ocp.transaction.v1.SwapResponse.Success.Code
+	14,  // 148: ocp.transaction.v1.SwapResponse.Error.code:type_name -> ocp.transaction.v1.SwapResponse.Error.Code
+	55,  // 149: ocp.transaction.v1.SwapResponse.Error.error_details:type_name -> ocp.transaction.v1.ErrorDetails
+	89,  // 150: ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateless.payer:type_name -> ocp.common.v1.SolanaAccountId
+	94,  // 151: ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateless.recent_blockhash:type_name -> ocp.common.v1.Blockhash
+	97,  // 152: ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateless.alts:type_name -> ocp.common.v1.SolanaAddressLookupTable
+	89,  // 153: ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateless.memory_account:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 154: ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateful.payer:type_name -> ocp.common.v1.SolanaAccountId
+	97,  // 155: ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateful.alts:type_name -> ocp.common.v1.SolanaAddressLookupTable
+	89,  // 156: ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateful.memory_account:type_name -> ocp.common.v1.SolanaAccountId
+	89,  // 157: ocp.transaction.v1.PublicDistributionMetadata.Distribution.destination:type_name -> ocp.common.v1.SolanaAccountId
+	19,  // 158: ocp.transaction.v1.Transaction.SubmitIntent:input_type -> ocp.transaction.v1.SubmitIntentRequest
+	21,  // 159: ocp.transaction.v1.Transaction.GetIntentMetadata:input_type -> ocp.transaction.v1.GetIntentMetadataRequest
+	23,  // 160: ocp.transaction.v1.Transaction.GetLimits:input_type -> ocp.transaction.v1.GetLimitsRequest
+	25,  // 161: ocp.transaction.v1.Transaction.CanWithdrawToAccount:input_type -> ocp.transaction.v1.CanWithdrawToAccountRequest
+	27,  // 162: ocp.transaction.v1.Transaction.Airdrop:input_type -> ocp.transaction.v1.AirdropRequest
+	29,  // 163: ocp.transaction.v1.Transaction.VoidGiftCard:input_type -> ocp.transaction.v1.VoidGiftCardRequest
+	31,  // 164: ocp.transaction.v1.Transaction.StartSwap:input_type -> ocp.transaction.v1.StartSwapRequest
+	33,  // 165: ocp.transaction.v1.Transaction.GetSwap:input_type -> ocp.transaction.v1.GetSwapRequest
+	35,  // 166: ocp.transaction.v1.Transaction.GetPendingSwaps:input_type -> ocp.transaction.v1.GetPendingSwapsRequest
+	37,  // 167: ocp.transaction.v1.Transaction.Swap:input_type -> ocp.transaction.v1.SwapRequest
+	20,  // 168: ocp.transaction.v1.Transaction.SubmitIntent:output_type -> ocp.transaction.v1.SubmitIntentResponse
+	22,  // 169: ocp.transaction.v1.Transaction.GetIntentMetadata:output_type -> ocp.transaction.v1.GetIntentMetadataResponse
+	24,  // 170: ocp.transaction.v1.Transaction.GetLimits:output_type -> ocp.transaction.v1.GetLimitsResponse
+	26,  // 171: ocp.transaction.v1.Transaction.CanWithdrawToAccount:output_type -> ocp.transaction.v1.CanWithdrawToAccountResponse
+	28,  // 172: ocp.transaction.v1.Transaction.Airdrop:output_type -> ocp.transaction.v1.AirdropResponse
+	30,  // 173: ocp.transaction.v1.Transaction.VoidGiftCard:output_type -> ocp.transaction.v1.VoidGiftCardResponse
+	32,  // 174: ocp.transaction.v1.Transaction.StartSwap:output_type -> ocp.transaction.v1.StartSwapResponse
+	34,  // 175: ocp.transaction.v1.Transaction.GetSwap:output_type -> ocp.transaction.v1.GetSwapResponse
+	36,  // 176: ocp.transaction.v1.Transaction.GetPendingSwaps:output_type -> ocp.transaction.v1.GetPendingSwapsResponse
+	38,  // 177: ocp.transaction.v1.Transaction.Swap:output_type -> ocp.transaction.v1.SwapResponse
 	168, // [168:178] is the sub-list for method output_type
 	158, // [158:168] is the sub-list for method input_type
 	158, // [158:158] is the sub-list for extension type_name
@@ -7427,13 +7427,13 @@ var file_transaction_v2_transaction_service_proto_depIdxs = []int32{
 	0,   // [0:158] is the sub-list for field type_name
 }
 
-func init() { file_transaction_v2_transaction_service_proto_init() }
-func file_transaction_v2_transaction_service_proto_init() {
-	if File_transaction_v2_transaction_service_proto != nil {
+func init() { file_transaction_v1_transaction_service_proto_init() }
+func file_transaction_v1_transaction_service_proto_init() {
+	if File_transaction_v1_transaction_service_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_transaction_v2_transaction_service_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SubmitIntentRequest); i {
 			case 0:
 				return &v.state
@@ -7445,7 +7445,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SubmitIntentResponse); i {
 			case 0:
 				return &v.state
@@ -7457,7 +7457,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetIntentMetadataRequest); i {
 			case 0:
 				return &v.state
@@ -7469,7 +7469,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetIntentMetadataResponse); i {
 			case 0:
 				return &v.state
@@ -7481,7 +7481,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetLimitsRequest); i {
 			case 0:
 				return &v.state
@@ -7493,7 +7493,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetLimitsResponse); i {
 			case 0:
 				return &v.state
@@ -7505,7 +7505,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CanWithdrawToAccountRequest); i {
 			case 0:
 				return &v.state
@@ -7517,7 +7517,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CanWithdrawToAccountResponse); i {
 			case 0:
 				return &v.state
@@ -7529,7 +7529,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AirdropRequest); i {
 			case 0:
 				return &v.state
@@ -7541,7 +7541,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AirdropResponse); i {
 			case 0:
 				return &v.state
@@ -7553,7 +7553,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*VoidGiftCardRequest); i {
 			case 0:
 				return &v.state
@@ -7565,7 +7565,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*VoidGiftCardResponse); i {
 			case 0:
 				return &v.state
@@ -7577,7 +7577,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StartSwapRequest); i {
 			case 0:
 				return &v.state
@@ -7589,7 +7589,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StartSwapResponse); i {
 			case 0:
 				return &v.state
@@ -7601,7 +7601,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetSwapRequest); i {
 			case 0:
 				return &v.state
@@ -7613,7 +7613,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetSwapResponse); i {
 			case 0:
 				return &v.state
@@ -7625,7 +7625,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetPendingSwapsRequest); i {
 			case 0:
 				return &v.state
@@ -7637,7 +7637,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetPendingSwapsResponse); i {
 			case 0:
 				return &v.state
@@ -7649,7 +7649,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SwapRequest); i {
 			case 0:
 				return &v.state
@@ -7661,7 +7661,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SwapResponse); i {
 			case 0:
 				return &v.state
@@ -7673,7 +7673,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Metadata); i {
 			case 0:
 				return &v.state
@@ -7685,7 +7685,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*OpenAccountsMetadata); i {
 			case 0:
 				return &v.state
@@ -7697,7 +7697,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SendPublicPaymentMetadata); i {
 			case 0:
 				return &v.state
@@ -7709,7 +7709,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ReceivePaymentsPubliclyMetadata); i {
 			case 0:
 				return &v.state
@@ -7721,7 +7721,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PublicDistributionMetadata); i {
 			case 0:
 				return &v.state
@@ -7733,7 +7733,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Action); i {
 			case 0:
 				return &v.state
@@ -7745,7 +7745,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*OpenAccountAction); i {
 			case 0:
 				return &v.state
@@ -7757,7 +7757,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NoPrivacyTransferAction); i {
 			case 0:
 				return &v.state
@@ -7769,7 +7769,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NoPrivacyWithdrawAction); i {
 			case 0:
 				return &v.state
@@ -7781,7 +7781,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FeePaymentAction); i {
 			case 0:
 				return &v.state
@@ -7793,7 +7793,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ServerParameter); i {
 			case 0:
 				return &v.state
@@ -7805,7 +7805,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NoncedTransactionMetadata); i {
 			case 0:
 				return &v.state
@@ -7817,7 +7817,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*OpenAccountServerParameter); i {
 			case 0:
 				return &v.state
@@ -7829,7 +7829,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NoPrivacyTransferServerParameter); i {
 			case 0:
 				return &v.state
@@ -7841,7 +7841,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NoPrivacyWithdrawServerParameter); i {
 			case 0:
 				return &v.state
@@ -7853,7 +7853,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FeePaymentServerParameter); i {
 			case 0:
 				return &v.state
@@ -7865,7 +7865,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ErrorDetails); i {
 			case 0:
 				return &v.state
@@ -7877,7 +7877,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ReasonStringErrorDetails); i {
 			case 0:
 				return &v.state
@@ -7889,7 +7889,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*InvalidSignatureErrorDetails); i {
 			case 0:
 				return &v.state
@@ -7901,7 +7901,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeniedErrorDetails); i {
 			case 0:
 				return &v.state
@@ -7913,7 +7913,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ExchangeData); i {
 			case 0:
 				return &v.state
@@ -7925,7 +7925,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[41].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[41].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ExchangeDataWithoutRate); i {
 			case 0:
 				return &v.state
@@ -7937,7 +7937,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SendLimit); i {
 			case 0:
 				return &v.state
@@ -7949,7 +7949,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*VerifiedSwapMetadata); i {
 			case 0:
 				return &v.state
@@ -7961,7 +7961,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*VerifiedCurrencyCreatorSwapMetadata); i {
 			case 0:
 				return &v.state
@@ -7973,7 +7973,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SwapMetadata); i {
 			case 0:
 				return &v.state
@@ -7985,7 +7985,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SubmitIntentRequest_SubmitActions); i {
 			case 0:
 				return &v.state
@@ -7997,7 +7997,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SubmitIntentRequest_SubmitSignatures); i {
 			case 0:
 				return &v.state
@@ -8009,7 +8009,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SubmitIntentResponse_ServerParameters); i {
 			case 0:
 				return &v.state
@@ -8021,7 +8021,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SubmitIntentResponse_Success); i {
 			case 0:
 				return &v.state
@@ -8033,7 +8033,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SubmitIntentResponse_Error); i {
 			case 0:
 				return &v.state
@@ -8045,7 +8045,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StartSwapRequest_Start); i {
 			case 0:
 				return &v.state
@@ -8057,7 +8057,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[53].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[53].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StartSwapRequest_SubmitSignature); i {
 			case 0:
 				return &v.state
@@ -8069,7 +8069,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[54].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[54].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StartSwapRequest_Start_CurrencyCreator); i {
 			case 0:
 				return &v.state
@@ -8081,7 +8081,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[55].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[55].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StartSwapResponse_ServerParameters); i {
 			case 0:
 				return &v.state
@@ -8093,7 +8093,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StartSwapResponse_Success); i {
 			case 0:
 				return &v.state
@@ -8105,7 +8105,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[57].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[57].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StartSwapResponse_Error); i {
 			case 0:
 				return &v.state
@@ -8117,7 +8117,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[58].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[58].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StartSwapResponse_ServerParameters_CurrencyCreator); i {
 			case 0:
 				return &v.state
@@ -8129,7 +8129,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[59].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[59].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SwapRequest_Initiate); i {
 			case 0:
 				return &v.state
@@ -8141,7 +8141,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[60].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[60].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SwapRequest_SubmitSignatures); i {
 			case 0:
 				return &v.state
@@ -8153,7 +8153,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[61].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[61].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SwapRequest_Initiate_Stateless); i {
 			case 0:
 				return &v.state
@@ -8165,7 +8165,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[62].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[62].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SwapRequest_Initiate_Stateful); i {
 			case 0:
 				return &v.state
@@ -8177,7 +8177,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[63].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[63].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SwapResponse_ServerParameters); i {
 			case 0:
 				return &v.state
@@ -8189,7 +8189,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[64].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[64].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SwapResponse_Success); i {
 			case 0:
 				return &v.state
@@ -8201,7 +8201,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[65].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[65].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SwapResponse_Error); i {
 			case 0:
 				return &v.state
@@ -8213,7 +8213,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[66].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[66].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SwapResponse_ServerParameters_CurrencyCreatorStateless); i {
 			case 0:
 				return &v.state
@@ -8225,7 +8225,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[67].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[67].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SwapResponse_ServerParameters_CurrencyCreatorStateful); i {
 			case 0:
 				return &v.state
@@ -8237,7 +8237,7 @@ func file_transaction_v2_transaction_service_proto_init() {
 				return nil
 			}
 		}
-		file_transaction_v2_transaction_service_proto_msgTypes[68].Exporter = func(v interface{}, i int) interface{} {
+		file_transaction_v1_transaction_service_proto_msgTypes[68].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PublicDistributionMetadata_Distribution); i {
 			case 0:
 				return &v.state
@@ -8250,74 +8250,74 @@ func file_transaction_v2_transaction_service_proto_init() {
 			}
 		}
 	}
-	file_transaction_v2_transaction_service_proto_msgTypes[0].OneofWrappers = []interface{}{
+	file_transaction_v1_transaction_service_proto_msgTypes[0].OneofWrappers = []interface{}{
 		(*SubmitIntentRequest_SubmitActions_)(nil),
 		(*SubmitIntentRequest_SubmitSignatures_)(nil),
 	}
-	file_transaction_v2_transaction_service_proto_msgTypes[1].OneofWrappers = []interface{}{
+	file_transaction_v1_transaction_service_proto_msgTypes[1].OneofWrappers = []interface{}{
 		(*SubmitIntentResponse_ServerParameters_)(nil),
 		(*SubmitIntentResponse_Success_)(nil),
 		(*SubmitIntentResponse_Error_)(nil),
 	}
-	file_transaction_v2_transaction_service_proto_msgTypes[12].OneofWrappers = []interface{}{
+	file_transaction_v1_transaction_service_proto_msgTypes[12].OneofWrappers = []interface{}{
 		(*StartSwapRequest_Start_)(nil),
 		(*StartSwapRequest_SubmitSignature_)(nil),
 	}
-	file_transaction_v2_transaction_service_proto_msgTypes[13].OneofWrappers = []interface{}{
+	file_transaction_v1_transaction_service_proto_msgTypes[13].OneofWrappers = []interface{}{
 		(*StartSwapResponse_ServerParameters_)(nil),
 		(*StartSwapResponse_Success_)(nil),
 		(*StartSwapResponse_Error_)(nil),
 	}
-	file_transaction_v2_transaction_service_proto_msgTypes[18].OneofWrappers = []interface{}{
+	file_transaction_v1_transaction_service_proto_msgTypes[18].OneofWrappers = []interface{}{
 		(*SwapRequest_Initiate_)(nil),
 		(*SwapRequest_SubmitSignatures_)(nil),
 	}
-	file_transaction_v2_transaction_service_proto_msgTypes[19].OneofWrappers = []interface{}{
+	file_transaction_v1_transaction_service_proto_msgTypes[19].OneofWrappers = []interface{}{
 		(*SwapResponse_ServerParameters_)(nil),
 		(*SwapResponse_Success_)(nil),
 		(*SwapResponse_Error_)(nil),
 	}
-	file_transaction_v2_transaction_service_proto_msgTypes[20].OneofWrappers = []interface{}{
+	file_transaction_v1_transaction_service_proto_msgTypes[20].OneofWrappers = []interface{}{
 		(*Metadata_OpenAccounts)(nil),
 		(*Metadata_SendPublicPayment)(nil),
 		(*Metadata_ReceivePaymentsPublicly)(nil),
 		(*Metadata_PublicDistribution)(nil),
 	}
-	file_transaction_v2_transaction_service_proto_msgTypes[25].OneofWrappers = []interface{}{
+	file_transaction_v1_transaction_service_proto_msgTypes[25].OneofWrappers = []interface{}{
 		(*Action_OpenAccount)(nil),
 		(*Action_NoPrivacyTransfer)(nil),
 		(*Action_NoPrivacyWithdraw)(nil),
 		(*Action_FeePayment)(nil),
 	}
-	file_transaction_v2_transaction_service_proto_msgTypes[30].OneofWrappers = []interface{}{
+	file_transaction_v1_transaction_service_proto_msgTypes[30].OneofWrappers = []interface{}{
 		(*ServerParameter_OpenAccount)(nil),
 		(*ServerParameter_NoPrivacyTransfer)(nil),
 		(*ServerParameter_NoPrivacyWithdraw)(nil),
 		(*ServerParameter_FeePayment)(nil),
 	}
-	file_transaction_v2_transaction_service_proto_msgTypes[36].OneofWrappers = []interface{}{
+	file_transaction_v1_transaction_service_proto_msgTypes[36].OneofWrappers = []interface{}{
 		(*ErrorDetails_ReasonString)(nil),
 		(*ErrorDetails_InvalidSignature)(nil),
 		(*ErrorDetails_Denied)(nil),
 	}
-	file_transaction_v2_transaction_service_proto_msgTypes[38].OneofWrappers = []interface{}{
+	file_transaction_v1_transaction_service_proto_msgTypes[38].OneofWrappers = []interface{}{
 		(*InvalidSignatureErrorDetails_ExpectedTransaction)(nil),
 		(*InvalidSignatureErrorDetails_ExpectedVixnHash)(nil),
 	}
-	file_transaction_v2_transaction_service_proto_msgTypes[43].OneofWrappers = []interface{}{
+	file_transaction_v1_transaction_service_proto_msgTypes[43].OneofWrappers = []interface{}{
 		(*VerifiedSwapMetadata_CurrencyCreator)(nil),
 	}
-	file_transaction_v2_transaction_service_proto_msgTypes[52].OneofWrappers = []interface{}{
+	file_transaction_v1_transaction_service_proto_msgTypes[52].OneofWrappers = []interface{}{
 		(*StartSwapRequest_Start_CurrencyCreator_)(nil),
 	}
-	file_transaction_v2_transaction_service_proto_msgTypes[55].OneofWrappers = []interface{}{
+	file_transaction_v1_transaction_service_proto_msgTypes[55].OneofWrappers = []interface{}{
 		(*StartSwapResponse_ServerParameters_CurrencyCreator_)(nil),
 	}
-	file_transaction_v2_transaction_service_proto_msgTypes[59].OneofWrappers = []interface{}{
+	file_transaction_v1_transaction_service_proto_msgTypes[59].OneofWrappers = []interface{}{
 		(*SwapRequest_Initiate_Stateless_)(nil),
 		(*SwapRequest_Initiate_Stateful_)(nil),
 	}
-	file_transaction_v2_transaction_service_proto_msgTypes[63].OneofWrappers = []interface{}{
+	file_transaction_v1_transaction_service_proto_msgTypes[63].OneofWrappers = []interface{}{
 		(*SwapResponse_ServerParameters_CurrencyCreatorStateless_)(nil),
 		(*SwapResponse_ServerParameters_CurrencyCreatorStateful_)(nil),
 	}
@@ -8325,19 +8325,19 @@ func file_transaction_v2_transaction_service_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_transaction_v2_transaction_service_proto_rawDesc,
+			RawDescriptor: file_transaction_v1_transaction_service_proto_rawDesc,
 			NumEnums:      19,
 			NumMessages:   69,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_transaction_v2_transaction_service_proto_goTypes,
-		DependencyIndexes: file_transaction_v2_transaction_service_proto_depIdxs,
-		EnumInfos:         file_transaction_v2_transaction_service_proto_enumTypes,
-		MessageInfos:      file_transaction_v2_transaction_service_proto_msgTypes,
+		GoTypes:           file_transaction_v1_transaction_service_proto_goTypes,
+		DependencyIndexes: file_transaction_v1_transaction_service_proto_depIdxs,
+		EnumInfos:         file_transaction_v1_transaction_service_proto_enumTypes,
+		MessageInfos:      file_transaction_v1_transaction_service_proto_msgTypes,
 	}.Build()
-	File_transaction_v2_transaction_service_proto = out.File
-	file_transaction_v2_transaction_service_proto_rawDesc = nil
-	file_transaction_v2_transaction_service_proto_goTypes = nil
-	file_transaction_v2_transaction_service_proto_depIdxs = nil
+	File_transaction_v1_transaction_service_proto = out.File
+	file_transaction_v1_transaction_service_proto_rawDesc = nil
+	file_transaction_v1_transaction_service_proto_goTypes = nil
+	file_transaction_v1_transaction_service_proto_depIdxs = nil
 }
