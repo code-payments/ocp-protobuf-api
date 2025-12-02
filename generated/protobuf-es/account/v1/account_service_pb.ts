@@ -6,7 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
 import { AccountType, Signature, SolanaAccountId } from "../../common/v1/model_pb";
-import { ExchangeData } from "../../transaction/v2/transaction_service_pb";
+import { ExchangeData } from "../../transaction/v1/transaction_service_pb";
 
 /**
  * @generated from message ocp.account.v1.IsCodeAccountRequest
@@ -383,7 +383,7 @@ export class TokenAccountInfo extends Message<TokenAccountInfo> {
    *  3. The balance could have been received, so the total balance can show
    *     as zero.
    *
-   * @generated from field: ocp.transaction.v2.ExchangeData original_exchange_data = 11;
+   * @generated from field: ocp.transaction.v1.ExchangeData original_exchange_data = 11;
    */
   originalExchangeData?: ExchangeData;
 

@@ -7,7 +7,7 @@ option java_package = "com.codeinc.gen.account.v1";
 option objc_class_prefix = "CPBAccountV1";
 
 import "common/v1/model.proto";
-import "transaction/v2/transaction_service.proto";
+import "transaction/v1/transaction_service.proto";
 import "google/protobuf/timestamp.proto";
 import "validate/validate.proto";
 
@@ -188,7 +188,7 @@ message TokenAccountInfo {
     //     the balance, in quarks, may be greater than the original quark value.
     //  3. The balance could have been received, so the total balance can show
     //     as zero.
-    transaction.v2.ExchangeData original_exchange_data = 11;
+    transaction.v1.ExchangeData original_exchange_data = 11;
 
     // The token account's mint
     common.v1.SolanaAccountId mint = 12;

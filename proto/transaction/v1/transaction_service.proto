@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package ocp.transaction.v2;
+package ocp.transaction.v1;
 
-option go_package = "github.com/code-payments/ocp-protobuf-api/generated/go/transaction/v2;transaction";
-option java_package = "com.codeinc.gen.transaction.v2";
-option objc_class_prefix = "APBTransactionV2";
+option go_package = "github.com/code-payments/ocp-protobuf-api/generated/go/transaction/v1;transaction";
+option java_package = "com.codeinc.gen.transaction.v1";
+option objc_class_prefix = "APBTransactionV1";
 
 import "common/v1/model.proto";
 import "google/protobuf/timestamp.proto";
