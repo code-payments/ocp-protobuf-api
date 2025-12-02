@@ -451,7 +451,7 @@ export class LaunchpadMetadata extends Message<LaunchpadMetadata> {
   /**
    * Precent fee for sells in basis points, currently hardcoded to 1%
    *
-   * @generated from field: uint32 sell_fee_bps = 10;
+   * @generated from field: uint32 sell_fee_bps = 9;
    */
   sellFeeBps = 0;
 
@@ -471,7 +471,7 @@ export class LaunchpadMetadata extends Message<LaunchpadMetadata> {
     { no: 6, name: "core_mint_vault", kind: "message", T: SolanaAccountId },
     { no: 7, name: "supply_from_bonding", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
     { no: 8, name: "core_mint_locked", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
-    { no: 10, name: "sell_fee_bps", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 9, name: "sell_fee_bps", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LaunchpadMetadata {
