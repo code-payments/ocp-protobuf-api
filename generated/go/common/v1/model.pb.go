@@ -24,7 +24,7 @@ const (
 )
 
 // AccountType associates a type to an account, which infers how an account is used
-// within the Code ecosystem.
+// within the OCP ecosystem.
 type AccountType int32
 
 const (
@@ -379,7 +379,7 @@ func (x *Signature) GetValue() []byte {
 }
 
 // IntentId is a client-side generated ID that maps to an intent to perform actions
-// on the blockchain fulfilled by the Code sequencer.
+// on the blockchain fulfilled by the OCP sequencer.
 type IntentId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

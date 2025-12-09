@@ -22,11 +22,11 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AccountClient interface {
-	// IsCodeAccount returns whether an owner account is a Code account. This hints
+	// IsOcpAccount returns whether an owner account is a OCP account. This hints
 	// to the client whether the account can be logged in, used for making payments,
 	// etc.
-	IsCodeAccount(ctx context.Context, in *IsCodeAccountRequest, opts ...grpc.CallOption) (*IsCodeAccountResponse, error)
-	// GetTokenAccountInfos returns token account metadata relevant to the Code owner
+	IsOcpAccount(ctx context.Context, in *IsOcpAccountRequest, opts ...grpc.CallOption) (*IsOcpAccountResponse, error)
+	// GetTokenAccountInfos returns token account metadata relevant to the OCP owner
 	// account.
 	GetTokenAccountInfos(ctx context.Context, in *GetTokenAccountInfosRequest, opts ...grpc.CallOption) (*GetTokenAccountInfosResponse, error)
 }
@@ -39,9 +39,9 @@ func NewAccountClient(cc grpc.ClientConnInterface) AccountClient {
 	return &accountClient{cc}
 }
 
-func (c *accountClient) IsCodeAccount(ctx context.Context, in *IsCodeAccountRequest, opts ...grpc.CallOption) (*IsCodeAccountResponse, error) {
-	out := new(IsCodeAccountResponse)
-	err := c.cc.Invoke(ctx, "/ocp.account.v1.Account/IsCodeAccount", in, out, opts...)
+func (c *accountClient) IsOcpAccount(ctx context.Context, in *IsOcpAccountRequest, opts ...grpc.CallOption) (*IsOcpAccountResponse, error) {
+	out := new(IsOcpAccountResponse)
+	err := c.cc.Invoke(ctx, "/ocp.account.v1.Account/IsOcpAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -61,11 +61,11 @@ func (c *accountClient) GetTokenAccountInfos(ctx context.Context, in *GetTokenAc
 // All implementations must embed UnimplementedAccountServer
 // for forward compatibility
 type AccountServer interface {
-	// IsCodeAccount returns whether an owner account is a Code account. This hints
+	// IsOcpAccount returns whether an owner account is a OCP account. This hints
 	// to the client whether the account can be logged in, used for making payments,
 	// etc.
-	IsCodeAccount(context.Context, *IsCodeAccountRequest) (*IsCodeAccountResponse, error)
-	// GetTokenAccountInfos returns token account metadata relevant to the Code owner
+	IsOcpAccount(context.Context, *IsOcpAccountRequest) (*IsOcpAccountResponse, error)
+	// GetTokenAccountInfos returns token account metadata relevant to the OCP owner
 	// account.
 	GetTokenAccountInfos(context.Context, *GetTokenAccountInfosRequest) (*GetTokenAccountInfosResponse, error)
 	mustEmbedUnimplementedAccountServer()
@@ -75,8 +75,8 @@ type AccountServer interface {
 type UnimplementedAccountServer struct {
 }
 
-func (UnimplementedAccountServer) IsCodeAccount(context.Context, *IsCodeAccountRequest) (*IsCodeAccountResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method IsCodeAccount not implemented")
+func (UnimplementedAccountServer) IsOcpAccount(context.Context, *IsOcpAccountRequest) (*IsOcpAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IsOcpAccount not implemented")
 }
 func (UnimplementedAccountServer) GetTokenAccountInfos(context.Context, *GetTokenAccountInfosRequest) (*GetTokenAccountInfosResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTokenAccountInfos not implemented")
@@ -94,20 +94,20 @@ func RegisterAccountServer(s grpc.ServiceRegistrar, srv AccountServer) {
 	s.RegisterService(&Account_ServiceDesc, srv)
 }
 
-func _Account_IsCodeAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IsCodeAccountRequest)
+func _Account_IsOcpAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsOcpAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServer).IsCodeAccount(ctx, in)
+		return srv.(AccountServer).IsOcpAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ocp.account.v1.Account/IsCodeAccount",
+		FullMethod: "/ocp.account.v1.Account/IsOcpAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServer).IsCodeAccount(ctx, req.(*IsCodeAccountRequest))
+		return srv.(AccountServer).IsOcpAccount(ctx, req.(*IsOcpAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -138,8 +138,8 @@ var Account_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*AccountServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "IsCodeAccount",
-			Handler:    _Account_IsCodeAccount_Handler,
+			MethodName: "IsOcpAccount",
+			Handler:    _Account_IsOcpAccount_Handler,
 		},
 		{
 			MethodName: "GetTokenAccountInfos",
