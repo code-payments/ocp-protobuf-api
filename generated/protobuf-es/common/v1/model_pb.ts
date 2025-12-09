@@ -8,7 +8,7 @@ import { Duration, Message, proto3, Timestamp } from "@bufbuild/protobuf";
 
 /**
  * AccountType associates a type to an account, which infers how an account is used
- * within the Code ecosystem.
+ * within the OCP ecosystem.
  *
  * @generated from enum ocp.common.v1.AccountType
  */
@@ -258,7 +258,7 @@ export class Signature extends Message<Signature> {
 
 /**
  * IntentId is a client-side generated ID that maps to an intent to perform actions
- * on the blockchain fulfilled by the Code sequencer.
+ * on the blockchain fulfilled by the OCP sequencer.
  *
  * @generated from message ocp.common.v1.IntentId
  */

@@ -11,7 +11,7 @@ import "google/protobuf/timestamp.proto";
 import "validate/validate.proto";
 
 // AccountType associates a type to an account, which infers how an account is used
-// within the Code ecosystem.
+// within the OCP ecosystem.
 enum AccountType {
     UNKNOWN                  = 0;
     PRIMARY                  = 1;
@@ -65,7 +65,7 @@ message Signature {
 }
 
 // IntentId is a client-side generated ID that maps to an intent to perform actions
-// on the blockchain fulfilled by the Code sequencer.
+// on the blockchain fulfilled by the OCP sequencer.
 message IntentId {
     bytes value = 1 [(validate.rules).bytes = {
         min_len: 32

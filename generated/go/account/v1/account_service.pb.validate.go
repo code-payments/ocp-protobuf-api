@@ -39,16 +39,16 @@ var (
 	_ = common.AccountType(0)
 )
 
-// Validate checks the field values on IsCodeAccountRequest with the rules
+// Validate checks the field values on IsOcpAccountRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
-func (m *IsCodeAccountRequest) Validate() error {
+func (m *IsOcpAccountRequest) Validate() error {
 	if m == nil {
 		return nil
 	}
 
 	if m.GetOwner() == nil {
-		return IsCodeAccountRequestValidationError{
+		return IsOcpAccountRequestValidationError{
 			field:  "Owner",
 			reason: "value is required",
 		}
@@ -56,7 +56,7 @@ func (m *IsCodeAccountRequest) Validate() error {
 
 	if v, ok := interface{}(m.GetOwner()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return IsCodeAccountRequestValidationError{
+			return IsOcpAccountRequestValidationError{
 				field:  "Owner",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -65,7 +65,7 @@ func (m *IsCodeAccountRequest) Validate() error {
 	}
 
 	if m.GetSignature() == nil {
-		return IsCodeAccountRequestValidationError{
+		return IsOcpAccountRequestValidationError{
 			field:  "Signature",
 			reason: "value is required",
 		}
@@ -73,7 +73,7 @@ func (m *IsCodeAccountRequest) Validate() error {
 
 	if v, ok := interface{}(m.GetSignature()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return IsCodeAccountRequestValidationError{
+			return IsOcpAccountRequestValidationError{
 				field:  "Signature",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -84,9 +84,9 @@ func (m *IsCodeAccountRequest) Validate() error {
 	return nil
 }
 
-// IsCodeAccountRequestValidationError is the validation error returned by
-// IsCodeAccountRequest.Validate if the designated constraints aren't met.
-type IsCodeAccountRequestValidationError struct {
+// IsOcpAccountRequestValidationError is the validation error returned by
+// IsOcpAccountRequest.Validate if the designated constraints aren't met.
+type IsOcpAccountRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -94,24 +94,24 @@ type IsCodeAccountRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e IsCodeAccountRequestValidationError) Field() string { return e.field }
+func (e IsOcpAccountRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e IsCodeAccountRequestValidationError) Reason() string { return e.reason }
+func (e IsOcpAccountRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e IsCodeAccountRequestValidationError) Cause() error { return e.cause }
+func (e IsOcpAccountRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e IsCodeAccountRequestValidationError) Key() bool { return e.key }
+func (e IsOcpAccountRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e IsCodeAccountRequestValidationError) ErrorName() string {
-	return "IsCodeAccountRequestValidationError"
+func (e IsOcpAccountRequestValidationError) ErrorName() string {
+	return "IsOcpAccountRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e IsCodeAccountRequestValidationError) Error() string {
+func (e IsOcpAccountRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -123,14 +123,14 @@ func (e IsCodeAccountRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sIsCodeAccountRequest.%s: %s%s",
+		"invalid %sIsOcpAccountRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = IsCodeAccountRequestValidationError{}
+var _ error = IsOcpAccountRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -138,12 +138,12 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = IsCodeAccountRequestValidationError{}
+} = IsOcpAccountRequestValidationError{}
 
-// Validate checks the field values on IsCodeAccountResponse with the rules
+// Validate checks the field values on IsOcpAccountResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
-func (m *IsCodeAccountResponse) Validate() error {
+func (m *IsOcpAccountResponse) Validate() error {
 	if m == nil {
 		return nil
 	}
@@ -153,9 +153,9 @@ func (m *IsCodeAccountResponse) Validate() error {
 	return nil
 }
 
-// IsCodeAccountResponseValidationError is the validation error returned by
-// IsCodeAccountResponse.Validate if the designated constraints aren't met.
-type IsCodeAccountResponseValidationError struct {
+// IsOcpAccountResponseValidationError is the validation error returned by
+// IsOcpAccountResponse.Validate if the designated constraints aren't met.
+type IsOcpAccountResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -163,24 +163,24 @@ type IsCodeAccountResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e IsCodeAccountResponseValidationError) Field() string { return e.field }
+func (e IsOcpAccountResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e IsCodeAccountResponseValidationError) Reason() string { return e.reason }
+func (e IsOcpAccountResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e IsCodeAccountResponseValidationError) Cause() error { return e.cause }
+func (e IsOcpAccountResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e IsCodeAccountResponseValidationError) Key() bool { return e.key }
+func (e IsOcpAccountResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e IsCodeAccountResponseValidationError) ErrorName() string {
-	return "IsCodeAccountResponseValidationError"
+func (e IsOcpAccountResponseValidationError) ErrorName() string {
+	return "IsOcpAccountResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e IsCodeAccountResponseValidationError) Error() string {
+func (e IsOcpAccountResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -192,14 +192,14 @@ func (e IsCodeAccountResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sIsCodeAccountResponse.%s: %s%s",
+		"invalid %sIsOcpAccountResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = IsCodeAccountResponseValidationError{}
+var _ error = IsOcpAccountResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -207,7 +207,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = IsCodeAccountResponseValidationError{}
+} = IsOcpAccountResponseValidationError{}
 
 // Validate checks the field values on GetTokenAccountInfosRequest with the
 // rules defined in the proto definition for this message. If any rules are

@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetTokenAccountInfosRequest, GetTokenAccountInfosResponse, IsCodeAccountRequest, IsCodeAccountResponse } from "./account_service_pb";
+import { GetTokenAccountInfosRequest, GetTokenAccountInfosResponse, IsOcpAccountRequest, IsOcpAccountResponse } from "./account_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -13,20 +13,20 @@ export const Account = {
   typeName: "ocp.account.v1.Account",
   methods: {
     /**
-     * IsCodeAccount returns whether an owner account is a Code account. This hints
+     * IsOcpAccount returns whether an owner account is a OCP account. This hints
      * to the client whether the account can be logged in, used for making payments,
      * etc.
      *
-     * @generated from rpc ocp.account.v1.Account.IsCodeAccount
+     * @generated from rpc ocp.account.v1.Account.IsOcpAccount
      */
-    isCodeAccount: {
-      name: "IsCodeAccount",
-      I: IsCodeAccountRequest,
-      O: IsCodeAccountResponse,
+    isOcpAccount: {
+      name: "IsOcpAccount",
+      I: IsOcpAccountRequest,
+      O: IsOcpAccountResponse,
       kind: MethodKind.Unary,
     },
     /**
-     * GetTokenAccountInfos returns token account metadata relevant to the Code owner
+     * GetTokenAccountInfos returns token account metadata relevant to the OCP owner
      * account.
      *
      * @generated from rpc ocp.account.v1.Account.GetTokenAccountInfos

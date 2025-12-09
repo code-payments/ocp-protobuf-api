@@ -9,9 +9,9 @@ import { AccountType, Signature, SolanaAccountId } from "../../common/v1/model_p
 import { ExchangeData } from "../../transaction/v1/transaction_service_pb";
 
 /**
- * @generated from message ocp.account.v1.IsCodeAccountRequest
+ * @generated from message ocp.account.v1.IsOcpAccountRequest
  */
-export class IsCodeAccountRequest extends Message<IsCodeAccountRequest> {
+export class IsOcpAccountRequest extends Message<IsOcpAccountRequest> {
   /**
    * The owner account to check against.
    *
@@ -20,7 +20,7 @@ export class IsCodeAccountRequest extends Message<IsCodeAccountRequest> {
   owner?: SolanaAccountId;
 
   /**
-   * The signature is of serialize(IsCodeAccountRequest) without this field set
+   * The signature is of serialize(IsOcpAccountRequest) without this field set
    * using the private key of the owner account. This provides an authentication
    * mechanism to the RPC.
    *
@@ -28,85 +28,85 @@ export class IsCodeAccountRequest extends Message<IsCodeAccountRequest> {
    */
   signature?: Signature;
 
-  constructor(data?: PartialMessage<IsCodeAccountRequest>) {
+  constructor(data?: PartialMessage<IsOcpAccountRequest>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.account.v1.IsCodeAccountRequest";
+  static readonly typeName = "ocp.account.v1.IsOcpAccountRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "owner", kind: "message", T: SolanaAccountId },
     { no: 2, name: "signature", kind: "message", T: Signature },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): IsCodeAccountRequest {
-    return new IsCodeAccountRequest().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): IsOcpAccountRequest {
+    return new IsOcpAccountRequest().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): IsCodeAccountRequest {
-    return new IsCodeAccountRequest().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): IsOcpAccountRequest {
+    return new IsOcpAccountRequest().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): IsCodeAccountRequest {
-    return new IsCodeAccountRequest().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): IsOcpAccountRequest {
+    return new IsOcpAccountRequest().fromJsonString(jsonString, options);
   }
 
-  static equals(a: IsCodeAccountRequest | PlainMessage<IsCodeAccountRequest> | undefined, b: IsCodeAccountRequest | PlainMessage<IsCodeAccountRequest> | undefined): boolean {
-    return proto3.util.equals(IsCodeAccountRequest, a, b);
+  static equals(a: IsOcpAccountRequest | PlainMessage<IsOcpAccountRequest> | undefined, b: IsOcpAccountRequest | PlainMessage<IsOcpAccountRequest> | undefined): boolean {
+    return proto3.util.equals(IsOcpAccountRequest, a, b);
   }
 }
 
 /**
- * @generated from message ocp.account.v1.IsCodeAccountResponse
+ * @generated from message ocp.account.v1.IsOcpAccountResponse
  */
-export class IsCodeAccountResponse extends Message<IsCodeAccountResponse> {
+export class IsOcpAccountResponse extends Message<IsOcpAccountResponse> {
   /**
-   * @generated from field: ocp.account.v1.IsCodeAccountResponse.Result result = 1;
+   * @generated from field: ocp.account.v1.IsOcpAccountResponse.Result result = 1;
    */
-  result = IsCodeAccountResponse_Result.OK;
+  result = IsOcpAccountResponse_Result.OK;
 
-  constructor(data?: PartialMessage<IsCodeAccountResponse>) {
+  constructor(data?: PartialMessage<IsOcpAccountResponse>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.account.v1.IsCodeAccountResponse";
+  static readonly typeName = "ocp.account.v1.IsOcpAccountResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(IsCodeAccountResponse_Result) },
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(IsOcpAccountResponse_Result) },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): IsCodeAccountResponse {
-    return new IsCodeAccountResponse().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): IsOcpAccountResponse {
+    return new IsOcpAccountResponse().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): IsCodeAccountResponse {
-    return new IsCodeAccountResponse().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): IsOcpAccountResponse {
+    return new IsOcpAccountResponse().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): IsCodeAccountResponse {
-    return new IsCodeAccountResponse().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): IsOcpAccountResponse {
+    return new IsOcpAccountResponse().fromJsonString(jsonString, options);
   }
 
-  static equals(a: IsCodeAccountResponse | PlainMessage<IsCodeAccountResponse> | undefined, b: IsCodeAccountResponse | PlainMessage<IsCodeAccountResponse> | undefined): boolean {
-    return proto3.util.equals(IsCodeAccountResponse, a, b);
+  static equals(a: IsOcpAccountResponse | PlainMessage<IsOcpAccountResponse> | undefined, b: IsOcpAccountResponse | PlainMessage<IsOcpAccountResponse> | undefined): boolean {
+    return proto3.util.equals(IsOcpAccountResponse, a, b);
   }
 }
 
 /**
- * @generated from enum ocp.account.v1.IsCodeAccountResponse.Result
+ * @generated from enum ocp.account.v1.IsOcpAccountResponse.Result
  */
-export enum IsCodeAccountResponse_Result {
+export enum IsOcpAccountResponse_Result {
   /**
-   * The account is a Code account.
+   * The account is an OCP account.
    *
    * @generated from enum value: OK = 0;
    */
   OK = 0,
 
   /**
-   * The account is not a Code account.
+   * The account is not an OCP account.
    *
    * @generated from enum value: NOT_FOUND = 1;
    */
@@ -119,8 +119,8 @@ export enum IsCodeAccountResponse_Result {
    */
   UNLOCKED_TIMELOCK_ACCOUNT = 2,
 }
-// Retrieve enum metadata with: proto3.getEnumType(IsCodeAccountResponse_Result)
-proto3.util.setEnumType(IsCodeAccountResponse_Result, "ocp.account.v1.IsCodeAccountResponse.Result", [
+// Retrieve enum metadata with: proto3.getEnumType(IsOcpAccountResponse_Result)
+proto3.util.setEnumType(IsOcpAccountResponse_Result, "ocp.account.v1.IsOcpAccountResponse.Result", [
   { no: 0, name: "OK" },
   { no: 1, name: "NOT_FOUND" },
   { no: 2, name: "UNLOCKED_TIMELOCK_ACCOUNT" },
@@ -343,7 +343,7 @@ export class TokenAccountInfo extends Message<TokenAccountInfo> {
   balanceSource = TokenAccountInfo_BalanceSource.UNKNOWN;
 
   /**
-   * The balance in quarks, as observed by Code. This may not reflect the value
+   * The balance in quarks, as observed by the OCP. This may not reflect the value
    * on the blockchain and could be non-zero even if the account hasn't been created.
    * Use balance_source to determine how this value was calculated.
    *
@@ -352,7 +352,7 @@ export class TokenAccountInfo extends Message<TokenAccountInfo> {
   balance = protoInt64.zero;
 
   /**
-   * The state of the account as it pertains to Code's ability to manage funds.
+   * The state of the account as it pertains to the OCP's ability to manage funds.
    *
    * @generated from field: ocp.account.v1.TokenAccountInfo.ManagementState management_state = 8;
    */
@@ -395,9 +395,9 @@ export class TokenAccountInfo extends Message<TokenAccountInfo> {
   mint?: SolanaAccountId;
 
   /**
-   * Time the account was created, if available. For Code accounts, this is
+   * Time the account was created, if available. For OCP accounts, this is
    * the time of intent submission. Otherwise, for external accounts, it is
-   * the tiem created on the blockchain.
+   * the time created on the blockchain.
    *
    * @generated from field: google.protobuf.Timestamp created_at = 13;
    */
@@ -473,7 +473,7 @@ export enum TokenAccountInfo_BalanceSource {
   BLOCKCHAIN = 1,
 
   /**
-   * The account's balance was calculated using cached values in Code. Accuracy
+   * The account's balance was calculated using cached values in OCP. Accuracy
    * is only guaranteed when management_state is LOCKED.
    *
    * @generated from enum value: BALANCE_SOURCE_CACHE = 2;
@@ -500,7 +500,7 @@ export enum TokenAccountInfo_ManagementState {
   UNKNOWN = 0,
 
   /**
-   * Code does not maintain a management state and won't move funds for this
+   * OCP does not maintain a management state and won't move funds for this
    * account.
    *
    * @generated from enum value: MANAGEMENT_STATE_NONE = 1;
@@ -515,7 +515,7 @@ export enum TokenAccountInfo_ManagementState {
   LOCKING = 2,
 
   /**
-   * The account's funds are locked and Code has co-signing authority.
+   * The account's funds are locked and OCP has co-signing authority.
    *
    * @generated from enum value: MANAGEMENT_STATE_LOCKED = 3;
    */
@@ -529,7 +529,7 @@ export enum TokenAccountInfo_ManagementState {
   UNLOCKING = 4,
 
   /**
-   * The account's funds are unlocked and Code no longer has co-signing
+   * The account's funds are unlocked and OCP no longer has co-signing
    * authority. The account must transition to the LOCKED state to have
    * management capabilities.
    *
