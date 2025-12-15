@@ -145,9 +145,6 @@ message LaunchpadMetadata {
     // Current circulating mint token supply in quarks
     uint64 supply_from_bonding = 7;
 
-    // Current core mint quarks locked in the liquidity pool
-    uint64 core_mint_locked = 8;
-
     // Precent fee for sells in basis points, currently hardcoded to 1%
-    uint32 sell_fee_bps = 9 [(validate.rules).uint32.const = 100];
+    uint32 sell_fee_bps = 8 [(validate.rules).uint32.const = 100];
 }
