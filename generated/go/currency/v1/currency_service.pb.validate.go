@@ -543,6 +543,23 @@ func (m *VmMetadata) Validate() error {
 		}
 	}
 
+	if m.GetOmnibus() == nil {
+		return VmMetadataValidationError{
+			field:  "Omnibus",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetOmnibus()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return VmMetadataValidationError{
+				field:  "Omnibus",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	return nil
 }
 

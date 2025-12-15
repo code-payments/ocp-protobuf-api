@@ -118,6 +118,9 @@ message VmMetadata {
     // Lock duration of Virtual Timelock Accounts on the VM, currently hardcoded
     // to 21 days
     uint32 lock_duration_in_days = 3 [(validate.rules).uint32.const = 21];
+
+    // VM omnibus address
+    common.v1.SolanaAccountId omnibus = 4 [(validate.rules).message.required = true];
 }
 
 message LaunchpadMetadata {
