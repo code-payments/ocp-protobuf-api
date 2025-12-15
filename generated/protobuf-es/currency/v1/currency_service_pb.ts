@@ -450,16 +450,9 @@ export class LaunchpadMetadata extends Message<LaunchpadMetadata> {
   supplyFromBonding = protoInt64.zero;
 
   /**
-   * Current core mint quarks locked in the liquidity pool
-   *
-   * @generated from field: uint64 core_mint_locked = 8;
-   */
-  coreMintLocked = protoInt64.zero;
-
-  /**
    * Precent fee for sells in basis points, currently hardcoded to 1%
    *
-   * @generated from field: uint32 sell_fee_bps = 9;
+   * @generated from field: uint32 sell_fee_bps = 8;
    */
   sellFeeBps = 0;
 
@@ -478,8 +471,7 @@ export class LaunchpadMetadata extends Message<LaunchpadMetadata> {
     { no: 5, name: "mint_vault", kind: "message", T: SolanaAccountId },
     { no: 6, name: "core_mint_vault", kind: "message", T: SolanaAccountId },
     { no: 7, name: "supply_from_bonding", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
-    { no: 8, name: "core_mint_locked", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
-    { no: 9, name: "sell_fee_bps", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 8, name: "sell_fee_bps", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LaunchpadMetadata {

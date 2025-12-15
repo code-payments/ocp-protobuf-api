@@ -729,8 +729,6 @@ func (m *LaunchpadMetadata) Validate() error {
 
 	// no validation rules for SupplyFromBonding
 
-	// no validation rules for CoreMintLocked
-
 	if m.GetSellFeeBps() != 100 {
 		return LaunchpadMetadataValidationError{
 			field:  "SellFeeBps",
