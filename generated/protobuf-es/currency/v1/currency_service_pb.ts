@@ -358,6 +358,13 @@ export class VmMetadata extends Message<VmMetadata> {
    */
   lockDurationInDays = 0;
 
+  /**
+   * VM omnibus address
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId omnibus = 4;
+   */
+  omnibus?: SolanaAccountId;
+
   constructor(data?: PartialMessage<VmMetadata>) {
     super();
     proto3.util.initPartial(data, this);
@@ -369,6 +376,7 @@ export class VmMetadata extends Message<VmMetadata> {
     { no: 1, name: "vm", kind: "message", T: SolanaAccountId },
     { no: 2, name: "authority", kind: "message", T: SolanaAccountId },
     { no: 3, name: "lock_duration_in_days", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 4, name: "omnibus", kind: "message", T: SolanaAccountId },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VmMetadata {
