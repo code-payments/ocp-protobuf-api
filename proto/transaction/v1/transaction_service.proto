@@ -366,15 +366,16 @@ message StartSwapRequest {
 
             // Where "amount" of "from_mint" will be sent from to the VM swap PDA
             FundingSource funding_source = 5 [(validate.rules).enum = {
-                in: [1] // FUNDING_SOURCE_SUBMIT_INTENT
+                in: [1, 2] // FUNDING_SOURCE_SUBMIT_INTENT, FUNDING_SOURCE_EXTERNAL_WALLET
             }];
 
             // The ID of the "transaction" to lookup funding state.
             //
-            // For SWAP_FUNDING_SOURCE_SUBMIT_INTENT, this value is the base58 encoded intent ID.
+            // For FUNDING_SOURCE_SUBMIT_INTENT, this value is the base58 encoded intent ID.
+            // For FUNDING_SOURCE_EXTERNAL_WALLET, this value is the base58 encoded transaction signature.
             string funding_id = 6 [(validate.rules).string = {
                 min_len: 32,
-                max_len: 44,
+                max_len: 88,
             }];
         }
 
@@ -1187,6 +1188,7 @@ enum AirdropType {
 }
 
 enum FundingSource {
-    FUNDING_SOURCE_UNKNOWN = 0;
-    FUNDING_SOURCE_SUBMIT_INTENT = 1;
+    FUNDING_SOURCE_UNKNOWN         = 0;
+    FUNDING_SOURCE_SUBMIT_INTENT   = 1;
+    FUNDING_SOURCE_EXTERNAL_WALLET = 2;
 }

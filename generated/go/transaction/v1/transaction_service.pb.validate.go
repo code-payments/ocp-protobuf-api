@@ -5572,14 +5572,14 @@ func (m *StartSwapRequest_Start_CurrencyCreator) Validate() error {
 	if _, ok := _StartSwapRequest_Start_CurrencyCreator_FundingSource_InLookup[m.GetFundingSource()]; !ok {
 		return StartSwapRequest_Start_CurrencyCreatorValidationError{
 			field:  "FundingSource",
-			reason: "value must be in list [1]",
+			reason: "value must be in list [1 2]",
 		}
 	}
 
-	if l := utf8.RuneCountInString(m.GetFundingId()); l < 32 || l > 44 {
+	if l := utf8.RuneCountInString(m.GetFundingId()); l < 32 || l > 88 {
 		return StartSwapRequest_Start_CurrencyCreatorValidationError{
 			field:  "FundingId",
-			reason: "value length must be between 32 and 44 runes, inclusive",
+			reason: "value length must be between 32 and 88 runes, inclusive",
 		}
 	}
 
@@ -5645,6 +5645,7 @@ var _ interface {
 
 var _StartSwapRequest_Start_CurrencyCreator_FundingSource_InLookup = map[FundingSource]struct{}{
 	1: {},
+	2: {},
 }
 
 // Validate checks the field values on StartSwapResponse_ServerParameters with
