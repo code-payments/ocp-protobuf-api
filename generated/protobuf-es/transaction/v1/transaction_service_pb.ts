@@ -1742,7 +1742,7 @@ export enum StatefulSwapResponse_Error_Code {
   DENIED = 0,
 
   /**
-   * There is an issue with the provided transaction signature
+   * There is an issue with the provided proof or transaction signatures
    *
    * @generated from enum value: SIGNATURE_ERROR = 1;
    */
