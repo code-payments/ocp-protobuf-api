@@ -515,7 +515,7 @@ type StatefulSwapResponse_Error_Code int32
 const (
 	// Denied by a guard (spam, money laundering, etc)
 	StatefulSwapResponse_Error_DENIED StatefulSwapResponse_Error_Code = 0
-	// There is an issue with the provided transaction signature
+	// There is an issue with the provided proof or transaction signatures
 	StatefulSwapResponse_Error_SIGNATURE_ERROR StatefulSwapResponse_Error_Code = 1
 	// The swap metadata failed server-side validation
 	StatefulSwapResponse_Error_INVALID_SWAP StatefulSwapResponse_Error_Code = 2

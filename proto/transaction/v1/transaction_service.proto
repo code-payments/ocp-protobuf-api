@@ -508,7 +508,7 @@ message StatefulSwapResponse {
         enum Code {
             // Denied by a guard (spam, money laundering, etc)
             DENIED = 0;
-            // There is an issue with the provided transaction signature
+            // There is an issue with the provided proof or transaction signatures
             SIGNATURE_ERROR = 1;
             // The swap metadata failed server-side validation
             INVALID_SWAP = 2;
