@@ -2068,6 +2068,10 @@ export class SwapRequest_Initiate_Stateless extends Message<SwapRequest_Initiate
 }
 
 /**
+ * Stateful initiates a swap for an existing swap that was created via
+ * the StartSwap RPC. This can be called when the swap is in either the
+ * FUNDING or FUNDED state to pre-sign/sign the swap transaction.
+ *
  * @generated from message ocp.transaction.v1.SwapRequest.Initiate.Stateful
  */
 export class SwapRequest_Initiate_Stateful extends Message<SwapRequest_Initiate_Stateful> {

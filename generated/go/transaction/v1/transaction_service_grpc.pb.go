@@ -83,15 +83,18 @@ type TransactionClient interface {
 	GetSwap(ctx context.Context, in *GetSwapRequest, opts ...grpc.CallOption) (*GetSwapResponse, error)
 	// GetPendingSwaps get swaps that are pending client actions which include:
 	//  1. Swaps that need a call to SubmitIntent to fund the VM swap PDA (ie. in a CREATED state)
-	//  2. Swaps that need to be executed via the Swap RPC (ie. in a FUNDED state)
+	//  2. Swaps that need to be pre-signed via the Swap RPC (ie. in a FUNDING or FUNDED state)
 	GetPendingSwaps(ctx context.Context, in *GetPendingSwapsRequest, opts ...grpc.CallOption) (*GetPendingSwapsResponse, error)
 	// Swap performs an on-chain swap. The high-level flow mirrors SubmitIntent
 	// closely. However, due to the time-sensitive nature and unreliability of
 	// swaps, they do not fit within the broader intent system. This results in
 	// a few key differences:
-	//   - Transactions are submitted on a best-effort basis outside of the Code
-	//     Sequencer within the RPC handler
+	//   - Transactions may be submitted on a best-effort basis outside of the Code
+	//     Sequencer within the RPC handler (eg. for stateless swaps)
 	//   - Balance changes are applied after the transaction has finalized
+	//
+	// For stateful swaps, the Swap RPC can be called when the swap is in either
+	// the FUNDING or FUNDED state to sign the swap transaction.
 	Swap(ctx context.Context, opts ...grpc.CallOption) (Transaction_SwapClient, error)
 }
 
@@ -324,15 +327,18 @@ type TransactionServer interface {
 	GetSwap(context.Context, *GetSwapRequest) (*GetSwapResponse, error)
 	// GetPendingSwaps get swaps that are pending client actions which include:
 	//  1. Swaps that need a call to SubmitIntent to fund the VM swap PDA (ie. in a CREATED state)
-	//  2. Swaps that need to be executed via the Swap RPC (ie. in a FUNDED state)
+	//  2. Swaps that need to be pre-signed via the Swap RPC (ie. in a FUNDING or FUNDED state)
 	GetPendingSwaps(context.Context, *GetPendingSwapsRequest) (*GetPendingSwapsResponse, error)
 	// Swap performs an on-chain swap. The high-level flow mirrors SubmitIntent
 	// closely. However, due to the time-sensitive nature and unreliability of
 	// swaps, they do not fit within the broader intent system. This results in
 	// a few key differences:
-	//   - Transactions are submitted on a best-effort basis outside of the Code
-	//     Sequencer within the RPC handler
+	//   - Transactions may be submitted on a best-effort basis outside of the Code
+	//     Sequencer within the RPC handler (eg. for stateless swaps)
 	//   - Balance changes are applied after the transaction has finalized
+	//
+	// For stateful swaps, the Swap RPC can be called when the swap is in either
+	// the FUNDING or FUNDED state to sign the swap transaction.
 	Swap(Transaction_SwapServer) error
 	mustEmbedUnimplementedTransactionServer()
 }
