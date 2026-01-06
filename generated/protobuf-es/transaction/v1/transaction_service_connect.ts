@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AirdropRequest, AirdropResponse, CanWithdrawToAccountRequest, CanWithdrawToAccountResponse, GetIntentMetadataRequest, GetIntentMetadataResponse, GetLimitsRequest, GetLimitsResponse, GetPendingSwapsRequest, GetPendingSwapsResponse, GetSwapRequest, GetSwapResponse, StartSwapRequest, StartSwapResponse, SubmitIntentRequest, SubmitIntentResponse, SwapRequest, SwapResponse, VoidGiftCardRequest, VoidGiftCardResponse } from "./transaction_service_pb";
+import { AirdropRequest, AirdropResponse, CanWithdrawToAccountRequest, CanWithdrawToAccountResponse, GetIntentMetadataRequest, GetIntentMetadataResponse, GetLimitsRequest, GetLimitsResponse, GetPendingSwapsRequest, GetPendingSwapsResponse, GetSwapRequest, GetSwapResponse, StatefulSwapRequest, StatefulSwapResponse, SubmitIntentRequest, SubmitIntentResponse, VoidGiftCardRequest, VoidGiftCardResponse } from "./transaction_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -119,15 +119,25 @@ export const Transaction = {
       kind: MethodKind.Unary,
     },
     /**
-     * StartSwap begins the process for swapping tokens by coordinating verified metadata
-     * for non-custodial state management tracking.
+     * StatefulSwap swaps tokens using a non-custodial state-management system.
+     * The high-level flow mirrors SubmitIntent closely. However, due to the
+     * unreliability of swaps, they do not fit within the broader intent system.
+     * This results in a few key differences:
+     *  * Client is (potentially) involved in additional steps to complete the
+     *    swap within the state machine
+     *  * Transactions are submitted on a best-effort basis outside of the Code
+     *    Sequencer
+     *  * Balance changes are applied after the transaction has finalized
      *
-     * @generated from rpc ocp.transaction.v1.Transaction.StartSwap
+     * Swap transaction signatures are collected up-front. They are executed once the
+     * swap is funded.
+     *
+     * @generated from rpc ocp.transaction.v1.Transaction.StatefulSwap
      */
-    startSwap: {
-      name: "StartSwap",
-      I: StartSwapRequest,
-      O: StartSwapResponse,
+    statefulSwap: {
+      name: "StatefulSwap",
+      I: StatefulSwapRequest,
+      O: StatefulSwapResponse,
       kind: MethodKind.BiDiStreaming,
     },
     /**
@@ -142,9 +152,8 @@ export const Transaction = {
       kind: MethodKind.Unary,
     },
     /**
-     * GetPendingSwaps get swaps that are pending client actions which include:
-     *  1. Swaps that need a call to SubmitIntent to fund the VM swap PDA (ie. in a CREATED state)
-     *  2. Swaps that need to be pre-signed via the Swap RPC (ie. in a FUNDING or FUNDED state)
+     * GetPendingSwaps gets swaps that are pending client actions which include:
+     *  * Swaps that need a call to SubmitIntent to fund the VM swap PDA
      *
      * @generated from rpc ocp.transaction.v1.Transaction.GetPendingSwaps
      */
@@ -153,26 +162,6 @@ export const Transaction = {
       I: GetPendingSwapsRequest,
       O: GetPendingSwapsResponse,
       kind: MethodKind.Unary,
-    },
-    /**
-     * Swap performs an on-chain swap. The high-level flow mirrors SubmitIntent
-     * closely. However, due to the time-sensitive nature and unreliability of
-     * swaps, they do not fit within the broader intent system. This results in
-     * a few key differences:
-     *  * Transactions may be submitted on a best-effort basis outside of the Code
-     *    Sequencer within the RPC handler (eg. for stateless swaps)
-     *  * Balance changes are applied after the transaction has finalized
-     *
-     * For stateful swaps, the Swap RPC can be called when the swap is in either
-     * the FUNDING or FUNDED state to sign the swap transaction.
-     *
-     * @generated from rpc ocp.transaction.v1.Transaction.Swap
-     */
-    swap: {
-      name: "Swap",
-      I: SwapRequest,
-      O: SwapResponse,
-      kind: MethodKind.BiDiStreaming,
     },
   }
 } as const;

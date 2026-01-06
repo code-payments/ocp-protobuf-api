@@ -76,26 +76,24 @@ type TransactionClient interface {
 	//
 	//	it is close to or is auto-returned, then OK will be returned.
 	VoidGiftCard(ctx context.Context, in *VoidGiftCardRequest, opts ...grpc.CallOption) (*VoidGiftCardResponse, error)
-	// StartSwap begins the process for swapping tokens by coordinating verified metadata
-	// for non-custodial state management tracking.
-	StartSwap(ctx context.Context, opts ...grpc.CallOption) (Transaction_StartSwapClient, error)
-	// GetSwap gets metadata for a swap
-	GetSwap(ctx context.Context, in *GetSwapRequest, opts ...grpc.CallOption) (*GetSwapResponse, error)
-	// GetPendingSwaps get swaps that are pending client actions which include:
-	//  1. Swaps that need a call to SubmitIntent to fund the VM swap PDA (ie. in a CREATED state)
-	//  2. Swaps that need to be pre-signed via the Swap RPC (ie. in a FUNDING or FUNDED state)
-	GetPendingSwaps(ctx context.Context, in *GetPendingSwapsRequest, opts ...grpc.CallOption) (*GetPendingSwapsResponse, error)
-	// Swap performs an on-chain swap. The high-level flow mirrors SubmitIntent
-	// closely. However, due to the time-sensitive nature and unreliability of
-	// swaps, they do not fit within the broader intent system. This results in
-	// a few key differences:
-	//   - Transactions may be submitted on a best-effort basis outside of the Code
-	//     Sequencer within the RPC handler (eg. for stateless swaps)
+	// StatefulSwap swaps tokens using a non-custodial state-management system.
+	// The high-level flow mirrors SubmitIntent closely. However, due to the
+	// unreliability of swaps, they do not fit within the broader intent system.
+	// This results in a few key differences:
+	//   - Client is (potentially) involved in additional steps to complete the
+	//     swap within the state machine
+	//   - Transactions are submitted on a best-effort basis outside of the Code
+	//     Sequencer
 	//   - Balance changes are applied after the transaction has finalized
 	//
-	// For stateful swaps, the Swap RPC can be called when the swap is in either
-	// the FUNDING or FUNDED state to sign the swap transaction.
-	Swap(ctx context.Context, opts ...grpc.CallOption) (Transaction_SwapClient, error)
+	// Swap transaction signatures are collected up-front. They are executed once the
+	// swap is funded.
+	StatefulSwap(ctx context.Context, opts ...grpc.CallOption) (Transaction_StatefulSwapClient, error)
+	// GetSwap gets metadata for a swap
+	GetSwap(ctx context.Context, in *GetSwapRequest, opts ...grpc.CallOption) (*GetSwapResponse, error)
+	// GetPendingSwaps gets swaps that are pending client actions which include:
+	//   - Swaps that need a call to SubmitIntent to fund the VM swap PDA
+	GetPendingSwaps(ctx context.Context, in *GetPendingSwapsRequest, opts ...grpc.CallOption) (*GetPendingSwapsResponse, error)
 }
 
 type transactionClient struct {
@@ -182,31 +180,31 @@ func (c *transactionClient) VoidGiftCard(ctx context.Context, in *VoidGiftCardRe
 	return out, nil
 }
 
-func (c *transactionClient) StartSwap(ctx context.Context, opts ...grpc.CallOption) (Transaction_StartSwapClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Transaction_ServiceDesc.Streams[1], "/ocp.transaction.v1.Transaction/StartSwap", opts...)
+func (c *transactionClient) StatefulSwap(ctx context.Context, opts ...grpc.CallOption) (Transaction_StatefulSwapClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Transaction_ServiceDesc.Streams[1], "/ocp.transaction.v1.Transaction/StatefulSwap", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &transactionStartSwapClient{stream}
+	x := &transactionStatefulSwapClient{stream}
 	return x, nil
 }
 
-type Transaction_StartSwapClient interface {
-	Send(*StartSwapRequest) error
-	Recv() (*StartSwapResponse, error)
+type Transaction_StatefulSwapClient interface {
+	Send(*StatefulSwapRequest) error
+	Recv() (*StatefulSwapResponse, error)
 	grpc.ClientStream
 }
 
-type transactionStartSwapClient struct {
+type transactionStatefulSwapClient struct {
 	grpc.ClientStream
 }
 
-func (x *transactionStartSwapClient) Send(m *StartSwapRequest) error {
+func (x *transactionStatefulSwapClient) Send(m *StatefulSwapRequest) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *transactionStartSwapClient) Recv() (*StartSwapResponse, error) {
-	m := new(StartSwapResponse)
+func (x *transactionStatefulSwapClient) Recv() (*StatefulSwapResponse, error) {
+	m := new(StatefulSwapResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -229,37 +227,6 @@ func (c *transactionClient) GetPendingSwaps(ctx context.Context, in *GetPendingS
 		return nil, err
 	}
 	return out, nil
-}
-
-func (c *transactionClient) Swap(ctx context.Context, opts ...grpc.CallOption) (Transaction_SwapClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Transaction_ServiceDesc.Streams[2], "/ocp.transaction.v1.Transaction/Swap", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &transactionSwapClient{stream}
-	return x, nil
-}
-
-type Transaction_SwapClient interface {
-	Send(*SwapRequest) error
-	Recv() (*SwapResponse, error)
-	grpc.ClientStream
-}
-
-type transactionSwapClient struct {
-	grpc.ClientStream
-}
-
-func (x *transactionSwapClient) Send(m *SwapRequest) error {
-	return x.ClientStream.SendMsg(m)
-}
-
-func (x *transactionSwapClient) Recv() (*SwapResponse, error) {
-	m := new(SwapResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
 }
 
 // TransactionServer is the server API for Transaction service.
@@ -320,26 +287,24 @@ type TransactionServer interface {
 	//
 	//	it is close to or is auto-returned, then OK will be returned.
 	VoidGiftCard(context.Context, *VoidGiftCardRequest) (*VoidGiftCardResponse, error)
-	// StartSwap begins the process for swapping tokens by coordinating verified metadata
-	// for non-custodial state management tracking.
-	StartSwap(Transaction_StartSwapServer) error
-	// GetSwap gets metadata for a swap
-	GetSwap(context.Context, *GetSwapRequest) (*GetSwapResponse, error)
-	// GetPendingSwaps get swaps that are pending client actions which include:
-	//  1. Swaps that need a call to SubmitIntent to fund the VM swap PDA (ie. in a CREATED state)
-	//  2. Swaps that need to be pre-signed via the Swap RPC (ie. in a FUNDING or FUNDED state)
-	GetPendingSwaps(context.Context, *GetPendingSwapsRequest) (*GetPendingSwapsResponse, error)
-	// Swap performs an on-chain swap. The high-level flow mirrors SubmitIntent
-	// closely. However, due to the time-sensitive nature and unreliability of
-	// swaps, they do not fit within the broader intent system. This results in
-	// a few key differences:
-	//   - Transactions may be submitted on a best-effort basis outside of the Code
-	//     Sequencer within the RPC handler (eg. for stateless swaps)
+	// StatefulSwap swaps tokens using a non-custodial state-management system.
+	// The high-level flow mirrors SubmitIntent closely. However, due to the
+	// unreliability of swaps, they do not fit within the broader intent system.
+	// This results in a few key differences:
+	//   - Client is (potentially) involved in additional steps to complete the
+	//     swap within the state machine
+	//   - Transactions are submitted on a best-effort basis outside of the Code
+	//     Sequencer
 	//   - Balance changes are applied after the transaction has finalized
 	//
-	// For stateful swaps, the Swap RPC can be called when the swap is in either
-	// the FUNDING or FUNDED state to sign the swap transaction.
-	Swap(Transaction_SwapServer) error
+	// Swap transaction signatures are collected up-front. They are executed once the
+	// swap is funded.
+	StatefulSwap(Transaction_StatefulSwapServer) error
+	// GetSwap gets metadata for a swap
+	GetSwap(context.Context, *GetSwapRequest) (*GetSwapResponse, error)
+	// GetPendingSwaps gets swaps that are pending client actions which include:
+	//   - Swaps that need a call to SubmitIntent to fund the VM swap PDA
+	GetPendingSwaps(context.Context, *GetPendingSwapsRequest) (*GetPendingSwapsResponse, error)
 	mustEmbedUnimplementedTransactionServer()
 }
 
@@ -365,17 +330,14 @@ func (UnimplementedTransactionServer) Airdrop(context.Context, *AirdropRequest) 
 func (UnimplementedTransactionServer) VoidGiftCard(context.Context, *VoidGiftCardRequest) (*VoidGiftCardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VoidGiftCard not implemented")
 }
-func (UnimplementedTransactionServer) StartSwap(Transaction_StartSwapServer) error {
-	return status.Errorf(codes.Unimplemented, "method StartSwap not implemented")
+func (UnimplementedTransactionServer) StatefulSwap(Transaction_StatefulSwapServer) error {
+	return status.Errorf(codes.Unimplemented, "method StatefulSwap not implemented")
 }
 func (UnimplementedTransactionServer) GetSwap(context.Context, *GetSwapRequest) (*GetSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSwap not implemented")
 }
 func (UnimplementedTransactionServer) GetPendingSwaps(context.Context, *GetPendingSwapsRequest) (*GetPendingSwapsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPendingSwaps not implemented")
-}
-func (UnimplementedTransactionServer) Swap(Transaction_SwapServer) error {
-	return status.Errorf(codes.Unimplemented, "method Swap not implemented")
 }
 func (UnimplementedTransactionServer) mustEmbedUnimplementedTransactionServer() {}
 
@@ -506,26 +468,26 @@ func _Transaction_VoidGiftCard_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Transaction_StartSwap_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(TransactionServer).StartSwap(&transactionStartSwapServer{stream})
+func _Transaction_StatefulSwap_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(TransactionServer).StatefulSwap(&transactionStatefulSwapServer{stream})
 }
 
-type Transaction_StartSwapServer interface {
-	Send(*StartSwapResponse) error
-	Recv() (*StartSwapRequest, error)
+type Transaction_StatefulSwapServer interface {
+	Send(*StatefulSwapResponse) error
+	Recv() (*StatefulSwapRequest, error)
 	grpc.ServerStream
 }
 
-type transactionStartSwapServer struct {
+type transactionStatefulSwapServer struct {
 	grpc.ServerStream
 }
 
-func (x *transactionStartSwapServer) Send(m *StartSwapResponse) error {
+func (x *transactionStatefulSwapServer) Send(m *StatefulSwapResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *transactionStartSwapServer) Recv() (*StartSwapRequest, error) {
-	m := new(StartSwapRequest)
+func (x *transactionStatefulSwapServer) Recv() (*StatefulSwapRequest, error) {
+	m := new(StatefulSwapRequest)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -566,32 +528,6 @@ func _Transaction_GetPendingSwaps_Handler(srv interface{}, ctx context.Context, 
 		return srv.(TransactionServer).GetPendingSwaps(ctx, req.(*GetPendingSwapsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
-}
-
-func _Transaction_Swap_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(TransactionServer).Swap(&transactionSwapServer{stream})
-}
-
-type Transaction_SwapServer interface {
-	Send(*SwapResponse) error
-	Recv() (*SwapRequest, error)
-	grpc.ServerStream
-}
-
-type transactionSwapServer struct {
-	grpc.ServerStream
-}
-
-func (x *transactionSwapServer) Send(m *SwapResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func (x *transactionSwapServer) Recv() (*SwapRequest, error) {
-	m := new(SwapRequest)
-	if err := x.ServerStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
 }
 
 // Transaction_ServiceDesc is the grpc.ServiceDesc for Transaction service.
@@ -638,14 +574,8 @@ var Transaction_ServiceDesc = grpc.ServiceDesc{
 			ClientStreams: true,
 		},
 		{
-			StreamName:    "StartSwap",
-			Handler:       _Transaction_StartSwap_Handler,
-			ServerStreams: true,
-			ClientStreams: true,
-		},
-		{
-			StreamName:    "Swap",
-			Handler:       _Transaction_Swap_Handler,
+			StreamName:    "StatefulSwap",
+			Handler:       _Transaction_StatefulSwap_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},

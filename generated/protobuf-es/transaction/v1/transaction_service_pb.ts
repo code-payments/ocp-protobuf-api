@@ -1136,67 +1136,67 @@ proto3.util.setEnumType(VoidGiftCardResponse_Result, "ocp.transaction.v1.VoidGif
 ]);
 
 /**
- * @generated from message ocp.transaction.v1.StartSwapRequest
+ * @generated from message ocp.transaction.v1.StatefulSwapRequest
  */
-export class StartSwapRequest extends Message<StartSwapRequest> {
+export class StatefulSwapRequest extends Message<StatefulSwapRequest> {
   /**
-   * @generated from oneof ocp.transaction.v1.StartSwapRequest.request
+   * @generated from oneof ocp.transaction.v1.StatefulSwapRequest.request
    */
   request: {
     /**
-     * @generated from field: ocp.transaction.v1.StartSwapRequest.Start start = 1;
+     * @generated from field: ocp.transaction.v1.StatefulSwapRequest.Initiate initiate = 1;
      */
-    value: StartSwapRequest_Start;
-    case: "start";
+    value: StatefulSwapRequest_Initiate;
+    case: "initiate";
   } | {
     /**
-     * @generated from field: ocp.transaction.v1.StartSwapRequest.SubmitSignature submit_signature = 2;
+     * @generated from field: ocp.transaction.v1.StatefulSwapRequest.SubmitSignatures submit_signatures = 2;
      */
-    value: StartSwapRequest_SubmitSignature;
-    case: "submitSignature";
+    value: StatefulSwapRequest_SubmitSignatures;
+    case: "submitSignatures";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
-  constructor(data?: PartialMessage<StartSwapRequest>) {
+  constructor(data?: PartialMessage<StatefulSwapRequest>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.StartSwapRequest";
+  static readonly typeName = "ocp.transaction.v1.StatefulSwapRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "start", kind: "message", T: StartSwapRequest_Start, oneof: "request" },
-    { no: 2, name: "submit_signature", kind: "message", T: StartSwapRequest_SubmitSignature, oneof: "request" },
+    { no: 1, name: "initiate", kind: "message", T: StatefulSwapRequest_Initiate, oneof: "request" },
+    { no: 2, name: "submit_signatures", kind: "message", T: StatefulSwapRequest_SubmitSignatures, oneof: "request" },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StartSwapRequest {
-    return new StartSwapRequest().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapRequest {
+    return new StatefulSwapRequest().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StartSwapRequest {
-    return new StartSwapRequest().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapRequest {
+    return new StatefulSwapRequest().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StartSwapRequest {
-    return new StartSwapRequest().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapRequest {
+    return new StatefulSwapRequest().fromJsonString(jsonString, options);
   }
 
-  static equals(a: StartSwapRequest | PlainMessage<StartSwapRequest> | undefined, b: StartSwapRequest | PlainMessage<StartSwapRequest> | undefined): boolean {
-    return proto3.util.equals(StartSwapRequest, a, b);
+  static equals(a: StatefulSwapRequest | PlainMessage<StatefulSwapRequest> | undefined, b: StatefulSwapRequest | PlainMessage<StatefulSwapRequest> | undefined): boolean {
+    return proto3.util.equals(StatefulSwapRequest, a, b);
   }
 }
 
 /**
- * @generated from message ocp.transaction.v1.StartSwapRequest.Start
+ * @generated from message ocp.transaction.v1.StatefulSwapRequest.Initiate
  */
-export class StartSwapRequest_Start extends Message<StartSwapRequest_Start> {
+export class StatefulSwapRequest_Initiate extends Message<StatefulSwapRequest_Initiate> {
   /**
-   * @generated from oneof ocp.transaction.v1.StartSwapRequest.Start.kind
+   * @generated from oneof ocp.transaction.v1.StatefulSwapRequest.Initiate.kind
    */
   kind: {
     /**
-     * @generated from field: ocp.transaction.v1.StartSwapRequest.Start.CurrencyCreator currency_creator = 1;
+     * @generated from field: ocp.transaction.v1.StatefulSwapRequest.Initiate.CurrencyCreator currency_creator = 1;
      */
-    value: StartSwapRequest_Start_CurrencyCreator;
+    value: StatefulSwapRequest_Initiate_CurrencyCreator;
     case: "currencyCreator";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
@@ -1208,50 +1208,68 @@ export class StartSwapRequest_Start extends Message<StartSwapRequest_Start> {
   owner?: SolanaAccountId;
 
   /**
-   * The signature is of serialize(StartSwapRequest.Start) without this field
-   * set using the  private key of the owner account. This provides an authentication
+   * The user authority account that will sign to authorize the swap.
+   *
+   * For Currency Creator program buy/sell flows, this should be a random one-time use account.
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId swap_authority = 10;
+   */
+  swapAuthority?: SolanaAccountId;
+
+  /**
+   * The signature of serialize(VerifiedSwapMetadata) for the swap being initiated.
+   *
+   * @generated from field: ocp.common.v1.Signature proof_signature = 11;
+   */
+  proofSignature?: Signature;
+
+  /**
+   * The signature is of serialize(StatefulSwapRequest.Initiate) without this field
+   * set using the private key of the owner account. This provides an authentication
    * mechanism to the RPC.
    *
-   * @generated from field: ocp.common.v1.Signature signature = 10;
+   * @generated from field: ocp.common.v1.Signature signature = 12;
    */
   signature?: Signature;
 
-  constructor(data?: PartialMessage<StartSwapRequest_Start>) {
+  constructor(data?: PartialMessage<StatefulSwapRequest_Initiate>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.StartSwapRequest.Start";
+  static readonly typeName = "ocp.transaction.v1.StatefulSwapRequest.Initiate";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "currency_creator", kind: "message", T: StartSwapRequest_Start_CurrencyCreator, oneof: "kind" },
+    { no: 1, name: "currency_creator", kind: "message", T: StatefulSwapRequest_Initiate_CurrencyCreator, oneof: "kind" },
     { no: 9, name: "owner", kind: "message", T: SolanaAccountId },
-    { no: 10, name: "signature", kind: "message", T: Signature },
+    { no: 10, name: "swap_authority", kind: "message", T: SolanaAccountId },
+    { no: 11, name: "proof_signature", kind: "message", T: Signature },
+    { no: 12, name: "signature", kind: "message", T: Signature },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StartSwapRequest_Start {
-    return new StartSwapRequest_Start().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapRequest_Initiate {
+    return new StatefulSwapRequest_Initiate().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StartSwapRequest_Start {
-    return new StartSwapRequest_Start().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapRequest_Initiate {
+    return new StatefulSwapRequest_Initiate().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StartSwapRequest_Start {
-    return new StartSwapRequest_Start().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapRequest_Initiate {
+    return new StatefulSwapRequest_Initiate().fromJsonString(jsonString, options);
   }
 
-  static equals(a: StartSwapRequest_Start | PlainMessage<StartSwapRequest_Start> | undefined, b: StartSwapRequest_Start | PlainMessage<StartSwapRequest_Start> | undefined): boolean {
-    return proto3.util.equals(StartSwapRequest_Start, a, b);
+  static equals(a: StatefulSwapRequest_Initiate | PlainMessage<StatefulSwapRequest_Initiate> | undefined, b: StatefulSwapRequest_Initiate | PlainMessage<StatefulSwapRequest_Initiate> | undefined): boolean {
+    return proto3.util.equals(StatefulSwapRequest_Initiate, a, b);
   }
 }
 
 /**
  * Server parameters for starting swaps against the Currency Creator program
  *
- * @generated from message ocp.transaction.v1.StartSwapRequest.Start.CurrencyCreator
+ * @generated from message ocp.transaction.v1.StatefulSwapRequest.Initiate.CurrencyCreator
  */
-export class StartSwapRequest_Start_CurrencyCreator extends Message<StartSwapRequest_Start_CurrencyCreator> {
+export class StatefulSwapRequest_Initiate_CurrencyCreator extends Message<StatefulSwapRequest_Initiate_CurrencyCreator> {
   /**
    * The unique ID for this swap randomly generated on client
    *
@@ -1267,7 +1285,7 @@ export class StartSwapRequest_Start_CurrencyCreator extends Message<StartSwapReq
   fromMint?: SolanaAccountId;
 
   /**
-   * The destination mint that will be swapped from
+   * The destination mint that will be swapped to
    *
    * @generated from field: ocp.common.v1.SolanaAccountId to_mint = 3;
    */
@@ -1297,13 +1315,13 @@ export class StartSwapRequest_Start_CurrencyCreator extends Message<StartSwapReq
    */
   fundingId = "";
 
-  constructor(data?: PartialMessage<StartSwapRequest_Start_CurrencyCreator>) {
+  constructor(data?: PartialMessage<StatefulSwapRequest_Initiate_CurrencyCreator>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.StartSwapRequest.Start.CurrencyCreator";
+  static readonly typeName = "ocp.transaction.v1.StatefulSwapRequest.Initiate.CurrencyCreator";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "id", kind: "message", T: SwapId },
     { no: 2, name: "from_mint", kind: "message", T: SolanaAccountId },
@@ -1313,307 +1331,409 @@ export class StartSwapRequest_Start_CurrencyCreator extends Message<StartSwapReq
     { no: 6, name: "funding_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StartSwapRequest_Start_CurrencyCreator {
-    return new StartSwapRequest_Start_CurrencyCreator().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapRequest_Initiate_CurrencyCreator {
+    return new StatefulSwapRequest_Initiate_CurrencyCreator().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StartSwapRequest_Start_CurrencyCreator {
-    return new StartSwapRequest_Start_CurrencyCreator().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapRequest_Initiate_CurrencyCreator {
+    return new StatefulSwapRequest_Initiate_CurrencyCreator().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StartSwapRequest_Start_CurrencyCreator {
-    return new StartSwapRequest_Start_CurrencyCreator().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapRequest_Initiate_CurrencyCreator {
+    return new StatefulSwapRequest_Initiate_CurrencyCreator().fromJsonString(jsonString, options);
   }
 
-  static equals(a: StartSwapRequest_Start_CurrencyCreator | PlainMessage<StartSwapRequest_Start_CurrencyCreator> | undefined, b: StartSwapRequest_Start_CurrencyCreator | PlainMessage<StartSwapRequest_Start_CurrencyCreator> | undefined): boolean {
-    return proto3.util.equals(StartSwapRequest_Start_CurrencyCreator, a, b);
+  static equals(a: StatefulSwapRequest_Initiate_CurrencyCreator | PlainMessage<StatefulSwapRequest_Initiate_CurrencyCreator> | undefined, b: StatefulSwapRequest_Initiate_CurrencyCreator | PlainMessage<StatefulSwapRequest_Initiate_CurrencyCreator> | undefined): boolean {
+    return proto3.util.equals(StatefulSwapRequest_Initiate_CurrencyCreator, a, b);
   }
 }
 
 /**
- * @generated from message ocp.transaction.v1.StartSwapRequest.SubmitSignature
+ * @generated from message ocp.transaction.v1.StatefulSwapRequest.SubmitSignatures
  */
-export class StartSwapRequest_SubmitSignature extends Message<StartSwapRequest_SubmitSignature> {
+export class StatefulSwapRequest_SubmitSignatures extends Message<StatefulSwapRequest_SubmitSignatures> {
   /**
-   * The signature of the verified swap metadata
+   * The signatures for the locally constructed swap transaction
    *
-   * @generated from field: ocp.common.v1.Signature signature = 1;
+   * @generated from field: repeated ocp.common.v1.Signature transaction_signatures = 1;
    */
-  signature?: Signature;
+  transactionSignatures: Signature[] = [];
 
-  constructor(data?: PartialMessage<StartSwapRequest_SubmitSignature>) {
+  constructor(data?: PartialMessage<StatefulSwapRequest_SubmitSignatures>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.StartSwapRequest.SubmitSignature";
+  static readonly typeName = "ocp.transaction.v1.StatefulSwapRequest.SubmitSignatures";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "signature", kind: "message", T: Signature },
+    { no: 1, name: "transaction_signatures", kind: "message", T: Signature, repeated: true },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StartSwapRequest_SubmitSignature {
-    return new StartSwapRequest_SubmitSignature().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapRequest_SubmitSignatures {
+    return new StatefulSwapRequest_SubmitSignatures().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StartSwapRequest_SubmitSignature {
-    return new StartSwapRequest_SubmitSignature().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapRequest_SubmitSignatures {
+    return new StatefulSwapRequest_SubmitSignatures().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StartSwapRequest_SubmitSignature {
-    return new StartSwapRequest_SubmitSignature().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapRequest_SubmitSignatures {
+    return new StatefulSwapRequest_SubmitSignatures().fromJsonString(jsonString, options);
   }
 
-  static equals(a: StartSwapRequest_SubmitSignature | PlainMessage<StartSwapRequest_SubmitSignature> | undefined, b: StartSwapRequest_SubmitSignature | PlainMessage<StartSwapRequest_SubmitSignature> | undefined): boolean {
-    return proto3.util.equals(StartSwapRequest_SubmitSignature, a, b);
+  static equals(a: StatefulSwapRequest_SubmitSignatures | PlainMessage<StatefulSwapRequest_SubmitSignatures> | undefined, b: StatefulSwapRequest_SubmitSignatures | PlainMessage<StatefulSwapRequest_SubmitSignatures> | undefined): boolean {
+    return proto3.util.equals(StatefulSwapRequest_SubmitSignatures, a, b);
   }
 }
 
 /**
- * @generated from message ocp.transaction.v1.StartSwapResponse
+ * @generated from message ocp.transaction.v1.StatefulSwapResponse
  */
-export class StartSwapResponse extends Message<StartSwapResponse> {
+export class StatefulSwapResponse extends Message<StatefulSwapResponse> {
   /**
-   * @generated from oneof ocp.transaction.v1.StartSwapResponse.response
+   * @generated from oneof ocp.transaction.v1.StatefulSwapResponse.response
    */
   response: {
     /**
-     * @generated from field: ocp.transaction.v1.StartSwapResponse.ServerParameters server_parameters = 1;
+     * @generated from field: ocp.transaction.v1.StatefulSwapResponse.ServerParameters server_parameters = 1;
      */
-    value: StartSwapResponse_ServerParameters;
+    value: StatefulSwapResponse_ServerParameters;
     case: "serverParameters";
   } | {
     /**
-     * @generated from field: ocp.transaction.v1.StartSwapResponse.Success success = 2;
+     * @generated from field: ocp.transaction.v1.StatefulSwapResponse.Success success = 2;
      */
-    value: StartSwapResponse_Success;
+    value: StatefulSwapResponse_Success;
     case: "success";
   } | {
     /**
-     * @generated from field: ocp.transaction.v1.StartSwapResponse.Error error = 3;
+     * @generated from field: ocp.transaction.v1.StatefulSwapResponse.Error error = 3;
      */
-    value: StartSwapResponse_Error;
+    value: StatefulSwapResponse_Error;
     case: "error";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
-  constructor(data?: PartialMessage<StartSwapResponse>) {
+  constructor(data?: PartialMessage<StatefulSwapResponse>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.StartSwapResponse";
+  static readonly typeName = "ocp.transaction.v1.StatefulSwapResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "server_parameters", kind: "message", T: StartSwapResponse_ServerParameters, oneof: "response" },
-    { no: 2, name: "success", kind: "message", T: StartSwapResponse_Success, oneof: "response" },
-    { no: 3, name: "error", kind: "message", T: StartSwapResponse_Error, oneof: "response" },
+    { no: 1, name: "server_parameters", kind: "message", T: StatefulSwapResponse_ServerParameters, oneof: "response" },
+    { no: 2, name: "success", kind: "message", T: StatefulSwapResponse_Success, oneof: "response" },
+    { no: 3, name: "error", kind: "message", T: StatefulSwapResponse_Error, oneof: "response" },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StartSwapResponse {
-    return new StartSwapResponse().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse {
+    return new StatefulSwapResponse().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StartSwapResponse {
-    return new StartSwapResponse().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapResponse {
+    return new StatefulSwapResponse().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StartSwapResponse {
-    return new StartSwapResponse().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapResponse {
+    return new StatefulSwapResponse().fromJsonString(jsonString, options);
   }
 
-  static equals(a: StartSwapResponse | PlainMessage<StartSwapResponse> | undefined, b: StartSwapResponse | PlainMessage<StartSwapResponse> | undefined): boolean {
-    return proto3.util.equals(StartSwapResponse, a, b);
+  static equals(a: StatefulSwapResponse | PlainMessage<StatefulSwapResponse> | undefined, b: StatefulSwapResponse | PlainMessage<StatefulSwapResponse> | undefined): boolean {
+    return proto3.util.equals(StatefulSwapResponse, a, b);
   }
 }
 
 /**
- * @generated from message ocp.transaction.v1.StartSwapResponse.ServerParameters
+ * @generated from message ocp.transaction.v1.StatefulSwapResponse.ServerParameters
  */
-export class StartSwapResponse_ServerParameters extends Message<StartSwapResponse_ServerParameters> {
+export class StatefulSwapResponse_ServerParameters extends Message<StatefulSwapResponse_ServerParameters> {
   /**
-   * @generated from oneof ocp.transaction.v1.StartSwapResponse.ServerParameters.kind
+   * @generated from oneof ocp.transaction.v1.StatefulSwapResponse.ServerParameters.kind
    */
   kind: {
     /**
-     * @generated from field: ocp.transaction.v1.StartSwapResponse.ServerParameters.CurrencyCreator currency_creator = 1;
+     * @generated from field: ocp.transaction.v1.StatefulSwapResponse.ServerParameters.CurrencyCreator currency_creator = 1;
      */
-    value: StartSwapResponse_ServerParameters_CurrencyCreator;
+    value: StatefulSwapResponse_ServerParameters_CurrencyCreator;
     case: "currencyCreator";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
-  constructor(data?: PartialMessage<StartSwapResponse_ServerParameters>) {
+  constructor(data?: PartialMessage<StatefulSwapResponse_ServerParameters>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.StartSwapResponse.ServerParameters";
+  static readonly typeName = "ocp.transaction.v1.StatefulSwapResponse.ServerParameters";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "currency_creator", kind: "message", T: StartSwapResponse_ServerParameters_CurrencyCreator, oneof: "kind" },
+    { no: 1, name: "currency_creator", kind: "message", T: StatefulSwapResponse_ServerParameters_CurrencyCreator, oneof: "kind" },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StartSwapResponse_ServerParameters {
-    return new StartSwapResponse_ServerParameters().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_ServerParameters {
+    return new StatefulSwapResponse_ServerParameters().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StartSwapResponse_ServerParameters {
-    return new StartSwapResponse_ServerParameters().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapResponse_ServerParameters {
+    return new StatefulSwapResponse_ServerParameters().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StartSwapResponse_ServerParameters {
-    return new StartSwapResponse_ServerParameters().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapResponse_ServerParameters {
+    return new StatefulSwapResponse_ServerParameters().fromJsonString(jsonString, options);
   }
 
-  static equals(a: StartSwapResponse_ServerParameters | PlainMessage<StartSwapResponse_ServerParameters> | undefined, b: StartSwapResponse_ServerParameters | PlainMessage<StartSwapResponse_ServerParameters> | undefined): boolean {
-    return proto3.util.equals(StartSwapResponse_ServerParameters, a, b);
+  static equals(a: StatefulSwapResponse_ServerParameters | PlainMessage<StatefulSwapResponse_ServerParameters> | undefined, b: StatefulSwapResponse_ServerParameters | PlainMessage<StatefulSwapResponse_ServerParameters> | undefined): boolean {
+    return proto3.util.equals(StatefulSwapResponse_ServerParameters, a, b);
   }
 }
 
 /**
- * @generated from message ocp.transaction.v1.StartSwapResponse.ServerParameters.CurrencyCreator
+ * Server parameters when executing stateful buy/sell flows against the
+ * Currency Creator program
+ *
+ * Supported Solana transaction version: v0
+ *
+ * Instruction formats:
+ *
+ * Buy Tokens (Core Mint -> Launchpad Currency Mint):
+ *  1. System::AdvanceNonce
+ *  2. [Optional] ComputeBudget::SetComputeUnitLimit
+ *  3. [Optional] ComputeBudget::SetComputeUnitPrice
+ *  4. [Optional] Memo::Memo
+ *  5. AssociatedTokenAccount::CreateIdempotent (open Core Mint temporary account)
+ *  6. VM::TransferForSwap (Core Mint VM swap ATA -> Core Mint temporary account)
+ *  6. CurrencyCreator::BuyAndDepositIntoVm (bounded buy depositing to_mint tokens into the to_mint VM)
+ *  8. Token::CloseAccount (closes Core Mint temporary account)
+ *  9. VM::CloseSwapAccountIfEmpty (closes Core Mint VM swap ATA if empty)
+ *
+ * Sell Tokens (Launchpad Currency Mint -> Core Mint):
+ *  1. System::AdvanceNonce
+ *  2. [Optional] ComputeBudget::SetComputeUnitLimit
+ *  3. [Optional] ComputeBudget::SetComputeUnitPrice
+ *  4. [Optional] Memo::Memo
+ *  5. AssociatedTokenAccount::CreateIdempotent (open from_mint temporary account)
+ *  6. VM::TransferForSwap (from_mint VM swap ATA -> from_mint temporary account)
+ *  7. CurrencyCreator::SellAndDepositIntoVm (bounded sell depositing Core Mint into the Core Mint VM)
+ *  8. Token::CloseAccount (closes from_mint temporary account)
+ *  9. VM::CloseSwapAccountIfEmpty (closes from_mint swap PDA/ATA if empty)
+ *
+ * Swap Tokens (Launchpad Currency Mint -> Launchpad Currency Mint):
+ *  1.  System::AdvanceNonce
+ *  2.  [Optional] ComputeBudget::SetComputeUnitLimit
+ *  3.  [Optional] ComputeBudget::SetComputeUnitPrice
+ *  4.  [Optional] Memo::Memo
+ *  5.  AssociatedTokenAccount::CreateIdempotent (open Core Mint temporary account)
+ *  6.  AssociatedTokenAccount::CreateIdempotent (open from_mint temporary account)
+ *  7.  VM::TransferForSwap (from_mint VM swap ATA -> from_mint temporary account)
+ *  8.  CurrencyCreator::SellTokens (bounded sell transferring Core Mint into temporary account)
+ *  9.  CurrencyCreator::BuyAndDepositIntoVm (unlimited buy depositing to_mint tokens into the to_mint VM)
+ *  10. Token::CloseAccount (closes Core Mint temporary account)
+ *  11. Token::CloseAccount (closes from_mint temporary account)
+ *  12. VM::CloseSwapAccountIfEmpty (closes from_mint VM swap ATA if empty)
+ *
+ * @generated from message ocp.transaction.v1.StatefulSwapResponse.ServerParameters.CurrencyCreator
  */
-export class StartSwapResponse_ServerParameters_CurrencyCreator extends Message<StartSwapResponse_ServerParameters_CurrencyCreator> {
+export class StatefulSwapResponse_ServerParameters_CurrencyCreator extends Message<StatefulSwapResponse_ServerParameters_CurrencyCreator> {
+  /**
+   * Subisdizer account that will be paying for the swap
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId payer = 1;
+   */
+  payer?: SolanaAccountId;
+
   /**
    * The nonce that is reserved for use in the swap transaction
    *
-   * @generated from field: ocp.common.v1.SolanaAccountId nonce = 1;
+   * @generated from field: ocp.common.v1.SolanaAccountId nonce = 2;
    */
   nonce?: SolanaAccountId;
 
   /**
    * The blockhash that is reserved for use in the swap transaction
    *
-   * @generated from field: ocp.common.v1.Blockhash blockhash = 2;
+   * @generated from field: ocp.common.v1.Blockhash blockhash = 3;
    */
   blockhash?: Blockhash;
 
-  constructor(data?: PartialMessage<StartSwapResponse_ServerParameters_CurrencyCreator>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.StartSwapResponse.ServerParameters.CurrencyCreator";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "nonce", kind: "message", T: SolanaAccountId },
-    { no: 2, name: "blockhash", kind: "message", T: Blockhash },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StartSwapResponse_ServerParameters_CurrencyCreator {
-    return new StartSwapResponse_ServerParameters_CurrencyCreator().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StartSwapResponse_ServerParameters_CurrencyCreator {
-    return new StartSwapResponse_ServerParameters_CurrencyCreator().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StartSwapResponse_ServerParameters_CurrencyCreator {
-    return new StartSwapResponse_ServerParameters_CurrencyCreator().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: StartSwapResponse_ServerParameters_CurrencyCreator | PlainMessage<StartSwapResponse_ServerParameters_CurrencyCreator> | undefined, b: StartSwapResponse_ServerParameters_CurrencyCreator | PlainMessage<StartSwapResponse_ServerParameters_CurrencyCreator> | undefined): boolean {
-    return proto3.util.equals(StartSwapResponse_ServerParameters_CurrencyCreator, a, b);
-  }
-}
-
-/**
- * @generated from message ocp.transaction.v1.StartSwapResponse.Success
- */
-export class StartSwapResponse_Success extends Message<StartSwapResponse_Success> {
   /**
-   * @generated from field: ocp.transaction.v1.StartSwapResponse.Success.Code code = 1;
+   * ALTs that should be used when constructing the versioned transaction
+   *
+   * @generated from field: repeated ocp.common.v1.SolanaAddressLookupTable alts = 4;
    */
-  code = StartSwapResponse_Success_Code.OK;
+  alts: SolanaAddressLookupTable[] = [];
 
-  constructor(data?: PartialMessage<StartSwapResponse_Success>) {
+  /**
+   * Compute unit limit provided to the ComputeBudget::SetComputeUnitLimit
+   * instruction. If the value is 0, then the instruction can be omitted.
+   *
+   * @generated from field: uint32 compute_unit_limit = 5;
+   */
+  computeUnitLimit = 0;
+
+  /**
+   * Compute unit price provided in the ComputeBudget::SetComputeUnitPrice
+   * instruction. If the value is 0, then the instruction can be omitted.
+   *
+   * @generated from field: uint64 compute_unit_price = 6;
+   */
+  computeUnitPrice = protoInt64.zero;
+
+  /**
+   * Value provided into the Memo::Memo instruction. If the value length is 0,
+   * then the instruction can be omitted.
+   *
+   * @generated from field: string memo_value = 7;
+   */
+  memoValue = "";
+
+  /**
+   * The memory account where the destination virtual Timelock account lives
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId memory_account = 8;
+   */
+  memoryAccount?: SolanaAccountId;
+
+  /**
+   * The memory index where the destination virtual Timelock account lives
+   *
+   * @generated from field: uint32 memory_index = 9;
+   */
+  memoryIndex = 0;
+
+  constructor(data?: PartialMessage<StatefulSwapResponse_ServerParameters_CurrencyCreator>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.StartSwapResponse.Success";
+  static readonly typeName = "ocp.transaction.v1.StatefulSwapResponse.ServerParameters.CurrencyCreator";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "code", kind: "enum", T: proto3.getEnumType(StartSwapResponse_Success_Code) },
+    { no: 1, name: "payer", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "nonce", kind: "message", T: SolanaAccountId },
+    { no: 3, name: "blockhash", kind: "message", T: Blockhash },
+    { no: 4, name: "alts", kind: "message", T: SolanaAddressLookupTable, repeated: true },
+    { no: 5, name: "compute_unit_limit", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 6, name: "compute_unit_price", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 7, name: "memo_value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 8, name: "memory_account", kind: "message", T: SolanaAccountId },
+    { no: 9, name: "memory_index", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StartSwapResponse_Success {
-    return new StartSwapResponse_Success().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_ServerParameters_CurrencyCreator {
+    return new StatefulSwapResponse_ServerParameters_CurrencyCreator().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StartSwapResponse_Success {
-    return new StartSwapResponse_Success().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapResponse_ServerParameters_CurrencyCreator {
+    return new StatefulSwapResponse_ServerParameters_CurrencyCreator().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StartSwapResponse_Success {
-    return new StartSwapResponse_Success().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapResponse_ServerParameters_CurrencyCreator {
+    return new StatefulSwapResponse_ServerParameters_CurrencyCreator().fromJsonString(jsonString, options);
   }
 
-  static equals(a: StartSwapResponse_Success | PlainMessage<StartSwapResponse_Success> | undefined, b: StartSwapResponse_Success | PlainMessage<StartSwapResponse_Success> | undefined): boolean {
-    return proto3.util.equals(StartSwapResponse_Success, a, b);
+  static equals(a: StatefulSwapResponse_ServerParameters_CurrencyCreator | PlainMessage<StatefulSwapResponse_ServerParameters_CurrencyCreator> | undefined, b: StatefulSwapResponse_ServerParameters_CurrencyCreator | PlainMessage<StatefulSwapResponse_ServerParameters_CurrencyCreator> | undefined): boolean {
+    return proto3.util.equals(StatefulSwapResponse_ServerParameters_CurrencyCreator, a, b);
   }
 }
 
 /**
- * @generated from enum ocp.transaction.v1.StartSwapResponse.Success.Code
+ * @generated from message ocp.transaction.v1.StatefulSwapResponse.Success
  */
-export enum StartSwapResponse_Success_Code {
+export class StatefulSwapResponse_Success extends Message<StatefulSwapResponse_Success> {
+  /**
+   * @generated from field: ocp.transaction.v1.StatefulSwapResponse.Success.Code code = 1;
+   */
+  code = StatefulSwapResponse_Success_Code.OK;
+
+  constructor(data?: PartialMessage<StatefulSwapResponse_Success>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.transaction.v1.StatefulSwapResponse.Success";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "code", kind: "enum", T: proto3.getEnumType(StatefulSwapResponse_Success_Code) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_Success {
+    return new StatefulSwapResponse_Success().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapResponse_Success {
+    return new StatefulSwapResponse_Success().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapResponse_Success {
+    return new StatefulSwapResponse_Success().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StatefulSwapResponse_Success | PlainMessage<StatefulSwapResponse_Success> | undefined, b: StatefulSwapResponse_Success | PlainMessage<StatefulSwapResponse_Success> | undefined): boolean {
+    return proto3.util.equals(StatefulSwapResponse_Success, a, b);
+  }
+}
+
+/**
+ * @generated from enum ocp.transaction.v1.StatefulSwapResponse.Success.Code
+ */
+export enum StatefulSwapResponse_Success_Code {
   /**
    * @generated from enum value: OK = 0;
    */
   OK = 0,
 }
-// Retrieve enum metadata with: proto3.getEnumType(StartSwapResponse_Success_Code)
-proto3.util.setEnumType(StartSwapResponse_Success_Code, "ocp.transaction.v1.StartSwapResponse.Success.Code", [
+// Retrieve enum metadata with: proto3.getEnumType(StatefulSwapResponse_Success_Code)
+proto3.util.setEnumType(StatefulSwapResponse_Success_Code, "ocp.transaction.v1.StatefulSwapResponse.Success.Code", [
   { no: 0, name: "OK" },
 ]);
 
 /**
- * @generated from message ocp.transaction.v1.StartSwapResponse.Error
+ * @generated from message ocp.transaction.v1.StatefulSwapResponse.Error
  */
-export class StartSwapResponse_Error extends Message<StartSwapResponse_Error> {
+export class StatefulSwapResponse_Error extends Message<StatefulSwapResponse_Error> {
   /**
-   * @generated from field: ocp.transaction.v1.StartSwapResponse.Error.Code code = 1;
+   * @generated from field: ocp.transaction.v1.StatefulSwapResponse.Error.Code code = 1;
    */
-  code = StartSwapResponse_Error_Code.DENIED;
+  code = StatefulSwapResponse_Error_Code.DENIED;
 
   /**
    * @generated from field: repeated ocp.transaction.v1.ErrorDetails error_details = 2;
    */
   errorDetails: ErrorDetails[] = [];
 
-  constructor(data?: PartialMessage<StartSwapResponse_Error>) {
+  constructor(data?: PartialMessage<StatefulSwapResponse_Error>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.StartSwapResponse.Error";
+  static readonly typeName = "ocp.transaction.v1.StatefulSwapResponse.Error";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "code", kind: "enum", T: proto3.getEnumType(StartSwapResponse_Error_Code) },
+    { no: 1, name: "code", kind: "enum", T: proto3.getEnumType(StatefulSwapResponse_Error_Code) },
     { no: 2, name: "error_details", kind: "message", T: ErrorDetails, repeated: true },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StartSwapResponse_Error {
-    return new StartSwapResponse_Error().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_Error {
+    return new StatefulSwapResponse_Error().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StartSwapResponse_Error {
-    return new StartSwapResponse_Error().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapResponse_Error {
+    return new StatefulSwapResponse_Error().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StartSwapResponse_Error {
-    return new StartSwapResponse_Error().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapResponse_Error {
+    return new StatefulSwapResponse_Error().fromJsonString(jsonString, options);
   }
 
-  static equals(a: StartSwapResponse_Error | PlainMessage<StartSwapResponse_Error> | undefined, b: StartSwapResponse_Error | PlainMessage<StartSwapResponse_Error> | undefined): boolean {
-    return proto3.util.equals(StartSwapResponse_Error, a, b);
+  static equals(a: StatefulSwapResponse_Error | PlainMessage<StatefulSwapResponse_Error> | undefined, b: StatefulSwapResponse_Error | PlainMessage<StatefulSwapResponse_Error> | undefined): boolean {
+    return proto3.util.equals(StatefulSwapResponse_Error, a, b);
   }
 }
 
 /**
- * @generated from enum ocp.transaction.v1.StartSwapResponse.Error.Code
+ * @generated from enum ocp.transaction.v1.StatefulSwapResponse.Error.Code
  */
-export enum StartSwapResponse_Error_Code {
+export enum StatefulSwapResponse_Error_Code {
   /**
    * Denied by a guard (spam, money laundering, etc)
    *
@@ -1622,7 +1742,7 @@ export enum StartSwapResponse_Error_Code {
   DENIED = 0,
 
   /**
-   * There is an issue with the provided signature
+   * There is an issue with the provided transaction signature
    *
    * @generated from enum value: SIGNATURE_ERROR = 1;
    */
@@ -1635,8 +1755,8 @@ export enum StartSwapResponse_Error_Code {
    */
   INVALID_SWAP = 2,
 }
-// Retrieve enum metadata with: proto3.getEnumType(StartSwapResponse_Error_Code)
-proto3.util.setEnumType(StartSwapResponse_Error_Code, "ocp.transaction.v1.StartSwapResponse.Error.Code", [
+// Retrieve enum metadata with: proto3.getEnumType(StatefulSwapResponse_Error_Code)
+proto3.util.setEnumType(StatefulSwapResponse_Error_Code, "ocp.transaction.v1.StatefulSwapResponse.Error.Code", [
   { no: 0, name: "DENIED" },
   { no: 1, name: "SIGNATURE_ERROR" },
   { no: 2, name: "INVALID_SWAP" },
@@ -1872,801 +1992,6 @@ export enum GetPendingSwapsResponse_Result {
 proto3.util.setEnumType(GetPendingSwapsResponse_Result, "ocp.transaction.v1.GetPendingSwapsResponse.Result", [
   { no: 0, name: "OK" },
   { no: 1, name: "NOT_FOUND" },
-]);
-
-/**
- * @generated from message ocp.transaction.v1.SwapRequest
- */
-export class SwapRequest extends Message<SwapRequest> {
-  /**
-   * @generated from oneof ocp.transaction.v1.SwapRequest.request
-   */
-  request: {
-    /**
-     * @generated from field: ocp.transaction.v1.SwapRequest.Initiate initiate = 1;
-     */
-    value: SwapRequest_Initiate;
-    case: "initiate";
-  } | {
-    /**
-     * @generated from field: ocp.transaction.v1.SwapRequest.SubmitSignatures submit_signatures = 2;
-     */
-    value: SwapRequest_SubmitSignatures;
-    case: "submitSignatures";
-  } | { case: undefined; value?: undefined } = { case: undefined };
-
-  constructor(data?: PartialMessage<SwapRequest>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.SwapRequest";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "initiate", kind: "message", T: SwapRequest_Initiate, oneof: "request" },
-    { no: 2, name: "submit_signatures", kind: "message", T: SwapRequest_SubmitSignatures, oneof: "request" },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SwapRequest {
-    return new SwapRequest().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SwapRequest {
-    return new SwapRequest().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SwapRequest {
-    return new SwapRequest().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: SwapRequest | PlainMessage<SwapRequest> | undefined, b: SwapRequest | PlainMessage<SwapRequest> | undefined): boolean {
-    return proto3.util.equals(SwapRequest, a, b);
-  }
-}
-
-/**
- * @generated from message ocp.transaction.v1.SwapRequest.Initiate
- */
-export class SwapRequest_Initiate extends Message<SwapRequest_Initiate> {
-  /**
-   * @generated from oneof ocp.transaction.v1.SwapRequest.Initiate.kind
-   */
-  kind: {
-    /**
-     * @generated from field: ocp.transaction.v1.SwapRequest.Initiate.Stateless stateless = 1;
-     */
-    value: SwapRequest_Initiate_Stateless;
-    case: "stateless";
-  } | {
-    /**
-     * @generated from field: ocp.transaction.v1.SwapRequest.Initiate.Stateful stateful = 2;
-     */
-    value: SwapRequest_Initiate_Stateful;
-    case: "stateful";
-  } | { case: undefined; value?: undefined } = { case: undefined };
-
-  constructor(data?: PartialMessage<SwapRequest_Initiate>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.SwapRequest.Initiate";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "stateless", kind: "message", T: SwapRequest_Initiate_Stateless, oneof: "kind" },
-    { no: 2, name: "stateful", kind: "message", T: SwapRequest_Initiate_Stateful, oneof: "kind" },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SwapRequest_Initiate {
-    return new SwapRequest_Initiate().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SwapRequest_Initiate {
-    return new SwapRequest_Initiate().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SwapRequest_Initiate {
-    return new SwapRequest_Initiate().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: SwapRequest_Initiate | PlainMessage<SwapRequest_Initiate> | undefined, b: SwapRequest_Initiate | PlainMessage<SwapRequest_Initiate> | undefined): boolean {
-    return proto3.util.equals(SwapRequest_Initiate, a, b);
-  }
-}
-
-/**
- * @generated from message ocp.transaction.v1.SwapRequest.Initiate.Stateless
- */
-export class SwapRequest_Initiate_Stateless extends Message<SwapRequest_Initiate_Stateless> {
-  /**
-   * The verified owner account public key
-   *
-   * @generated from field: ocp.common.v1.SolanaAccountId owner = 1;
-   */
-  owner?: SolanaAccountId;
-
-  /**
-   * The source mint that will be swapped from
-   *
-   * @generated from field: ocp.common.v1.SolanaAccountId from_mint = 2;
-   */
-  fromMint?: SolanaAccountId;
-
-  /**
-   * The destination mint that will be swapped to
-   *
-   * @generated from field: ocp.common.v1.SolanaAccountId to_mint = 3;
-   */
-  toMint?: SolanaAccountId;
-
-  /**
-   * The amount to swap from the source mint in quarks.
-   *
-   * @generated from field: uint64 amount = 4;
-   */
-  amount = protoInt64.zero;
-
-  /**
-   * The user authority account that will sign to authorize the swap.
-   *
-   * For Currency Creator program buy/sell flows, this should be a random one-time use account.
-   *
-   * @generated from field: ocp.common.v1.SolanaAccountId swap_authority = 5;
-   */
-  swapAuthority?: SolanaAccountId;
-
-  /**
-   * Whether the client wants the RPC to wait for blockchain status. If false,
-   * then the RPC will return Success when the swap is submitted to the blockchain.
-   * Otherwise, the RPC will observe and report back the status of the transaction.
-   *
-   * @generated from field: bool wait_for_blockchain_status = 6;
-   */
-  waitForBlockchainStatus = false;
-
-  /**
-   * The signature is of serialize(Stateless) without this field set using the
-   * private key of the owner account. This provides an authentication mechanism
-   * to the RPC.
-   *
-   * @generated from field: ocp.common.v1.Signature signature = 7;
-   */
-  signature?: Signature;
-
-  constructor(data?: PartialMessage<SwapRequest_Initiate_Stateless>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.SwapRequest.Initiate.Stateless";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "owner", kind: "message", T: SolanaAccountId },
-    { no: 2, name: "from_mint", kind: "message", T: SolanaAccountId },
-    { no: 3, name: "to_mint", kind: "message", T: SolanaAccountId },
-    { no: 4, name: "amount", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
-    { no: 5, name: "swap_authority", kind: "message", T: SolanaAccountId },
-    { no: 6, name: "wait_for_blockchain_status", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 7, name: "signature", kind: "message", T: Signature },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SwapRequest_Initiate_Stateless {
-    return new SwapRequest_Initiate_Stateless().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SwapRequest_Initiate_Stateless {
-    return new SwapRequest_Initiate_Stateless().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SwapRequest_Initiate_Stateless {
-    return new SwapRequest_Initiate_Stateless().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: SwapRequest_Initiate_Stateless | PlainMessage<SwapRequest_Initiate_Stateless> | undefined, b: SwapRequest_Initiate_Stateless | PlainMessage<SwapRequest_Initiate_Stateless> | undefined): boolean {
-    return proto3.util.equals(SwapRequest_Initiate_Stateless, a, b);
-  }
-}
-
-/**
- * Stateful initiates a swap for an existing swap that was created via
- * the StartSwap RPC. This can be called when the swap is in either the
- * FUNDING or FUNDED state to pre-sign/sign the swap transaction.
- *
- * @generated from message ocp.transaction.v1.SwapRequest.Initiate.Stateful
- */
-export class SwapRequest_Initiate_Stateful extends Message<SwapRequest_Initiate_Stateful> {
-  /**
-   * The ID of the swap to execute
-   *
-   * @generated from field: ocp.common.v1.SwapId swap_id = 1;
-   */
-  swapId?: SwapId;
-
-  /**
-   * The verified owner account public key
-   *
-   * @generated from field: ocp.common.v1.SolanaAccountId owner = 2;
-   */
-  owner?: SolanaAccountId;
-
-  /**
-   * The user authority account that will sign to authorize the swap.
-   *
-   * For Currency Creator program buy/sell flows, this should be a random one-time use account.
-   *
-   * @generated from field: ocp.common.v1.SolanaAccountId swap_authority = 3;
-   */
-  swapAuthority?: SolanaAccountId;
-
-  /**
-   * The signature is of serialize(Stateful) without this field set using the
-   * private key of the owner account. This provides an authentication mechanism
-   * to the RPC.
-   *
-   * @generated from field: ocp.common.v1.Signature signature = 4;
-   */
-  signature?: Signature;
-
-  constructor(data?: PartialMessage<SwapRequest_Initiate_Stateful>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.SwapRequest.Initiate.Stateful";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "swap_id", kind: "message", T: SwapId },
-    { no: 2, name: "owner", kind: "message", T: SolanaAccountId },
-    { no: 3, name: "swap_authority", kind: "message", T: SolanaAccountId },
-    { no: 4, name: "signature", kind: "message", T: Signature },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SwapRequest_Initiate_Stateful {
-    return new SwapRequest_Initiate_Stateful().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SwapRequest_Initiate_Stateful {
-    return new SwapRequest_Initiate_Stateful().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SwapRequest_Initiate_Stateful {
-    return new SwapRequest_Initiate_Stateful().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: SwapRequest_Initiate_Stateful | PlainMessage<SwapRequest_Initiate_Stateful> | undefined, b: SwapRequest_Initiate_Stateful | PlainMessage<SwapRequest_Initiate_Stateful> | undefined): boolean {
-    return proto3.util.equals(SwapRequest_Initiate_Stateful, a, b);
-  }
-}
-
-/**
- * @generated from message ocp.transaction.v1.SwapRequest.SubmitSignatures
- */
-export class SwapRequest_SubmitSignatures extends Message<SwapRequest_SubmitSignatures> {
-  /**
-   * The signatures for the locally constructed swap transaction
-   *
-   * @generated from field: repeated ocp.common.v1.Signature signatures = 1;
-   */
-  signatures: Signature[] = [];
-
-  constructor(data?: PartialMessage<SwapRequest_SubmitSignatures>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.SwapRequest.SubmitSignatures";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "signatures", kind: "message", T: Signature, repeated: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SwapRequest_SubmitSignatures {
-    return new SwapRequest_SubmitSignatures().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SwapRequest_SubmitSignatures {
-    return new SwapRequest_SubmitSignatures().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SwapRequest_SubmitSignatures {
-    return new SwapRequest_SubmitSignatures().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: SwapRequest_SubmitSignatures | PlainMessage<SwapRequest_SubmitSignatures> | undefined, b: SwapRequest_SubmitSignatures | PlainMessage<SwapRequest_SubmitSignatures> | undefined): boolean {
-    return proto3.util.equals(SwapRequest_SubmitSignatures, a, b);
-  }
-}
-
-/**
- * @generated from message ocp.transaction.v1.SwapResponse
- */
-export class SwapResponse extends Message<SwapResponse> {
-  /**
-   * @generated from oneof ocp.transaction.v1.SwapResponse.response
-   */
-  response: {
-    /**
-     * @generated from field: ocp.transaction.v1.SwapResponse.ServerParameters server_parameters = 1;
-     */
-    value: SwapResponse_ServerParameters;
-    case: "serverParameters";
-  } | {
-    /**
-     * @generated from field: ocp.transaction.v1.SwapResponse.Success success = 2;
-     */
-    value: SwapResponse_Success;
-    case: "success";
-  } | {
-    /**
-     * @generated from field: ocp.transaction.v1.SwapResponse.Error error = 3;
-     */
-    value: SwapResponse_Error;
-    case: "error";
-  } | { case: undefined; value?: undefined } = { case: undefined };
-
-  constructor(data?: PartialMessage<SwapResponse>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.SwapResponse";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "server_parameters", kind: "message", T: SwapResponse_ServerParameters, oneof: "response" },
-    { no: 2, name: "success", kind: "message", T: SwapResponse_Success, oneof: "response" },
-    { no: 3, name: "error", kind: "message", T: SwapResponse_Error, oneof: "response" },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SwapResponse {
-    return new SwapResponse().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SwapResponse {
-    return new SwapResponse().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SwapResponse {
-    return new SwapResponse().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: SwapResponse | PlainMessage<SwapResponse> | undefined, b: SwapResponse | PlainMessage<SwapResponse> | undefined): boolean {
-    return proto3.util.equals(SwapResponse, a, b);
-  }
-}
-
-/**
- * @generated from message ocp.transaction.v1.SwapResponse.ServerParameters
- */
-export class SwapResponse_ServerParameters extends Message<SwapResponse_ServerParameters> {
-  /**
-   * @generated from oneof ocp.transaction.v1.SwapResponse.ServerParameters.kind
-   */
-  kind: {
-    /**
-     * @generated from field: ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateless currency_creator_stateless = 1;
-     */
-    value: SwapResponse_ServerParameters_CurrencyCreatorStateless;
-    case: "currencyCreatorStateless";
-  } | {
-    /**
-     * @generated from field: ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateful currency_creator_stateful = 2;
-     */
-    value: SwapResponse_ServerParameters_CurrencyCreatorStateful;
-    case: "currencyCreatorStateful";
-  } | { case: undefined; value?: undefined } = { case: undefined };
-
-  constructor(data?: PartialMessage<SwapResponse_ServerParameters>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.SwapResponse.ServerParameters";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "currency_creator_stateless", kind: "message", T: SwapResponse_ServerParameters_CurrencyCreatorStateless, oneof: "kind" },
-    { no: 2, name: "currency_creator_stateful", kind: "message", T: SwapResponse_ServerParameters_CurrencyCreatorStateful, oneof: "kind" },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SwapResponse_ServerParameters {
-    return new SwapResponse_ServerParameters().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SwapResponse_ServerParameters {
-    return new SwapResponse_ServerParameters().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SwapResponse_ServerParameters {
-    return new SwapResponse_ServerParameters().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: SwapResponse_ServerParameters | PlainMessage<SwapResponse_ServerParameters> | undefined, b: SwapResponse_ServerParameters | PlainMessage<SwapResponse_ServerParameters> | undefined): boolean {
-    return proto3.util.equals(SwapResponse_ServerParameters, a, b);
-  }
-}
-
-/**
- * Server parameters when executing stateless buy/sell flows against the
- * Currency Creator program
- *
- * Note: The transaction and instruction formats are nearly identical to
- * the stateful flow, except the system::AdvanceNonce instruction is
- * ommitted in favour of using a latest blockhash.
- *
- * Note: This will be deprecated in favour of the stateful version. For
- * PoC of swap flow only.
- *
- * @generated from message ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateless
- */
-export class SwapResponse_ServerParameters_CurrencyCreatorStateless extends Message<SwapResponse_ServerParameters_CurrencyCreatorStateless> {
-  /**
-   * Subisdizer account that will be paying for the swap
-   *
-   * @generated from field: ocp.common.v1.SolanaAccountId payer = 1;
-   */
-  payer?: SolanaAccountId;
-
-  /**
-   * Recent blockhash
-   *
-   * @generated from field: ocp.common.v1.Blockhash recent_blockhash = 2;
-   */
-  recentBlockhash?: Blockhash;
-
-  /**
-   * ALTs that should be used when constructing the versioned transaction
-   *
-   * @generated from field: repeated ocp.common.v1.SolanaAddressLookupTable alts = 3;
-   */
-  alts: SolanaAddressLookupTable[] = [];
-
-  /**
-   * Compute unit limit provided to the ComputeBudget::SetComputeUnitLimit
-   * instruction. If the value is 0, then the instruction can be omitted.
-   *
-   * @generated from field: uint32 compute_unit_limit = 4;
-   */
-  computeUnitLimit = 0;
-
-  /**
-   * Compute unit price provided in the ComputeBudget::SetComputeUnitPrice
-   * instruction. If the value is 0, then the instruction can be omitted.
-   *
-   * @generated from field: uint64 compute_unit_price = 5;
-   */
-  computeUnitPrice = protoInt64.zero;
-
-  /**
-   * Value provided into the Memo::Memo instruction. If the value length is 0,
-   * then the instruction can be omitted.
-   *
-   * @generated from field: string memo_value = 6;
-   */
-  memoValue = "";
-
-  /**
-   * The memory account where the destination virtual Timelock account lives
-   *
-   * @generated from field: ocp.common.v1.SolanaAccountId memory_account = 7;
-   */
-  memoryAccount?: SolanaAccountId;
-
-  /**
-   * The memory index where the destination virtual Timelock account lives
-   *
-   * @generated from field: uint32 memory_index = 8;
-   */
-  memoryIndex = 0;
-
-  constructor(data?: PartialMessage<SwapResponse_ServerParameters_CurrencyCreatorStateless>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateless";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "payer", kind: "message", T: SolanaAccountId },
-    { no: 2, name: "recent_blockhash", kind: "message", T: Blockhash },
-    { no: 3, name: "alts", kind: "message", T: SolanaAddressLookupTable, repeated: true },
-    { no: 4, name: "compute_unit_limit", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
-    { no: 5, name: "compute_unit_price", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
-    { no: 6, name: "memo_value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 7, name: "memory_account", kind: "message", T: SolanaAccountId },
-    { no: 8, name: "memory_index", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SwapResponse_ServerParameters_CurrencyCreatorStateless {
-    return new SwapResponse_ServerParameters_CurrencyCreatorStateless().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SwapResponse_ServerParameters_CurrencyCreatorStateless {
-    return new SwapResponse_ServerParameters_CurrencyCreatorStateless().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SwapResponse_ServerParameters_CurrencyCreatorStateless {
-    return new SwapResponse_ServerParameters_CurrencyCreatorStateless().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: SwapResponse_ServerParameters_CurrencyCreatorStateless | PlainMessage<SwapResponse_ServerParameters_CurrencyCreatorStateless> | undefined, b: SwapResponse_ServerParameters_CurrencyCreatorStateless | PlainMessage<SwapResponse_ServerParameters_CurrencyCreatorStateless> | undefined): boolean {
-    return proto3.util.equals(SwapResponse_ServerParameters_CurrencyCreatorStateless, a, b);
-  }
-}
-
-/**
- * Server parameters when executing stateful buy/sell flows against the
- * Currency Creator program
- *
- * Supported Solana transaction version: v0
- *
- * Instruction formats:
- *
- * Buy Tokens (Core Mint -> Launchpad Currency Mint):
- *  1. System::AdvanceNonce
- *  2. [Optional] ComputeBudget::SetComputeUnitLimit
- *  3. [Optional] ComputeBudget::SetComputeUnitPrice
- *  4. [Optional] Memo::Memo
- *  5. AssociatedTokenAccount::CreateIdempotent (open Core Mint temporary account)
- *  6. VM::TransferForSwap (Core Mint VM swap ATA -> Core Mint temporary account)
- *  6. CurrencyCreator::BuyAndDepositIntoVm (bounded buy depositing to_mint tokens into the to_mint VM)
- *  8. Token::CloseAccount (closes Core Mint temporary account)
- *  9. VM::CloseSwapAccountIfEmpty (closes Core Mint VM swap ATA if empty)
- *
- * Sell Tokens (Launchpad Currency Mint -> Core Mint):
- *  1. System::AdvanceNonce
- *  2. [Optional] ComputeBudget::SetComputeUnitLimit
- *  3. [Optional] ComputeBudget::SetComputeUnitPrice
- *  4. [Optional] Memo::Memo
- *  5. AssociatedTokenAccount::CreateIdempotent (open from_mint temporary account)
- *  6. VM::TransferForSwap (from_mint VM swap ATA -> from_mint temporary account)
- *  7. CurrencyCreator::SellAndDepositIntoVm (bounded sell depositing Core Mint into the Core Mint VM)
- *  8. Token::CloseAccount (closes from_mint temporary account)
- *  9. VM::CloseSwapAccountIfEmpty (closes from_mint swap PDA/ATA if empty)
- *
- * Swap Tokens (Launchpad Currency Mint -> Launchpad Currency Mint):
- *  1.  System::AdvanceNonce
- *  2.  [Optional] ComputeBudget::SetComputeUnitLimit
- *  3.  [Optional] ComputeBudget::SetComputeUnitPrice
- *  4.  [Optional] Memo::Memo
- *  5.  AssociatedTokenAccount::CreateIdempotent (open Core Mint temporary account)
- *  6.  AssociatedTokenAccount::CreateIdempotent (open from_mint temporary account)
- *  7.  VM::TransferForSwap (from_mint VM swap ATA -> from_mint temporary account)
- *  8.  CurrencyCreator::SellTokens (bounded sell transferring Core Mint into temporary account)
- *  9.  CurrencyCreator::BuyAndDepositIntoVm (unlimited buy depositing to_mint tokens into the to_mint VM)
- *  10. Token::CloseAccount (closes Core Mint temporary account)
- *  11. Token::CloseAccount (closes from_mint temporary account)
- *  12. VM::CloseSwapAccountIfEmpty (closes from_mint VM swap ATA if empty)
- *
- * @generated from message ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateful
- */
-export class SwapResponse_ServerParameters_CurrencyCreatorStateful extends Message<SwapResponse_ServerParameters_CurrencyCreatorStateful> {
-  /**
-   * Subisdizer account that will be paying for the swap
-   *
-   * @generated from field: ocp.common.v1.SolanaAccountId payer = 1;
-   */
-  payer?: SolanaAccountId;
-
-  /**
-   * ALTs that should be used when constructing the versioned transaction
-   *
-   * @generated from field: repeated ocp.common.v1.SolanaAddressLookupTable alts = 2;
-   */
-  alts: SolanaAddressLookupTable[] = [];
-
-  /**
-   * Compute unit limit provided to the ComputeBudget::SetComputeUnitLimit
-   * instruction. If the value is 0, then the instruction can be omitted.
-   *
-   * @generated from field: uint32 compute_unit_limit = 3;
-   */
-  computeUnitLimit = 0;
-
-  /**
-   * Compute unit price provided in the ComputeBudget::SetComputeUnitPrice
-   * instruction. If the value is 0, then the instruction can be omitted.
-   *
-   * @generated from field: uint64 compute_unit_price = 4;
-   */
-  computeUnitPrice = protoInt64.zero;
-
-  /**
-   * Value provided into the Memo::Memo instruction. If the value length is 0,
-   * then the instruction can be omitted.
-   *
-   * @generated from field: string memo_value = 5;
-   */
-  memoValue = "";
-
-  /**
-   * The memory account where the destination virtual Timelock account lives
-   *
-   * @generated from field: ocp.common.v1.SolanaAccountId memory_account = 6;
-   */
-  memoryAccount?: SolanaAccountId;
-
-  /**
-   * The memory index where the destination virtual Timelock account lives
-   *
-   * @generated from field: uint32 memory_index = 7;
-   */
-  memoryIndex = 0;
-
-  constructor(data?: PartialMessage<SwapResponse_ServerParameters_CurrencyCreatorStateful>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.SwapResponse.ServerParameters.CurrencyCreatorStateful";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "payer", kind: "message", T: SolanaAccountId },
-    { no: 2, name: "alts", kind: "message", T: SolanaAddressLookupTable, repeated: true },
-    { no: 3, name: "compute_unit_limit", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
-    { no: 4, name: "compute_unit_price", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
-    { no: 5, name: "memo_value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 6, name: "memory_account", kind: "message", T: SolanaAccountId },
-    { no: 7, name: "memory_index", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SwapResponse_ServerParameters_CurrencyCreatorStateful {
-    return new SwapResponse_ServerParameters_CurrencyCreatorStateful().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SwapResponse_ServerParameters_CurrencyCreatorStateful {
-    return new SwapResponse_ServerParameters_CurrencyCreatorStateful().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SwapResponse_ServerParameters_CurrencyCreatorStateful {
-    return new SwapResponse_ServerParameters_CurrencyCreatorStateful().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: SwapResponse_ServerParameters_CurrencyCreatorStateful | PlainMessage<SwapResponse_ServerParameters_CurrencyCreatorStateful> | undefined, b: SwapResponse_ServerParameters_CurrencyCreatorStateful | PlainMessage<SwapResponse_ServerParameters_CurrencyCreatorStateful> | undefined): boolean {
-    return proto3.util.equals(SwapResponse_ServerParameters_CurrencyCreatorStateful, a, b);
-  }
-}
-
-/**
- * @generated from message ocp.transaction.v1.SwapResponse.Success
- */
-export class SwapResponse_Success extends Message<SwapResponse_Success> {
-  /**
-   * @generated from field: ocp.transaction.v1.SwapResponse.Success.Code code = 1;
-   */
-  code = SwapResponse_Success_Code.SWAP_SUBMITTED;
-
-  constructor(data?: PartialMessage<SwapResponse_Success>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.SwapResponse.Success";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "code", kind: "enum", T: proto3.getEnumType(SwapResponse_Success_Code) },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SwapResponse_Success {
-    return new SwapResponse_Success().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SwapResponse_Success {
-    return new SwapResponse_Success().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SwapResponse_Success {
-    return new SwapResponse_Success().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: SwapResponse_Success | PlainMessage<SwapResponse_Success> | undefined, b: SwapResponse_Success | PlainMessage<SwapResponse_Success> | undefined): boolean {
-    return proto3.util.equals(SwapResponse_Success, a, b);
-  }
-}
-
-/**
- * @generated from enum ocp.transaction.v1.SwapResponse.Success.Code
- */
-export enum SwapResponse_Success_Code {
-  /**
-   * The swap was submitted to the blockchain.
-   *
-   * @generated from enum value: SWAP_SUBMITTED = 0;
-   */
-  SWAP_SUBMITTED = 0,
-
-  /**
-   * The swap was finalized on the blockchain.
-   *
-   * @generated from enum value: SWAP_FINALIZED = 1;
-   */
-  SWAP_FINALIZED = 1,
-}
-// Retrieve enum metadata with: proto3.getEnumType(SwapResponse_Success_Code)
-proto3.util.setEnumType(SwapResponse_Success_Code, "ocp.transaction.v1.SwapResponse.Success.Code", [
-  { no: 0, name: "SWAP_SUBMITTED" },
-  { no: 1, name: "SWAP_FINALIZED" },
-]);
-
-/**
- * @generated from message ocp.transaction.v1.SwapResponse.Error
- */
-export class SwapResponse_Error extends Message<SwapResponse_Error> {
-  /**
-   * @generated from field: ocp.transaction.v1.SwapResponse.Error.Code code = 1;
-   */
-  code = SwapResponse_Error_Code.DENIED;
-
-  /**
-   * @generated from field: repeated ocp.transaction.v1.ErrorDetails error_details = 2;
-   */
-  errorDetails: ErrorDetails[] = [];
-
-  constructor(data?: PartialMessage<SwapResponse_Error>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.SwapResponse.Error";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "code", kind: "enum", T: proto3.getEnumType(SwapResponse_Error_Code) },
-    { no: 2, name: "error_details", kind: "message", T: ErrorDetails, repeated: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SwapResponse_Error {
-    return new SwapResponse_Error().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SwapResponse_Error {
-    return new SwapResponse_Error().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SwapResponse_Error {
-    return new SwapResponse_Error().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: SwapResponse_Error | PlainMessage<SwapResponse_Error> | undefined, b: SwapResponse_Error | PlainMessage<SwapResponse_Error> | undefined): boolean {
-    return proto3.util.equals(SwapResponse_Error, a, b);
-  }
-}
-
-/**
- * @generated from enum ocp.transaction.v1.SwapResponse.Error.Code
- */
-export enum SwapResponse_Error_Code {
-  /**
-   * Denied by a guard (spam, money laundering, etc)
-   *
-   * @generated from enum value: DENIED = 0;
-   */
-  DENIED = 0,
-
-  /**
-   * There is an issue with the provided signature.
-   *
-   * @generated from enum value: SIGNATURE_ERROR = 1;
-   */
-  SIGNATURE_ERROR = 1,
-
-  /**
-   * The swap failed server-side validation
-   *
-   * @generated from enum value: INVALID_SWAP = 2;
-   */
-  INVALID_SWAP = 2,
-
-  /**
-   * The submitted swap transaction failed. Attempt the swap again.
-   *
-   * @generated from enum value: SWAP_FAILED = 3;
-   */
-  SWAP_FAILED = 3,
-}
-// Retrieve enum metadata with: proto3.getEnumType(SwapResponse_Error_Code)
-proto3.util.setEnumType(SwapResponse_Error_Code, "ocp.transaction.v1.SwapResponse.Error.Code", [
-  { no: 0, name: "DENIED" },
-  { no: 1, name: "SIGNATURE_ERROR" },
-  { no: 2, name: "INVALID_SWAP" },
-  { no: 3, name: "SWAP_FAILED" },
 ]);
 
 /**
@@ -4293,18 +3618,11 @@ export class VerifiedSwapMetadata extends Message<VerifiedSwapMetadata> {
  */
 export class VerifiedCurrencyCreatorSwapMetadata extends Message<VerifiedCurrencyCreatorSwapMetadata> {
   /**
-   * Verifiable client-side parameters that were provided during the StartSwap RPC
+   * Verifiable client-side parameters that were provided during the StatefulSwap RPC
    *
-   * @generated from field: ocp.transaction.v1.StartSwapRequest.Start.CurrencyCreator client_parameters = 1;
+   * @generated from field: ocp.transaction.v1.StatefulSwapRequest.Initiate.CurrencyCreator client_parameters = 1;
    */
-  clientParameters?: StartSwapRequest_Start_CurrencyCreator;
-
-  /**
-   * Verifiable agreed-upon server-side parameters that were provided during the StartSwap RPC
-   *
-   * @generated from field: ocp.transaction.v1.StartSwapResponse.ServerParameters.CurrencyCreator server_parameters = 2;
-   */
-  serverParameters?: StartSwapResponse_ServerParameters_CurrencyCreator;
+  clientParameters?: StatefulSwapRequest_Initiate_CurrencyCreator;
 
   constructor(data?: PartialMessage<VerifiedCurrencyCreatorSwapMetadata>) {
     super();
@@ -4314,8 +3632,7 @@ export class VerifiedCurrencyCreatorSwapMetadata extends Message<VerifiedCurrenc
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "ocp.transaction.v1.VerifiedCurrencyCreatorSwapMetadata";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "client_parameters", kind: "message", T: StartSwapRequest_Start_CurrencyCreator },
-    { no: 2, name: "server_parameters", kind: "message", T: StartSwapResponse_ServerParameters_CurrencyCreator },
+    { no: 1, name: "client_parameters", kind: "message", T: StatefulSwapRequest_Initiate_CurrencyCreator },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VerifiedCurrencyCreatorSwapMetadata {

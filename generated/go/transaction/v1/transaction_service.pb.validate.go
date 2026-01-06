@@ -1186,34 +1186,34 @@ var _ interface {
 	ErrorName() string
 } = VoidGiftCardResponseValidationError{}
 
-// Validate checks the field values on StartSwapRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, an
-// error is returned.
-func (m *StartSwapRequest) Validate() error {
+// Validate checks the field values on StatefulSwapRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *StatefulSwapRequest) Validate() error {
 	if m == nil {
 		return nil
 	}
 
 	switch m.Request.(type) {
 
-	case *StartSwapRequest_Start_:
+	case *StatefulSwapRequest_Initiate_:
 
-		if v, ok := interface{}(m.GetStart()).(interface{ Validate() error }); ok {
+		if v, ok := interface{}(m.GetInitiate()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return StartSwapRequestValidationError{
-					field:  "Start",
+				return StatefulSwapRequestValidationError{
+					field:  "Initiate",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
 			}
 		}
 
-	case *StartSwapRequest_SubmitSignature_:
+	case *StatefulSwapRequest_SubmitSignatures_:
 
-		if v, ok := interface{}(m.GetSubmitSignature()).(interface{ Validate() error }); ok {
+		if v, ok := interface{}(m.GetSubmitSignatures()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return StartSwapRequestValidationError{
-					field:  "SubmitSignature",
+				return StatefulSwapRequestValidationError{
+					field:  "SubmitSignatures",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -1221,7 +1221,7 @@ func (m *StartSwapRequest) Validate() error {
 		}
 
 	default:
-		return StartSwapRequestValidationError{
+		return StatefulSwapRequestValidationError{
 			field:  "Request",
 			reason: "value is required",
 		}
@@ -1231,9 +1231,9 @@ func (m *StartSwapRequest) Validate() error {
 	return nil
 }
 
-// StartSwapRequestValidationError is the validation error returned by
-// StartSwapRequest.Validate if the designated constraints aren't met.
-type StartSwapRequestValidationError struct {
+// StatefulSwapRequestValidationError is the validation error returned by
+// StatefulSwapRequest.Validate if the designated constraints aren't met.
+type StatefulSwapRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1241,22 +1241,24 @@ type StartSwapRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e StartSwapRequestValidationError) Field() string { return e.field }
+func (e StatefulSwapRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e StartSwapRequestValidationError) Reason() string { return e.reason }
+func (e StatefulSwapRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e StartSwapRequestValidationError) Cause() error { return e.cause }
+func (e StatefulSwapRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e StartSwapRequestValidationError) Key() bool { return e.key }
+func (e StatefulSwapRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e StartSwapRequestValidationError) ErrorName() string { return "StartSwapRequestValidationError" }
+func (e StatefulSwapRequestValidationError) ErrorName() string {
+	return "StatefulSwapRequestValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e StartSwapRequestValidationError) Error() string {
+func (e StatefulSwapRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1268,14 +1270,14 @@ func (e StartSwapRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sStartSwapRequest.%s: %s%s",
+		"invalid %sStatefulSwapRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = StartSwapRequestValidationError{}
+var _ error = StatefulSwapRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1283,23 +1285,23 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = StartSwapRequestValidationError{}
+} = StatefulSwapRequestValidationError{}
 
-// Validate checks the field values on StartSwapResponse with the rules defined
-// in the proto definition for this message. If any rules are violated, an
-// error is returned.
-func (m *StartSwapResponse) Validate() error {
+// Validate checks the field values on StatefulSwapResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *StatefulSwapResponse) Validate() error {
 	if m == nil {
 		return nil
 	}
 
 	switch m.Response.(type) {
 
-	case *StartSwapResponse_ServerParameters_:
+	case *StatefulSwapResponse_ServerParameters_:
 
 		if v, ok := interface{}(m.GetServerParameters()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return StartSwapResponseValidationError{
+				return StatefulSwapResponseValidationError{
 					field:  "ServerParameters",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1307,11 +1309,11 @@ func (m *StartSwapResponse) Validate() error {
 			}
 		}
 
-	case *StartSwapResponse_Success_:
+	case *StatefulSwapResponse_Success_:
 
 		if v, ok := interface{}(m.GetSuccess()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return StartSwapResponseValidationError{
+				return StatefulSwapResponseValidationError{
 					field:  "Success",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1319,11 +1321,11 @@ func (m *StartSwapResponse) Validate() error {
 			}
 		}
 
-	case *StartSwapResponse_Error_:
+	case *StatefulSwapResponse_Error_:
 
 		if v, ok := interface{}(m.GetError()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return StartSwapResponseValidationError{
+				return StatefulSwapResponseValidationError{
 					field:  "Error",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1332,7 +1334,7 @@ func (m *StartSwapResponse) Validate() error {
 		}
 
 	default:
-		return StartSwapResponseValidationError{
+		return StatefulSwapResponseValidationError{
 			field:  "Response",
 			reason: "value is required",
 		}
@@ -1342,9 +1344,9 @@ func (m *StartSwapResponse) Validate() error {
 	return nil
 }
 
-// StartSwapResponseValidationError is the validation error returned by
-// StartSwapResponse.Validate if the designated constraints aren't met.
-type StartSwapResponseValidationError struct {
+// StatefulSwapResponseValidationError is the validation error returned by
+// StatefulSwapResponse.Validate if the designated constraints aren't met.
+type StatefulSwapResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1352,24 +1354,24 @@ type StartSwapResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e StartSwapResponseValidationError) Field() string { return e.field }
+func (e StatefulSwapResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e StartSwapResponseValidationError) Reason() string { return e.reason }
+func (e StatefulSwapResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e StartSwapResponseValidationError) Cause() error { return e.cause }
+func (e StatefulSwapResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e StartSwapResponseValidationError) Key() bool { return e.key }
+func (e StatefulSwapResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e StartSwapResponseValidationError) ErrorName() string {
-	return "StartSwapResponseValidationError"
+func (e StatefulSwapResponseValidationError) ErrorName() string {
+	return "StatefulSwapResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e StartSwapResponseValidationError) Error() string {
+func (e StatefulSwapResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1381,14 +1383,14 @@ func (e StartSwapResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sStartSwapResponse.%s: %s%s",
+		"invalid %sStatefulSwapResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = StartSwapResponseValidationError{}
+var _ error = StatefulSwapResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1396,7 +1398,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = StartSwapResponseValidationError{}
+} = StatefulSwapResponseValidationError{}
 
 // Validate checks the field values on GetSwapRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, an error
@@ -1782,216 +1784,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetPendingSwapsResponseValidationError{}
-
-// Validate checks the field values on SwapRequest with the rules defined in
-// the proto definition for this message. If any rules are violated, an error
-// is returned.
-func (m *SwapRequest) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	switch m.Request.(type) {
-
-	case *SwapRequest_Initiate_:
-
-		if v, ok := interface{}(m.GetInitiate()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return SwapRequestValidationError{
-					field:  "Initiate",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	case *SwapRequest_SubmitSignatures_:
-
-		if v, ok := interface{}(m.GetSubmitSignatures()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return SwapRequestValidationError{
-					field:  "SubmitSignatures",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	default:
-		return SwapRequestValidationError{
-			field:  "Request",
-			reason: "value is required",
-		}
-
-	}
-
-	return nil
-}
-
-// SwapRequestValidationError is the validation error returned by
-// SwapRequest.Validate if the designated constraints aren't met.
-type SwapRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SwapRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SwapRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SwapRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SwapRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SwapRequestValidationError) ErrorName() string { return "SwapRequestValidationError" }
-
-// Error satisfies the builtin error interface
-func (e SwapRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSwapRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SwapRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SwapRequestValidationError{}
-
-// Validate checks the field values on SwapResponse with the rules defined in
-// the proto definition for this message. If any rules are violated, an error
-// is returned.
-func (m *SwapResponse) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	switch m.Response.(type) {
-
-	case *SwapResponse_ServerParameters_:
-
-		if v, ok := interface{}(m.GetServerParameters()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return SwapResponseValidationError{
-					field:  "ServerParameters",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	case *SwapResponse_Success_:
-
-		if v, ok := interface{}(m.GetSuccess()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return SwapResponseValidationError{
-					field:  "Success",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	case *SwapResponse_Error_:
-
-		if v, ok := interface{}(m.GetError()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return SwapResponseValidationError{
-					field:  "Error",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	default:
-		return SwapResponseValidationError{
-			field:  "Response",
-			reason: "value is required",
-		}
-
-	}
-
-	return nil
-}
-
-// SwapResponseValidationError is the validation error returned by
-// SwapResponse.Validate if the designated constraints aren't met.
-type SwapResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SwapResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SwapResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SwapResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SwapResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SwapResponseValidationError) ErrorName() string { return "SwapResponseValidationError" }
-
-// Error satisfies the builtin error interface
-func (e SwapResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSwapResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SwapResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SwapResponseValidationError{}
 
 // Validate checks the field values on Metadata with the rules defined in the
 // proto definition for this message. If any rules are violated, an error is returned.
@@ -4616,23 +4408,6 @@ func (m *VerifiedCurrencyCreatorSwapMetadata) Validate() error {
 		}
 	}
 
-	if m.GetServerParameters() == nil {
-		return VerifiedCurrencyCreatorSwapMetadataValidationError{
-			field:  "ServerParameters",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetServerParameters()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return VerifiedCurrencyCreatorSwapMetadataValidationError{
-				field:  "ServerParameters",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	return nil
 }
 
@@ -5295,16 +5070,16 @@ var _ interface {
 	ErrorName() string
 } = SubmitIntentResponse_ErrorValidationError{}
 
-// Validate checks the field values on StartSwapRequest_Start with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on StatefulSwapRequest_Initiate with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
-func (m *StartSwapRequest_Start) Validate() error {
+func (m *StatefulSwapRequest_Initiate) Validate() error {
 	if m == nil {
 		return nil
 	}
 
 	if m.GetOwner() == nil {
-		return StartSwapRequest_StartValidationError{
+		return StatefulSwapRequest_InitiateValidationError{
 			field:  "Owner",
 			reason: "value is required",
 		}
@@ -5312,7 +5087,7 @@ func (m *StartSwapRequest_Start) Validate() error {
 
 	if v, ok := interface{}(m.GetOwner()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return StartSwapRequest_StartValidationError{
+			return StatefulSwapRequest_InitiateValidationError{
 				field:  "Owner",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5320,8 +5095,42 @@ func (m *StartSwapRequest_Start) Validate() error {
 		}
 	}
 
+	if m.GetSwapAuthority() == nil {
+		return StatefulSwapRequest_InitiateValidationError{
+			field:  "SwapAuthority",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSwapAuthority()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapRequest_InitiateValidationError{
+				field:  "SwapAuthority",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetProofSignature() == nil {
+		return StatefulSwapRequest_InitiateValidationError{
+			field:  "ProofSignature",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetProofSignature()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapRequest_InitiateValidationError{
+				field:  "ProofSignature",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.GetSignature() == nil {
-		return StartSwapRequest_StartValidationError{
+		return StatefulSwapRequest_InitiateValidationError{
 			field:  "Signature",
 			reason: "value is required",
 		}
@@ -5329,7 +5138,7 @@ func (m *StartSwapRequest_Start) Validate() error {
 
 	if v, ok := interface{}(m.GetSignature()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return StartSwapRequest_StartValidationError{
+			return StatefulSwapRequest_InitiateValidationError{
 				field:  "Signature",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5339,11 +5148,11 @@ func (m *StartSwapRequest_Start) Validate() error {
 
 	switch m.Kind.(type) {
 
-	case *StartSwapRequest_Start_CurrencyCreator_:
+	case *StatefulSwapRequest_Initiate_CurrencyCreator_:
 
 		if v, ok := interface{}(m.GetCurrencyCreator()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return StartSwapRequest_StartValidationError{
+				return StatefulSwapRequest_InitiateValidationError{
 					field:  "CurrencyCreator",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -5352,7 +5161,7 @@ func (m *StartSwapRequest_Start) Validate() error {
 		}
 
 	default:
-		return StartSwapRequest_StartValidationError{
+		return StatefulSwapRequest_InitiateValidationError{
 			field:  "Kind",
 			reason: "value is required",
 		}
@@ -5362,9 +5171,10 @@ func (m *StartSwapRequest_Start) Validate() error {
 	return nil
 }
 
-// StartSwapRequest_StartValidationError is the validation error returned by
-// StartSwapRequest_Start.Validate if the designated constraints aren't met.
-type StartSwapRequest_StartValidationError struct {
+// StatefulSwapRequest_InitiateValidationError is the validation error returned
+// by StatefulSwapRequest_Initiate.Validate if the designated constraints
+// aren't met.
+type StatefulSwapRequest_InitiateValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5372,24 +5182,24 @@ type StartSwapRequest_StartValidationError struct {
 }
 
 // Field function returns field value.
-func (e StartSwapRequest_StartValidationError) Field() string { return e.field }
+func (e StatefulSwapRequest_InitiateValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e StartSwapRequest_StartValidationError) Reason() string { return e.reason }
+func (e StatefulSwapRequest_InitiateValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e StartSwapRequest_StartValidationError) Cause() error { return e.cause }
+func (e StatefulSwapRequest_InitiateValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e StartSwapRequest_StartValidationError) Key() bool { return e.key }
+func (e StatefulSwapRequest_InitiateValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e StartSwapRequest_StartValidationError) ErrorName() string {
-	return "StartSwapRequest_StartValidationError"
+func (e StatefulSwapRequest_InitiateValidationError) ErrorName() string {
+	return "StatefulSwapRequest_InitiateValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e StartSwapRequest_StartValidationError) Error() string {
+func (e StatefulSwapRequest_InitiateValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5401,14 +5211,14 @@ func (e StartSwapRequest_StartValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sStartSwapRequest_Start.%s: %s%s",
+		"invalid %sStatefulSwapRequest_Initiate.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = StartSwapRequest_StartValidationError{}
+var _ error = StatefulSwapRequest_InitiateValidationError{}
 
 var _ interface {
 	Field() string
@@ -5416,40 +5226,45 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = StartSwapRequest_StartValidationError{}
+} = StatefulSwapRequest_InitiateValidationError{}
 
-// Validate checks the field values on StartSwapRequest_SubmitSignature with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, an error is returned.
-func (m *StartSwapRequest_SubmitSignature) Validate() error {
+// Validate checks the field values on StatefulSwapRequest_SubmitSignatures
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, an error is returned.
+func (m *StatefulSwapRequest_SubmitSignatures) Validate() error {
 	if m == nil {
 		return nil
 	}
 
-	if m.GetSignature() == nil {
-		return StartSwapRequest_SubmitSignatureValidationError{
-			field:  "Signature",
-			reason: "value is required",
+	if len(m.GetTransactionSignatures()) != 2 {
+		return StatefulSwapRequest_SubmitSignaturesValidationError{
+			field:  "TransactionSignatures",
+			reason: "value must contain exactly 2 item(s)",
 		}
 	}
 
-	if v, ok := interface{}(m.GetSignature()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return StartSwapRequest_SubmitSignatureValidationError{
-				field:  "Signature",
-				reason: "embedded message failed validation",
-				cause:  err,
+	for idx, item := range m.GetTransactionSignatures() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StatefulSwapRequest_SubmitSignaturesValidationError{
+					field:  fmt.Sprintf("TransactionSignatures[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
 			}
 		}
+
 	}
 
 	return nil
 }
 
-// StartSwapRequest_SubmitSignatureValidationError is the validation error
-// returned by StartSwapRequest_SubmitSignature.Validate if the designated
+// StatefulSwapRequest_SubmitSignaturesValidationError is the validation error
+// returned by StatefulSwapRequest_SubmitSignatures.Validate if the designated
 // constraints aren't met.
-type StartSwapRequest_SubmitSignatureValidationError struct {
+type StatefulSwapRequest_SubmitSignaturesValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5457,24 +5272,24 @@ type StartSwapRequest_SubmitSignatureValidationError struct {
 }
 
 // Field function returns field value.
-func (e StartSwapRequest_SubmitSignatureValidationError) Field() string { return e.field }
+func (e StatefulSwapRequest_SubmitSignaturesValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e StartSwapRequest_SubmitSignatureValidationError) Reason() string { return e.reason }
+func (e StatefulSwapRequest_SubmitSignaturesValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e StartSwapRequest_SubmitSignatureValidationError) Cause() error { return e.cause }
+func (e StatefulSwapRequest_SubmitSignaturesValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e StartSwapRequest_SubmitSignatureValidationError) Key() bool { return e.key }
+func (e StatefulSwapRequest_SubmitSignaturesValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e StartSwapRequest_SubmitSignatureValidationError) ErrorName() string {
-	return "StartSwapRequest_SubmitSignatureValidationError"
+func (e StatefulSwapRequest_SubmitSignaturesValidationError) ErrorName() string {
+	return "StatefulSwapRequest_SubmitSignaturesValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e StartSwapRequest_SubmitSignatureValidationError) Error() string {
+func (e StatefulSwapRequest_SubmitSignaturesValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5486,14 +5301,14 @@ func (e StartSwapRequest_SubmitSignatureValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sStartSwapRequest_SubmitSignature.%s: %s%s",
+		"invalid %sStatefulSwapRequest_SubmitSignatures.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = StartSwapRequest_SubmitSignatureValidationError{}
+var _ error = StatefulSwapRequest_SubmitSignaturesValidationError{}
 
 var _ interface {
 	Field() string
@@ -5501,18 +5316,18 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = StartSwapRequest_SubmitSignatureValidationError{}
+} = StatefulSwapRequest_SubmitSignaturesValidationError{}
 
-// Validate checks the field values on StartSwapRequest_Start_CurrencyCreator
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, an error is returned.
-func (m *StartSwapRequest_Start_CurrencyCreator) Validate() error {
+// Validate checks the field values on
+// StatefulSwapRequest_Initiate_CurrencyCreator with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *StatefulSwapRequest_Initiate_CurrencyCreator) Validate() error {
 	if m == nil {
 		return nil
 	}
 
 	if m.GetId() == nil {
-		return StartSwapRequest_Start_CurrencyCreatorValidationError{
+		return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
 			field:  "Id",
 			reason: "value is required",
 		}
@@ -5520,7 +5335,7 @@ func (m *StartSwapRequest_Start_CurrencyCreator) Validate() error {
 
 	if v, ok := interface{}(m.GetId()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return StartSwapRequest_Start_CurrencyCreatorValidationError{
+			return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
 				field:  "Id",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5529,7 +5344,7 @@ func (m *StartSwapRequest_Start_CurrencyCreator) Validate() error {
 	}
 
 	if m.GetFromMint() == nil {
-		return StartSwapRequest_Start_CurrencyCreatorValidationError{
+		return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
 			field:  "FromMint",
 			reason: "value is required",
 		}
@@ -5537,7 +5352,7 @@ func (m *StartSwapRequest_Start_CurrencyCreator) Validate() error {
 
 	if v, ok := interface{}(m.GetFromMint()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return StartSwapRequest_Start_CurrencyCreatorValidationError{
+			return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
 				field:  "FromMint",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5546,7 +5361,7 @@ func (m *StartSwapRequest_Start_CurrencyCreator) Validate() error {
 	}
 
 	if m.GetToMint() == nil {
-		return StartSwapRequest_Start_CurrencyCreatorValidationError{
+		return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
 			field:  "ToMint",
 			reason: "value is required",
 		}
@@ -5554,7 +5369,7 @@ func (m *StartSwapRequest_Start_CurrencyCreator) Validate() error {
 
 	if v, ok := interface{}(m.GetToMint()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return StartSwapRequest_Start_CurrencyCreatorValidationError{
+			return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
 				field:  "ToMint",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5563,21 +5378,21 @@ func (m *StartSwapRequest_Start_CurrencyCreator) Validate() error {
 	}
 
 	if m.GetAmount() <= 0 {
-		return StartSwapRequest_Start_CurrencyCreatorValidationError{
+		return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
 			field:  "Amount",
 			reason: "value must be greater than 0",
 		}
 	}
 
-	if _, ok := _StartSwapRequest_Start_CurrencyCreator_FundingSource_InLookup[m.GetFundingSource()]; !ok {
-		return StartSwapRequest_Start_CurrencyCreatorValidationError{
+	if _, ok := _StatefulSwapRequest_Initiate_CurrencyCreator_FundingSource_InLookup[m.GetFundingSource()]; !ok {
+		return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
 			field:  "FundingSource",
 			reason: "value must be in list [1 2]",
 		}
 	}
 
 	if l := utf8.RuneCountInString(m.GetFundingId()); l < 32 || l > 88 {
-		return StartSwapRequest_Start_CurrencyCreatorValidationError{
+		return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
 			field:  "FundingId",
 			reason: "value length must be between 32 and 88 runes, inclusive",
 		}
@@ -5586,10 +5401,11 @@ func (m *StartSwapRequest_Start_CurrencyCreator) Validate() error {
 	return nil
 }
 
-// StartSwapRequest_Start_CurrencyCreatorValidationError is the validation
-// error returned by StartSwapRequest_Start_CurrencyCreator.Validate if the
-// designated constraints aren't met.
-type StartSwapRequest_Start_CurrencyCreatorValidationError struct {
+// StatefulSwapRequest_Initiate_CurrencyCreatorValidationError is the
+// validation error returned by
+// StatefulSwapRequest_Initiate_CurrencyCreator.Validate if the designated
+// constraints aren't met.
+type StatefulSwapRequest_Initiate_CurrencyCreatorValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5597,24 +5413,24 @@ type StartSwapRequest_Start_CurrencyCreatorValidationError struct {
 }
 
 // Field function returns field value.
-func (e StartSwapRequest_Start_CurrencyCreatorValidationError) Field() string { return e.field }
+func (e StatefulSwapRequest_Initiate_CurrencyCreatorValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e StartSwapRequest_Start_CurrencyCreatorValidationError) Reason() string { return e.reason }
+func (e StatefulSwapRequest_Initiate_CurrencyCreatorValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e StartSwapRequest_Start_CurrencyCreatorValidationError) Cause() error { return e.cause }
+func (e StatefulSwapRequest_Initiate_CurrencyCreatorValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e StartSwapRequest_Start_CurrencyCreatorValidationError) Key() bool { return e.key }
+func (e StatefulSwapRequest_Initiate_CurrencyCreatorValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e StartSwapRequest_Start_CurrencyCreatorValidationError) ErrorName() string {
-	return "StartSwapRequest_Start_CurrencyCreatorValidationError"
+func (e StatefulSwapRequest_Initiate_CurrencyCreatorValidationError) ErrorName() string {
+	return "StatefulSwapRequest_Initiate_CurrencyCreatorValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e StartSwapRequest_Start_CurrencyCreatorValidationError) Error() string {
+func (e StatefulSwapRequest_Initiate_CurrencyCreatorValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5626,14 +5442,14 @@ func (e StartSwapRequest_Start_CurrencyCreatorValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sStartSwapRequest_Start_CurrencyCreator.%s: %s%s",
+		"invalid %sStatefulSwapRequest_Initiate_CurrencyCreator.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = StartSwapRequest_Start_CurrencyCreatorValidationError{}
+var _ error = StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{}
 
 var _ interface {
 	Field() string
@@ -5641,28 +5457,28 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = StartSwapRequest_Start_CurrencyCreatorValidationError{}
+} = StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{}
 
-var _StartSwapRequest_Start_CurrencyCreator_FundingSource_InLookup = map[FundingSource]struct{}{
+var _StatefulSwapRequest_Initiate_CurrencyCreator_FundingSource_InLookup = map[FundingSource]struct{}{
 	1: {},
 	2: {},
 }
 
-// Validate checks the field values on StartSwapResponse_ServerParameters with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, an error is returned.
-func (m *StartSwapResponse_ServerParameters) Validate() error {
+// Validate checks the field values on StatefulSwapResponse_ServerParameters
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, an error is returned.
+func (m *StatefulSwapResponse_ServerParameters) Validate() error {
 	if m == nil {
 		return nil
 	}
 
 	switch m.Kind.(type) {
 
-	case *StartSwapResponse_ServerParameters_CurrencyCreator_:
+	case *StatefulSwapResponse_ServerParameters_CurrencyCreator_:
 
 		if v, ok := interface{}(m.GetCurrencyCreator()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return StartSwapResponse_ServerParametersValidationError{
+				return StatefulSwapResponse_ServerParametersValidationError{
 					field:  "CurrencyCreator",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -5671,7 +5487,7 @@ func (m *StartSwapResponse_ServerParameters) Validate() error {
 		}
 
 	default:
-		return StartSwapResponse_ServerParametersValidationError{
+		return StatefulSwapResponse_ServerParametersValidationError{
 			field:  "Kind",
 			reason: "value is required",
 		}
@@ -5681,10 +5497,10 @@ func (m *StartSwapResponse_ServerParameters) Validate() error {
 	return nil
 }
 
-// StartSwapResponse_ServerParametersValidationError is the validation error
-// returned by StartSwapResponse_ServerParameters.Validate if the designated
-// constraints aren't met.
-type StartSwapResponse_ServerParametersValidationError struct {
+// StatefulSwapResponse_ServerParametersValidationError is the validation error
+// returned by StatefulSwapResponse_ServerParameters.Validate if the
+// designated constraints aren't met.
+type StatefulSwapResponse_ServerParametersValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5692,24 +5508,24 @@ type StartSwapResponse_ServerParametersValidationError struct {
 }
 
 // Field function returns field value.
-func (e StartSwapResponse_ServerParametersValidationError) Field() string { return e.field }
+func (e StatefulSwapResponse_ServerParametersValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e StartSwapResponse_ServerParametersValidationError) Reason() string { return e.reason }
+func (e StatefulSwapResponse_ServerParametersValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e StartSwapResponse_ServerParametersValidationError) Cause() error { return e.cause }
+func (e StatefulSwapResponse_ServerParametersValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e StartSwapResponse_ServerParametersValidationError) Key() bool { return e.key }
+func (e StatefulSwapResponse_ServerParametersValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e StartSwapResponse_ServerParametersValidationError) ErrorName() string {
-	return "StartSwapResponse_ServerParametersValidationError"
+func (e StatefulSwapResponse_ServerParametersValidationError) ErrorName() string {
+	return "StatefulSwapResponse_ServerParametersValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e StartSwapResponse_ServerParametersValidationError) Error() string {
+func (e StatefulSwapResponse_ServerParametersValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5721,14 +5537,14 @@ func (e StartSwapResponse_ServerParametersValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sStartSwapResponse_ServerParameters.%s: %s%s",
+		"invalid %sStatefulSwapResponse_ServerParameters.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = StartSwapResponse_ServerParametersValidationError{}
+var _ error = StatefulSwapResponse_ServerParametersValidationError{}
 
 var _ interface {
 	Field() string
@@ -5736,12 +5552,12 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = StartSwapResponse_ServerParametersValidationError{}
+} = StatefulSwapResponse_ServerParametersValidationError{}
 
-// Validate checks the field values on StartSwapResponse_Success with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on StatefulSwapResponse_Success with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
-func (m *StartSwapResponse_Success) Validate() error {
+func (m *StatefulSwapResponse_Success) Validate() error {
 	if m == nil {
 		return nil
 	}
@@ -5751,9 +5567,10 @@ func (m *StartSwapResponse_Success) Validate() error {
 	return nil
 }
 
-// StartSwapResponse_SuccessValidationError is the validation error returned by
-// StartSwapResponse_Success.Validate if the designated constraints aren't met.
-type StartSwapResponse_SuccessValidationError struct {
+// StatefulSwapResponse_SuccessValidationError is the validation error returned
+// by StatefulSwapResponse_Success.Validate if the designated constraints
+// aren't met.
+type StatefulSwapResponse_SuccessValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5761,24 +5578,24 @@ type StartSwapResponse_SuccessValidationError struct {
 }
 
 // Field function returns field value.
-func (e StartSwapResponse_SuccessValidationError) Field() string { return e.field }
+func (e StatefulSwapResponse_SuccessValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e StartSwapResponse_SuccessValidationError) Reason() string { return e.reason }
+func (e StatefulSwapResponse_SuccessValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e StartSwapResponse_SuccessValidationError) Cause() error { return e.cause }
+func (e StatefulSwapResponse_SuccessValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e StartSwapResponse_SuccessValidationError) Key() bool { return e.key }
+func (e StatefulSwapResponse_SuccessValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e StartSwapResponse_SuccessValidationError) ErrorName() string {
-	return "StartSwapResponse_SuccessValidationError"
+func (e StatefulSwapResponse_SuccessValidationError) ErrorName() string {
+	return "StatefulSwapResponse_SuccessValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e StartSwapResponse_SuccessValidationError) Error() string {
+func (e StatefulSwapResponse_SuccessValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5790,14 +5607,14 @@ func (e StartSwapResponse_SuccessValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sStartSwapResponse_Success.%s: %s%s",
+		"invalid %sStatefulSwapResponse_Success.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = StartSwapResponse_SuccessValidationError{}
+var _ error = StatefulSwapResponse_SuccessValidationError{}
 
 var _ interface {
 	Field() string
@@ -5805,12 +5622,12 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = StartSwapResponse_SuccessValidationError{}
+} = StatefulSwapResponse_SuccessValidationError{}
 
-// Validate checks the field values on StartSwapResponse_Error with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on StatefulSwapResponse_Error with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
-func (m *StartSwapResponse_Error) Validate() error {
+func (m *StatefulSwapResponse_Error) Validate() error {
 	if m == nil {
 		return nil
 	}
@@ -5822,7 +5639,7 @@ func (m *StartSwapResponse_Error) Validate() error {
 
 		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return StartSwapResponse_ErrorValidationError{
+				return StatefulSwapResponse_ErrorValidationError{
 					field:  fmt.Sprintf("ErrorDetails[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -5835,9 +5652,9 @@ func (m *StartSwapResponse_Error) Validate() error {
 	return nil
 }
 
-// StartSwapResponse_ErrorValidationError is the validation error returned by
-// StartSwapResponse_Error.Validate if the designated constraints aren't met.
-type StartSwapResponse_ErrorValidationError struct {
+// StatefulSwapResponse_ErrorValidationError is the validation error returned
+// by StatefulSwapResponse_Error.Validate if the designated constraints aren't met.
+type StatefulSwapResponse_ErrorValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5845,24 +5662,24 @@ type StartSwapResponse_ErrorValidationError struct {
 }
 
 // Field function returns field value.
-func (e StartSwapResponse_ErrorValidationError) Field() string { return e.field }
+func (e StatefulSwapResponse_ErrorValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e StartSwapResponse_ErrorValidationError) Reason() string { return e.reason }
+func (e StatefulSwapResponse_ErrorValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e StartSwapResponse_ErrorValidationError) Cause() error { return e.cause }
+func (e StatefulSwapResponse_ErrorValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e StartSwapResponse_ErrorValidationError) Key() bool { return e.key }
+func (e StatefulSwapResponse_ErrorValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e StartSwapResponse_ErrorValidationError) ErrorName() string {
-	return "StartSwapResponse_ErrorValidationError"
+func (e StatefulSwapResponse_ErrorValidationError) ErrorName() string {
+	return "StatefulSwapResponse_ErrorValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e StartSwapResponse_ErrorValidationError) Error() string {
+func (e StatefulSwapResponse_ErrorValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5874,14 +5691,14 @@ func (e StartSwapResponse_ErrorValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sStartSwapResponse_Error.%s: %s%s",
+		"invalid %sStatefulSwapResponse_Error.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = StartSwapResponse_ErrorValidationError{}
+var _ error = StatefulSwapResponse_ErrorValidationError{}
 
 var _ interface {
 	Field() string
@@ -5889,19 +5706,36 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = StartSwapResponse_ErrorValidationError{}
+} = StatefulSwapResponse_ErrorValidationError{}
 
 // Validate checks the field values on
-// StartSwapResponse_ServerParameters_CurrencyCreator with the rules defined
-// in the proto definition for this message. If any rules are violated, an
-// error is returned.
-func (m *StartSwapResponse_ServerParameters_CurrencyCreator) Validate() error {
+// StatefulSwapResponse_ServerParameters_CurrencyCreator with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *StatefulSwapResponse_ServerParameters_CurrencyCreator) Validate() error {
 	if m == nil {
 		return nil
 	}
 
+	if m.GetPayer() == nil {
+		return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
+			field:  "Payer",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetPayer()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
+				field:  "Payer",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.GetNonce() == nil {
-		return StartSwapResponse_ServerParameters_CurrencyCreatorValidationError{
+		return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
 			field:  "Nonce",
 			reason: "value is required",
 		}
@@ -5909,7 +5743,7 @@ func (m *StartSwapResponse_ServerParameters_CurrencyCreator) Validate() error {
 
 	if v, ok := interface{}(m.GetNonce()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return StartSwapResponse_ServerParameters_CurrencyCreatorValidationError{
+			return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
 				field:  "Nonce",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5918,7 +5752,7 @@ func (m *StartSwapResponse_ServerParameters_CurrencyCreator) Validate() error {
 	}
 
 	if m.GetBlockhash() == nil {
-		return StartSwapResponse_ServerParameters_CurrencyCreatorValidationError{
+		return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
 			field:  "Blockhash",
 			reason: "value is required",
 		}
@@ -5926,7 +5760,7 @@ func (m *StartSwapResponse_ServerParameters_CurrencyCreator) Validate() error {
 
 	if v, ok := interface{}(m.GetBlockhash()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return StartSwapResponse_ServerParameters_CurrencyCreatorValidationError{
+			return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
 				field:  "Blockhash",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5934,866 +5768,12 @@ func (m *StartSwapResponse_ServerParameters_CurrencyCreator) Validate() error {
 		}
 	}
 
-	return nil
-}
-
-// StartSwapResponse_ServerParameters_CurrencyCreatorValidationError is the
-// validation error returned by
-// StartSwapResponse_ServerParameters_CurrencyCreator.Validate if the
-// designated constraints aren't met.
-type StartSwapResponse_ServerParameters_CurrencyCreatorValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e StartSwapResponse_ServerParameters_CurrencyCreatorValidationError) Field() string {
-	return e.field
-}
-
-// Reason function returns reason value.
-func (e StartSwapResponse_ServerParameters_CurrencyCreatorValidationError) Reason() string {
-	return e.reason
-}
-
-// Cause function returns cause value.
-func (e StartSwapResponse_ServerParameters_CurrencyCreatorValidationError) Cause() error {
-	return e.cause
-}
-
-// Key function returns key value.
-func (e StartSwapResponse_ServerParameters_CurrencyCreatorValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e StartSwapResponse_ServerParameters_CurrencyCreatorValidationError) ErrorName() string {
-	return "StartSwapResponse_ServerParameters_CurrencyCreatorValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e StartSwapResponse_ServerParameters_CurrencyCreatorValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sStartSwapResponse_ServerParameters_CurrencyCreator.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = StartSwapResponse_ServerParameters_CurrencyCreatorValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = StartSwapResponse_ServerParameters_CurrencyCreatorValidationError{}
-
-// Validate checks the field values on SwapRequest_Initiate with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
-func (m *SwapRequest_Initiate) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	switch m.Kind.(type) {
-
-	case *SwapRequest_Initiate_Stateless_:
-
-		if v, ok := interface{}(m.GetStateless()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return SwapRequest_InitiateValidationError{
-					field:  "Stateless",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	case *SwapRequest_Initiate_Stateful_:
-
-		if v, ok := interface{}(m.GetStateful()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return SwapRequest_InitiateValidationError{
-					field:  "Stateful",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	default:
-		return SwapRequest_InitiateValidationError{
-			field:  "Kind",
-			reason: "value is required",
-		}
-
-	}
-
-	return nil
-}
-
-// SwapRequest_InitiateValidationError is the validation error returned by
-// SwapRequest_Initiate.Validate if the designated constraints aren't met.
-type SwapRequest_InitiateValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SwapRequest_InitiateValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SwapRequest_InitiateValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SwapRequest_InitiateValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SwapRequest_InitiateValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SwapRequest_InitiateValidationError) ErrorName() string {
-	return "SwapRequest_InitiateValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e SwapRequest_InitiateValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSwapRequest_Initiate.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SwapRequest_InitiateValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SwapRequest_InitiateValidationError{}
-
-// Validate checks the field values on SwapRequest_SubmitSignatures with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
-func (m *SwapRequest_SubmitSignatures) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	if len(m.GetSignatures()) != 2 {
-		return SwapRequest_SubmitSignaturesValidationError{
-			field:  "Signatures",
-			reason: "value must contain exactly 2 item(s)",
-		}
-	}
-
-	for idx, item := range m.GetSignatures() {
-		_, _ = idx, item
-
-		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return SwapRequest_SubmitSignaturesValidationError{
-					field:  fmt.Sprintf("Signatures[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// SwapRequest_SubmitSignaturesValidationError is the validation error returned
-// by SwapRequest_SubmitSignatures.Validate if the designated constraints
-// aren't met.
-type SwapRequest_SubmitSignaturesValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SwapRequest_SubmitSignaturesValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SwapRequest_SubmitSignaturesValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SwapRequest_SubmitSignaturesValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SwapRequest_SubmitSignaturesValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SwapRequest_SubmitSignaturesValidationError) ErrorName() string {
-	return "SwapRequest_SubmitSignaturesValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e SwapRequest_SubmitSignaturesValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSwapRequest_SubmitSignatures.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SwapRequest_SubmitSignaturesValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SwapRequest_SubmitSignaturesValidationError{}
-
-// Validate checks the field values on SwapRequest_Initiate_Stateless with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
-func (m *SwapRequest_Initiate_Stateless) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	if m.GetOwner() == nil {
-		return SwapRequest_Initiate_StatelessValidationError{
-			field:  "Owner",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetOwner()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SwapRequest_Initiate_StatelessValidationError{
-				field:  "Owner",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if m.GetFromMint() == nil {
-		return SwapRequest_Initiate_StatelessValidationError{
-			field:  "FromMint",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetFromMint()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SwapRequest_Initiate_StatelessValidationError{
-				field:  "FromMint",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if m.GetToMint() == nil {
-		return SwapRequest_Initiate_StatelessValidationError{
-			field:  "ToMint",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetToMint()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SwapRequest_Initiate_StatelessValidationError{
-				field:  "ToMint",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if m.GetAmount() <= 0 {
-		return SwapRequest_Initiate_StatelessValidationError{
-			field:  "Amount",
-			reason: "value must be greater than 0",
-		}
-	}
-
-	if m.GetSwapAuthority() == nil {
-		return SwapRequest_Initiate_StatelessValidationError{
-			field:  "SwapAuthority",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetSwapAuthority()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SwapRequest_Initiate_StatelessValidationError{
-				field:  "SwapAuthority",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for WaitForBlockchainStatus
-
-	if m.GetSignature() == nil {
-		return SwapRequest_Initiate_StatelessValidationError{
-			field:  "Signature",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetSignature()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SwapRequest_Initiate_StatelessValidationError{
-				field:  "Signature",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	return nil
-}
-
-// SwapRequest_Initiate_StatelessValidationError is the validation error
-// returned by SwapRequest_Initiate_Stateless.Validate if the designated
-// constraints aren't met.
-type SwapRequest_Initiate_StatelessValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SwapRequest_Initiate_StatelessValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SwapRequest_Initiate_StatelessValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SwapRequest_Initiate_StatelessValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SwapRequest_Initiate_StatelessValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SwapRequest_Initiate_StatelessValidationError) ErrorName() string {
-	return "SwapRequest_Initiate_StatelessValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e SwapRequest_Initiate_StatelessValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSwapRequest_Initiate_Stateless.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SwapRequest_Initiate_StatelessValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SwapRequest_Initiate_StatelessValidationError{}
-
-// Validate checks the field values on SwapRequest_Initiate_Stateful with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
-func (m *SwapRequest_Initiate_Stateful) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	if m.GetSwapId() == nil {
-		return SwapRequest_Initiate_StatefulValidationError{
-			field:  "SwapId",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetSwapId()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SwapRequest_Initiate_StatefulValidationError{
-				field:  "SwapId",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if m.GetOwner() == nil {
-		return SwapRequest_Initiate_StatefulValidationError{
-			field:  "Owner",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetOwner()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SwapRequest_Initiate_StatefulValidationError{
-				field:  "Owner",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if m.GetSwapAuthority() == nil {
-		return SwapRequest_Initiate_StatefulValidationError{
-			field:  "SwapAuthority",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetSwapAuthority()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SwapRequest_Initiate_StatefulValidationError{
-				field:  "SwapAuthority",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if m.GetSignature() == nil {
-		return SwapRequest_Initiate_StatefulValidationError{
-			field:  "Signature",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetSignature()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SwapRequest_Initiate_StatefulValidationError{
-				field:  "Signature",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	return nil
-}
-
-// SwapRequest_Initiate_StatefulValidationError is the validation error
-// returned by SwapRequest_Initiate_Stateful.Validate if the designated
-// constraints aren't met.
-type SwapRequest_Initiate_StatefulValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SwapRequest_Initiate_StatefulValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SwapRequest_Initiate_StatefulValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SwapRequest_Initiate_StatefulValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SwapRequest_Initiate_StatefulValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SwapRequest_Initiate_StatefulValidationError) ErrorName() string {
-	return "SwapRequest_Initiate_StatefulValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e SwapRequest_Initiate_StatefulValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSwapRequest_Initiate_Stateful.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SwapRequest_Initiate_StatefulValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SwapRequest_Initiate_StatefulValidationError{}
-
-// Validate checks the field values on SwapResponse_ServerParameters with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
-func (m *SwapResponse_ServerParameters) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	switch m.Kind.(type) {
-
-	case *SwapResponse_ServerParameters_CurrencyCreatorStateless_:
-
-		if v, ok := interface{}(m.GetCurrencyCreatorStateless()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return SwapResponse_ServerParametersValidationError{
-					field:  "CurrencyCreatorStateless",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	case *SwapResponse_ServerParameters_CurrencyCreatorStateful_:
-
-		if v, ok := interface{}(m.GetCurrencyCreatorStateful()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return SwapResponse_ServerParametersValidationError{
-					field:  "CurrencyCreatorStateful",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	default:
-		return SwapResponse_ServerParametersValidationError{
-			field:  "Kind",
-			reason: "value is required",
-		}
-
-	}
-
-	return nil
-}
-
-// SwapResponse_ServerParametersValidationError is the validation error
-// returned by SwapResponse_ServerParameters.Validate if the designated
-// constraints aren't met.
-type SwapResponse_ServerParametersValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SwapResponse_ServerParametersValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SwapResponse_ServerParametersValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SwapResponse_ServerParametersValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SwapResponse_ServerParametersValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SwapResponse_ServerParametersValidationError) ErrorName() string {
-	return "SwapResponse_ServerParametersValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e SwapResponse_ServerParametersValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSwapResponse_ServerParameters.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SwapResponse_ServerParametersValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SwapResponse_ServerParametersValidationError{}
-
-// Validate checks the field values on SwapResponse_Success with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
-func (m *SwapResponse_Success) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	// no validation rules for Code
-
-	return nil
-}
-
-// SwapResponse_SuccessValidationError is the validation error returned by
-// SwapResponse_Success.Validate if the designated constraints aren't met.
-type SwapResponse_SuccessValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SwapResponse_SuccessValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SwapResponse_SuccessValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SwapResponse_SuccessValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SwapResponse_SuccessValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SwapResponse_SuccessValidationError) ErrorName() string {
-	return "SwapResponse_SuccessValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e SwapResponse_SuccessValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSwapResponse_Success.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SwapResponse_SuccessValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SwapResponse_SuccessValidationError{}
-
-// Validate checks the field values on SwapResponse_Error with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
-func (m *SwapResponse_Error) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	// no validation rules for Code
-
-	for idx, item := range m.GetErrorDetails() {
-		_, _ = idx, item
-
-		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return SwapResponse_ErrorValidationError{
-					field:  fmt.Sprintf("ErrorDetails[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// SwapResponse_ErrorValidationError is the validation error returned by
-// SwapResponse_Error.Validate if the designated constraints aren't met.
-type SwapResponse_ErrorValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SwapResponse_ErrorValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SwapResponse_ErrorValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SwapResponse_ErrorValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SwapResponse_ErrorValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SwapResponse_ErrorValidationError) ErrorName() string {
-	return "SwapResponse_ErrorValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e SwapResponse_ErrorValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSwapResponse_Error.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SwapResponse_ErrorValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SwapResponse_ErrorValidationError{}
-
-// Validate checks the field values on
-// SwapResponse_ServerParameters_CurrencyCreatorStateless with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
-func (m *SwapResponse_ServerParameters_CurrencyCreatorStateless) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	if m.GetPayer() == nil {
-		return SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError{
-			field:  "Payer",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetPayer()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError{
-				field:  "Payer",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if m.GetRecentBlockhash() == nil {
-		return SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError{
-			field:  "RecentBlockhash",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetRecentBlockhash()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError{
-				field:  "RecentBlockhash",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	for idx, item := range m.GetAlts() {
 		_, _ = idx, item
 
 		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError{
+				return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
 					field:  fmt.Sprintf("Alts[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -6808,14 +5788,14 @@ func (m *SwapResponse_ServerParameters_CurrencyCreatorStateless) Validate() erro
 	// no validation rules for ComputeUnitPrice
 
 	if utf8.RuneCountInString(m.GetMemoValue()) > 64 {
-		return SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError{
+		return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
 			field:  "MemoValue",
 			reason: "value length must be at most 64 runes",
 		}
 	}
 
 	if m.GetMemoryAccount() == nil {
-		return SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError{
+		return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
 			field:  "MemoryAccount",
 			reason: "value is required",
 		}
@@ -6823,7 +5803,7 @@ func (m *SwapResponse_ServerParameters_CurrencyCreatorStateless) Validate() erro
 
 	if v, ok := interface{}(m.GetMemoryAccount()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError{
+			return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
 				field:  "MemoryAccount",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -6836,11 +5816,11 @@ func (m *SwapResponse_ServerParameters_CurrencyCreatorStateless) Validate() erro
 	return nil
 }
 
-// SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError is the
+// StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError is the
 // validation error returned by
-// SwapResponse_ServerParameters_CurrencyCreatorStateless.Validate if the
+// StatefulSwapResponse_ServerParameters_CurrencyCreator.Validate if the
 // designated constraints aren't met.
-type SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError struct {
+type StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -6848,32 +5828,32 @@ type SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError struc
 }
 
 // Field function returns field value.
-func (e SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError) Field() string {
+func (e StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError) Field() string {
 	return e.field
 }
 
 // Reason function returns reason value.
-func (e SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError) Reason() string {
+func (e StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError) Reason() string {
 	return e.reason
 }
 
 // Cause function returns cause value.
-func (e SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError) Cause() error {
+func (e StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError) Cause() error {
 	return e.cause
 }
 
 // Key function returns key value.
-func (e SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError) Key() bool {
+func (e StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError) Key() bool {
 	return e.key
 }
 
 // ErrorName returns error name.
-func (e SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError) ErrorName() string {
-	return "SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError"
+func (e StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError) ErrorName() string {
+	return "StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError) Error() string {
+func (e StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -6885,14 +5865,14 @@ func (e SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError) E
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSwapResponse_ServerParameters_CurrencyCreatorStateless.%s: %s%s",
+		"invalid %sStatefulSwapResponse_ServerParameters_CurrencyCreator.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError{}
+var _ error = StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{}
 
 var _ interface {
 	Field() string
@@ -6900,147 +5880,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SwapResponse_ServerParameters_CurrencyCreatorStatelessValidationError{}
-
-// Validate checks the field values on
-// SwapResponse_ServerParameters_CurrencyCreatorStateful with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
-func (m *SwapResponse_ServerParameters_CurrencyCreatorStateful) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	if m.GetPayer() == nil {
-		return SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError{
-			field:  "Payer",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetPayer()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError{
-				field:  "Payer",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	for idx, item := range m.GetAlts() {
-		_, _ = idx, item
-
-		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError{
-					field:  fmt.Sprintf("Alts[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	// no validation rules for ComputeUnitLimit
-
-	// no validation rules for ComputeUnitPrice
-
-	if utf8.RuneCountInString(m.GetMemoValue()) > 64 {
-		return SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError{
-			field:  "MemoValue",
-			reason: "value length must be at most 64 runes",
-		}
-	}
-
-	if m.GetMemoryAccount() == nil {
-		return SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError{
-			field:  "MemoryAccount",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetMemoryAccount()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError{
-				field:  "MemoryAccount",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for MemoryIndex
-
-	return nil
-}
-
-// SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError is the
-// validation error returned by
-// SwapResponse_ServerParameters_CurrencyCreatorStateful.Validate if the
-// designated constraints aren't met.
-type SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError) Field() string {
-	return e.field
-}
-
-// Reason function returns reason value.
-func (e SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError) Reason() string {
-	return e.reason
-}
-
-// Cause function returns cause value.
-func (e SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError) Cause() error {
-	return e.cause
-}
-
-// Key function returns key value.
-func (e SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError) Key() bool {
-	return e.key
-}
-
-// ErrorName returns error name.
-func (e SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError) ErrorName() string {
-	return "SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSwapResponse_ServerParameters_CurrencyCreatorStateful.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SwapResponse_ServerParameters_CurrencyCreatorStatefulValidationError{}
+} = StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{}
 
 // Validate checks the field values on PublicDistributionMetadata_Distribution
 // with the rules defined in the proto definition for this message. If any
