@@ -5412,6 +5412,9 @@ func (x *SwapRequest_Initiate_Stateless) GetSignature() *v1.Signature {
 	return nil
 }
 
+// Stateful initiates a swap for an existing swap that was created via
+// the StartSwap RPC. This can be called when the swap is in either the
+// FUNDING or FUNDED state to pre-sign/sign the swap transaction.
 type SwapRequest_Initiate_Stateful struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
