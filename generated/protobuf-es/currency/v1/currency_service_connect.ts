@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetAllRatesRequest, GetAllRatesResponse, GetMintsRequest, GetMintsResponse } from "./currency_service_pb";
+import { GetAllRatesRequest, GetAllRatesResponse, GetHistoricalMintDataRequest, GetHistoricalMintDataResponse, GetMintsRequest, GetMintsResponse } from "./currency_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -33,6 +33,17 @@ export const Currency = {
       name: "GetMints",
       I: GetMintsRequest,
       O: GetMintsResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * GetHistoricalMintData returns historical market data for a mint
+     *
+     * @generated from rpc ocp.currency.v1.Currency.GetHistoricalMintData
+     */
+    getHistoricalMintData: {
+      name: "GetHistoricalMintData",
+      I: GetHistoricalMintDataRequest,
+      O: GetHistoricalMintDataResponse,
       kind: MethodKind.Unary,
     },
   }

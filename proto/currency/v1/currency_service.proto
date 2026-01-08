@@ -17,6 +17,9 @@ service Currency {
 
     // GetMints gets mint account metadata by address
     rpc GetMints(GetMintsRequest) returns (GetMintsResponse);
+
+    // GetHistoricalMintData returns historical market data for a mint
+    rpc GetHistoricalMintData(GetHistoricalMintDataRequest) returns (GetHistoricalMintDataResponse);
 }
 
 message GetAllRatesRequest {
@@ -147,4 +150,46 @@ message LaunchpadMetadata {
 
     // Precent fee for sells in basis points, currently hardcoded to 1%
     uint32 sell_fee_bps = 8 [(validate.rules).uint32.const = 100];
+}
+
+message GetHistoricalMintDataRequest {
+    // The mint address to get historical data for
+    common.v1.SolanaAccountId address = 1 [(validate.rules).message.required = true];
+
+    // The currency code for the returned market data (e.g., "usd")
+    string currency_code = 2 [(validate.rules).string = {
+        pattern: "^[a-z]{3,4}$"
+    }];
+
+    // Start of the time range
+    google.protobuf.Timestamp start_time = 3 [(validate.rules).timestamp.required = true];
+
+    // End of the time range. If not provided, defaults to current time.
+    google.protobuf.Timestamp end_time = 4;
+
+    // The interval for data aggregation
+    common.v1.Interval interval = 5;
+}
+
+message GetHistoricalMintDataResponse {
+    Result result = 1;
+    enum Result {
+        OK = 0;
+
+        // The requested mint or currency was not found
+        NOT_FOUND = 1;
+
+        // No data available for the requested time range
+        MISSING_DATA = 2;
+    }
+
+    repeated HistoricalMintData data = 2;
+}
+
+message HistoricalMintData {
+    // Timestamp for this data point
+    google.protobuf.Timestamp timestamp = 1 [(validate.rules).timestamp.required = true];
+
+    // Market capitalization at this point in time
+    double market_cap = 2;
 }

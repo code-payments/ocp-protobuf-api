@@ -27,6 +27,8 @@ type CurrencyClient interface {
 	GetAllRates(ctx context.Context, in *GetAllRatesRequest, opts ...grpc.CallOption) (*GetAllRatesResponse, error)
 	// GetMints gets mint account metadata by address
 	GetMints(ctx context.Context, in *GetMintsRequest, opts ...grpc.CallOption) (*GetMintsResponse, error)
+	// GetHistoricalMintData returns historical market data for a mint
+	GetHistoricalMintData(ctx context.Context, in *GetHistoricalMintDataRequest, opts ...grpc.CallOption) (*GetHistoricalMintDataResponse, error)
 }
 
 type currencyClient struct {
@@ -55,6 +57,15 @@ func (c *currencyClient) GetMints(ctx context.Context, in *GetMintsRequest, opts
 	return out, nil
 }
 
+func (c *currencyClient) GetHistoricalMintData(ctx context.Context, in *GetHistoricalMintDataRequest, opts ...grpc.CallOption) (*GetHistoricalMintDataResponse, error) {
+	out := new(GetHistoricalMintDataResponse)
+	err := c.cc.Invoke(ctx, "/ocp.currency.v1.Currency/GetHistoricalMintData", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CurrencyServer is the server API for Currency service.
 // All implementations must embed UnimplementedCurrencyServer
 // for forward compatibility
@@ -64,6 +75,8 @@ type CurrencyServer interface {
 	GetAllRates(context.Context, *GetAllRatesRequest) (*GetAllRatesResponse, error)
 	// GetMints gets mint account metadata by address
 	GetMints(context.Context, *GetMintsRequest) (*GetMintsResponse, error)
+	// GetHistoricalMintData returns historical market data for a mint
+	GetHistoricalMintData(context.Context, *GetHistoricalMintDataRequest) (*GetHistoricalMintDataResponse, error)
 	mustEmbedUnimplementedCurrencyServer()
 }
 
@@ -76,6 +89,9 @@ func (UnimplementedCurrencyServer) GetAllRates(context.Context, *GetAllRatesRequ
 }
 func (UnimplementedCurrencyServer) GetMints(context.Context, *GetMintsRequest) (*GetMintsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMints not implemented")
+}
+func (UnimplementedCurrencyServer) GetHistoricalMintData(context.Context, *GetHistoricalMintDataRequest) (*GetHistoricalMintDataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetHistoricalMintData not implemented")
 }
 func (UnimplementedCurrencyServer) mustEmbedUnimplementedCurrencyServer() {}
 
@@ -126,6 +142,24 @@ func _Currency_GetMints_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Currency_GetHistoricalMintData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHistoricalMintDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyServer).GetHistoricalMintData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ocp.currency.v1.Currency/GetHistoricalMintData",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyServer).GetHistoricalMintData(ctx, req.(*GetHistoricalMintDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Currency_ServiceDesc is the grpc.ServiceDesc for Currency service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -140,6 +174,10 @@ var Currency_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMints",
 			Handler:    _Currency_GetMints_Handler,
+		},
+		{
+			MethodName: "GetHistoricalMintData",
+			Handler:    _Currency_GetHistoricalMintData_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -132,3 +132,12 @@ message ClientPong {
     // of potential network latency
     google.protobuf.Timestamp timestamp = 1 [(validate.rules).timestamp.required = true];
 }
+
+enum Interval {
+    RAW     = 0;
+    SECOND  = 1;
+    MINUTE  = 2;
+    HOUR    = 3;
+    DAY     = 4;
+    WEEK    = 5;
+}
