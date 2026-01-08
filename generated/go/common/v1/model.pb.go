@@ -83,6 +83,64 @@ func (AccountType) EnumDescriptor() ([]byte, []int) {
 	return file_common_v1_model_proto_rawDescGZIP(), []int{0}
 }
 
+type Interval int32
+
+const (
+	Interval_RAW    Interval = 0
+	Interval_SECOND Interval = 1
+	Interval_MINUTE Interval = 2
+	Interval_HOUR   Interval = 3
+	Interval_DAY    Interval = 4
+	Interval_WEEK   Interval = 5
+)
+
+// Enum value maps for Interval.
+var (
+	Interval_name = map[int32]string{
+		0: "RAW",
+		1: "SECOND",
+		2: "MINUTE",
+		3: "HOUR",
+		4: "DAY",
+		5: "WEEK",
+	}
+	Interval_value = map[string]int32{
+		"RAW":    0,
+		"SECOND": 1,
+		"MINUTE": 2,
+		"HOUR":   3,
+		"DAY":    4,
+		"WEEK":   5,
+	}
+)
+
+func (x Interval) Enum() *Interval {
+	p := new(Interval)
+	*p = x
+	return p
+}
+
+func (x Interval) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Interval) Descriptor() protoreflect.EnumDescriptor {
+	return file_common_v1_model_proto_enumTypes[1].Descriptor()
+}
+
+func (Interval) Type() protoreflect.EnumType {
+	return &file_common_v1_model_proto_enumTypes[1]
+}
+
+func (x Interval) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Interval.Descriptor instead.
+func (Interval) EnumDescriptor() ([]byte, []int) {
+	return file_common_v1_model_proto_rawDescGZIP(), []int{1}
+}
+
 type Response_Result int32
 
 const (
@@ -113,11 +171,11 @@ func (x Response_Result) String() string {
 }
 
 func (Response_Result) Descriptor() protoreflect.EnumDescriptor {
-	return file_common_v1_model_proto_enumTypes[1].Descriptor()
+	return file_common_v1_model_proto_enumTypes[2].Descriptor()
 }
 
 func (Response_Result) Type() protoreflect.EnumType {
-	return &file_common_v1_model_proto_enumTypes[1]
+	return &file_common_v1_model_proto_enumTypes[2]
 }
 
 func (x Response_Result) Number() protoreflect.EnumNumber {
@@ -897,15 +955,19 @@ var file_common_v1_model_proto_rawDesc = []byte{
 	0x41, 0x52, 0x44, 0x10, 0x02, 0x12, 0x08, 0x0a, 0x04, 0x53, 0x57, 0x41, 0x50, 0x10, 0x03, 0x12,
 	0x1c, 0x0a, 0x18, 0x41, 0x53, 0x53, 0x4f, 0x43, 0x49, 0x41, 0x54, 0x45, 0x44, 0x5f, 0x54, 0x4f,
 	0x4b, 0x45, 0x4e, 0x5f, 0x41, 0x43, 0x43, 0x4f, 0x55, 0x4e, 0x54, 0x10, 0x04, 0x12, 0x08, 0x0a,
-	0x04, 0x50, 0x4f, 0x4f, 0x4c, 0x10, 0x05, 0x42, 0x72, 0x0a, 0x19, 0x63, 0x6f, 0x6d, 0x2e, 0x63,
-	0x6f, 0x64, 0x65, 0x69, 0x6e, 0x63, 0x2e, 0x67, 0x65, 0x6e, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f,
-	0x6e, 0x2e, 0x76, 0x31, 0x5a, 0x47, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
-	0x2f, 0x63, 0x6f, 0x64, 0x65, 0x2d, 0x70, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x2f, 0x6f,
-	0x63, 0x70, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2d, 0x61, 0x70, 0x69, 0x2f,
-	0x67, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x64, 0x2f, 0x67, 0x6f, 0x2f, 0x63, 0x6f, 0x6d,
-	0x6d, 0x6f, 0x6e, 0x2f, 0x76, 0x31, 0x3b, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0xa2, 0x02, 0x0b,
-	0x43, 0x50, 0x42, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x04, 0x50, 0x4f, 0x4f, 0x4c, 0x10, 0x05, 0x2a, 0x48, 0x0a, 0x08, 0x49, 0x6e, 0x74, 0x65, 0x72,
+	0x76, 0x61, 0x6c, 0x12, 0x07, 0x0a, 0x03, 0x52, 0x41, 0x57, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06,
+	0x53, 0x45, 0x43, 0x4f, 0x4e, 0x44, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x4d, 0x49, 0x4e, 0x55,
+	0x54, 0x45, 0x10, 0x02, 0x12, 0x08, 0x0a, 0x04, 0x48, 0x4f, 0x55, 0x52, 0x10, 0x03, 0x12, 0x07,
+	0x0a, 0x03, 0x44, 0x41, 0x59, 0x10, 0x04, 0x12, 0x08, 0x0a, 0x04, 0x57, 0x45, 0x45, 0x4b, 0x10,
+	0x05, 0x42, 0x72, 0x0a, 0x19, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x64, 0x65, 0x69, 0x6e, 0x63,
+	0x2e, 0x67, 0x65, 0x6e, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x5a, 0x47,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x64, 0x65, 0x2d,
+	0x70, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x2f, 0x6f, 0x63, 0x70, 0x2d, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2d, 0x61, 0x70, 0x69, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x72, 0x61,
+	0x74, 0x65, 0x64, 0x2f, 0x67, 0x6f, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2f, 0x76, 0x31,
+	0x3b, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0xa2, 0x02, 0x0b, 0x43, 0x50, 0x42, 0x43, 0x6f, 0x6d,
+	0x6d, 0x6f, 0x6e, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -920,34 +982,35 @@ func file_common_v1_model_proto_rawDescGZIP() []byte {
 	return file_common_v1_model_proto_rawDescData
 }
 
-var file_common_v1_model_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_common_v1_model_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_common_v1_model_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_common_v1_model_proto_goTypes = []interface{}{
 	(AccountType)(0),                 // 0: ocp.common.v1.AccountType
-	(Response_Result)(0),             // 1: ocp.common.v1.Response.Result
-	(*SolanaAccountId)(nil),          // 2: ocp.common.v1.SolanaAccountId
-	(*SolanaAddressLookupTable)(nil), // 3: ocp.common.v1.SolanaAddressLookupTable
-	(*Transaction)(nil),              // 4: ocp.common.v1.Transaction
-	(*Blockhash)(nil),                // 5: ocp.common.v1.Blockhash
-	(*Signature)(nil),                // 6: ocp.common.v1.Signature
-	(*IntentId)(nil),                 // 7: ocp.common.v1.IntentId
-	(*SwapId)(nil),                   // 8: ocp.common.v1.SwapId
-	(*Hash)(nil),                     // 9: ocp.common.v1.Hash
-	(*UUID)(nil),                     // 10: ocp.common.v1.UUID
-	(*Request)(nil),                  // 11: ocp.common.v1.Request
-	(*Response)(nil),                 // 12: ocp.common.v1.Response
-	(*ServerPing)(nil),               // 13: ocp.common.v1.ServerPing
-	(*ClientPong)(nil),               // 14: ocp.common.v1.ClientPong
-	(*timestamppb.Timestamp)(nil),    // 15: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),      // 16: google.protobuf.Duration
+	(Interval)(0),                    // 1: ocp.common.v1.Interval
+	(Response_Result)(0),             // 2: ocp.common.v1.Response.Result
+	(*SolanaAccountId)(nil),          // 3: ocp.common.v1.SolanaAccountId
+	(*SolanaAddressLookupTable)(nil), // 4: ocp.common.v1.SolanaAddressLookupTable
+	(*Transaction)(nil),              // 5: ocp.common.v1.Transaction
+	(*Blockhash)(nil),                // 6: ocp.common.v1.Blockhash
+	(*Signature)(nil),                // 7: ocp.common.v1.Signature
+	(*IntentId)(nil),                 // 8: ocp.common.v1.IntentId
+	(*SwapId)(nil),                   // 9: ocp.common.v1.SwapId
+	(*Hash)(nil),                     // 10: ocp.common.v1.Hash
+	(*UUID)(nil),                     // 11: ocp.common.v1.UUID
+	(*Request)(nil),                  // 12: ocp.common.v1.Request
+	(*Response)(nil),                 // 13: ocp.common.v1.Response
+	(*ServerPing)(nil),               // 14: ocp.common.v1.ServerPing
+	(*ClientPong)(nil),               // 15: ocp.common.v1.ClientPong
+	(*timestamppb.Timestamp)(nil),    // 16: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),      // 17: google.protobuf.Duration
 }
 var file_common_v1_model_proto_depIdxs = []int32{
-	2,  // 0: ocp.common.v1.SolanaAddressLookupTable.address:type_name -> ocp.common.v1.SolanaAccountId
-	2,  // 1: ocp.common.v1.SolanaAddressLookupTable.entries:type_name -> ocp.common.v1.SolanaAccountId
-	1,  // 2: ocp.common.v1.Response.result:type_name -> ocp.common.v1.Response.Result
-	15, // 3: ocp.common.v1.ServerPing.timestamp:type_name -> google.protobuf.Timestamp
-	16, // 4: ocp.common.v1.ServerPing.ping_delay:type_name -> google.protobuf.Duration
-	15, // 5: ocp.common.v1.ClientPong.timestamp:type_name -> google.protobuf.Timestamp
+	3,  // 0: ocp.common.v1.SolanaAddressLookupTable.address:type_name -> ocp.common.v1.SolanaAccountId
+	3,  // 1: ocp.common.v1.SolanaAddressLookupTable.entries:type_name -> ocp.common.v1.SolanaAccountId
+	2,  // 2: ocp.common.v1.Response.result:type_name -> ocp.common.v1.Response.Result
+	16, // 3: ocp.common.v1.ServerPing.timestamp:type_name -> google.protobuf.Timestamp
+	17, // 4: ocp.common.v1.ServerPing.ping_delay:type_name -> google.protobuf.Duration
+	16, // 5: ocp.common.v1.ClientPong.timestamp:type_name -> google.protobuf.Timestamp
 	6,  // [6:6] is the sub-list for method output_type
 	6,  // [6:6] is the sub-list for method input_type
 	6,  // [6:6] is the sub-list for extension type_name
@@ -1123,7 +1186,7 @@ func file_common_v1_model_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_common_v1_model_proto_rawDesc,
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,

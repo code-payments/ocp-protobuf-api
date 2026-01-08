@@ -54,6 +54,50 @@ proto3.util.setEnumType(AccountType, "ocp.common.v1.AccountType", [
 ]);
 
 /**
+ * @generated from enum ocp.common.v1.Interval
+ */
+export enum Interval {
+  /**
+   * @generated from enum value: RAW = 0;
+   */
+  RAW = 0,
+
+  /**
+   * @generated from enum value: SECOND = 1;
+   */
+  SECOND = 1,
+
+  /**
+   * @generated from enum value: MINUTE = 2;
+   */
+  MINUTE = 2,
+
+  /**
+   * @generated from enum value: HOUR = 3;
+   */
+  HOUR = 3,
+
+  /**
+   * @generated from enum value: DAY = 4;
+   */
+  DAY = 4,
+
+  /**
+   * @generated from enum value: WEEK = 5;
+   */
+  WEEK = 5,
+}
+// Retrieve enum metadata with: proto3.getEnumType(Interval)
+proto3.util.setEnumType(Interval, "ocp.common.v1.Interval", [
+  { no: 0, name: "RAW" },
+  { no: 1, name: "SECOND" },
+  { no: 2, name: "MINUTE" },
+  { no: 3, name: "HOUR" },
+  { no: 4, name: "DAY" },
+  { no: 5, name: "WEEK" },
+]);
+
+/**
  * SolanaAccountId is a raw binary Ed25519 public key for a Solana account
  *
  * @generated from message ocp.common.v1.SolanaAccountId

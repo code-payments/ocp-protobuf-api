@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
-import { SolanaAccountId } from "../../common/v1/model_pb";
+import { Interval, SolanaAccountId } from "../../common/v1/model_pb";
 
 /**
  * @generated from message ocp.currency.v1.GetAllRatesRequest
@@ -488,6 +488,197 @@ export class LaunchpadMetadata extends Message<LaunchpadMetadata> {
 
   static equals(a: LaunchpadMetadata | PlainMessage<LaunchpadMetadata> | undefined, b: LaunchpadMetadata | PlainMessage<LaunchpadMetadata> | undefined): boolean {
     return proto3.util.equals(LaunchpadMetadata, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.GetHistoricalMintDataRequest
+ */
+export class GetHistoricalMintDataRequest extends Message<GetHistoricalMintDataRequest> {
+  /**
+   * The mint address to get historical data for
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId address = 1;
+   */
+  address?: SolanaAccountId;
+
+  /**
+   * The currency code for the returned market data (e.g., "usd")
+   *
+   * @generated from field: string currency_code = 2;
+   */
+  currencyCode = "";
+
+  /**
+   * Start of the time range
+   *
+   * @generated from field: google.protobuf.Timestamp start_time = 3;
+   */
+  startTime?: Timestamp;
+
+  /**
+   * End of the time range. If not provided, defaults to current time.
+   *
+   * @generated from field: google.protobuf.Timestamp end_time = 4;
+   */
+  endTime?: Timestamp;
+
+  /**
+   * The interval for data aggregation
+   *
+   * @generated from field: ocp.common.v1.Interval interval = 5;
+   */
+  interval = Interval.RAW;
+
+  constructor(data?: PartialMessage<GetHistoricalMintDataRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.GetHistoricalMintDataRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "address", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "currency_code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "start_time", kind: "message", T: Timestamp },
+    { no: 4, name: "end_time", kind: "message", T: Timestamp },
+    { no: 5, name: "interval", kind: "enum", T: proto3.getEnumType(Interval) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetHistoricalMintDataRequest {
+    return new GetHistoricalMintDataRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetHistoricalMintDataRequest {
+    return new GetHistoricalMintDataRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetHistoricalMintDataRequest {
+    return new GetHistoricalMintDataRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetHistoricalMintDataRequest | PlainMessage<GetHistoricalMintDataRequest> | undefined, b: GetHistoricalMintDataRequest | PlainMessage<GetHistoricalMintDataRequest> | undefined): boolean {
+    return proto3.util.equals(GetHistoricalMintDataRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.GetHistoricalMintDataResponse
+ */
+export class GetHistoricalMintDataResponse extends Message<GetHistoricalMintDataResponse> {
+  /**
+   * @generated from field: ocp.currency.v1.GetHistoricalMintDataResponse.Result result = 1;
+   */
+  result = GetHistoricalMintDataResponse_Result.OK;
+
+  /**
+   * @generated from field: repeated ocp.currency.v1.HistoricalMintData data = 2;
+   */
+  data: HistoricalMintData[] = [];
+
+  constructor(data?: PartialMessage<GetHistoricalMintDataResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.GetHistoricalMintDataResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(GetHistoricalMintDataResponse_Result) },
+    { no: 2, name: "data", kind: "message", T: HistoricalMintData, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetHistoricalMintDataResponse {
+    return new GetHistoricalMintDataResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetHistoricalMintDataResponse {
+    return new GetHistoricalMintDataResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetHistoricalMintDataResponse {
+    return new GetHistoricalMintDataResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetHistoricalMintDataResponse | PlainMessage<GetHistoricalMintDataResponse> | undefined, b: GetHistoricalMintDataResponse | PlainMessage<GetHistoricalMintDataResponse> | undefined): boolean {
+    return proto3.util.equals(GetHistoricalMintDataResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum ocp.currency.v1.GetHistoricalMintDataResponse.Result
+ */
+export enum GetHistoricalMintDataResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * The requested mint or currency was not found
+   *
+   * @generated from enum value: NOT_FOUND = 1;
+   */
+  NOT_FOUND = 1,
+
+  /**
+   * No data available for the requested time range
+   *
+   * @generated from enum value: MISSING_DATA = 2;
+   */
+  MISSING_DATA = 2,
+}
+// Retrieve enum metadata with: proto3.getEnumType(GetHistoricalMintDataResponse_Result)
+proto3.util.setEnumType(GetHistoricalMintDataResponse_Result, "ocp.currency.v1.GetHistoricalMintDataResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "NOT_FOUND" },
+  { no: 2, name: "MISSING_DATA" },
+]);
+
+/**
+ * @generated from message ocp.currency.v1.HistoricalMintData
+ */
+export class HistoricalMintData extends Message<HistoricalMintData> {
+  /**
+   * Timestamp for this data point
+   *
+   * @generated from field: google.protobuf.Timestamp timestamp = 1;
+   */
+  timestamp?: Timestamp;
+
+  /**
+   * Market capitalization at this point in time
+   *
+   * @generated from field: double market_cap = 2;
+   */
+  marketCap = 0;
+
+  constructor(data?: PartialMessage<HistoricalMintData>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.HistoricalMintData";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "timestamp", kind: "message", T: Timestamp },
+    { no: 2, name: "market_cap", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): HistoricalMintData {
+    return new HistoricalMintData().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): HistoricalMintData {
+    return new HistoricalMintData().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): HistoricalMintData {
+    return new HistoricalMintData().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: HistoricalMintData | PlainMessage<HistoricalMintData> | undefined, b: HistoricalMintData | PlainMessage<HistoricalMintData> | undefined): boolean {
+    return proto3.util.equals(HistoricalMintData, a, b);
   }
 }
 
