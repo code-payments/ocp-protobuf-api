@@ -16,8 +16,6 @@ import (
 	"unicode/utf8"
 
 	"github.com/golang/protobuf/ptypes"
-
-	common "github.com/code-payments/ocp-protobuf-api/generated/go/common/v1"
 )
 
 // ensure the imports are used
@@ -33,8 +31,6 @@ var (
 	_ = (*url.URL)(nil)
 	_ = (*mail.Address)(nil)
 	_ = ptypes.DynamicAny{}
-
-	_ = common.Interval(0)
 )
 
 // Validate checks the field values on GetAllRatesRequest with the rules
@@ -360,6 +356,198 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetMintsResponseValidationError{}
+
+// Validate checks the field values on GetHistoricalMintDataRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *GetHistoricalMintDataRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetAddress() == nil {
+		return GetHistoricalMintDataRequestValidationError{
+			field:  "Address",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetAddress()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetHistoricalMintDataRequestValidationError{
+				field:  "Address",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if !_GetHistoricalMintDataRequest_CurrencyCode_Pattern.MatchString(m.GetCurrencyCode()) {
+		return GetHistoricalMintDataRequestValidationError{
+			field:  "CurrencyCode",
+			reason: "value does not match regex pattern \"^[a-z]{3,4}$\"",
+		}
+	}
+
+	switch m.Range.(type) {
+
+	case *GetHistoricalMintDataRequest_PredefinedRange_:
+		// no validation rules for PredefinedRange
+
+	default:
+		return GetHistoricalMintDataRequestValidationError{
+			field:  "Range",
+			reason: "value is required",
+		}
+
+	}
+
+	return nil
+}
+
+// GetHistoricalMintDataRequestValidationError is the validation error returned
+// by GetHistoricalMintDataRequest.Validate if the designated constraints
+// aren't met.
+type GetHistoricalMintDataRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetHistoricalMintDataRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetHistoricalMintDataRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetHistoricalMintDataRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetHistoricalMintDataRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetHistoricalMintDataRequestValidationError) ErrorName() string {
+	return "GetHistoricalMintDataRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetHistoricalMintDataRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetHistoricalMintDataRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetHistoricalMintDataRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetHistoricalMintDataRequestValidationError{}
+
+var _GetHistoricalMintDataRequest_CurrencyCode_Pattern = regexp.MustCompile("^[a-z]{3,4}$")
+
+// Validate checks the field values on GetHistoricalMintDataResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *GetHistoricalMintDataResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Result
+
+	for idx, item := range m.GetData() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetHistoricalMintDataResponseValidationError{
+					field:  fmt.Sprintf("Data[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// GetHistoricalMintDataResponseValidationError is the validation error
+// returned by GetHistoricalMintDataResponse.Validate if the designated
+// constraints aren't met.
+type GetHistoricalMintDataResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetHistoricalMintDataResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetHistoricalMintDataResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetHistoricalMintDataResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetHistoricalMintDataResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetHistoricalMintDataResponseValidationError) ErrorName() string {
+	return "GetHistoricalMintDataResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetHistoricalMintDataResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetHistoricalMintDataResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetHistoricalMintDataResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetHistoricalMintDataResponseValidationError{}
 
 // Validate checks the field values on Mint with the rules defined in the proto
 // definition for this message. If any rules are violated, an error is returned.
@@ -798,204 +986,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = LaunchpadMetadataValidationError{}
-
-// Validate checks the field values on GetHistoricalMintDataRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
-func (m *GetHistoricalMintDataRequest) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	if m.GetAddress() == nil {
-		return GetHistoricalMintDataRequestValidationError{
-			field:  "Address",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetAddress()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetHistoricalMintDataRequestValidationError{
-				field:  "Address",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if !_GetHistoricalMintDataRequest_CurrencyCode_Pattern.MatchString(m.GetCurrencyCode()) {
-		return GetHistoricalMintDataRequestValidationError{
-			field:  "CurrencyCode",
-			reason: "value does not match regex pattern \"^[a-z]{3,4}$\"",
-		}
-	}
-
-	if m.GetStartTime() == nil {
-		return GetHistoricalMintDataRequestValidationError{
-			field:  "StartTime",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetHistoricalMintDataRequestValidationError{
-				field:  "EndTime",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for Interval
-
-	return nil
-}
-
-// GetHistoricalMintDataRequestValidationError is the validation error returned
-// by GetHistoricalMintDataRequest.Validate if the designated constraints
-// aren't met.
-type GetHistoricalMintDataRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetHistoricalMintDataRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetHistoricalMintDataRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetHistoricalMintDataRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetHistoricalMintDataRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetHistoricalMintDataRequestValidationError) ErrorName() string {
-	return "GetHistoricalMintDataRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetHistoricalMintDataRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetHistoricalMintDataRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetHistoricalMintDataRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetHistoricalMintDataRequestValidationError{}
-
-var _GetHistoricalMintDataRequest_CurrencyCode_Pattern = regexp.MustCompile("^[a-z]{3,4}$")
-
-// Validate checks the field values on GetHistoricalMintDataResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
-func (m *GetHistoricalMintDataResponse) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	// no validation rules for Result
-
-	for idx, item := range m.GetData() {
-		_, _ = idx, item
-
-		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return GetHistoricalMintDataResponseValidationError{
-					field:  fmt.Sprintf("Data[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// GetHistoricalMintDataResponseValidationError is the validation error
-// returned by GetHistoricalMintDataResponse.Validate if the designated
-// constraints aren't met.
-type GetHistoricalMintDataResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetHistoricalMintDataResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetHistoricalMintDataResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetHistoricalMintDataResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetHistoricalMintDataResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetHistoricalMintDataResponseValidationError) ErrorName() string {
-	return "GetHistoricalMintDataResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetHistoricalMintDataResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetHistoricalMintDataResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetHistoricalMintDataResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetHistoricalMintDataResponseValidationError{}
 
 // Validate checks the field values on HistoricalMintData with the rules
 // defined in the proto definition for this message. If any rules are
