@@ -1358,26 +1358,21 @@ func (m *VerifiedCoreMintFiatExchangeRate) Validate() error {
 		return nil
 	}
 
-	if l := len(m.GetExchangeRates()); l < 1 || l > 256 {
+	if m.GetExchangeRate() == nil {
 		return VerifiedCoreMintFiatExchangeRateValidationError{
-			field:  "ExchangeRates",
-			reason: "value must contain between 1 and 256 items, inclusive",
+			field:  "ExchangeRate",
+			reason: "value is required",
 		}
 	}
 
-	for idx, item := range m.GetExchangeRates() {
-		_, _ = idx, item
-
-		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return VerifiedCoreMintFiatExchangeRateValidationError{
-					field:  fmt.Sprintf("ExchangeRates[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
+	if v, ok := interface{}(m.GetExchangeRate()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return VerifiedCoreMintFiatExchangeRateValidationError{
+				field:  "ExchangeRate",
+				reason: "embedded message failed validation",
+				cause:  err,
 			}
 		}
-
 	}
 
 	if m.GetSignature() == nil {
@@ -1456,6 +1451,96 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = VerifiedCoreMintFiatExchangeRateValidationError{}
+
+// Validate checks the field values on VerifiedCoreMintFiatExchangeRateBatch
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, an error is returned.
+func (m *VerifiedCoreMintFiatExchangeRateBatch) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if l := len(m.GetExchangeRates()); l < 1 || l > 256 {
+		return VerifiedCoreMintFiatExchangeRateBatchValidationError{
+			field:  "ExchangeRates",
+			reason: "value must contain between 1 and 256 items, inclusive",
+		}
+	}
+
+	for idx, item := range m.GetExchangeRates() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return VerifiedCoreMintFiatExchangeRateBatchValidationError{
+					field:  fmt.Sprintf("ExchangeRates[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// VerifiedCoreMintFiatExchangeRateBatchValidationError is the validation error
+// returned by VerifiedCoreMintFiatExchangeRateBatch.Validate if the
+// designated constraints aren't met.
+type VerifiedCoreMintFiatExchangeRateBatchValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e VerifiedCoreMintFiatExchangeRateBatchValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e VerifiedCoreMintFiatExchangeRateBatchValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e VerifiedCoreMintFiatExchangeRateBatchValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e VerifiedCoreMintFiatExchangeRateBatchValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e VerifiedCoreMintFiatExchangeRateBatchValidationError) ErrorName() string {
+	return "VerifiedCoreMintFiatExchangeRateBatchValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e VerifiedCoreMintFiatExchangeRateBatchValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVerifiedCoreMintFiatExchangeRateBatch.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = VerifiedCoreMintFiatExchangeRateBatchValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = VerifiedCoreMintFiatExchangeRateBatchValidationError{}
 
 // Validate checks the field values on LaunchpadCurrencyReserveState with the
 // rules defined in the proto definition for this message. If any rules are

@@ -543,9 +543,9 @@ export class StreamLiveMintDataResponse_LiveData extends Message<StreamLiveMintD
    */
   type: {
     /**
-     * @generated from field: ocp.currency.v1.VerifiedCoreMintFiatExchangeRate core_mint_fiat_exchange_rates = 1;
+     * @generated from field: ocp.currency.v1.VerifiedCoreMintFiatExchangeRateBatch core_mint_fiat_exchange_rates = 1;
      */
-    value: VerifiedCoreMintFiatExchangeRate;
+    value: VerifiedCoreMintFiatExchangeRateBatch;
     case: "coreMintFiatExchangeRates";
   } | {
     /**
@@ -563,7 +563,7 @@ export class StreamLiveMintDataResponse_LiveData extends Message<StreamLiveMintD
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "ocp.currency.v1.StreamLiveMintDataResponse.LiveData";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "core_mint_fiat_exchange_rates", kind: "message", T: VerifiedCoreMintFiatExchangeRate, oneof: "type" },
+    { no: 1, name: "core_mint_fiat_exchange_rates", kind: "message", T: VerifiedCoreMintFiatExchangeRateBatch, oneof: "type" },
     { no: 2, name: "launchpad_currency_reserve_states", kind: "message", T: VerifiedLaunchapdCurrencyReserveStateBatch, oneof: "type" },
   ]);
 
@@ -962,9 +962,9 @@ export class CoreMintFiatExchangeRate extends Message<CoreMintFiatExchangeRate> 
  */
 export class VerifiedCoreMintFiatExchangeRate extends Message<VerifiedCoreMintFiatExchangeRate> {
   /**
-   * @generated from field: repeated ocp.currency.v1.CoreMintFiatExchangeRate exchange_rates = 1;
+   * @generated from field: ocp.currency.v1.CoreMintFiatExchangeRate exchange_rate = 1;
    */
-  exchangeRates: CoreMintFiatExchangeRate[] = [];
+  exchangeRate?: CoreMintFiatExchangeRate;
 
   /**
    * @generated from field: ocp.common.v1.Signature signature = 2;
@@ -979,7 +979,7 @@ export class VerifiedCoreMintFiatExchangeRate extends Message<VerifiedCoreMintFi
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "ocp.currency.v1.VerifiedCoreMintFiatExchangeRate";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "exchange_rates", kind: "message", T: CoreMintFiatExchangeRate, repeated: true },
+    { no: 1, name: "exchange_rate", kind: "message", T: CoreMintFiatExchangeRate },
     { no: 2, name: "signature", kind: "message", T: Signature },
   ]);
 
@@ -997,6 +997,43 @@ export class VerifiedCoreMintFiatExchangeRate extends Message<VerifiedCoreMintFi
 
   static equals(a: VerifiedCoreMintFiatExchangeRate | PlainMessage<VerifiedCoreMintFiatExchangeRate> | undefined, b: VerifiedCoreMintFiatExchangeRate | PlainMessage<VerifiedCoreMintFiatExchangeRate> | undefined): boolean {
     return proto3.util.equals(VerifiedCoreMintFiatExchangeRate, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.VerifiedCoreMintFiatExchangeRateBatch
+ */
+export class VerifiedCoreMintFiatExchangeRateBatch extends Message<VerifiedCoreMintFiatExchangeRateBatch> {
+  /**
+   * @generated from field: repeated ocp.currency.v1.VerifiedCoreMintFiatExchangeRate exchange_rates = 2;
+   */
+  exchangeRates: VerifiedCoreMintFiatExchangeRate[] = [];
+
+  constructor(data?: PartialMessage<VerifiedCoreMintFiatExchangeRateBatch>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.VerifiedCoreMintFiatExchangeRateBatch";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 2, name: "exchange_rates", kind: "message", T: VerifiedCoreMintFiatExchangeRate, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VerifiedCoreMintFiatExchangeRateBatch {
+    return new VerifiedCoreMintFiatExchangeRateBatch().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): VerifiedCoreMintFiatExchangeRateBatch {
+    return new VerifiedCoreMintFiatExchangeRateBatch().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): VerifiedCoreMintFiatExchangeRateBatch {
+    return new VerifiedCoreMintFiatExchangeRateBatch().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: VerifiedCoreMintFiatExchangeRateBatch | PlainMessage<VerifiedCoreMintFiatExchangeRateBatch> | undefined, b: VerifiedCoreMintFiatExchangeRateBatch | PlainMessage<VerifiedCoreMintFiatExchangeRateBatch> | undefined): boolean {
+    return proto3.util.equals(VerifiedCoreMintFiatExchangeRateBatch, a, b);
   }
 }
 

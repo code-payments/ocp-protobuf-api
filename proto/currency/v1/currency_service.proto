@@ -139,7 +139,7 @@ message StreamLiveMintDataResponse {
         oneof type {
             option (validate.required) = true;
 
-            VerifiedCoreMintFiatExchangeRate           core_mint_fiat_exchange_rates     = 1;
+            VerifiedCoreMintFiatExchangeRateBatch      core_mint_fiat_exchange_rates     = 1;
             VerifiedLaunchapdCurrencyReserveStateBatch launchpad_currency_reserve_states = 2;
         }
     }
@@ -257,12 +257,16 @@ message CoreMintFiatExchangeRate {
 
 // CoreMintFiatExchangeRate with a server signature for proof for use in a payment
 message VerifiedCoreMintFiatExchangeRate {
-    repeated CoreMintFiatExchangeRate exchange_rates = 1 [(validate.rules).repeated = {
+    CoreMintFiatExchangeRate exchange_rate = 1 [(validate.rules).message.required = true];
+
+    common.v1.Signature signature = 2 [(validate.rules).message.required = true];
+}
+
+message VerifiedCoreMintFiatExchangeRateBatch {
+    repeated VerifiedCoreMintFiatExchangeRate exchange_rates = 2  [(validate.rules).repeated = {
         min_items: 1
         max_items: 256 // Arbitrary
     }];
-
-    common.v1.Signature signature = 2 [(validate.rules).message.required = true];;
 }
 
 message LaunchpadCurrencyReserveState {
