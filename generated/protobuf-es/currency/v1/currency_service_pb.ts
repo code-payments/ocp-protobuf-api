@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
-import { SolanaAccountId } from "../../common/v1/model_pb";
+import { ClientPong, ServerPing, Signature, SolanaAccountId } from "../../common/v1/model_pb";
 
 /**
  * @generated from message ocp.currency.v1.GetAllRatesRequest
@@ -395,6 +395,196 @@ proto3.util.setEnumType(GetHistoricalMintDataResponse_Result, "ocp.currency.v1.G
 ]);
 
 /**
+ * @generated from message ocp.currency.v1.StreamLiveMintDataRequest
+ */
+export class StreamLiveMintDataRequest extends Message<StreamLiveMintDataRequest> {
+  /**
+   * @generated from oneof ocp.currency.v1.StreamLiveMintDataRequest.type
+   */
+  type: {
+    /**
+     * @generated from field: ocp.currency.v1.StreamLiveMintDataRequest.Request request = 1;
+     */
+    value: StreamLiveMintDataRequest_Request;
+    case: "request";
+  } | {
+    /**
+     * @generated from field: ocp.common.v1.ClientPong pong = 2;
+     */
+    value: ClientPong;
+    case: "pong";
+  } | { case: undefined; value?: undefined } = { case: undefined };
+
+  constructor(data?: PartialMessage<StreamLiveMintDataRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.StreamLiveMintDataRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "request", kind: "message", T: StreamLiveMintDataRequest_Request, oneof: "type" },
+    { no: 2, name: "pong", kind: "message", T: ClientPong, oneof: "type" },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamLiveMintDataRequest {
+    return new StreamLiveMintDataRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamLiveMintDataRequest {
+    return new StreamLiveMintDataRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamLiveMintDataRequest {
+    return new StreamLiveMintDataRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StreamLiveMintDataRequest | PlainMessage<StreamLiveMintDataRequest> | undefined, b: StreamLiveMintDataRequest | PlainMessage<StreamLiveMintDataRequest> | undefined): boolean {
+    return proto3.util.equals(StreamLiveMintDataRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.StreamLiveMintDataRequest.Request
+ */
+export class StreamLiveMintDataRequest_Request extends Message<StreamLiveMintDataRequest_Request> {
+  /**
+   * The set of mints to receive live data against. To update the set of mints,
+   * close the current stream and open a new one with the new set.
+   *
+   * @generated from field: repeated ocp.common.v1.SolanaAccountId mints = 1;
+   */
+  mints: SolanaAccountId[] = [];
+
+  constructor(data?: PartialMessage<StreamLiveMintDataRequest_Request>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.StreamLiveMintDataRequest.Request";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "mints", kind: "message", T: SolanaAccountId, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamLiveMintDataRequest_Request {
+    return new StreamLiveMintDataRequest_Request().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamLiveMintDataRequest_Request {
+    return new StreamLiveMintDataRequest_Request().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamLiveMintDataRequest_Request {
+    return new StreamLiveMintDataRequest_Request().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StreamLiveMintDataRequest_Request | PlainMessage<StreamLiveMintDataRequest_Request> | undefined, b: StreamLiveMintDataRequest_Request | PlainMessage<StreamLiveMintDataRequest_Request> | undefined): boolean {
+    return proto3.util.equals(StreamLiveMintDataRequest_Request, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.StreamLiveMintDataResponse
+ */
+export class StreamLiveMintDataResponse extends Message<StreamLiveMintDataResponse> {
+  /**
+   * @generated from oneof ocp.currency.v1.StreamLiveMintDataResponse.type
+   */
+  type: {
+    /**
+     * @generated from field: ocp.currency.v1.StreamLiveMintDataResponse.LiveData data = 1;
+     */
+    value: StreamLiveMintDataResponse_LiveData;
+    case: "data";
+  } | {
+    /**
+     * @generated from field: ocp.common.v1.ServerPing ping = 2;
+     */
+    value: ServerPing;
+    case: "ping";
+  } | { case: undefined; value?: undefined } = { case: undefined };
+
+  constructor(data?: PartialMessage<StreamLiveMintDataResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.StreamLiveMintDataResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "data", kind: "message", T: StreamLiveMintDataResponse_LiveData, oneof: "type" },
+    { no: 2, name: "ping", kind: "message", T: ServerPing, oneof: "type" },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamLiveMintDataResponse {
+    return new StreamLiveMintDataResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamLiveMintDataResponse {
+    return new StreamLiveMintDataResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamLiveMintDataResponse {
+    return new StreamLiveMintDataResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StreamLiveMintDataResponse | PlainMessage<StreamLiveMintDataResponse> | undefined, b: StreamLiveMintDataResponse | PlainMessage<StreamLiveMintDataResponse> | undefined): boolean {
+    return proto3.util.equals(StreamLiveMintDataResponse, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.StreamLiveMintDataResponse.LiveData
+ */
+export class StreamLiveMintDataResponse_LiveData extends Message<StreamLiveMintDataResponse_LiveData> {
+  /**
+   * @generated from oneof ocp.currency.v1.StreamLiveMintDataResponse.LiveData.type
+   */
+  type: {
+    /**
+     * @generated from field: ocp.currency.v1.VerifiedCoreMintFiatExchangeRateBatch core_mint_fiat_exchange_rates = 1;
+     */
+    value: VerifiedCoreMintFiatExchangeRateBatch;
+    case: "coreMintFiatExchangeRates";
+  } | {
+    /**
+     * @generated from field: ocp.currency.v1.VerifiedLaunchapdCurrencyReserveStateBatch launchpad_currency_reserve_states = 2;
+     */
+    value: VerifiedLaunchapdCurrencyReserveStateBatch;
+    case: "launchpadCurrencyReserveStates";
+  } | { case: undefined; value?: undefined } = { case: undefined };
+
+  constructor(data?: PartialMessage<StreamLiveMintDataResponse_LiveData>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.StreamLiveMintDataResponse.LiveData";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "core_mint_fiat_exchange_rates", kind: "message", T: VerifiedCoreMintFiatExchangeRateBatch, oneof: "type" },
+    { no: 2, name: "launchpad_currency_reserve_states", kind: "message", T: VerifiedLaunchapdCurrencyReserveStateBatch, oneof: "type" },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamLiveMintDataResponse_LiveData {
+    return new StreamLiveMintDataResponse_LiveData().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamLiveMintDataResponse_LiveData {
+    return new StreamLiveMintDataResponse_LiveData().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamLiveMintDataResponse_LiveData {
+    return new StreamLiveMintDataResponse_LiveData().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StreamLiveMintDataResponse_LiveData | PlainMessage<StreamLiveMintDataResponse_LiveData> | undefined, b: StreamLiveMintDataResponse_LiveData | PlainMessage<StreamLiveMintDataResponse_LiveData> | undefined): boolean {
+    return proto3.util.equals(StreamLiveMintDataResponse_LiveData, a, b);
+  }
+}
+
+/**
  * @generated from message ocp.currency.v1.Mint
  */
 export class Mint extends Message<Mint> {
@@ -615,6 +805,8 @@ export class LaunchpadMetadata extends Message<LaunchpadMetadata> {
   /**
    * Current circulating mint token supply in quarks
    *
+   * Deprecated: Use supply value from StreamLiveMintData
+   *
    * @generated from field: uint64 supply_from_bonding = 7;
    */
   supplyFromBonding = protoInt64.zero;
@@ -705,6 +897,280 @@ export class HistoricalMintData extends Message<HistoricalMintData> {
 
   static equals(a: HistoricalMintData | PlainMessage<HistoricalMintData> | undefined, b: HistoricalMintData | PlainMessage<HistoricalMintData> | undefined): boolean {
     return proto3.util.equals(HistoricalMintData, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.CoreMintFiatExchangeRate
+ */
+export class CoreMintFiatExchangeRate extends Message<CoreMintFiatExchangeRate> {
+  /**
+   * The currency code for the fiat exchange rate
+   *
+   * @generated from field: string currency_code = 1;
+   */
+  currencyCode = "";
+
+  /**
+   * The exchange rate against the core mint
+   *
+   * @generated from field: double exchange_rate = 2;
+   */
+  exchangeRate = 0;
+
+  /**
+   * Timestamp for this data point
+   *
+   * @generated from field: google.protobuf.Timestamp timestamp = 3;
+   */
+  timestamp?: Timestamp;
+
+  constructor(data?: PartialMessage<CoreMintFiatExchangeRate>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.CoreMintFiatExchangeRate";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "currency_code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "exchange_rate", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 3, name: "timestamp", kind: "message", T: Timestamp },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CoreMintFiatExchangeRate {
+    return new CoreMintFiatExchangeRate().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CoreMintFiatExchangeRate {
+    return new CoreMintFiatExchangeRate().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CoreMintFiatExchangeRate {
+    return new CoreMintFiatExchangeRate().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: CoreMintFiatExchangeRate | PlainMessage<CoreMintFiatExchangeRate> | undefined, b: CoreMintFiatExchangeRate | PlainMessage<CoreMintFiatExchangeRate> | undefined): boolean {
+    return proto3.util.equals(CoreMintFiatExchangeRate, a, b);
+  }
+}
+
+/**
+ * CoreMintFiatExchangeRate with a server signature for proof for use in a payment
+ *
+ * @generated from message ocp.currency.v1.VerifiedCoreMintFiatExchangeRate
+ */
+export class VerifiedCoreMintFiatExchangeRate extends Message<VerifiedCoreMintFiatExchangeRate> {
+  /**
+   * @generated from field: ocp.currency.v1.CoreMintFiatExchangeRate exchange_rate = 1;
+   */
+  exchangeRate?: CoreMintFiatExchangeRate;
+
+  /**
+   * @generated from field: ocp.common.v1.Signature signature = 2;
+   */
+  signature?: Signature;
+
+  constructor(data?: PartialMessage<VerifiedCoreMintFiatExchangeRate>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.VerifiedCoreMintFiatExchangeRate";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "exchange_rate", kind: "message", T: CoreMintFiatExchangeRate },
+    { no: 2, name: "signature", kind: "message", T: Signature },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VerifiedCoreMintFiatExchangeRate {
+    return new VerifiedCoreMintFiatExchangeRate().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): VerifiedCoreMintFiatExchangeRate {
+    return new VerifiedCoreMintFiatExchangeRate().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): VerifiedCoreMintFiatExchangeRate {
+    return new VerifiedCoreMintFiatExchangeRate().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: VerifiedCoreMintFiatExchangeRate | PlainMessage<VerifiedCoreMintFiatExchangeRate> | undefined, b: VerifiedCoreMintFiatExchangeRate | PlainMessage<VerifiedCoreMintFiatExchangeRate> | undefined): boolean {
+    return proto3.util.equals(VerifiedCoreMintFiatExchangeRate, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.VerifiedCoreMintFiatExchangeRateBatch
+ */
+export class VerifiedCoreMintFiatExchangeRateBatch extends Message<VerifiedCoreMintFiatExchangeRateBatch> {
+  /**
+   * @generated from field: repeated ocp.currency.v1.VerifiedCoreMintFiatExchangeRate exchange_rates = 2;
+   */
+  exchangeRates: VerifiedCoreMintFiatExchangeRate[] = [];
+
+  constructor(data?: PartialMessage<VerifiedCoreMintFiatExchangeRateBatch>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.VerifiedCoreMintFiatExchangeRateBatch";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 2, name: "exchange_rates", kind: "message", T: VerifiedCoreMintFiatExchangeRate, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VerifiedCoreMintFiatExchangeRateBatch {
+    return new VerifiedCoreMintFiatExchangeRateBatch().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): VerifiedCoreMintFiatExchangeRateBatch {
+    return new VerifiedCoreMintFiatExchangeRateBatch().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): VerifiedCoreMintFiatExchangeRateBatch {
+    return new VerifiedCoreMintFiatExchangeRateBatch().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: VerifiedCoreMintFiatExchangeRateBatch | PlainMessage<VerifiedCoreMintFiatExchangeRateBatch> | undefined, b: VerifiedCoreMintFiatExchangeRateBatch | PlainMessage<VerifiedCoreMintFiatExchangeRateBatch> | undefined): boolean {
+    return proto3.util.equals(VerifiedCoreMintFiatExchangeRateBatch, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.LaunchpadCurrencyReserveState
+ */
+export class LaunchpadCurrencyReserveState extends Message<LaunchpadCurrencyReserveState> {
+  /**
+   * Launchpad currency mint address
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId mint = 1;
+   */
+  mint?: SolanaAccountId;
+
+  /**
+   * Current circulating mint token supply in quarks
+   *
+   * @generated from field: uint64 supply_from_bonding = 2;
+   */
+  supplyFromBonding = protoInt64.zero;
+
+  /**
+   * Timestamp for this data point
+   *
+   * @generated from field: google.protobuf.Timestamp timestamp = 3;
+   */
+  timestamp?: Timestamp;
+
+  constructor(data?: PartialMessage<LaunchpadCurrencyReserveState>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.LaunchpadCurrencyReserveState";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "mint", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "supply_from_bonding", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 3, name: "timestamp", kind: "message", T: Timestamp },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LaunchpadCurrencyReserveState {
+    return new LaunchpadCurrencyReserveState().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LaunchpadCurrencyReserveState {
+    return new LaunchpadCurrencyReserveState().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LaunchpadCurrencyReserveState {
+    return new LaunchpadCurrencyReserveState().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: LaunchpadCurrencyReserveState | PlainMessage<LaunchpadCurrencyReserveState> | undefined, b: LaunchpadCurrencyReserveState | PlainMessage<LaunchpadCurrencyReserveState> | undefined): boolean {
+    return proto3.util.equals(LaunchpadCurrencyReserveState, a, b);
+  }
+}
+
+/**
+ * LaunchpadCurrencyReserveState with a server signature for proof for use in a payment
+ *
+ * @generated from message ocp.currency.v1.VerifiedLaunchpadCurrencyReserveState
+ */
+export class VerifiedLaunchpadCurrencyReserveState extends Message<VerifiedLaunchpadCurrencyReserveState> {
+  /**
+   * @generated from field: ocp.currency.v1.LaunchpadCurrencyReserveState reserve_state = 1;
+   */
+  reserveState?: LaunchpadCurrencyReserveState;
+
+  /**
+   * @generated from field: ocp.common.v1.Signature signature = 2;
+   */
+  signature?: Signature;
+
+  constructor(data?: PartialMessage<VerifiedLaunchpadCurrencyReserveState>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.VerifiedLaunchpadCurrencyReserveState";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "reserve_state", kind: "message", T: LaunchpadCurrencyReserveState },
+    { no: 2, name: "signature", kind: "message", T: Signature },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VerifiedLaunchpadCurrencyReserveState {
+    return new VerifiedLaunchpadCurrencyReserveState().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): VerifiedLaunchpadCurrencyReserveState {
+    return new VerifiedLaunchpadCurrencyReserveState().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): VerifiedLaunchpadCurrencyReserveState {
+    return new VerifiedLaunchpadCurrencyReserveState().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: VerifiedLaunchpadCurrencyReserveState | PlainMessage<VerifiedLaunchpadCurrencyReserveState> | undefined, b: VerifiedLaunchpadCurrencyReserveState | PlainMessage<VerifiedLaunchpadCurrencyReserveState> | undefined): boolean {
+    return proto3.util.equals(VerifiedLaunchpadCurrencyReserveState, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.VerifiedLaunchapdCurrencyReserveStateBatch
+ */
+export class VerifiedLaunchapdCurrencyReserveStateBatch extends Message<VerifiedLaunchapdCurrencyReserveStateBatch> {
+  /**
+   * @generated from field: repeated ocp.currency.v1.VerifiedLaunchpadCurrencyReserveState reserve_states = 2;
+   */
+  reserveStates: VerifiedLaunchpadCurrencyReserveState[] = [];
+
+  constructor(data?: PartialMessage<VerifiedLaunchapdCurrencyReserveStateBatch>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.VerifiedLaunchapdCurrencyReserveStateBatch";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 2, name: "reserve_states", kind: "message", T: VerifiedLaunchpadCurrencyReserveState, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VerifiedLaunchapdCurrencyReserveStateBatch {
+    return new VerifiedLaunchapdCurrencyReserveStateBatch().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): VerifiedLaunchapdCurrencyReserveStateBatch {
+    return new VerifiedLaunchapdCurrencyReserveStateBatch().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): VerifiedLaunchapdCurrencyReserveStateBatch {
+    return new VerifiedLaunchapdCurrencyReserveStateBatch().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: VerifiedLaunchapdCurrencyReserveStateBatch | PlainMessage<VerifiedLaunchapdCurrencyReserveStateBatch> | undefined, b: VerifiedLaunchapdCurrencyReserveStateBatch | PlainMessage<VerifiedLaunchapdCurrencyReserveStateBatch> | undefined): boolean {
+    return proto3.util.equals(VerifiedLaunchapdCurrencyReserveStateBatch, a, b);
   }
 }
 

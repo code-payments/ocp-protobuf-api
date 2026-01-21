@@ -24,11 +24,15 @@ const _ = grpc.SupportPackageIsVersion7
 type CurrencyClient interface {
 	// GetAllRates returns the exchange rates for the core mint token against all
 	// available currencies
+	//
+	// Deprecated: Use StreamLiveMintData instead
 	GetAllRates(ctx context.Context, in *GetAllRatesRequest, opts ...grpc.CallOption) (*GetAllRatesResponse, error)
 	// GetMints gets mint account metadata by address
 	GetMints(ctx context.Context, in *GetMintsRequest, opts ...grpc.CallOption) (*GetMintsResponse, error)
 	// GetHistoricalMintData returns historical market data for a mint
 	GetHistoricalMintData(ctx context.Context, in *GetHistoricalMintDataRequest, opts ...grpc.CallOption) (*GetHistoricalMintDataResponse, error)
+	// StreamLiveMintData streams live mint data for a set of mints
+	StreamLiveMintData(ctx context.Context, opts ...grpc.CallOption) (Currency_StreamLiveMintDataClient, error)
 }
 
 type currencyClient struct {
@@ -66,17 +70,52 @@ func (c *currencyClient) GetHistoricalMintData(ctx context.Context, in *GetHisto
 	return out, nil
 }
 
+func (c *currencyClient) StreamLiveMintData(ctx context.Context, opts ...grpc.CallOption) (Currency_StreamLiveMintDataClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Currency_ServiceDesc.Streams[0], "/ocp.currency.v1.Currency/StreamLiveMintData", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &currencyStreamLiveMintDataClient{stream}
+	return x, nil
+}
+
+type Currency_StreamLiveMintDataClient interface {
+	Send(*StreamLiveMintDataRequest) error
+	Recv() (*StreamLiveMintDataResponse, error)
+	grpc.ClientStream
+}
+
+type currencyStreamLiveMintDataClient struct {
+	grpc.ClientStream
+}
+
+func (x *currencyStreamLiveMintDataClient) Send(m *StreamLiveMintDataRequest) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *currencyStreamLiveMintDataClient) Recv() (*StreamLiveMintDataResponse, error) {
+	m := new(StreamLiveMintDataResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // CurrencyServer is the server API for Currency service.
 // All implementations must embed UnimplementedCurrencyServer
 // for forward compatibility
 type CurrencyServer interface {
 	// GetAllRates returns the exchange rates for the core mint token against all
 	// available currencies
+	//
+	// Deprecated: Use StreamLiveMintData instead
 	GetAllRates(context.Context, *GetAllRatesRequest) (*GetAllRatesResponse, error)
 	// GetMints gets mint account metadata by address
 	GetMints(context.Context, *GetMintsRequest) (*GetMintsResponse, error)
 	// GetHistoricalMintData returns historical market data for a mint
 	GetHistoricalMintData(context.Context, *GetHistoricalMintDataRequest) (*GetHistoricalMintDataResponse, error)
+	// StreamLiveMintData streams live mint data for a set of mints
+	StreamLiveMintData(Currency_StreamLiveMintDataServer) error
 	mustEmbedUnimplementedCurrencyServer()
 }
 
@@ -92,6 +131,9 @@ func (UnimplementedCurrencyServer) GetMints(context.Context, *GetMintsRequest) (
 }
 func (UnimplementedCurrencyServer) GetHistoricalMintData(context.Context, *GetHistoricalMintDataRequest) (*GetHistoricalMintDataResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHistoricalMintData not implemented")
+}
+func (UnimplementedCurrencyServer) StreamLiveMintData(Currency_StreamLiveMintDataServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamLiveMintData not implemented")
 }
 func (UnimplementedCurrencyServer) mustEmbedUnimplementedCurrencyServer() {}
 
@@ -160,6 +202,32 @@ func _Currency_GetHistoricalMintData_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Currency_StreamLiveMintData_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(CurrencyServer).StreamLiveMintData(&currencyStreamLiveMintDataServer{stream})
+}
+
+type Currency_StreamLiveMintDataServer interface {
+	Send(*StreamLiveMintDataResponse) error
+	Recv() (*StreamLiveMintDataRequest, error)
+	grpc.ServerStream
+}
+
+type currencyStreamLiveMintDataServer struct {
+	grpc.ServerStream
+}
+
+func (x *currencyStreamLiveMintDataServer) Send(m *StreamLiveMintDataResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *currencyStreamLiveMintDataServer) Recv() (*StreamLiveMintDataRequest, error) {
+	m := new(StreamLiveMintDataRequest)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // Currency_ServiceDesc is the grpc.ServiceDesc for Currency service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -180,6 +248,13 @@ var Currency_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Currency_GetHistoricalMintData_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "StreamLiveMintData",
+			Handler:       _Currency_StreamLiveMintData_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "currency/v1/currency_service.proto",
 }
