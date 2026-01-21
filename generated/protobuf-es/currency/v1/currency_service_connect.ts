@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetAllRatesRequest, GetAllRatesResponse, GetHistoricalMintDataRequest, GetHistoricalMintDataResponse, GetMintsRequest, GetMintsResponse } from "./currency_service_pb";
+import { GetAllRatesRequest, GetAllRatesResponse, GetHistoricalMintDataRequest, GetHistoricalMintDataResponse, GetMintsRequest, GetMintsResponse, StreamLiveMintDataRequest, StreamLiveMintDataResponse } from "./currency_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -15,6 +15,8 @@ export const Currency = {
     /**
      * GetAllRates returns the exchange rates for the core mint token against all
      * available currencies
+     *
+     * Deprecated: Use StreamLiveMintData instead
      *
      * @generated from rpc ocp.currency.v1.Currency.GetAllRates
      */
@@ -45,6 +47,17 @@ export const Currency = {
       I: GetHistoricalMintDataRequest,
       O: GetHistoricalMintDataResponse,
       kind: MethodKind.Unary,
+    },
+    /**
+     * StreamLiveMintData streams live mint data for a set of mints
+     *
+     * @generated from rpc ocp.currency.v1.Currency.StreamLiveMintData
+     */
+    streamLiveMintData: {
+      name: "StreamLiveMintData",
+      I: StreamLiveMintDataRequest,
+      O: StreamLiveMintDataResponse,
+      kind: MethodKind.BiDiStreaming,
     },
   }
 } as const;

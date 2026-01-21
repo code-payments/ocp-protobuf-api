@@ -549,6 +549,208 @@ var _ interface {
 	ErrorName() string
 } = GetHistoricalMintDataResponseValidationError{}
 
+// Validate checks the field values on StreamLiveMintDataRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *StreamLiveMintDataRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	switch m.Type.(type) {
+
+	case *StreamLiveMintDataRequest_Request_:
+
+		if v, ok := interface{}(m.GetRequest()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StreamLiveMintDataRequestValidationError{
+					field:  "Request",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *StreamLiveMintDataRequest_Pong:
+
+		if v, ok := interface{}(m.GetPong()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StreamLiveMintDataRequestValidationError{
+					field:  "Pong",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		return StreamLiveMintDataRequestValidationError{
+			field:  "Type",
+			reason: "value is required",
+		}
+
+	}
+
+	return nil
+}
+
+// StreamLiveMintDataRequestValidationError is the validation error returned by
+// StreamLiveMintDataRequest.Validate if the designated constraints aren't met.
+type StreamLiveMintDataRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e StreamLiveMintDataRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e StreamLiveMintDataRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e StreamLiveMintDataRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e StreamLiveMintDataRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e StreamLiveMintDataRequestValidationError) ErrorName() string {
+	return "StreamLiveMintDataRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e StreamLiveMintDataRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sStreamLiveMintDataRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = StreamLiveMintDataRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = StreamLiveMintDataRequestValidationError{}
+
+// Validate checks the field values on StreamLiveMintDataResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *StreamLiveMintDataResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	switch m.Type.(type) {
+
+	case *StreamLiveMintDataResponse_Data:
+
+		if v, ok := interface{}(m.GetData()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StreamLiveMintDataResponseValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *StreamLiveMintDataResponse_Ping:
+
+		if v, ok := interface{}(m.GetPing()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StreamLiveMintDataResponseValidationError{
+					field:  "Ping",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		return StreamLiveMintDataResponseValidationError{
+			field:  "Type",
+			reason: "value is required",
+		}
+
+	}
+
+	return nil
+}
+
+// StreamLiveMintDataResponseValidationError is the validation error returned
+// by StreamLiveMintDataResponse.Validate if the designated constraints aren't met.
+type StreamLiveMintDataResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e StreamLiveMintDataResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e StreamLiveMintDataResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e StreamLiveMintDataResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e StreamLiveMintDataResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e StreamLiveMintDataResponseValidationError) ErrorName() string {
+	return "StreamLiveMintDataResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e StreamLiveMintDataResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sStreamLiveMintDataResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = StreamLiveMintDataResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = StreamLiveMintDataResponseValidationError{}
+
 // Validate checks the field values on Mint with the rules defined in the proto
 // definition for this message. If any rules are violated, an error is returned.
 func (m *Mint) Validate() error {
@@ -1062,3 +1264,673 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = HistoricalMintDataValidationError{}
+
+// Validate checks the field values on CoreMintFiatExchangeRate with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *CoreMintFiatExchangeRate) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if !_CoreMintFiatExchangeRate_CurrencyCode_Pattern.MatchString(m.GetCurrencyCode()) {
+		return CoreMintFiatExchangeRateValidationError{
+			field:  "CurrencyCode",
+			reason: "value does not match regex pattern \"^[a-z]{3,4}$\"",
+		}
+	}
+
+	// no validation rules for ExchangeRate
+
+	if m.GetTimestamp() == nil {
+		return CoreMintFiatExchangeRateValidationError{
+			field:  "Timestamp",
+			reason: "value is required",
+		}
+	}
+
+	return nil
+}
+
+// CoreMintFiatExchangeRateValidationError is the validation error returned by
+// CoreMintFiatExchangeRate.Validate if the designated constraints aren't met.
+type CoreMintFiatExchangeRateValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CoreMintFiatExchangeRateValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CoreMintFiatExchangeRateValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CoreMintFiatExchangeRateValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CoreMintFiatExchangeRateValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CoreMintFiatExchangeRateValidationError) ErrorName() string {
+	return "CoreMintFiatExchangeRateValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CoreMintFiatExchangeRateValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCoreMintFiatExchangeRate.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CoreMintFiatExchangeRateValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CoreMintFiatExchangeRateValidationError{}
+
+var _CoreMintFiatExchangeRate_CurrencyCode_Pattern = regexp.MustCompile("^[a-z]{3,4}$")
+
+// Validate checks the field values on VerifiedCoreMintFiatExchangeRate with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, an error is returned.
+func (m *VerifiedCoreMintFiatExchangeRate) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if l := len(m.GetExchangeRates()); l < 1 || l > 256 {
+		return VerifiedCoreMintFiatExchangeRateValidationError{
+			field:  "ExchangeRates",
+			reason: "value must contain between 1 and 256 items, inclusive",
+		}
+	}
+
+	for idx, item := range m.GetExchangeRates() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return VerifiedCoreMintFiatExchangeRateValidationError{
+					field:  fmt.Sprintf("ExchangeRates[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.GetSignature() == nil {
+		return VerifiedCoreMintFiatExchangeRateValidationError{
+			field:  "Signature",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSignature()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return VerifiedCoreMintFiatExchangeRateValidationError{
+				field:  "Signature",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// VerifiedCoreMintFiatExchangeRateValidationError is the validation error
+// returned by VerifiedCoreMintFiatExchangeRate.Validate if the designated
+// constraints aren't met.
+type VerifiedCoreMintFiatExchangeRateValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e VerifiedCoreMintFiatExchangeRateValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e VerifiedCoreMintFiatExchangeRateValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e VerifiedCoreMintFiatExchangeRateValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e VerifiedCoreMintFiatExchangeRateValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e VerifiedCoreMintFiatExchangeRateValidationError) ErrorName() string {
+	return "VerifiedCoreMintFiatExchangeRateValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e VerifiedCoreMintFiatExchangeRateValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVerifiedCoreMintFiatExchangeRate.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = VerifiedCoreMintFiatExchangeRateValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = VerifiedCoreMintFiatExchangeRateValidationError{}
+
+// Validate checks the field values on LaunchpadCurrencyReserveState with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *LaunchpadCurrencyReserveState) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetMint() == nil {
+		return LaunchpadCurrencyReserveStateValidationError{
+			field:  "Mint",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetMint()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LaunchpadCurrencyReserveStateValidationError{
+				field:  "Mint",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for SupplyFromBonding
+
+	if m.GetTimestamp() == nil {
+		return LaunchpadCurrencyReserveStateValidationError{
+			field:  "Timestamp",
+			reason: "value is required",
+		}
+	}
+
+	return nil
+}
+
+// LaunchpadCurrencyReserveStateValidationError is the validation error
+// returned by LaunchpadCurrencyReserveState.Validate if the designated
+// constraints aren't met.
+type LaunchpadCurrencyReserveStateValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LaunchpadCurrencyReserveStateValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LaunchpadCurrencyReserveStateValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LaunchpadCurrencyReserveStateValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LaunchpadCurrencyReserveStateValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LaunchpadCurrencyReserveStateValidationError) ErrorName() string {
+	return "LaunchpadCurrencyReserveStateValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e LaunchpadCurrencyReserveStateValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLaunchpadCurrencyReserveState.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LaunchpadCurrencyReserveStateValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LaunchpadCurrencyReserveStateValidationError{}
+
+// Validate checks the field values on VerifiedLaunchpadCurrencyReserveState
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, an error is returned.
+func (m *VerifiedLaunchpadCurrencyReserveState) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetReserveState() == nil {
+		return VerifiedLaunchpadCurrencyReserveStateValidationError{
+			field:  "ReserveState",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetReserveState()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return VerifiedLaunchpadCurrencyReserveStateValidationError{
+				field:  "ReserveState",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetSignature() == nil {
+		return VerifiedLaunchpadCurrencyReserveStateValidationError{
+			field:  "Signature",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSignature()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return VerifiedLaunchpadCurrencyReserveStateValidationError{
+				field:  "Signature",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// VerifiedLaunchpadCurrencyReserveStateValidationError is the validation error
+// returned by VerifiedLaunchpadCurrencyReserveState.Validate if the
+// designated constraints aren't met.
+type VerifiedLaunchpadCurrencyReserveStateValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e VerifiedLaunchpadCurrencyReserveStateValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e VerifiedLaunchpadCurrencyReserveStateValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e VerifiedLaunchpadCurrencyReserveStateValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e VerifiedLaunchpadCurrencyReserveStateValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e VerifiedLaunchpadCurrencyReserveStateValidationError) ErrorName() string {
+	return "VerifiedLaunchpadCurrencyReserveStateValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e VerifiedLaunchpadCurrencyReserveStateValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVerifiedLaunchpadCurrencyReserveState.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = VerifiedLaunchpadCurrencyReserveStateValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = VerifiedLaunchpadCurrencyReserveStateValidationError{}
+
+// Validate checks the field values on
+// VerifiedLaunchapdCurrencyReserveStateBatch with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *VerifiedLaunchapdCurrencyReserveStateBatch) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if l := len(m.GetReserveStates()); l < 1 || l > 1024 {
+		return VerifiedLaunchapdCurrencyReserveStateBatchValidationError{
+			field:  "ReserveStates",
+			reason: "value must contain between 1 and 1024 items, inclusive",
+		}
+	}
+
+	for idx, item := range m.GetReserveStates() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return VerifiedLaunchapdCurrencyReserveStateBatchValidationError{
+					field:  fmt.Sprintf("ReserveStates[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// VerifiedLaunchapdCurrencyReserveStateBatchValidationError is the validation
+// error returned by VerifiedLaunchapdCurrencyReserveStateBatch.Validate if
+// the designated constraints aren't met.
+type VerifiedLaunchapdCurrencyReserveStateBatchValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e VerifiedLaunchapdCurrencyReserveStateBatchValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e VerifiedLaunchapdCurrencyReserveStateBatchValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e VerifiedLaunchapdCurrencyReserveStateBatchValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e VerifiedLaunchapdCurrencyReserveStateBatchValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e VerifiedLaunchapdCurrencyReserveStateBatchValidationError) ErrorName() string {
+	return "VerifiedLaunchapdCurrencyReserveStateBatchValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e VerifiedLaunchapdCurrencyReserveStateBatchValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVerifiedLaunchapdCurrencyReserveStateBatch.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = VerifiedLaunchapdCurrencyReserveStateBatchValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = VerifiedLaunchapdCurrencyReserveStateBatchValidationError{}
+
+// Validate checks the field values on StreamLiveMintDataRequest_Request with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, an error is returned.
+func (m *StreamLiveMintDataRequest_Request) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if l := len(m.GetMints()); l < 1 || l > 1024 {
+		return StreamLiveMintDataRequest_RequestValidationError{
+			field:  "Mints",
+			reason: "value must contain between 1 and 1024 items, inclusive",
+		}
+	}
+
+	for idx, item := range m.GetMints() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StreamLiveMintDataRequest_RequestValidationError{
+					field:  fmt.Sprintf("Mints[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// StreamLiveMintDataRequest_RequestValidationError is the validation error
+// returned by StreamLiveMintDataRequest_Request.Validate if the designated
+// constraints aren't met.
+type StreamLiveMintDataRequest_RequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e StreamLiveMintDataRequest_RequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e StreamLiveMintDataRequest_RequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e StreamLiveMintDataRequest_RequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e StreamLiveMintDataRequest_RequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e StreamLiveMintDataRequest_RequestValidationError) ErrorName() string {
+	return "StreamLiveMintDataRequest_RequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e StreamLiveMintDataRequest_RequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sStreamLiveMintDataRequest_Request.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = StreamLiveMintDataRequest_RequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = StreamLiveMintDataRequest_RequestValidationError{}
+
+// Validate checks the field values on StreamLiveMintDataResponse_LiveData with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, an error is returned.
+func (m *StreamLiveMintDataResponse_LiveData) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	switch m.Type.(type) {
+
+	case *StreamLiveMintDataResponse_LiveData_CoreMintFiatExchangeRates:
+
+		if v, ok := interface{}(m.GetCoreMintFiatExchangeRates()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StreamLiveMintDataResponse_LiveDataValidationError{
+					field:  "CoreMintFiatExchangeRates",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *StreamLiveMintDataResponse_LiveData_LaunchpadCurrencyReserveStates:
+
+		if v, ok := interface{}(m.GetLaunchpadCurrencyReserveStates()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StreamLiveMintDataResponse_LiveDataValidationError{
+					field:  "LaunchpadCurrencyReserveStates",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		return StreamLiveMintDataResponse_LiveDataValidationError{
+			field:  "Type",
+			reason: "value is required",
+		}
+
+	}
+
+	return nil
+}
+
+// StreamLiveMintDataResponse_LiveDataValidationError is the validation error
+// returned by StreamLiveMintDataResponse_LiveData.Validate if the designated
+// constraints aren't met.
+type StreamLiveMintDataResponse_LiveDataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e StreamLiveMintDataResponse_LiveDataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e StreamLiveMintDataResponse_LiveDataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e StreamLiveMintDataResponse_LiveDataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e StreamLiveMintDataResponse_LiveDataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e StreamLiveMintDataResponse_LiveDataValidationError) ErrorName() string {
+	return "StreamLiveMintDataResponse_LiveDataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e StreamLiveMintDataResponse_LiveDataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sStreamLiveMintDataResponse_LiveData.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = StreamLiveMintDataResponse_LiveDataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = StreamLiveMintDataResponse_LiveDataValidationError{}
