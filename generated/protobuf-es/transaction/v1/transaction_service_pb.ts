@@ -6,6 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
 import { AccountType, Blockhash, Hash, IntentId, Signature, SolanaAccountId, SolanaAddressLookupTable, SwapId, Transaction } from "../../common/v1/model_pb";
+import { VerifiedCoreMintFiatExchangeRate, VerifiedLaunchpadCurrencyReserveState } from "../../currency/v1/currency_service_pb";
 
 /**
  * @generated from enum ocp.transaction.v1.AirdropType
@@ -2193,9 +2194,25 @@ export class SendPublicPaymentMetadata extends Message<SendPublicPaymentMetadata
   /**
    * The exchange data of total funds being sent to the destination
    *
-   * @generated from field: ocp.transaction.v1.ExchangeData exchange_data = 4;
+   * @generated from oneof ocp.transaction.v1.SendPublicPaymentMetadata.exchange_data
    */
-  exchangeData?: ExchangeData;
+  exchangeData: {
+    /**
+     * Provided by server for submitted intents
+     *
+     * @generated from field: ocp.transaction.v1.ExchangeData server_exchange_data = 4;
+     */
+    value: ExchangeData;
+    case: "serverExchangeData";
+  } | {
+    /**
+     * Provided by clients when submitting new intents
+     *
+     * @generated from field: ocp.transaction.v1.VerifiedExchangeData client_exchange_data = 8;
+     */
+    value: VerifiedExchangeData;
+    case: "clientExchangeData";
+  } | { case: undefined; value?: undefined } = { case: undefined };
 
   /**
    * Is the payment a withdrawal?
@@ -2229,7 +2246,8 @@ export class SendPublicPaymentMetadata extends Message<SendPublicPaymentMetadata
     { no: 1, name: "source", kind: "message", T: SolanaAccountId },
     { no: 2, name: "destination", kind: "message", T: SolanaAccountId },
     { no: 3, name: "destination_owner", kind: "message", T: SolanaAccountId },
-    { no: 4, name: "exchange_data", kind: "message", T: ExchangeData },
+    { no: 4, name: "server_exchange_data", kind: "message", T: ExchangeData, oneof: "exchange_data" },
+    { no: 8, name: "client_exchange_data", kind: "message", T: VerifiedExchangeData, oneof: "exchange_data" },
     { no: 5, name: "is_withdrawal", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 6, name: "is_remote_send", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 7, name: "mint", kind: "message", T: SolanaAccountId },
@@ -3386,7 +3404,90 @@ proto3.util.setEnumType(DeniedErrorDetails_Code, "ocp.transaction.v1.DeniedError
 ]);
 
 /**
- * ExchangeData defines an amount of crypto with currency exchange data
+ * VerifiedExchangeData defines an amount of crypto to use in a payment flow
+ * with verified server-state for provable fiat exchange data
+ *
+ * @generated from message ocp.transaction.v1.VerifiedExchangeData
+ */
+export class VerifiedExchangeData extends Message<VerifiedExchangeData> {
+  /**
+   * The crypto mint that is being operated against for the payment flow.
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId mint = 1;
+   */
+  mint?: SolanaAccountId;
+
+  /**
+   * The exact amount of quarks being operated in a payment flow.
+   * This will be used as the source of truth for validating transfer amounts.
+   *
+   * @generated from field: uint64 quarks = 2;
+   */
+  quarks = protoInt64.zero;
+
+  /**
+   * The agreed upon fiat amount in a payment flow.
+   *
+   * @generated from field: double native_amount = 3;
+   */
+  nativeAmount = 0;
+
+  /**
+   * Verified core mint fiat exchange rate used to compute the exchange data
+   *
+   * Required when operating against:
+   *  - Core mint
+   *  - Launchpad currency
+   *
+   * @generated from field: ocp.currency.v1.VerifiedCoreMintFiatExchangeRate core_mint_fiat_exchange_rate = 4;
+   */
+  coreMintFiatExchangeRate?: VerifiedCoreMintFiatExchangeRate;
+
+  /**
+   * Verified launchpad currency reserve state used to compute the exchange data
+   *
+   * Required when operating against:
+   *  - Launchpad currency
+   *
+   * @generated from field: ocp.currency.v1.VerifiedLaunchpadCurrencyReserveState launchpad_currency_reserve_state = 5;
+   */
+  launchpadCurrencyReserveState?: VerifiedLaunchpadCurrencyReserveState;
+
+  constructor(data?: PartialMessage<VerifiedExchangeData>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.transaction.v1.VerifiedExchangeData";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "mint", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "quarks", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 3, name: "native_amount", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 4, name: "core_mint_fiat_exchange_rate", kind: "message", T: VerifiedCoreMintFiatExchangeRate },
+    { no: 5, name: "launchpad_currency_reserve_state", kind: "message", T: VerifiedLaunchpadCurrencyReserveState },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VerifiedExchangeData {
+    return new VerifiedExchangeData().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): VerifiedExchangeData {
+    return new VerifiedExchangeData().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): VerifiedExchangeData {
+    return new VerifiedExchangeData().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: VerifiedExchangeData | PlainMessage<VerifiedExchangeData> | undefined, b: VerifiedExchangeData | PlainMessage<VerifiedExchangeData> | undefined): boolean {
+    return proto3.util.equals(VerifiedExchangeData, a, b);
+  }
+}
+
+/**
+ * ExchangeData defines an amount of crypto to use in a payment flow with
+ * fiat exchange data
  *
  * @generated from message ocp.transaction.v1.ExchangeData
  */
@@ -3407,23 +3508,22 @@ export class ExchangeData extends Message<ExchangeData> {
   exchangeRate = 0;
 
   /**
-   * The agreed upon transfer amount in the currency the payment was made
-   * in.
+   * The agreed upon fiat amount in a payment flow.
    *
    * @generated from field: double native_amount = 3;
    */
   nativeAmount = 0;
 
   /**
-   * The exact amount of quarks to send. This will be used as the source of
-   * truth for validating transaction transfer amounts.
+   * The exact amount of quarks being operated in a payment flow.
+   * This will be used as the source of truth for validating transfer amounts.
    *
    * @generated from field: uint64 quarks = 4;
    */
   quarks = protoInt64.zero;
 
   /**
-   * The crypto mint that is being operated against for the exchange.
+   * The crypto mint that is being operated against for the payment flow.
    *
    * @generated from field: ocp.common.v1.SolanaAccountId mint = 5;
    */
@@ -3473,8 +3573,7 @@ export class ExchangeDataWithoutRate extends Message<ExchangeDataWithoutRate> {
   currency = "";
 
   /**
-   * The agreed upon transfer amount in the currency the payment was made
-   * in.
+   * The agreed upon fiat amount in a payment flow.
    *
    * @generated from field: double native_amount = 2;
    */

@@ -2050,23 +2050,6 @@ func (m *SendPublicPaymentMetadata) Validate() error {
 		}
 	}
 
-	if m.GetExchangeData() == nil {
-		return SendPublicPaymentMetadataValidationError{
-			field:  "ExchangeData",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetExchangeData()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return SendPublicPaymentMetadataValidationError{
-				field:  "ExchangeData",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	// no validation rules for IsWithdrawal
 
 	// no validation rules for IsRemoteSend
@@ -2086,6 +2069,40 @@ func (m *SendPublicPaymentMetadata) Validate() error {
 				cause:  err,
 			}
 		}
+	}
+
+	switch m.ExchangeData.(type) {
+
+	case *SendPublicPaymentMetadata_ServerExchangeData:
+
+		if v, ok := interface{}(m.GetServerExchangeData()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SendPublicPaymentMetadataValidationError{
+					field:  "ServerExchangeData",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *SendPublicPaymentMetadata_ClientExchangeData:
+
+		if v, ok := interface{}(m.GetClientExchangeData()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SendPublicPaymentMetadataValidationError{
+					field:  "ClientExchangeData",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		return SendPublicPaymentMetadataValidationError{
+			field:  "ExchangeData",
+			reason: "value is required",
+		}
+
 	}
 
 	return nil
@@ -4028,6 +4045,131 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = DeniedErrorDetailsValidationError{}
+
+// Validate checks the field values on VerifiedExchangeData with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *VerifiedExchangeData) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetMint() == nil {
+		return VerifiedExchangeDataValidationError{
+			field:  "Mint",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetMint()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return VerifiedExchangeDataValidationError{
+				field:  "Mint",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetQuarks() <= 0 {
+		return VerifiedExchangeDataValidationError{
+			field:  "Quarks",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	if m.GetNativeAmount() <= 0 {
+		return VerifiedExchangeDataValidationError{
+			field:  "NativeAmount",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	if m.GetCoreMintFiatExchangeRate() == nil {
+		return VerifiedExchangeDataValidationError{
+			field:  "CoreMintFiatExchangeRate",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetCoreMintFiatExchangeRate()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return VerifiedExchangeDataValidationError{
+				field:  "CoreMintFiatExchangeRate",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetLaunchpadCurrencyReserveState()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return VerifiedExchangeDataValidationError{
+				field:  "LaunchpadCurrencyReserveState",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// VerifiedExchangeDataValidationError is the validation error returned by
+// VerifiedExchangeData.Validate if the designated constraints aren't met.
+type VerifiedExchangeDataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e VerifiedExchangeDataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e VerifiedExchangeDataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e VerifiedExchangeDataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e VerifiedExchangeDataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e VerifiedExchangeDataValidationError) ErrorName() string {
+	return "VerifiedExchangeDataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e VerifiedExchangeDataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVerifiedExchangeData.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = VerifiedExchangeDataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = VerifiedExchangeDataValidationError{}
 
 // Validate checks the field values on ExchangeData with the rules defined in
 // the proto definition for this message. If any rules are violated, an error
