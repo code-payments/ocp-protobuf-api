@@ -22,11 +22,6 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CurrencyClient interface {
-	// GetAllRates returns the exchange rates for the core mint token against all
-	// available currencies
-	//
-	// Deprecated: Use StreamLiveMintData instead
-	GetAllRates(ctx context.Context, in *GetAllRatesRequest, opts ...grpc.CallOption) (*GetAllRatesResponse, error)
 	// GetMints gets mint account metadata by address
 	GetMints(ctx context.Context, in *GetMintsRequest, opts ...grpc.CallOption) (*GetMintsResponse, error)
 	// GetHistoricalMintData returns historical market data for a mint
@@ -41,15 +36,6 @@ type currencyClient struct {
 
 func NewCurrencyClient(cc grpc.ClientConnInterface) CurrencyClient {
 	return &currencyClient{cc}
-}
-
-func (c *currencyClient) GetAllRates(ctx context.Context, in *GetAllRatesRequest, opts ...grpc.CallOption) (*GetAllRatesResponse, error) {
-	out := new(GetAllRatesResponse)
-	err := c.cc.Invoke(ctx, "/ocp.currency.v1.Currency/GetAllRates", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *currencyClient) GetMints(ctx context.Context, in *GetMintsRequest, opts ...grpc.CallOption) (*GetMintsResponse, error) {
@@ -105,11 +91,6 @@ func (x *currencyStreamLiveMintDataClient) Recv() (*StreamLiveMintDataResponse, 
 // All implementations must embed UnimplementedCurrencyServer
 // for forward compatibility
 type CurrencyServer interface {
-	// GetAllRates returns the exchange rates for the core mint token against all
-	// available currencies
-	//
-	// Deprecated: Use StreamLiveMintData instead
-	GetAllRates(context.Context, *GetAllRatesRequest) (*GetAllRatesResponse, error)
 	// GetMints gets mint account metadata by address
 	GetMints(context.Context, *GetMintsRequest) (*GetMintsResponse, error)
 	// GetHistoricalMintData returns historical market data for a mint
@@ -123,9 +104,6 @@ type CurrencyServer interface {
 type UnimplementedCurrencyServer struct {
 }
 
-func (UnimplementedCurrencyServer) GetAllRates(context.Context, *GetAllRatesRequest) (*GetAllRatesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAllRates not implemented")
-}
 func (UnimplementedCurrencyServer) GetMints(context.Context, *GetMintsRequest) (*GetMintsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMints not implemented")
 }
@@ -146,24 +124,6 @@ type UnsafeCurrencyServer interface {
 
 func RegisterCurrencyServer(s grpc.ServiceRegistrar, srv CurrencyServer) {
 	s.RegisterService(&Currency_ServiceDesc, srv)
-}
-
-func _Currency_GetAllRates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAllRatesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CurrencyServer).GetAllRates(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/ocp.currency.v1.Currency/GetAllRates",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CurrencyServer).GetAllRates(ctx, req.(*GetAllRatesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _Currency_GetMints_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -235,10 +195,6 @@ var Currency_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "ocp.currency.v1.Currency",
 	HandlerType: (*CurrencyServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "GetAllRates",
-			Handler:    _Currency_GetAllRates_Handler,
-		},
 		{
 			MethodName: "GetMints",
 			Handler:    _Currency_GetMints_Handler,
