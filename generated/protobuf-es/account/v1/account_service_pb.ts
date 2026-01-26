@@ -411,6 +411,14 @@ export class TokenAccountInfo extends Message<TokenAccountInfo> {
    */
   isGiftCardIssuer = false;
 
+  /**
+   * The USD cost basis for this account, which can be used to compute currency
+   * appreciation/depreciation
+   *
+   * @generated from field: double usd_cost_basis = 15;
+   */
+  usdCostBasis = 0;
+
   constructor(data?: PartialMessage<TokenAccountInfo>) {
     super();
     proto3.util.initPartial(data, this);
@@ -433,6 +441,7 @@ export class TokenAccountInfo extends Message<TokenAccountInfo> {
     { no: 12, name: "mint", kind: "message", T: SolanaAccountId },
     { no: 13, name: "created_at", kind: "message", T: Timestamp },
     { no: 14, name: "is_gift_card_issuer", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 15, name: "usd_cost_basis", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): TokenAccountInfo {
