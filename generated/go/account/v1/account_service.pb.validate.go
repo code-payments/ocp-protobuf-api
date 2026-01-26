@@ -530,6 +530,8 @@ func (m *TokenAccountInfo) Validate() error {
 
 	// no validation rules for IsGiftCardIssuer
 
+	// no validation rules for UsdCostBasis
+
 	return nil
 }
 
