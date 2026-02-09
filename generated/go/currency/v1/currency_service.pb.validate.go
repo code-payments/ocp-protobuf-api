@@ -962,6 +962,10 @@ func (m *LaunchpadMetadata) Validate() error {
 		}
 	}
 
+	// no validation rules for Price
+
+	// no validation rules for MarketCap
+
 	return nil
 }
 
