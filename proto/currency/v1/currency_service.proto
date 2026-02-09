@@ -200,6 +200,12 @@ message LaunchpadMetadata {
 
     // Precent fee for sells in basis points, currently hardcoded to 1%
     uint32 sell_fee_bps = 8 [(validate.rules).uint32.const = 100];
+
+    // The current price in USD
+    double price = 9;
+
+    // The current market capitalization in USD
+    double market_cap = 10;
 }
 
 message HistoricalMintData {

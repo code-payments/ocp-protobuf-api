@@ -701,6 +701,20 @@ export class LaunchpadMetadata extends Message<LaunchpadMetadata> {
    */
   sellFeeBps = 0;
 
+  /**
+   * The current price in USD
+   *
+   * @generated from field: double price = 9;
+   */
+  price = 0;
+
+  /**
+   * The current market capitalization in USD
+   *
+   * @generated from field: double market_cap = 10;
+   */
+  marketCap = 0;
+
   constructor(data?: PartialMessage<LaunchpadMetadata>) {
     super();
     proto3.util.initPartial(data, this);
@@ -717,6 +731,8 @@ export class LaunchpadMetadata extends Message<LaunchpadMetadata> {
     { no: 6, name: "core_mint_vault", kind: "message", T: SolanaAccountId },
     { no: 7, name: "supply_from_bonding", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
     { no: 8, name: "sell_fee_bps", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 9, name: "price", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 10, name: "market_cap", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LaunchpadMetadata {
