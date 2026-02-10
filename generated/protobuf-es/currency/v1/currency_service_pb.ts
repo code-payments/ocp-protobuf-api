@@ -539,6 +539,13 @@ export class Mint extends Message<Mint> {
    */
   createdAt?: Timestamp;
 
+  /**
+   * Social links for this currency
+   *
+   * @generated from field: repeated ocp.currency.v1.SocialLink social_links = 10;
+   */
+  socialLinks: SocialLink[] = [];
+
   constructor(data?: PartialMessage<Mint>) {
     super();
     proto3.util.initPartial(data, this);
@@ -556,6 +563,7 @@ export class Mint extends Message<Mint> {
     { no: 7, name: "vm_metadata", kind: "message", T: VmMetadata },
     { no: 8, name: "launchpad_metadata", kind: "message", T: LaunchpadMetadata },
     { no: 9, name: "created_at", kind: "message", T: Timestamp },
+    { no: 10, name: "social_links", kind: "message", T: SocialLink, repeated: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Mint {
@@ -1070,6 +1078,130 @@ export class VerifiedLaunchapdCurrencyReserveStateBatch extends Message<Verified
 
   static equals(a: VerifiedLaunchapdCurrencyReserveStateBatch | PlainMessage<VerifiedLaunchapdCurrencyReserveStateBatch> | undefined, b: VerifiedLaunchapdCurrencyReserveStateBatch | PlainMessage<VerifiedLaunchapdCurrencyReserveStateBatch> | undefined): boolean {
     return proto3.util.equals(VerifiedLaunchapdCurrencyReserveStateBatch, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.SocialLink
+ */
+export class SocialLink extends Message<SocialLink> {
+  /**
+   * @generated from oneof ocp.currency.v1.SocialLink.type
+   */
+  type: {
+    /**
+     * @generated from field: ocp.currency.v1.SocialLink.Website website = 1;
+     */
+    value: SocialLink_Website;
+    case: "website";
+  } | {
+    /**
+     * @generated from field: ocp.currency.v1.SocialLink.X x = 2;
+     */
+    value: SocialLink_X;
+    case: "x";
+  } | { case: undefined; value?: undefined } = { case: undefined };
+
+  constructor(data?: PartialMessage<SocialLink>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.SocialLink";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "website", kind: "message", T: SocialLink_Website, oneof: "type" },
+    { no: 2, name: "x", kind: "message", T: SocialLink_X, oneof: "type" },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SocialLink {
+    return new SocialLink().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SocialLink {
+    return new SocialLink().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SocialLink {
+    return new SocialLink().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SocialLink | PlainMessage<SocialLink> | undefined, b: SocialLink | PlainMessage<SocialLink> | undefined): boolean {
+    return proto3.util.equals(SocialLink, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.SocialLink.Website
+ */
+export class SocialLink_Website extends Message<SocialLink_Website> {
+  /**
+   * @generated from field: string url = 1;
+   */
+  url = "";
+
+  constructor(data?: PartialMessage<SocialLink_Website>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.SocialLink.Website";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SocialLink_Website {
+    return new SocialLink_Website().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SocialLink_Website {
+    return new SocialLink_Website().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SocialLink_Website {
+    return new SocialLink_Website().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SocialLink_Website | PlainMessage<SocialLink_Website> | undefined, b: SocialLink_Website | PlainMessage<SocialLink_Website> | undefined): boolean {
+    return proto3.util.equals(SocialLink_Website, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.SocialLink.X
+ */
+export class SocialLink_X extends Message<SocialLink_X> {
+  /**
+   * @generated from field: string username = 1;
+   */
+  username = "";
+
+  constructor(data?: PartialMessage<SocialLink_X>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.SocialLink.X";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "username", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SocialLink_X {
+    return new SocialLink_X().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SocialLink_X {
+    return new SocialLink_X().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SocialLink_X {
+    return new SocialLink_X().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SocialLink_X | PlainMessage<SocialLink_X> | undefined, b: SocialLink_X | PlainMessage<SocialLink_X> | undefined): boolean {
+    return proto3.util.equals(SocialLink_X, a, b);
   }
 }
 
