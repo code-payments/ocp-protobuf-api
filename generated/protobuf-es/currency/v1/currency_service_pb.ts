@@ -546,6 +546,13 @@ export class Mint extends Message<Mint> {
    */
   socialLinks: SocialLink[] = [];
 
+  /**
+   * Bill customization for this currency. Use the default if not provided
+   *
+   * @generated from field: ocp.currency.v1.BillCustomization bill_customization = 11;
+   */
+  billCustomization?: BillCustomization;
+
   constructor(data?: PartialMessage<Mint>) {
     super();
     proto3.util.initPartial(data, this);
@@ -564,6 +571,7 @@ export class Mint extends Message<Mint> {
     { no: 8, name: "launchpad_metadata", kind: "message", T: LaunchpadMetadata },
     { no: 9, name: "created_at", kind: "message", T: Timestamp },
     { no: 10, name: "social_links", kind: "message", T: SocialLink, repeated: true },
+    { no: 11, name: "bill_customization", kind: "message", T: BillCustomization },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Mint {
@@ -1202,6 +1210,84 @@ export class SocialLink_X extends Message<SocialLink_X> {
 
   static equals(a: SocialLink_X | PlainMessage<SocialLink_X> | undefined, b: SocialLink_X | PlainMessage<SocialLink_X> | undefined): boolean {
     return proto3.util.equals(SocialLink_X, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.BillCustomization
+ */
+export class BillCustomization extends Message<BillCustomization> {
+  /**
+   * Bill background colors (from top to bottom)
+   *
+   * @generated from field: repeated ocp.currency.v1.Color colors = 1;
+   */
+  colors: Color[] = [];
+
+  constructor(data?: PartialMessage<BillCustomization>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.BillCustomization";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "colors", kind: "message", T: Color, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): BillCustomization {
+    return new BillCustomization().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): BillCustomization {
+    return new BillCustomization().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): BillCustomization {
+    return new BillCustomization().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: BillCustomization | PlainMessage<BillCustomization> | undefined, b: BillCustomization | PlainMessage<BillCustomization> | undefined): boolean {
+    return proto3.util.equals(BillCustomization, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.Color
+ */
+export class Color extends Message<Color> {
+  /**
+   * Hex colour value (e.g. "#19191A")
+   *
+   * @generated from field: string hex = 1;
+   */
+  hex = "";
+
+  constructor(data?: PartialMessage<Color>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.Color";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "hex", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Color {
+    return new Color().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Color {
+    return new Color().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Color {
+    return new Color().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: Color | PlainMessage<Color> | undefined, b: Color | PlainMessage<Color> | undefined): boolean {
+    return proto3.util.equals(Color, a, b);
   }
 }
 
