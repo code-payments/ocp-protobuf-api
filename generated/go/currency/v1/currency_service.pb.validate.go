@@ -664,6 +664,28 @@ func (m *Mint) Validate() error {
 		}
 	}
 
+	if len(m.GetSocialLinks()) > 32 {
+		return MintValidationError{
+			field:  "SocialLinks",
+			reason: "value must contain no more than 32 item(s)",
+		}
+	}
+
+	for idx, item := range m.GetSocialLinks() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MintValidationError{
+					field:  fmt.Sprintf("SocialLinks[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -1664,6 +1686,104 @@ var _ interface {
 	ErrorName() string
 } = VerifiedLaunchapdCurrencyReserveStateBatchValidationError{}
 
+// Validate checks the field values on SocialLink with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *SocialLink) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	switch m.Type.(type) {
+
+	case *SocialLink_Website_:
+
+		if v, ok := interface{}(m.GetWebsite()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SocialLinkValidationError{
+					field:  "Website",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *SocialLink_X_:
+
+		if v, ok := interface{}(m.GetX()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SocialLinkValidationError{
+					field:  "X",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		return SocialLinkValidationError{
+			field:  "Type",
+			reason: "value is required",
+		}
+
+	}
+
+	return nil
+}
+
+// SocialLinkValidationError is the validation error returned by
+// SocialLink.Validate if the designated constraints aren't met.
+type SocialLinkValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SocialLinkValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SocialLinkValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SocialLinkValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SocialLinkValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SocialLinkValidationError) ErrorName() string { return "SocialLinkValidationError" }
+
+// Error satisfies the builtin error interface
+func (e SocialLinkValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSocialLink.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SocialLinkValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SocialLinkValidationError{}
+
 // Validate checks the field values on StreamLiveMintDataRequest_Request with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, an error is returned.
@@ -1855,3 +1975,171 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = StreamLiveMintDataResponse_LiveDataValidationError{}
+
+// Validate checks the field values on SocialLink_Website with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *SocialLink_Website) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if utf8.RuneCountInString(m.GetUrl()) > 2048 {
+		return SocialLink_WebsiteValidationError{
+			field:  "Url",
+			reason: "value length must be at most 2048 runes",
+		}
+	}
+
+	if uri, err := url.Parse(m.GetUrl()); err != nil {
+		return SocialLink_WebsiteValidationError{
+			field:  "Url",
+			reason: "value must be a valid URI",
+			cause:  err,
+		}
+	} else if !uri.IsAbs() {
+		return SocialLink_WebsiteValidationError{
+			field:  "Url",
+			reason: "value must be absolute",
+		}
+	}
+
+	return nil
+}
+
+// SocialLink_WebsiteValidationError is the validation error returned by
+// SocialLink_Website.Validate if the designated constraints aren't met.
+type SocialLink_WebsiteValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SocialLink_WebsiteValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SocialLink_WebsiteValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SocialLink_WebsiteValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SocialLink_WebsiteValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SocialLink_WebsiteValidationError) ErrorName() string {
+	return "SocialLink_WebsiteValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SocialLink_WebsiteValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSocialLink_Website.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SocialLink_WebsiteValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SocialLink_WebsiteValidationError{}
+
+// Validate checks the field values on SocialLink_X with the rules defined in
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
+func (m *SocialLink_X) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if l := utf8.RuneCountInString(m.GetUsername()); l < 1 || l > 15 {
+		return SocialLink_XValidationError{
+			field:  "Username",
+			reason: "value length must be between 1 and 15 runes, inclusive",
+		}
+	}
+
+	if !_SocialLink_X_Username_Pattern.MatchString(m.GetUsername()) {
+		return SocialLink_XValidationError{
+			field:  "Username",
+			reason: "value does not match regex pattern \"^[a-zA-Z0-9_]+$\"",
+		}
+	}
+
+	return nil
+}
+
+// SocialLink_XValidationError is the validation error returned by
+// SocialLink_X.Validate if the designated constraints aren't met.
+type SocialLink_XValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SocialLink_XValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SocialLink_XValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SocialLink_XValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SocialLink_XValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SocialLink_XValidationError) ErrorName() string { return "SocialLink_XValidationError" }
+
+// Error satisfies the builtin error interface
+func (e SocialLink_XValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSocialLink_X.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SocialLink_XValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SocialLink_XValidationError{}
+
+var _SocialLink_X_Username_Pattern = regexp.MustCompile("^[a-zA-Z0-9_]+$")

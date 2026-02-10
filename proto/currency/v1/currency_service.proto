@@ -157,6 +157,12 @@ message Mint {
 
     // Timestamp the currency was created
     google.protobuf.Timestamp created_at = 9 [(validate.rules).timestamp.required = true];
+
+    // Social links for this currency
+    repeated SocialLink social_links = 10 [(validate.rules).repeated = {
+        min_items: 0
+        max_items: 32 // Arbitrary
+    }];
 }
 
 message VmMetadata {
@@ -266,4 +272,28 @@ message VerifiedLaunchapdCurrencyReserveStateBatch {
         min_items: 1
         max_items: 1024 // Arbitrary
     }];
+}
+
+message SocialLink {
+    oneof type {
+        option (validate.required) = true;
+
+        Website website = 1;
+        X       x       = 2;
+    }
+
+    message Website {
+        string url = 1 [(validate.rules).string = {
+            uri: true,
+            max_len: 2048,
+        }];
+    }
+
+    message X {
+        string username = 1 [(validate.rules).string = {
+            min_len: 1,
+            max_len: 15,
+            pattern: "^[a-zA-Z0-9_]+$",
+        }];
+    }
 }
