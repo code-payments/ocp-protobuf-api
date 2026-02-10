@@ -686,6 +686,16 @@ func (m *Mint) Validate() error {
 
 	}
 
+	if v, ok := interface{}(m.GetBillCustomization()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MintValidationError{
+				field:  "BillCustomization",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	return nil
 }
 
@@ -1783,6 +1793,168 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = SocialLinkValidationError{}
+
+// Validate checks the field values on BillCustomization with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *BillCustomization) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if l := len(m.GetColors()); l < 2 || l > 3 {
+		return BillCustomizationValidationError{
+			field:  "Colors",
+			reason: "value must contain between 2 and 3 items, inclusive",
+		}
+	}
+
+	for idx, item := range m.GetColors() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return BillCustomizationValidationError{
+					field:  fmt.Sprintf("Colors[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// BillCustomizationValidationError is the validation error returned by
+// BillCustomization.Validate if the designated constraints aren't met.
+type BillCustomizationValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BillCustomizationValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BillCustomizationValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BillCustomizationValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BillCustomizationValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BillCustomizationValidationError) ErrorName() string {
+	return "BillCustomizationValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BillCustomizationValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBillCustomization.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BillCustomizationValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BillCustomizationValidationError{}
+
+// Validate checks the field values on Color with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *Color) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if !_Color_Hex_Pattern.MatchString(m.GetHex()) {
+		return ColorValidationError{
+			field:  "Hex",
+			reason: "value does not match regex pattern \"^#[0-9a-fA-F]{6}$\"",
+		}
+	}
+
+	return nil
+}
+
+// ColorValidationError is the validation error returned by Color.Validate if
+// the designated constraints aren't met.
+type ColorValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ColorValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ColorValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ColorValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ColorValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ColorValidationError) ErrorName() string { return "ColorValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ColorValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sColor.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ColorValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ColorValidationError{}
+
+var _Color_Hex_Pattern = regexp.MustCompile("^#[0-9a-fA-F]{6}$")
 
 // Validate checks the field values on StreamLiveMintDataRequest_Request with
 // the rules defined in the proto definition for this message. If any rules

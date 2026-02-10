@@ -163,6 +163,9 @@ message Mint {
         min_items: 0
         max_items: 32 // Arbitrary
     }];
+
+    // Bill customization for this currency. Use the default if not provided
+    BillCustomization bill_customization = 11;
 }
 
 message VmMetadata {
@@ -296,4 +299,19 @@ message SocialLink {
             pattern: "^[a-zA-Z0-9_]+$",
         }];
     }
+}
+
+message BillCustomization {
+    // Bill background colors (from top to bottom)
+    repeated Color colors = 1 [(validate.rules).repeated = {
+        min_items: 2
+        max_items: 3
+    }];
+}
+
+message Color {
+    // Hex colour value (e.g. "#19191A")
+    string hex = 1 [(validate.rules).string = {
+        pattern: "^#[0-9a-fA-F]{6}$"
+    }];
 }
