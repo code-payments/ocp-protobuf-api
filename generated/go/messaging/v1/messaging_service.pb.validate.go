@@ -1234,6 +1234,16 @@ func (m *RequestToGiveBill) Validate() error {
 		}
 	}
 
+	if v, ok := interface{}(m.GetExchangeData()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RequestToGiveBillValidationError{
+				field:  "ExchangeData",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	return nil
 }
 
