@@ -6,6 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message as Message$1, proto3 } from "@bufbuild/protobuf";
 import { ClientPong, ServerPing, Signature, SolanaAccountId } from "../../common/v1/model_pb";
+import { VerifiedExchangeData } from "../../transaction/v1/transaction_service_pb";
 
 /**
  * @generated from message ocp.messaging.v1.OpenMessageStreamRequest
@@ -627,6 +628,15 @@ export class RequestToGiveBill extends Message$1<RequestToGiveBill> {
    */
   mint?: SolanaAccountId;
 
+  /**
+   * The validated exchange data that was used to compute the fiat value of the give
+   * to support subsequent gives. Clients should be aware of timeouts and dismiss a
+   * bill if the threshold is met.
+   *
+   * @generated from field: ocp.transaction.v1.VerifiedExchangeData exchange_data = 2;
+   */
+  exchangeData?: VerifiedExchangeData;
+
   constructor(data?: PartialMessage<RequestToGiveBill>) {
     super();
     proto3.util.initPartial(data, this);
@@ -636,6 +646,7 @@ export class RequestToGiveBill extends Message$1<RequestToGiveBill> {
   static readonly typeName = "ocp.messaging.v1.RequestToGiveBill";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "mint", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "exchange_data", kind: "message", T: VerifiedExchangeData },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RequestToGiveBill {
