@@ -1956,6 +1956,196 @@ var _ interface {
 
 var _Color_Hex_Pattern = regexp.MustCompile("^#[0-9a-fA-F]{6}$")
 
+// Validate checks the field values on LaunchRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
+func (m *LaunchRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetOwner() == nil {
+		return LaunchRequestValidationError{
+			field:  "Owner",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetOwner()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LaunchRequestValidationError{
+				field:  "Owner",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetSignature() == nil {
+		return LaunchRequestValidationError{
+			field:  "Signature",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSignature()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LaunchRequestValidationError{
+				field:  "Signature",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if l := utf8.RuneCountInString(m.GetName()); l < 1 || l > 32 {
+		return LaunchRequestValidationError{
+			field:  "Name",
+			reason: "value length must be between 1 and 32 runes, inclusive",
+		}
+	}
+
+	if utf8.RuneCountInString(m.GetSymbol()) > 8 {
+		return LaunchRequestValidationError{
+			field:  "Symbol",
+			reason: "value length must be at most 8 runes",
+		}
+	}
+
+	return nil
+}
+
+// LaunchRequestValidationError is the validation error returned by
+// LaunchRequest.Validate if the designated constraints aren't met.
+type LaunchRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LaunchRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LaunchRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LaunchRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LaunchRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LaunchRequestValidationError) ErrorName() string { return "LaunchRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e LaunchRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLaunchRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LaunchRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LaunchRequestValidationError{}
+
+// Validate checks the field values on LaunchResponse with the rules defined in
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
+func (m *LaunchResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Result
+
+	if v, ok := interface{}(m.GetMint()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LaunchResponseValidationError{
+				field:  "Mint",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// LaunchResponseValidationError is the validation error returned by
+// LaunchResponse.Validate if the designated constraints aren't met.
+type LaunchResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LaunchResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LaunchResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LaunchResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LaunchResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LaunchResponseValidationError) ErrorName() string { return "LaunchResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e LaunchResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLaunchResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LaunchResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LaunchResponseValidationError{}
+
 // Validate checks the field values on StreamLiveMintDataRequest_Request with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, an error is returned.

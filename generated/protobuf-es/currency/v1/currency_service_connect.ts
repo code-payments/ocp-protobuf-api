@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetHistoricalMintDataRequest, GetHistoricalMintDataResponse, GetMintsRequest, GetMintsResponse, StreamLiveMintDataRequest, StreamLiveMintDataResponse } from "./currency_service_pb";
+import { GetHistoricalMintDataRequest, GetHistoricalMintDataResponse, GetMintsRequest, GetMintsResponse, LaunchRequest, LaunchResponse, StreamLiveMintDataRequest, StreamLiveMintDataResponse } from "./currency_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -44,6 +44,17 @@ export const Currency = {
       I: StreamLiveMintDataRequest,
       O: StreamLiveMintDataResponse,
       kind: MethodKind.BiDiStreaming,
+    },
+    /**
+     * Launch launches a new currency on the launchpad
+     *
+     * @generated from rpc ocp.currency.v1.Currency.Launch
+     */
+    launch: {
+      name: "Launch",
+      I: LaunchRequest,
+      O: LaunchResponse,
+      kind: MethodKind.Unary,
     },
   }
 } as const;

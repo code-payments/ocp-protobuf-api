@@ -28,6 +28,8 @@ type CurrencyClient interface {
 	GetHistoricalMintData(ctx context.Context, in *GetHistoricalMintDataRequest, opts ...grpc.CallOption) (*GetHistoricalMintDataResponse, error)
 	// StreamLiveMintData streams live mint data for a set of mints
 	StreamLiveMintData(ctx context.Context, opts ...grpc.CallOption) (Currency_StreamLiveMintDataClient, error)
+	// Launch launches a new currency on the launchpad
+	Launch(ctx context.Context, in *LaunchRequest, opts ...grpc.CallOption) (*LaunchResponse, error)
 }
 
 type currencyClient struct {
@@ -87,6 +89,15 @@ func (x *currencyStreamLiveMintDataClient) Recv() (*StreamLiveMintDataResponse, 
 	return m, nil
 }
 
+func (c *currencyClient) Launch(ctx context.Context, in *LaunchRequest, opts ...grpc.CallOption) (*LaunchResponse, error) {
+	out := new(LaunchResponse)
+	err := c.cc.Invoke(ctx, "/ocp.currency.v1.Currency/Launch", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CurrencyServer is the server API for Currency service.
 // All implementations must embed UnimplementedCurrencyServer
 // for forward compatibility
@@ -97,6 +108,8 @@ type CurrencyServer interface {
 	GetHistoricalMintData(context.Context, *GetHistoricalMintDataRequest) (*GetHistoricalMintDataResponse, error)
 	// StreamLiveMintData streams live mint data for a set of mints
 	StreamLiveMintData(Currency_StreamLiveMintDataServer) error
+	// Launch launches a new currency on the launchpad
+	Launch(context.Context, *LaunchRequest) (*LaunchResponse, error)
 	mustEmbedUnimplementedCurrencyServer()
 }
 
@@ -112,6 +125,9 @@ func (UnimplementedCurrencyServer) GetHistoricalMintData(context.Context, *GetHi
 }
 func (UnimplementedCurrencyServer) StreamLiveMintData(Currency_StreamLiveMintDataServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamLiveMintData not implemented")
+}
+func (UnimplementedCurrencyServer) Launch(context.Context, *LaunchRequest) (*LaunchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Launch not implemented")
 }
 func (UnimplementedCurrencyServer) mustEmbedUnimplementedCurrencyServer() {}
 
@@ -188,6 +204,24 @@ func (x *currencyStreamLiveMintDataServer) Recv() (*StreamLiveMintDataRequest, e
 	return m, nil
 }
 
+func _Currency_Launch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LaunchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyServer).Launch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ocp.currency.v1.Currency/Launch",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyServer).Launch(ctx, req.(*LaunchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Currency_ServiceDesc is the grpc.ServiceDesc for Currency service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -202,6 +236,10 @@ var Currency_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetHistoricalMintData",
 			Handler:    _Currency_GetHistoricalMintData_Handler,
+		},
+		{
+			MethodName: "Launch",
+			Handler:    _Currency_Launch_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
