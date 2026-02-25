@@ -175,6 +175,57 @@ func (GetHistoricalMintDataResponse_Result) EnumDescriptor() ([]byte, []int) {
 	return file_currency_v1_currency_service_proto_rawDescGZIP(), []int{3, 0}
 }
 
+type LaunchResponse_Result int32
+
+const (
+	LaunchResponse_OK LaunchResponse_Result = 0
+	// The launch was denied
+	LaunchResponse_DENIED LaunchResponse_Result = 1
+	// A similar currency already exists
+	LaunchResponse_EXISTS LaunchResponse_Result = 2
+)
+
+// Enum value maps for LaunchResponse_Result.
+var (
+	LaunchResponse_Result_name = map[int32]string{
+		0: "OK",
+		1: "DENIED",
+		2: "EXISTS",
+	}
+	LaunchResponse_Result_value = map[string]int32{
+		"OK":     0,
+		"DENIED": 1,
+		"EXISTS": 2,
+	}
+)
+
+func (x LaunchResponse_Result) Enum() *LaunchResponse_Result {
+	p := new(LaunchResponse_Result)
+	*p = x
+	return p
+}
+
+func (x LaunchResponse_Result) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (LaunchResponse_Result) Descriptor() protoreflect.EnumDescriptor {
+	return file_currency_v1_currency_service_proto_enumTypes[3].Descriptor()
+}
+
+func (LaunchResponse_Result) Type() protoreflect.EnumType {
+	return &file_currency_v1_currency_service_proto_enumTypes[3]
+}
+
+func (x LaunchResponse_Result) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use LaunchResponse_Result.Descriptor instead.
+func (LaunchResponse_Result) EnumDescriptor() ([]byte, []int) {
+	return file_currency_v1_currency_service_proto_rawDescGZIP(), []int{20, 0}
+}
+
 type GetMintsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1501,6 +1552,140 @@ func (x *Color) GetHex() string {
 	return ""
 }
 
+type LaunchRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// The owner account launching the currency
+	Owner *v1.SolanaAccountId `protobuf:"bytes,1,opt,name=owner,proto3" json:"owner,omitempty"`
+	// The signature is of serialize(LaunchRequest) without this field set
+	// using the private key of the owner account. This provides an authentication
+	// mechanism to the RPC.
+	Signature *v1.Signature `protobuf:"bytes,2,opt,name=signature,proto3" json:"signature,omitempty"`
+	// The name of the currency to launch
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// The ticker symbol for the currency. If not provided, a default will be
+	// generated using the currency name.
+	Symbol string `protobuf:"bytes,4,opt,name=symbol,proto3" json:"symbol,omitempty"`
+}
+
+func (x *LaunchRequest) Reset() {
+	*x = LaunchRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_currency_v1_currency_service_proto_msgTypes[19]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *LaunchRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LaunchRequest) ProtoMessage() {}
+
+func (x *LaunchRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_currency_v1_currency_service_proto_msgTypes[19]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LaunchRequest.ProtoReflect.Descriptor instead.
+func (*LaunchRequest) Descriptor() ([]byte, []int) {
+	return file_currency_v1_currency_service_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *LaunchRequest) GetOwner() *v1.SolanaAccountId {
+	if x != nil {
+		return x.Owner
+	}
+	return nil
+}
+
+func (x *LaunchRequest) GetSignature() *v1.Signature {
+	if x != nil {
+		return x.Signature
+	}
+	return nil
+}
+
+func (x *LaunchRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *LaunchRequest) GetSymbol() string {
+	if x != nil {
+		return x.Symbol
+	}
+	return ""
+}
+
+type LaunchResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Result LaunchResponse_Result `protobuf:"varint,1,opt,name=result,proto3,enum=ocp.currency.v1.LaunchResponse_Result" json:"result,omitempty"`
+	// The mint address of the launched currency on success
+	Mint *v1.SolanaAccountId `protobuf:"bytes,2,opt,name=mint,proto3" json:"mint,omitempty"`
+}
+
+func (x *LaunchResponse) Reset() {
+	*x = LaunchResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_currency_v1_currency_service_proto_msgTypes[20]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *LaunchResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LaunchResponse) ProtoMessage() {}
+
+func (x *LaunchResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_currency_v1_currency_service_proto_msgTypes[20]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LaunchResponse.ProtoReflect.Descriptor instead.
+func (*LaunchResponse) Descriptor() ([]byte, []int) {
+	return file_currency_v1_currency_service_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *LaunchResponse) GetResult() LaunchResponse_Result {
+	if x != nil {
+		return x.Result
+	}
+	return LaunchResponse_OK
+}
+
+func (x *LaunchResponse) GetMint() *v1.SolanaAccountId {
+	if x != nil {
+		return x.Mint
+	}
+	return nil
+}
+
 type StreamLiveMintDataRequest_Request struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1514,7 +1699,7 @@ type StreamLiveMintDataRequest_Request struct {
 func (x *StreamLiveMintDataRequest_Request) Reset() {
 	*x = StreamLiveMintDataRequest_Request{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_currency_v1_currency_service_proto_msgTypes[20]
+		mi := &file_currency_v1_currency_service_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1527,7 +1712,7 @@ func (x *StreamLiveMintDataRequest_Request) String() string {
 func (*StreamLiveMintDataRequest_Request) ProtoMessage() {}
 
 func (x *StreamLiveMintDataRequest_Request) ProtoReflect() protoreflect.Message {
-	mi := &file_currency_v1_currency_service_proto_msgTypes[20]
+	mi := &file_currency_v1_currency_service_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1565,7 +1750,7 @@ type StreamLiveMintDataResponse_LiveData struct {
 func (x *StreamLiveMintDataResponse_LiveData) Reset() {
 	*x = StreamLiveMintDataResponse_LiveData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_currency_v1_currency_service_proto_msgTypes[21]
+		mi := &file_currency_v1_currency_service_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1578,7 +1763,7 @@ func (x *StreamLiveMintDataResponse_LiveData) String() string {
 func (*StreamLiveMintDataResponse_LiveData) ProtoMessage() {}
 
 func (x *StreamLiveMintDataResponse_LiveData) ProtoReflect() protoreflect.Message {
-	mi := &file_currency_v1_currency_service_proto_msgTypes[21]
+	mi := &file_currency_v1_currency_service_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1644,7 +1829,7 @@ type SocialLink_Website struct {
 func (x *SocialLink_Website) Reset() {
 	*x = SocialLink_Website{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_currency_v1_currency_service_proto_msgTypes[22]
+		mi := &file_currency_v1_currency_service_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1657,7 +1842,7 @@ func (x *SocialLink_Website) String() string {
 func (*SocialLink_Website) ProtoMessage() {}
 
 func (x *SocialLink_Website) ProtoReflect() protoreflect.Message {
-	mi := &file_currency_v1_currency_service_proto_msgTypes[22]
+	mi := &file_currency_v1_currency_service_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1691,7 +1876,7 @@ type SocialLink_X struct {
 func (x *SocialLink_X) Reset() {
 	*x = SocialLink_X{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_currency_v1_currency_service_proto_msgTypes[23]
+		mi := &file_currency_v1_currency_service_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1704,7 +1889,7 @@ func (x *SocialLink_X) String() string {
 func (*SocialLink_X) ProtoMessage() {}
 
 func (x *SocialLink_X) ProtoReflect() protoreflect.Message {
-	mi := &file_currency_v1_currency_service_proto_msgTypes[23]
+	mi := &file_currency_v1_currency_service_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2045,36 +2230,66 @@ var file_currency_v1_currency_service_proto_rawDesc = []byte{
 	0x52, 0x06, 0x63, 0x6f, 0x6c, 0x6f, 0x72, 0x73, 0x22, 0x35, 0x0a, 0x05, 0x43, 0x6f, 0x6c, 0x6f,
 	0x72, 0x12, 0x2c, 0x0a, 0x03, 0x68, 0x65, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x1a,
 	0xba, 0xe9, 0xc0, 0x03, 0x15, 0x72, 0x13, 0x32, 0x11, 0x5e, 0x23, 0x5b, 0x30, 0x2d, 0x39, 0x61,
-	0x2d, 0x66, 0x41, 0x2d, 0x46, 0x5d, 0x7b, 0x36, 0x7d, 0x24, 0x52, 0x03, 0x68, 0x65, 0x78, 0x32,
-	0xc6, 0x02, 0x0a, 0x08, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x12, 0x4f, 0x0a, 0x08,
-	0x47, 0x65, 0x74, 0x4d, 0x69, 0x6e, 0x74, 0x73, 0x12, 0x20, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63,
-	0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4d, 0x69,
-	0x6e, 0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x6f, 0x63, 0x70,
-	0x2e, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74,
-	0x4d, 0x69, 0x6e, 0x74, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x76, 0x0a,
-	0x15, 0x47, 0x65, 0x74, 0x48, 0x69, 0x73, 0x74, 0x6f, 0x72, 0x69, 0x63, 0x61, 0x6c, 0x4d, 0x69,
-	0x6e, 0x74, 0x44, 0x61, 0x74, 0x61, 0x12, 0x2d, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63, 0x75, 0x72,
-	0x72, 0x65, 0x6e, 0x63, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x48, 0x69, 0x73, 0x74,
-	0x6f, 0x72, 0x69, 0x63, 0x61, 0x6c, 0x4d, 0x69, 0x6e, 0x74, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2e, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63, 0x75, 0x72, 0x72,
-	0x65, 0x6e, 0x63, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x48, 0x69, 0x73, 0x74, 0x6f,
-	0x72, 0x69, 0x63, 0x61, 0x6c, 0x4d, 0x69, 0x6e, 0x74, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x71, 0x0a, 0x12, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x4c,
-	0x69, 0x76, 0x65, 0x4d, 0x69, 0x6e, 0x74, 0x44, 0x61, 0x74, 0x61, 0x12, 0x2a, 0x2e, 0x6f, 0x63,
-	0x70, 0x2e, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74,
-	0x72, 0x65, 0x61, 0x6d, 0x4c, 0x69, 0x76, 0x65, 0x4d, 0x69, 0x6e, 0x74, 0x44, 0x61, 0x74, 0x61,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2b, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63, 0x75,
-	0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d,
-	0x4c, 0x69, 0x76, 0x65, 0x4d, 0x69, 0x6e, 0x74, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x28, 0x01, 0x30, 0x01, 0x42, 0x7a, 0x0a, 0x1b, 0x63, 0x6f, 0x6d, 0x2e,
-	0x63, 0x6f, 0x64, 0x65, 0x69, 0x6e, 0x63, 0x2e, 0x67, 0x65, 0x6e, 0x2e, 0x63, 0x75, 0x72, 0x72,
-	0x65, 0x6e, 0x63, 0x79, 0x2e, 0x76, 0x31, 0x5a, 0x4b, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x64, 0x65, 0x2d, 0x70, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74,
-	0x73, 0x2f, 0x6f, 0x63, 0x70, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2d, 0x61,
-	0x70, 0x69, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x64, 0x2f, 0x67, 0x6f, 0x2f,
-	0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x2f, 0x76, 0x31, 0x3b, 0x63, 0x75, 0x72, 0x72,
-	0x65, 0x6e, 0x63, 0x79, 0xa2, 0x02, 0x0d, 0x43, 0x50, 0x42, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e,
-	0x63, 0x79, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x2d, 0x66, 0x41, 0x2d, 0x46, 0x5d, 0x7b, 0x36, 0x7d, 0x24, 0x52, 0x03, 0x68, 0x65, 0x78, 0x22,
+	0xd9, 0x01, 0x0a, 0x0d, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x40, 0x0a, 0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x1e, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x76, 0x31,
+	0x2e, 0x53, 0x6f, 0x6c, 0x61, 0x6e, 0x61, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64,
+	0x42, 0x0a, 0xba, 0xe9, 0xc0, 0x03, 0x05, 0x8a, 0x01, 0x02, 0x10, 0x01, 0x52, 0x05, 0x6f, 0x77,
+	0x6e, 0x65, 0x72, 0x12, 0x42, 0x0a, 0x09, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63, 0x6f, 0x6d,
+	0x6d, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65,
+	0x42, 0x0a, 0xba, 0xe9, 0xc0, 0x03, 0x05, 0x8a, 0x01, 0x02, 0x10, 0x01, 0x52, 0x09, 0x73, 0x69,
+	0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x12, 0x1f, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x09, 0x42, 0x0b, 0xba, 0xe9, 0xc0, 0x03, 0x06, 0x72, 0x04, 0x10, 0x01,
+	0x18, 0x20, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x21, 0x0a, 0x06, 0x73, 0x79, 0x6d, 0x62,
+	0x6f, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x42, 0x09, 0xba, 0xe9, 0xc0, 0x03, 0x04, 0x72,
+	0x02, 0x18, 0x08, 0x52, 0x06, 0x73, 0x79, 0x6d, 0x62, 0x6f, 0x6c, 0x22, 0xae, 0x01, 0x0a, 0x0e,
+	0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3e,
+	0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x26,
+	0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x2e, 0x76, 0x31,
+	0x2e, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e,
+	0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x32,
+	0x0a, 0x04, 0x6d, 0x69, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x6f,
+	0x63, 0x70, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x6f, 0x6c,
+	0x61, 0x6e, 0x61, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x52, 0x04, 0x6d, 0x69,
+	0x6e, 0x74, 0x22, 0x28, 0x0a, 0x06, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x06, 0x0a, 0x02,
+	0x4f, 0x4b, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x44, 0x45, 0x4e, 0x49, 0x45, 0x44, 0x10, 0x01,
+	0x12, 0x0a, 0x0a, 0x06, 0x45, 0x58, 0x49, 0x53, 0x54, 0x53, 0x10, 0x02, 0x32, 0x91, 0x03, 0x0a,
+	0x08, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x12, 0x4f, 0x0a, 0x08, 0x47, 0x65, 0x74,
+	0x4d, 0x69, 0x6e, 0x74, 0x73, 0x12, 0x20, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63, 0x75, 0x72, 0x72,
+	0x65, 0x6e, 0x63, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4d, 0x69, 0x6e, 0x74, 0x73,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63, 0x75,
+	0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4d, 0x69, 0x6e,
+	0x74, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x76, 0x0a, 0x15, 0x47, 0x65,
+	0x74, 0x48, 0x69, 0x73, 0x74, 0x6f, 0x72, 0x69, 0x63, 0x61, 0x6c, 0x4d, 0x69, 0x6e, 0x74, 0x44,
+	0x61, 0x74, 0x61, 0x12, 0x2d, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e,
+	0x63, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x48, 0x69, 0x73, 0x74, 0x6f, 0x72, 0x69,
+	0x63, 0x61, 0x6c, 0x4d, 0x69, 0x6e, 0x74, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x2e, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63,
+	0x79, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x48, 0x69, 0x73, 0x74, 0x6f, 0x72, 0x69, 0x63,
+	0x61, 0x6c, 0x4d, 0x69, 0x6e, 0x74, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x71, 0x0a, 0x12, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x4c, 0x69, 0x76, 0x65,
+	0x4d, 0x69, 0x6e, 0x74, 0x44, 0x61, 0x74, 0x61, 0x12, 0x2a, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63,
+	0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x72, 0x65, 0x61,
+	0x6d, 0x4c, 0x69, 0x76, 0x65, 0x4d, 0x69, 0x6e, 0x74, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x2b, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63, 0x75, 0x72, 0x72, 0x65,
+	0x6e, 0x63, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x4c, 0x69, 0x76,
+	0x65, 0x4d, 0x69, 0x6e, 0x74, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x28, 0x01, 0x30, 0x01, 0x12, 0x49, 0x0a, 0x06, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x12,
+	0x1e, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x2e, 0x76,
+	0x31, 0x2e, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x1f, 0x2e, 0x6f, 0x63, 0x70, 0x2e, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x2e, 0x76,
+	0x31, 0x2e, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x42, 0x7a, 0x0a, 0x1b, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x64, 0x65, 0x69, 0x6e, 0x63, 0x2e,
+	0x67, 0x65, 0x6e, 0x2e, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x2e, 0x76, 0x31, 0x5a,
+	0x4b, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x64, 0x65,
+	0x2d, 0x70, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x2f, 0x6f, 0x63, 0x70, 0x2d, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2d, 0x61, 0x70, 0x69, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x72,
+	0x61, 0x74, 0x65, 0x64, 0x2f, 0x67, 0x6f, 0x2f, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79,
+	0x2f, 0x76, 0x31, 0x3b, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0xa2, 0x02, 0x0d, 0x43,
+	0x50, 0x42, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2089,97 +2304,106 @@ func file_currency_v1_currency_service_proto_rawDescGZIP() []byte {
 	return file_currency_v1_currency_service_proto_rawDescData
 }
 
-var file_currency_v1_currency_service_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_currency_v1_currency_service_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_currency_v1_currency_service_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_currency_v1_currency_service_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_currency_v1_currency_service_proto_goTypes = []interface{}{
 	(GetMintsResponse_Result)(0),                       // 0: ocp.currency.v1.GetMintsResponse.Result
 	(GetHistoricalMintDataRequest_PredefinedRange)(0),  // 1: ocp.currency.v1.GetHistoricalMintDataRequest.PredefinedRange
 	(GetHistoricalMintDataResponse_Result)(0),          // 2: ocp.currency.v1.GetHistoricalMintDataResponse.Result
-	(*GetMintsRequest)(nil),                            // 3: ocp.currency.v1.GetMintsRequest
-	(*GetMintsResponse)(nil),                           // 4: ocp.currency.v1.GetMintsResponse
-	(*GetHistoricalMintDataRequest)(nil),               // 5: ocp.currency.v1.GetHistoricalMintDataRequest
-	(*GetHistoricalMintDataResponse)(nil),              // 6: ocp.currency.v1.GetHistoricalMintDataResponse
-	(*StreamLiveMintDataRequest)(nil),                  // 7: ocp.currency.v1.StreamLiveMintDataRequest
-	(*StreamLiveMintDataResponse)(nil),                 // 8: ocp.currency.v1.StreamLiveMintDataResponse
-	(*Mint)(nil),                                       // 9: ocp.currency.v1.Mint
-	(*VmMetadata)(nil),                                 // 10: ocp.currency.v1.VmMetadata
-	(*LaunchpadMetadata)(nil),                          // 11: ocp.currency.v1.LaunchpadMetadata
-	(*HistoricalMintData)(nil),                         // 12: ocp.currency.v1.HistoricalMintData
-	(*CoreMintFiatExchangeRate)(nil),                   // 13: ocp.currency.v1.CoreMintFiatExchangeRate
-	(*VerifiedCoreMintFiatExchangeRate)(nil),           // 14: ocp.currency.v1.VerifiedCoreMintFiatExchangeRate
-	(*VerifiedCoreMintFiatExchangeRateBatch)(nil),      // 15: ocp.currency.v1.VerifiedCoreMintFiatExchangeRateBatch
-	(*LaunchpadCurrencyReserveState)(nil),              // 16: ocp.currency.v1.LaunchpadCurrencyReserveState
-	(*VerifiedLaunchpadCurrencyReserveState)(nil),      // 17: ocp.currency.v1.VerifiedLaunchpadCurrencyReserveState
-	(*VerifiedLaunchapdCurrencyReserveStateBatch)(nil), // 18: ocp.currency.v1.VerifiedLaunchapdCurrencyReserveStateBatch
-	(*SocialLink)(nil),                                 // 19: ocp.currency.v1.SocialLink
-	(*BillCustomization)(nil),                          // 20: ocp.currency.v1.BillCustomization
-	(*Color)(nil),                                      // 21: ocp.currency.v1.Color
-	nil,                                                // 22: ocp.currency.v1.GetMintsResponse.MetadataByAddressEntry
-	(*StreamLiveMintDataRequest_Request)(nil),          // 23: ocp.currency.v1.StreamLiveMintDataRequest.Request
-	(*StreamLiveMintDataResponse_LiveData)(nil),        // 24: ocp.currency.v1.StreamLiveMintDataResponse.LiveData
-	(*SocialLink_Website)(nil),                         // 25: ocp.currency.v1.SocialLink.Website
-	(*SocialLink_X)(nil),                               // 26: ocp.currency.v1.SocialLink.X
-	(*v1.SolanaAccountId)(nil),                         // 27: ocp.common.v1.SolanaAccountId
-	(*v1.ClientPong)(nil),                              // 28: ocp.common.v1.ClientPong
-	(*v1.ServerPing)(nil),                              // 29: ocp.common.v1.ServerPing
-	(*timestamppb.Timestamp)(nil),                      // 30: google.protobuf.Timestamp
-	(*v1.Signature)(nil),                               // 31: ocp.common.v1.Signature
+	(LaunchResponse_Result)(0),                         // 3: ocp.currency.v1.LaunchResponse.Result
+	(*GetMintsRequest)(nil),                            // 4: ocp.currency.v1.GetMintsRequest
+	(*GetMintsResponse)(nil),                           // 5: ocp.currency.v1.GetMintsResponse
+	(*GetHistoricalMintDataRequest)(nil),               // 6: ocp.currency.v1.GetHistoricalMintDataRequest
+	(*GetHistoricalMintDataResponse)(nil),              // 7: ocp.currency.v1.GetHistoricalMintDataResponse
+	(*StreamLiveMintDataRequest)(nil),                  // 8: ocp.currency.v1.StreamLiveMintDataRequest
+	(*StreamLiveMintDataResponse)(nil),                 // 9: ocp.currency.v1.StreamLiveMintDataResponse
+	(*Mint)(nil),                                       // 10: ocp.currency.v1.Mint
+	(*VmMetadata)(nil),                                 // 11: ocp.currency.v1.VmMetadata
+	(*LaunchpadMetadata)(nil),                          // 12: ocp.currency.v1.LaunchpadMetadata
+	(*HistoricalMintData)(nil),                         // 13: ocp.currency.v1.HistoricalMintData
+	(*CoreMintFiatExchangeRate)(nil),                   // 14: ocp.currency.v1.CoreMintFiatExchangeRate
+	(*VerifiedCoreMintFiatExchangeRate)(nil),           // 15: ocp.currency.v1.VerifiedCoreMintFiatExchangeRate
+	(*VerifiedCoreMintFiatExchangeRateBatch)(nil),      // 16: ocp.currency.v1.VerifiedCoreMintFiatExchangeRateBatch
+	(*LaunchpadCurrencyReserveState)(nil),              // 17: ocp.currency.v1.LaunchpadCurrencyReserveState
+	(*VerifiedLaunchpadCurrencyReserveState)(nil),      // 18: ocp.currency.v1.VerifiedLaunchpadCurrencyReserveState
+	(*VerifiedLaunchapdCurrencyReserveStateBatch)(nil), // 19: ocp.currency.v1.VerifiedLaunchapdCurrencyReserveStateBatch
+	(*SocialLink)(nil),                                 // 20: ocp.currency.v1.SocialLink
+	(*BillCustomization)(nil),                          // 21: ocp.currency.v1.BillCustomization
+	(*Color)(nil),                                      // 22: ocp.currency.v1.Color
+	(*LaunchRequest)(nil),                              // 23: ocp.currency.v1.LaunchRequest
+	(*LaunchResponse)(nil),                             // 24: ocp.currency.v1.LaunchResponse
+	nil,                                                // 25: ocp.currency.v1.GetMintsResponse.MetadataByAddressEntry
+	(*StreamLiveMintDataRequest_Request)(nil),          // 26: ocp.currency.v1.StreamLiveMintDataRequest.Request
+	(*StreamLiveMintDataResponse_LiveData)(nil),        // 27: ocp.currency.v1.StreamLiveMintDataResponse.LiveData
+	(*SocialLink_Website)(nil),                         // 28: ocp.currency.v1.SocialLink.Website
+	(*SocialLink_X)(nil),                               // 29: ocp.currency.v1.SocialLink.X
+	(*v1.SolanaAccountId)(nil),                         // 30: ocp.common.v1.SolanaAccountId
+	(*v1.ClientPong)(nil),                              // 31: ocp.common.v1.ClientPong
+	(*v1.ServerPing)(nil),                              // 32: ocp.common.v1.ServerPing
+	(*timestamppb.Timestamp)(nil),                      // 33: google.protobuf.Timestamp
+	(*v1.Signature)(nil),                               // 34: ocp.common.v1.Signature
 }
 var file_currency_v1_currency_service_proto_depIdxs = []int32{
-	27, // 0: ocp.currency.v1.GetMintsRequest.addresses:type_name -> ocp.common.v1.SolanaAccountId
+	30, // 0: ocp.currency.v1.GetMintsRequest.addresses:type_name -> ocp.common.v1.SolanaAccountId
 	0,  // 1: ocp.currency.v1.GetMintsResponse.result:type_name -> ocp.currency.v1.GetMintsResponse.Result
-	22, // 2: ocp.currency.v1.GetMintsResponse.metadata_by_address:type_name -> ocp.currency.v1.GetMintsResponse.MetadataByAddressEntry
-	27, // 3: ocp.currency.v1.GetHistoricalMintDataRequest.address:type_name -> ocp.common.v1.SolanaAccountId
+	25, // 2: ocp.currency.v1.GetMintsResponse.metadata_by_address:type_name -> ocp.currency.v1.GetMintsResponse.MetadataByAddressEntry
+	30, // 3: ocp.currency.v1.GetHistoricalMintDataRequest.address:type_name -> ocp.common.v1.SolanaAccountId
 	1,  // 4: ocp.currency.v1.GetHistoricalMintDataRequest.predefined_range:type_name -> ocp.currency.v1.GetHistoricalMintDataRequest.PredefinedRange
 	2,  // 5: ocp.currency.v1.GetHistoricalMintDataResponse.result:type_name -> ocp.currency.v1.GetHistoricalMintDataResponse.Result
-	12, // 6: ocp.currency.v1.GetHistoricalMintDataResponse.data:type_name -> ocp.currency.v1.HistoricalMintData
-	23, // 7: ocp.currency.v1.StreamLiveMintDataRequest.request:type_name -> ocp.currency.v1.StreamLiveMintDataRequest.Request
-	28, // 8: ocp.currency.v1.StreamLiveMintDataRequest.pong:type_name -> ocp.common.v1.ClientPong
-	24, // 9: ocp.currency.v1.StreamLiveMintDataResponse.data:type_name -> ocp.currency.v1.StreamLiveMintDataResponse.LiveData
-	29, // 10: ocp.currency.v1.StreamLiveMintDataResponse.ping:type_name -> ocp.common.v1.ServerPing
-	27, // 11: ocp.currency.v1.Mint.address:type_name -> ocp.common.v1.SolanaAccountId
-	10, // 12: ocp.currency.v1.Mint.vm_metadata:type_name -> ocp.currency.v1.VmMetadata
-	11, // 13: ocp.currency.v1.Mint.launchpad_metadata:type_name -> ocp.currency.v1.LaunchpadMetadata
-	30, // 14: ocp.currency.v1.Mint.created_at:type_name -> google.protobuf.Timestamp
-	19, // 15: ocp.currency.v1.Mint.social_links:type_name -> ocp.currency.v1.SocialLink
-	20, // 16: ocp.currency.v1.Mint.bill_customization:type_name -> ocp.currency.v1.BillCustomization
-	27, // 17: ocp.currency.v1.VmMetadata.vm:type_name -> ocp.common.v1.SolanaAccountId
-	27, // 18: ocp.currency.v1.VmMetadata.authority:type_name -> ocp.common.v1.SolanaAccountId
-	27, // 19: ocp.currency.v1.VmMetadata.omnibus:type_name -> ocp.common.v1.SolanaAccountId
-	27, // 20: ocp.currency.v1.LaunchpadMetadata.currency_config:type_name -> ocp.common.v1.SolanaAccountId
-	27, // 21: ocp.currency.v1.LaunchpadMetadata.liquidity_pool:type_name -> ocp.common.v1.SolanaAccountId
-	27, // 22: ocp.currency.v1.LaunchpadMetadata.seed:type_name -> ocp.common.v1.SolanaAccountId
-	27, // 23: ocp.currency.v1.LaunchpadMetadata.authority:type_name -> ocp.common.v1.SolanaAccountId
-	27, // 24: ocp.currency.v1.LaunchpadMetadata.mint_vault:type_name -> ocp.common.v1.SolanaAccountId
-	27, // 25: ocp.currency.v1.LaunchpadMetadata.core_mint_vault:type_name -> ocp.common.v1.SolanaAccountId
-	30, // 26: ocp.currency.v1.HistoricalMintData.timestamp:type_name -> google.protobuf.Timestamp
-	30, // 27: ocp.currency.v1.CoreMintFiatExchangeRate.timestamp:type_name -> google.protobuf.Timestamp
-	13, // 28: ocp.currency.v1.VerifiedCoreMintFiatExchangeRate.exchange_rate:type_name -> ocp.currency.v1.CoreMintFiatExchangeRate
-	31, // 29: ocp.currency.v1.VerifiedCoreMintFiatExchangeRate.signature:type_name -> ocp.common.v1.Signature
-	14, // 30: ocp.currency.v1.VerifiedCoreMintFiatExchangeRateBatch.exchange_rates:type_name -> ocp.currency.v1.VerifiedCoreMintFiatExchangeRate
-	27, // 31: ocp.currency.v1.LaunchpadCurrencyReserveState.mint:type_name -> ocp.common.v1.SolanaAccountId
-	30, // 32: ocp.currency.v1.LaunchpadCurrencyReserveState.timestamp:type_name -> google.protobuf.Timestamp
-	16, // 33: ocp.currency.v1.VerifiedLaunchpadCurrencyReserveState.reserve_state:type_name -> ocp.currency.v1.LaunchpadCurrencyReserveState
-	31, // 34: ocp.currency.v1.VerifiedLaunchpadCurrencyReserveState.signature:type_name -> ocp.common.v1.Signature
-	17, // 35: ocp.currency.v1.VerifiedLaunchapdCurrencyReserveStateBatch.reserve_states:type_name -> ocp.currency.v1.VerifiedLaunchpadCurrencyReserveState
-	25, // 36: ocp.currency.v1.SocialLink.website:type_name -> ocp.currency.v1.SocialLink.Website
-	26, // 37: ocp.currency.v1.SocialLink.x:type_name -> ocp.currency.v1.SocialLink.X
-	21, // 38: ocp.currency.v1.BillCustomization.colors:type_name -> ocp.currency.v1.Color
-	9,  // 39: ocp.currency.v1.GetMintsResponse.MetadataByAddressEntry.value:type_name -> ocp.currency.v1.Mint
-	27, // 40: ocp.currency.v1.StreamLiveMintDataRequest.Request.mints:type_name -> ocp.common.v1.SolanaAccountId
-	15, // 41: ocp.currency.v1.StreamLiveMintDataResponse.LiveData.core_mint_fiat_exchange_rates:type_name -> ocp.currency.v1.VerifiedCoreMintFiatExchangeRateBatch
-	18, // 42: ocp.currency.v1.StreamLiveMintDataResponse.LiveData.launchpad_currency_reserve_states:type_name -> ocp.currency.v1.VerifiedLaunchapdCurrencyReserveStateBatch
-	3,  // 43: ocp.currency.v1.Currency.GetMints:input_type -> ocp.currency.v1.GetMintsRequest
-	5,  // 44: ocp.currency.v1.Currency.GetHistoricalMintData:input_type -> ocp.currency.v1.GetHistoricalMintDataRequest
-	7,  // 45: ocp.currency.v1.Currency.StreamLiveMintData:input_type -> ocp.currency.v1.StreamLiveMintDataRequest
-	4,  // 46: ocp.currency.v1.Currency.GetMints:output_type -> ocp.currency.v1.GetMintsResponse
-	6,  // 47: ocp.currency.v1.Currency.GetHistoricalMintData:output_type -> ocp.currency.v1.GetHistoricalMintDataResponse
-	8,  // 48: ocp.currency.v1.Currency.StreamLiveMintData:output_type -> ocp.currency.v1.StreamLiveMintDataResponse
-	46, // [46:49] is the sub-list for method output_type
-	43, // [43:46] is the sub-list for method input_type
-	43, // [43:43] is the sub-list for extension type_name
-	43, // [43:43] is the sub-list for extension extendee
-	0,  // [0:43] is the sub-list for field type_name
+	13, // 6: ocp.currency.v1.GetHistoricalMintDataResponse.data:type_name -> ocp.currency.v1.HistoricalMintData
+	26, // 7: ocp.currency.v1.StreamLiveMintDataRequest.request:type_name -> ocp.currency.v1.StreamLiveMintDataRequest.Request
+	31, // 8: ocp.currency.v1.StreamLiveMintDataRequest.pong:type_name -> ocp.common.v1.ClientPong
+	27, // 9: ocp.currency.v1.StreamLiveMintDataResponse.data:type_name -> ocp.currency.v1.StreamLiveMintDataResponse.LiveData
+	32, // 10: ocp.currency.v1.StreamLiveMintDataResponse.ping:type_name -> ocp.common.v1.ServerPing
+	30, // 11: ocp.currency.v1.Mint.address:type_name -> ocp.common.v1.SolanaAccountId
+	11, // 12: ocp.currency.v1.Mint.vm_metadata:type_name -> ocp.currency.v1.VmMetadata
+	12, // 13: ocp.currency.v1.Mint.launchpad_metadata:type_name -> ocp.currency.v1.LaunchpadMetadata
+	33, // 14: ocp.currency.v1.Mint.created_at:type_name -> google.protobuf.Timestamp
+	20, // 15: ocp.currency.v1.Mint.social_links:type_name -> ocp.currency.v1.SocialLink
+	21, // 16: ocp.currency.v1.Mint.bill_customization:type_name -> ocp.currency.v1.BillCustomization
+	30, // 17: ocp.currency.v1.VmMetadata.vm:type_name -> ocp.common.v1.SolanaAccountId
+	30, // 18: ocp.currency.v1.VmMetadata.authority:type_name -> ocp.common.v1.SolanaAccountId
+	30, // 19: ocp.currency.v1.VmMetadata.omnibus:type_name -> ocp.common.v1.SolanaAccountId
+	30, // 20: ocp.currency.v1.LaunchpadMetadata.currency_config:type_name -> ocp.common.v1.SolanaAccountId
+	30, // 21: ocp.currency.v1.LaunchpadMetadata.liquidity_pool:type_name -> ocp.common.v1.SolanaAccountId
+	30, // 22: ocp.currency.v1.LaunchpadMetadata.seed:type_name -> ocp.common.v1.SolanaAccountId
+	30, // 23: ocp.currency.v1.LaunchpadMetadata.authority:type_name -> ocp.common.v1.SolanaAccountId
+	30, // 24: ocp.currency.v1.LaunchpadMetadata.mint_vault:type_name -> ocp.common.v1.SolanaAccountId
+	30, // 25: ocp.currency.v1.LaunchpadMetadata.core_mint_vault:type_name -> ocp.common.v1.SolanaAccountId
+	33, // 26: ocp.currency.v1.HistoricalMintData.timestamp:type_name -> google.protobuf.Timestamp
+	33, // 27: ocp.currency.v1.CoreMintFiatExchangeRate.timestamp:type_name -> google.protobuf.Timestamp
+	14, // 28: ocp.currency.v1.VerifiedCoreMintFiatExchangeRate.exchange_rate:type_name -> ocp.currency.v1.CoreMintFiatExchangeRate
+	34, // 29: ocp.currency.v1.VerifiedCoreMintFiatExchangeRate.signature:type_name -> ocp.common.v1.Signature
+	15, // 30: ocp.currency.v1.VerifiedCoreMintFiatExchangeRateBatch.exchange_rates:type_name -> ocp.currency.v1.VerifiedCoreMintFiatExchangeRate
+	30, // 31: ocp.currency.v1.LaunchpadCurrencyReserveState.mint:type_name -> ocp.common.v1.SolanaAccountId
+	33, // 32: ocp.currency.v1.LaunchpadCurrencyReserveState.timestamp:type_name -> google.protobuf.Timestamp
+	17, // 33: ocp.currency.v1.VerifiedLaunchpadCurrencyReserveState.reserve_state:type_name -> ocp.currency.v1.LaunchpadCurrencyReserveState
+	34, // 34: ocp.currency.v1.VerifiedLaunchpadCurrencyReserveState.signature:type_name -> ocp.common.v1.Signature
+	18, // 35: ocp.currency.v1.VerifiedLaunchapdCurrencyReserveStateBatch.reserve_states:type_name -> ocp.currency.v1.VerifiedLaunchpadCurrencyReserveState
+	28, // 36: ocp.currency.v1.SocialLink.website:type_name -> ocp.currency.v1.SocialLink.Website
+	29, // 37: ocp.currency.v1.SocialLink.x:type_name -> ocp.currency.v1.SocialLink.X
+	22, // 38: ocp.currency.v1.BillCustomization.colors:type_name -> ocp.currency.v1.Color
+	30, // 39: ocp.currency.v1.LaunchRequest.owner:type_name -> ocp.common.v1.SolanaAccountId
+	34, // 40: ocp.currency.v1.LaunchRequest.signature:type_name -> ocp.common.v1.Signature
+	3,  // 41: ocp.currency.v1.LaunchResponse.result:type_name -> ocp.currency.v1.LaunchResponse.Result
+	30, // 42: ocp.currency.v1.LaunchResponse.mint:type_name -> ocp.common.v1.SolanaAccountId
+	10, // 43: ocp.currency.v1.GetMintsResponse.MetadataByAddressEntry.value:type_name -> ocp.currency.v1.Mint
+	30, // 44: ocp.currency.v1.StreamLiveMintDataRequest.Request.mints:type_name -> ocp.common.v1.SolanaAccountId
+	16, // 45: ocp.currency.v1.StreamLiveMintDataResponse.LiveData.core_mint_fiat_exchange_rates:type_name -> ocp.currency.v1.VerifiedCoreMintFiatExchangeRateBatch
+	19, // 46: ocp.currency.v1.StreamLiveMintDataResponse.LiveData.launchpad_currency_reserve_states:type_name -> ocp.currency.v1.VerifiedLaunchapdCurrencyReserveStateBatch
+	4,  // 47: ocp.currency.v1.Currency.GetMints:input_type -> ocp.currency.v1.GetMintsRequest
+	6,  // 48: ocp.currency.v1.Currency.GetHistoricalMintData:input_type -> ocp.currency.v1.GetHistoricalMintDataRequest
+	8,  // 49: ocp.currency.v1.Currency.StreamLiveMintData:input_type -> ocp.currency.v1.StreamLiveMintDataRequest
+	23, // 50: ocp.currency.v1.Currency.Launch:input_type -> ocp.currency.v1.LaunchRequest
+	5,  // 51: ocp.currency.v1.Currency.GetMints:output_type -> ocp.currency.v1.GetMintsResponse
+	7,  // 52: ocp.currency.v1.Currency.GetHistoricalMintData:output_type -> ocp.currency.v1.GetHistoricalMintDataResponse
+	9,  // 53: ocp.currency.v1.Currency.StreamLiveMintData:output_type -> ocp.currency.v1.StreamLiveMintDataResponse
+	24, // 54: ocp.currency.v1.Currency.Launch:output_type -> ocp.currency.v1.LaunchResponse
+	51, // [51:55] is the sub-list for method output_type
+	47, // [47:51] is the sub-list for method input_type
+	47, // [47:47] is the sub-list for extension type_name
+	47, // [47:47] is the sub-list for extension extendee
+	0,  // [0:47] is the sub-list for field type_name
 }
 
 func init() { file_currency_v1_currency_service_proto_init() }
@@ -2416,8 +2640,8 @@ func file_currency_v1_currency_service_proto_init() {
 				return nil
 			}
 		}
-		file_currency_v1_currency_service_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamLiveMintDataRequest_Request); i {
+		file_currency_v1_currency_service_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*LaunchRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2428,8 +2652,8 @@ func file_currency_v1_currency_service_proto_init() {
 				return nil
 			}
 		}
-		file_currency_v1_currency_service_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamLiveMintDataResponse_LiveData); i {
+		file_currency_v1_currency_service_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*LaunchResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2441,7 +2665,7 @@ func file_currency_v1_currency_service_proto_init() {
 			}
 		}
 		file_currency_v1_currency_service_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SocialLink_Website); i {
+			switch v := v.(*StreamLiveMintDataRequest_Request); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2453,6 +2677,30 @@ func file_currency_v1_currency_service_proto_init() {
 			}
 		}
 		file_currency_v1_currency_service_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StreamLiveMintDataResponse_LiveData); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_currency_v1_currency_service_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SocialLink_Website); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_currency_v1_currency_service_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SocialLink_X); i {
 			case 0:
 				return &v.state
@@ -2480,7 +2728,7 @@ func file_currency_v1_currency_service_proto_init() {
 		(*SocialLink_Website_)(nil),
 		(*SocialLink_X_)(nil),
 	}
-	file_currency_v1_currency_service_proto_msgTypes[21].OneofWrappers = []interface{}{
+	file_currency_v1_currency_service_proto_msgTypes[23].OneofWrappers = []interface{}{
 		(*StreamLiveMintDataResponse_LiveData_CoreMintFiatExchangeRates)(nil),
 		(*StreamLiveMintDataResponse_LiveData_LaunchpadCurrencyReserveStates)(nil),
 	}
@@ -2489,8 +2737,8 @@ func file_currency_v1_currency_service_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_currency_v1_currency_service_proto_rawDesc,
-			NumEnums:      3,
-			NumMessages:   24,
+			NumEnums:      4,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -1291,3 +1291,144 @@ export class Color extends Message<Color> {
   }
 }
 
+/**
+ * @generated from message ocp.currency.v1.LaunchRequest
+ */
+export class LaunchRequest extends Message<LaunchRequest> {
+  /**
+   * The owner account launching the currency
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId owner = 1;
+   */
+  owner?: SolanaAccountId;
+
+  /**
+   * The signature is of serialize(LaunchRequest) without this field set
+   * using the private key of the owner account. This provides an authentication
+   * mechanism to the RPC.
+   *
+   * @generated from field: ocp.common.v1.Signature signature = 2;
+   */
+  signature?: Signature;
+
+  /**
+   * The name of the currency to launch
+   *
+   * @generated from field: string name = 3;
+   */
+  name = "";
+
+  /**
+   * The ticker symbol for the currency. If not provided, a default will be
+   * generated using the currency name.
+   *
+   * @generated from field: string symbol = 4;
+   */
+  symbol = "";
+
+  constructor(data?: PartialMessage<LaunchRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.LaunchRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "owner", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "signature", kind: "message", T: Signature },
+    { no: 3, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "symbol", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LaunchRequest {
+    return new LaunchRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LaunchRequest {
+    return new LaunchRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LaunchRequest {
+    return new LaunchRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: LaunchRequest | PlainMessage<LaunchRequest> | undefined, b: LaunchRequest | PlainMessage<LaunchRequest> | undefined): boolean {
+    return proto3.util.equals(LaunchRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.LaunchResponse
+ */
+export class LaunchResponse extends Message<LaunchResponse> {
+  /**
+   * @generated from field: ocp.currency.v1.LaunchResponse.Result result = 1;
+   */
+  result = LaunchResponse_Result.OK;
+
+  /**
+   * The mint address of the launched currency on success
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId mint = 2;
+   */
+  mint?: SolanaAccountId;
+
+  constructor(data?: PartialMessage<LaunchResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.LaunchResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(LaunchResponse_Result) },
+    { no: 2, name: "mint", kind: "message", T: SolanaAccountId },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LaunchResponse {
+    return new LaunchResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LaunchResponse {
+    return new LaunchResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LaunchResponse {
+    return new LaunchResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: LaunchResponse | PlainMessage<LaunchResponse> | undefined, b: LaunchResponse | PlainMessage<LaunchResponse> | undefined): boolean {
+    return proto3.util.equals(LaunchResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum ocp.currency.v1.LaunchResponse.Result
+ */
+export enum LaunchResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * The launch was denied
+   *
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+
+  /**
+   * A similar currency already exists
+   *
+   * @generated from enum value: EXISTS = 2;
+   */
+  EXISTS = 2,
+}
+// Retrieve enum metadata with: proto3.getEnumType(LaunchResponse_Result)
+proto3.util.setEnumType(LaunchResponse_Result, "ocp.currency.v1.LaunchResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+  { no: 2, name: "EXISTS" },
+]);
+
