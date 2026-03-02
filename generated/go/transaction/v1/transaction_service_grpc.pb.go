@@ -66,8 +66,6 @@ type TransactionClient interface {
 	// CanWithdrawToAccount provides hints to clients for submitting withdraw intents.
 	// The RPC indicates if a withdrawal is possible, and how it should be performed.
 	CanWithdrawToAccount(ctx context.Context, in *CanWithdrawToAccountRequest, opts ...grpc.CallOption) (*CanWithdrawToAccountResponse, error)
-	// Airdrop airdrops core mint tokens to the requesting account
-	Airdrop(ctx context.Context, in *AirdropRequest, opts ...grpc.CallOption) (*AirdropResponse, error)
 	// VoidGiftCard voids a gift card account by returning the funds to the funds back
 	// to the issuer via the auto-return action if it hasn't been claimed or already
 	// returned.
@@ -156,15 +154,6 @@ func (c *transactionClient) GetLimits(ctx context.Context, in *GetLimitsRequest,
 func (c *transactionClient) CanWithdrawToAccount(ctx context.Context, in *CanWithdrawToAccountRequest, opts ...grpc.CallOption) (*CanWithdrawToAccountResponse, error) {
 	out := new(CanWithdrawToAccountResponse)
 	err := c.cc.Invoke(ctx, "/ocp.transaction.v1.Transaction/CanWithdrawToAccount", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *transactionClient) Airdrop(ctx context.Context, in *AirdropRequest, opts ...grpc.CallOption) (*AirdropResponse, error) {
-	out := new(AirdropResponse)
-	err := c.cc.Invoke(ctx, "/ocp.transaction.v1.Transaction/Airdrop", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -277,8 +266,6 @@ type TransactionServer interface {
 	// CanWithdrawToAccount provides hints to clients for submitting withdraw intents.
 	// The RPC indicates if a withdrawal is possible, and how it should be performed.
 	CanWithdrawToAccount(context.Context, *CanWithdrawToAccountRequest) (*CanWithdrawToAccountResponse, error)
-	// Airdrop airdrops core mint tokens to the requesting account
-	Airdrop(context.Context, *AirdropRequest) (*AirdropResponse, error)
 	// VoidGiftCard voids a gift card account by returning the funds to the funds back
 	// to the issuer via the auto-return action if it hasn't been claimed or already
 	// returned.
@@ -323,9 +310,6 @@ func (UnimplementedTransactionServer) GetLimits(context.Context, *GetLimitsReque
 }
 func (UnimplementedTransactionServer) CanWithdrawToAccount(context.Context, *CanWithdrawToAccountRequest) (*CanWithdrawToAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CanWithdrawToAccount not implemented")
-}
-func (UnimplementedTransactionServer) Airdrop(context.Context, *AirdropRequest) (*AirdropResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Airdrop not implemented")
 }
 func (UnimplementedTransactionServer) VoidGiftCard(context.Context, *VoidGiftCardRequest) (*VoidGiftCardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VoidGiftCard not implemented")
@@ -432,24 +416,6 @@ func _Transaction_CanWithdrawToAccount_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Transaction_Airdrop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AirdropRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TransactionServer).Airdrop(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/ocp.transaction.v1.Transaction/Airdrop",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TransactionServer).Airdrop(ctx, req.(*AirdropRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Transaction_VoidGiftCard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VoidGiftCardRequest)
 	if err := dec(in); err != nil {
@@ -548,10 +514,6 @@ var Transaction_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CanWithdrawToAccount",
 			Handler:    _Transaction_CanWithdrawToAccount_Handler,
-		},
-		{
-			MethodName: "Airdrop",
-			Handler:    _Transaction_Airdrop_Handler,
 		},
 		{
 			MethodName: "VoidGiftCard",
