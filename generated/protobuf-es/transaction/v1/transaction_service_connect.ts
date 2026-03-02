@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AirdropRequest, AirdropResponse, CanWithdrawToAccountRequest, CanWithdrawToAccountResponse, GetIntentMetadataRequest, GetIntentMetadataResponse, GetLimitsRequest, GetLimitsResponse, GetPendingSwapsRequest, GetPendingSwapsResponse, GetSwapRequest, GetSwapResponse, StatefulSwapRequest, StatefulSwapResponse, SubmitIntentRequest, SubmitIntentResponse, VoidGiftCardRequest, VoidGiftCardResponse } from "./transaction_service_pb";
+import { CanWithdrawToAccountRequest, CanWithdrawToAccountResponse, GetIntentMetadataRequest, GetIntentMetadataResponse, GetLimitsRequest, GetLimitsResponse, GetPendingSwapsRequest, GetPendingSwapsResponse, GetSwapRequest, GetSwapResponse, StatefulSwapRequest, StatefulSwapResponse, SubmitIntentRequest, SubmitIntentResponse, VoidGiftCardRequest, VoidGiftCardResponse } from "./transaction_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -89,17 +89,6 @@ export const Transaction = {
       name: "CanWithdrawToAccount",
       I: CanWithdrawToAccountRequest,
       O: CanWithdrawToAccountResponse,
-      kind: MethodKind.Unary,
-    },
-    /**
-     * Airdrop airdrops core mint tokens to the requesting account
-     *
-     * @generated from rpc ocp.transaction.v1.Transaction.Airdrop
-     */
-    airdrop: {
-      name: "Airdrop",
-      I: AirdropRequest,
-      O: AirdropResponse,
       kind: MethodKind.Unary,
     },
     /**
