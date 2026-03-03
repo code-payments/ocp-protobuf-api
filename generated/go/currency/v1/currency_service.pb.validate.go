@@ -2146,6 +2146,417 @@ var _ interface {
 	ErrorName() string
 } = LaunchResponseValidationError{}
 
+// Validate checks the field values on UpdateIconRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *UpdateIconRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetOwner() == nil {
+		return UpdateIconRequestValidationError{
+			field:  "Owner",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetOwner()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateIconRequestValidationError{
+				field:  "Owner",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetSignature() == nil {
+		return UpdateIconRequestValidationError{
+			field:  "Signature",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSignature()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateIconRequestValidationError{
+				field:  "Signature",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetMint() == nil {
+		return UpdateIconRequestValidationError{
+			field:  "Mint",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetMint()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateIconRequestValidationError{
+				field:  "Mint",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if l := len(m.GetIcon()); l < 1 || l > 1048576 {
+		return UpdateIconRequestValidationError{
+			field:  "Icon",
+			reason: "value length must be between 1 and 1048576 bytes, inclusive",
+		}
+	}
+
+	return nil
+}
+
+// UpdateIconRequestValidationError is the validation error returned by
+// UpdateIconRequest.Validate if the designated constraints aren't met.
+type UpdateIconRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateIconRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateIconRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateIconRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateIconRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateIconRequestValidationError) ErrorName() string {
+	return "UpdateIconRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateIconRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateIconRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateIconRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateIconRequestValidationError{}
+
+// Validate checks the field values on UpdateIconResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *UpdateIconResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Result
+
+	return nil
+}
+
+// UpdateIconResponseValidationError is the validation error returned by
+// UpdateIconResponse.Validate if the designated constraints aren't met.
+type UpdateIconResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateIconResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateIconResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateIconResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateIconResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateIconResponseValidationError) ErrorName() string {
+	return "UpdateIconResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateIconResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateIconResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateIconResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateIconResponseValidationError{}
+
+// Validate checks the field values on UpdateMetadataRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *UpdateMetadataRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetOwner() == nil {
+		return UpdateMetadataRequestValidationError{
+			field:  "Owner",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetOwner()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateMetadataRequestValidationError{
+				field:  "Owner",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetSignature() == nil {
+		return UpdateMetadataRequestValidationError{
+			field:  "Signature",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSignature()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateMetadataRequestValidationError{
+				field:  "Signature",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetMint() == nil {
+		return UpdateMetadataRequestValidationError{
+			field:  "Mint",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetMint()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateMetadataRequestValidationError{
+				field:  "Mint",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetNewDescription()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateMetadataRequestValidationError{
+				field:  "NewDescription",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetNewBillCustomization()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateMetadataRequestValidationError{
+				field:  "NewBillCustomization",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetNewSocialLinks()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateMetadataRequestValidationError{
+				field:  "NewSocialLinks",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// UpdateMetadataRequestValidationError is the validation error returned by
+// UpdateMetadataRequest.Validate if the designated constraints aren't met.
+type UpdateMetadataRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateMetadataRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateMetadataRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateMetadataRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateMetadataRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateMetadataRequestValidationError) ErrorName() string {
+	return "UpdateMetadataRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateMetadataRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateMetadataRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateMetadataRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateMetadataRequestValidationError{}
+
+// Validate checks the field values on UpdateMetadataResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *UpdateMetadataResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Result
+
+	return nil
+}
+
+// UpdateMetadataResponseValidationError is the validation error returned by
+// UpdateMetadataResponse.Validate if the designated constraints aren't met.
+type UpdateMetadataResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateMetadataResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateMetadataResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateMetadataResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateMetadataResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateMetadataResponseValidationError) ErrorName() string {
+	return "UpdateMetadataResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateMetadataResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateMetadataResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateMetadataResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateMetadataResponseValidationError{}
+
 // Validate checks the field values on StreamLiveMintDataRequest_Request with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, an error is returned.
@@ -2505,3 +2916,256 @@ var _ interface {
 } = SocialLink_XValidationError{}
 
 var _SocialLink_X_Username_Pattern = regexp.MustCompile("^[a-zA-Z0-9_]+$")
+
+// Validate checks the field values on UpdateMetadataRequest_DescriptionUpdate
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, an error is returned.
+func (m *UpdateMetadataRequest_DescriptionUpdate) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if l := utf8.RuneCountInString(m.GetValue()); l < 1 || l > 4096 {
+		return UpdateMetadataRequest_DescriptionUpdateValidationError{
+			field:  "Value",
+			reason: "value length must be between 1 and 4096 runes, inclusive",
+		}
+	}
+
+	return nil
+}
+
+// UpdateMetadataRequest_DescriptionUpdateValidationError is the validation
+// error returned by UpdateMetadataRequest_DescriptionUpdate.Validate if the
+// designated constraints aren't met.
+type UpdateMetadataRequest_DescriptionUpdateValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateMetadataRequest_DescriptionUpdateValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateMetadataRequest_DescriptionUpdateValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateMetadataRequest_DescriptionUpdateValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateMetadataRequest_DescriptionUpdateValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateMetadataRequest_DescriptionUpdateValidationError) ErrorName() string {
+	return "UpdateMetadataRequest_DescriptionUpdateValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateMetadataRequest_DescriptionUpdateValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateMetadataRequest_DescriptionUpdate.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateMetadataRequest_DescriptionUpdateValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateMetadataRequest_DescriptionUpdateValidationError{}
+
+// Validate checks the field values on
+// UpdateMetadataRequest_BillCustomizationUpdate with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *UpdateMetadataRequest_BillCustomizationUpdate) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetValue() == nil {
+		return UpdateMetadataRequest_BillCustomizationUpdateValidationError{
+			field:  "Value",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetValue()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateMetadataRequest_BillCustomizationUpdateValidationError{
+				field:  "Value",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// UpdateMetadataRequest_BillCustomizationUpdateValidationError is the
+// validation error returned by
+// UpdateMetadataRequest_BillCustomizationUpdate.Validate if the designated
+// constraints aren't met.
+type UpdateMetadataRequest_BillCustomizationUpdateValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateMetadataRequest_BillCustomizationUpdateValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateMetadataRequest_BillCustomizationUpdateValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e UpdateMetadataRequest_BillCustomizationUpdateValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateMetadataRequest_BillCustomizationUpdateValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateMetadataRequest_BillCustomizationUpdateValidationError) ErrorName() string {
+	return "UpdateMetadataRequest_BillCustomizationUpdateValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateMetadataRequest_BillCustomizationUpdateValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateMetadataRequest_BillCustomizationUpdate.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateMetadataRequest_BillCustomizationUpdateValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateMetadataRequest_BillCustomizationUpdateValidationError{}
+
+// Validate checks the field values on UpdateMetadataRequest_SocialLinksUpdate
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, an error is returned.
+func (m *UpdateMetadataRequest_SocialLinksUpdate) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if len(m.GetValue()) > 32 {
+		return UpdateMetadataRequest_SocialLinksUpdateValidationError{
+			field:  "Value",
+			reason: "value must contain no more than 32 item(s)",
+		}
+	}
+
+	for idx, item := range m.GetValue() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateMetadataRequest_SocialLinksUpdateValidationError{
+					field:  fmt.Sprintf("Value[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// UpdateMetadataRequest_SocialLinksUpdateValidationError is the validation
+// error returned by UpdateMetadataRequest_SocialLinksUpdate.Validate if the
+// designated constraints aren't met.
+type UpdateMetadataRequest_SocialLinksUpdateValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateMetadataRequest_SocialLinksUpdateValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateMetadataRequest_SocialLinksUpdateValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateMetadataRequest_SocialLinksUpdateValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateMetadataRequest_SocialLinksUpdateValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateMetadataRequest_SocialLinksUpdateValidationError) ErrorName() string {
+	return "UpdateMetadataRequest_SocialLinksUpdateValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateMetadataRequest_SocialLinksUpdateValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateMetadataRequest_SocialLinksUpdate.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateMetadataRequest_SocialLinksUpdateValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateMetadataRequest_SocialLinksUpdateValidationError{}
