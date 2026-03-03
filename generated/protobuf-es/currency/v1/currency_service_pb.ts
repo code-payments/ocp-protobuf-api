@@ -1432,3 +1432,393 @@ proto3.util.setEnumType(LaunchResponse_Result, "ocp.currency.v1.LaunchResponse.R
   { no: 2, name: "EXISTS" },
 ]);
 
+/**
+ * @generated from message ocp.currency.v1.UpdateIconRequest
+ */
+export class UpdateIconRequest extends Message<UpdateIconRequest> {
+  /**
+   * The owner account of the currency
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId owner = 1;
+   */
+  owner?: SolanaAccountId;
+
+  /**
+   * The signature is of serialize(UpdateIconRequest) without this field set
+   * using the private key of the owner account. This provides an authentication
+   * mechanism to the RPC.
+   *
+   * @generated from field: ocp.common.v1.Signature signature = 2;
+   */
+  signature?: Signature;
+
+  /**
+   * The mint address of the currency to update
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId mint = 3;
+   */
+  mint?: SolanaAccountId;
+
+  /**
+   * The raw image data for the icon
+   *
+   * @generated from field: bytes icon = 4;
+   */
+  icon = new Uint8Array(0);
+
+  constructor(data?: PartialMessage<UpdateIconRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.UpdateIconRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "owner", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "signature", kind: "message", T: Signature },
+    { no: 3, name: "mint", kind: "message", T: SolanaAccountId },
+    { no: 4, name: "icon", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateIconRequest {
+    return new UpdateIconRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateIconRequest {
+    return new UpdateIconRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateIconRequest {
+    return new UpdateIconRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UpdateIconRequest | PlainMessage<UpdateIconRequest> | undefined, b: UpdateIconRequest | PlainMessage<UpdateIconRequest> | undefined): boolean {
+    return proto3.util.equals(UpdateIconRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.UpdateIconResponse
+ */
+export class UpdateIconResponse extends Message<UpdateIconResponse> {
+  /**
+   * @generated from field: ocp.currency.v1.UpdateIconResponse.Result result = 1;
+   */
+  result = UpdateIconResponse_Result.OK;
+
+  constructor(data?: PartialMessage<UpdateIconResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.UpdateIconResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(UpdateIconResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateIconResponse {
+    return new UpdateIconResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateIconResponse {
+    return new UpdateIconResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateIconResponse {
+    return new UpdateIconResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UpdateIconResponse | PlainMessage<UpdateIconResponse> | undefined, b: UpdateIconResponse | PlainMessage<UpdateIconResponse> | undefined): boolean {
+    return proto3.util.equals(UpdateIconResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum ocp.currency.v1.UpdateIconResponse.Result
+ */
+export enum UpdateIconResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: NOT_FOUND = 1;
+   */
+  NOT_FOUND = 1,
+
+  /**
+   * @generated from enum value: DENIED = 2;
+   */
+  DENIED = 2,
+
+  /**
+   * @generated from enum value: INVALID_ICON = 3;
+   */
+  INVALID_ICON = 3,
+}
+// Retrieve enum metadata with: proto3.getEnumType(UpdateIconResponse_Result)
+proto3.util.setEnumType(UpdateIconResponse_Result, "ocp.currency.v1.UpdateIconResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "NOT_FOUND" },
+  { no: 2, name: "DENIED" },
+  { no: 3, name: "INVALID_ICON" },
+]);
+
+/**
+ * @generated from message ocp.currency.v1.UpdateMetadataRequest
+ */
+export class UpdateMetadataRequest extends Message<UpdateMetadataRequest> {
+  /**
+   * The owner account of the currency
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId owner = 1;
+   */
+  owner?: SolanaAccountId;
+
+  /**
+   * The signature is of serialize(UpdateMetadataRequest) without this field set
+   * using the private key of the owner account. This provides an authentication
+   * mechanism to the RPC.
+   *
+   * @generated from field: ocp.common.v1.Signature signature = 2;
+   */
+  signature?: Signature;
+
+  /**
+   * The mint address of the currency to update
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId mint = 3;
+   */
+  mint?: SolanaAccountId;
+
+  /**
+   * Updated currency description. If not provided, description is not updated.
+   *
+   * @generated from field: ocp.currency.v1.UpdateMetadataRequest.DescriptionUpdate new_description = 4;
+   */
+  newDescription?: UpdateMetadataRequest_DescriptionUpdate;
+
+  /**
+   * Updated bill customization. If not provided, bill customization is not updated.
+   *
+   * @generated from field: ocp.currency.v1.UpdateMetadataRequest.BillCustomizationUpdate new_bill_customization = 5;
+   */
+  newBillCustomization?: UpdateMetadataRequest_BillCustomizationUpdate;
+
+  /**
+   * Updated social links. This replaces the entire set of social links. If not
+   * provided, social links are not updated.
+   *
+   * @generated from field: ocp.currency.v1.UpdateMetadataRequest.SocialLinksUpdate new_social_links = 6;
+   */
+  newSocialLinks?: UpdateMetadataRequest_SocialLinksUpdate;
+
+  constructor(data?: PartialMessage<UpdateMetadataRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.UpdateMetadataRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "owner", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "signature", kind: "message", T: Signature },
+    { no: 3, name: "mint", kind: "message", T: SolanaAccountId },
+    { no: 4, name: "new_description", kind: "message", T: UpdateMetadataRequest_DescriptionUpdate },
+    { no: 5, name: "new_bill_customization", kind: "message", T: UpdateMetadataRequest_BillCustomizationUpdate },
+    { no: 6, name: "new_social_links", kind: "message", T: UpdateMetadataRequest_SocialLinksUpdate },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateMetadataRequest {
+    return new UpdateMetadataRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateMetadataRequest {
+    return new UpdateMetadataRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateMetadataRequest {
+    return new UpdateMetadataRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UpdateMetadataRequest | PlainMessage<UpdateMetadataRequest> | undefined, b: UpdateMetadataRequest | PlainMessage<UpdateMetadataRequest> | undefined): boolean {
+    return proto3.util.equals(UpdateMetadataRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.UpdateMetadataRequest.DescriptionUpdate
+ */
+export class UpdateMetadataRequest_DescriptionUpdate extends Message<UpdateMetadataRequest_DescriptionUpdate> {
+  /**
+   * @generated from field: string value = 1;
+   */
+  value = "";
+
+  constructor(data?: PartialMessage<UpdateMetadataRequest_DescriptionUpdate>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.UpdateMetadataRequest.DescriptionUpdate";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateMetadataRequest_DescriptionUpdate {
+    return new UpdateMetadataRequest_DescriptionUpdate().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateMetadataRequest_DescriptionUpdate {
+    return new UpdateMetadataRequest_DescriptionUpdate().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateMetadataRequest_DescriptionUpdate {
+    return new UpdateMetadataRequest_DescriptionUpdate().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UpdateMetadataRequest_DescriptionUpdate | PlainMessage<UpdateMetadataRequest_DescriptionUpdate> | undefined, b: UpdateMetadataRequest_DescriptionUpdate | PlainMessage<UpdateMetadataRequest_DescriptionUpdate> | undefined): boolean {
+    return proto3.util.equals(UpdateMetadataRequest_DescriptionUpdate, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.UpdateMetadataRequest.BillCustomizationUpdate
+ */
+export class UpdateMetadataRequest_BillCustomizationUpdate extends Message<UpdateMetadataRequest_BillCustomizationUpdate> {
+  /**
+   * @generated from field: ocp.currency.v1.BillCustomization value = 1;
+   */
+  value?: BillCustomization;
+
+  constructor(data?: PartialMessage<UpdateMetadataRequest_BillCustomizationUpdate>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.UpdateMetadataRequest.BillCustomizationUpdate";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "value", kind: "message", T: BillCustomization },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateMetadataRequest_BillCustomizationUpdate {
+    return new UpdateMetadataRequest_BillCustomizationUpdate().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateMetadataRequest_BillCustomizationUpdate {
+    return new UpdateMetadataRequest_BillCustomizationUpdate().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateMetadataRequest_BillCustomizationUpdate {
+    return new UpdateMetadataRequest_BillCustomizationUpdate().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UpdateMetadataRequest_BillCustomizationUpdate | PlainMessage<UpdateMetadataRequest_BillCustomizationUpdate> | undefined, b: UpdateMetadataRequest_BillCustomizationUpdate | PlainMessage<UpdateMetadataRequest_BillCustomizationUpdate> | undefined): boolean {
+    return proto3.util.equals(UpdateMetadataRequest_BillCustomizationUpdate, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.UpdateMetadataRequest.SocialLinksUpdate
+ */
+export class UpdateMetadataRequest_SocialLinksUpdate extends Message<UpdateMetadataRequest_SocialLinksUpdate> {
+  /**
+   * @generated from field: repeated ocp.currency.v1.SocialLink value = 1;
+   */
+  value: SocialLink[] = [];
+
+  constructor(data?: PartialMessage<UpdateMetadataRequest_SocialLinksUpdate>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.UpdateMetadataRequest.SocialLinksUpdate";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "value", kind: "message", T: SocialLink, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateMetadataRequest_SocialLinksUpdate {
+    return new UpdateMetadataRequest_SocialLinksUpdate().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateMetadataRequest_SocialLinksUpdate {
+    return new UpdateMetadataRequest_SocialLinksUpdate().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateMetadataRequest_SocialLinksUpdate {
+    return new UpdateMetadataRequest_SocialLinksUpdate().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UpdateMetadataRequest_SocialLinksUpdate | PlainMessage<UpdateMetadataRequest_SocialLinksUpdate> | undefined, b: UpdateMetadataRequest_SocialLinksUpdate | PlainMessage<UpdateMetadataRequest_SocialLinksUpdate> | undefined): boolean {
+    return proto3.util.equals(UpdateMetadataRequest_SocialLinksUpdate, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.UpdateMetadataResponse
+ */
+export class UpdateMetadataResponse extends Message<UpdateMetadataResponse> {
+  /**
+   * @generated from field: ocp.currency.v1.UpdateMetadataResponse.Result result = 1;
+   */
+  result = UpdateMetadataResponse_Result.OK;
+
+  constructor(data?: PartialMessage<UpdateMetadataResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.UpdateMetadataResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(UpdateMetadataResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateMetadataResponse {
+    return new UpdateMetadataResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateMetadataResponse {
+    return new UpdateMetadataResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateMetadataResponse {
+    return new UpdateMetadataResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UpdateMetadataResponse | PlainMessage<UpdateMetadataResponse> | undefined, b: UpdateMetadataResponse | PlainMessage<UpdateMetadataResponse> | undefined): boolean {
+    return proto3.util.equals(UpdateMetadataResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum ocp.currency.v1.UpdateMetadataResponse.Result
+ */
+export enum UpdateMetadataResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: NOT_FOUND = 1;
+   */
+  NOT_FOUND = 1,
+
+  /**
+   * @generated from enum value: DENIED = 2;
+   */
+  DENIED = 2,
+}
+// Retrieve enum metadata with: proto3.getEnumType(UpdateMetadataResponse_Result)
+proto3.util.setEnumType(UpdateMetadataResponse_Result, "ocp.currency.v1.UpdateMetadataResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "NOT_FOUND" },
+  { no: 2, name: "DENIED" },
+]);
+

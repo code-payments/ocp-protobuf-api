@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetHistoricalMintDataRequest, GetHistoricalMintDataResponse, GetMintsRequest, GetMintsResponse, LaunchRequest, LaunchResponse, StreamLiveMintDataRequest, StreamLiveMintDataResponse } from "./currency_service_pb";
+import { GetHistoricalMintDataRequest, GetHistoricalMintDataResponse, GetMintsRequest, GetMintsResponse, LaunchRequest, LaunchResponse, StreamLiveMintDataRequest, StreamLiveMintDataResponse, UpdateIconRequest, UpdateIconResponse, UpdateMetadataRequest, UpdateMetadataResponse } from "./currency_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -54,6 +54,28 @@ export const Currency = {
       name: "Launch",
       I: LaunchRequest,
       O: LaunchResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * UpdateIcon uploads and updates the icon for a currency
+     *
+     * @generated from rpc ocp.currency.v1.Currency.UpdateIcon
+     */
+    updateIcon: {
+      name: "UpdateIcon",
+      I: UpdateIconRequest,
+      O: UpdateIconResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * UpdateMetadata updates mutable metadata for a currency
+     *
+     * @generated from rpc ocp.currency.v1.Currency.UpdateMetadata
+     */
+    updateMetadata: {
+      name: "UpdateMetadata",
+      I: UpdateMetadataRequest,
+      O: UpdateMetadataResponse,
       kind: MethodKind.Unary,
     },
   }

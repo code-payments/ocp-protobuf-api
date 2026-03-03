@@ -30,6 +30,10 @@ type CurrencyClient interface {
 	StreamLiveMintData(ctx context.Context, opts ...grpc.CallOption) (Currency_StreamLiveMintDataClient, error)
 	// Launch launches a new currency on the launchpad
 	Launch(ctx context.Context, in *LaunchRequest, opts ...grpc.CallOption) (*LaunchResponse, error)
+	// UpdateIcon uploads and updates the icon for a currency
+	UpdateIcon(ctx context.Context, in *UpdateIconRequest, opts ...grpc.CallOption) (*UpdateIconResponse, error)
+	// UpdateMetadata updates mutable metadata for a currency
+	UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*UpdateMetadataResponse, error)
 }
 
 type currencyClient struct {
@@ -98,6 +102,24 @@ func (c *currencyClient) Launch(ctx context.Context, in *LaunchRequest, opts ...
 	return out, nil
 }
 
+func (c *currencyClient) UpdateIcon(ctx context.Context, in *UpdateIconRequest, opts ...grpc.CallOption) (*UpdateIconResponse, error) {
+	out := new(UpdateIconResponse)
+	err := c.cc.Invoke(ctx, "/ocp.currency.v1.Currency/UpdateIcon", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyClient) UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*UpdateMetadataResponse, error) {
+	out := new(UpdateMetadataResponse)
+	err := c.cc.Invoke(ctx, "/ocp.currency.v1.Currency/UpdateMetadata", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CurrencyServer is the server API for Currency service.
 // All implementations must embed UnimplementedCurrencyServer
 // for forward compatibility
@@ -110,6 +132,10 @@ type CurrencyServer interface {
 	StreamLiveMintData(Currency_StreamLiveMintDataServer) error
 	// Launch launches a new currency on the launchpad
 	Launch(context.Context, *LaunchRequest) (*LaunchResponse, error)
+	// UpdateIcon uploads and updates the icon for a currency
+	UpdateIcon(context.Context, *UpdateIconRequest) (*UpdateIconResponse, error)
+	// UpdateMetadata updates mutable metadata for a currency
+	UpdateMetadata(context.Context, *UpdateMetadataRequest) (*UpdateMetadataResponse, error)
 	mustEmbedUnimplementedCurrencyServer()
 }
 
@@ -128,6 +154,12 @@ func (UnimplementedCurrencyServer) StreamLiveMintData(Currency_StreamLiveMintDat
 }
 func (UnimplementedCurrencyServer) Launch(context.Context, *LaunchRequest) (*LaunchResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Launch not implemented")
+}
+func (UnimplementedCurrencyServer) UpdateIcon(context.Context, *UpdateIconRequest) (*UpdateIconResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateIcon not implemented")
+}
+func (UnimplementedCurrencyServer) UpdateMetadata(context.Context, *UpdateMetadataRequest) (*UpdateMetadataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMetadata not implemented")
 }
 func (UnimplementedCurrencyServer) mustEmbedUnimplementedCurrencyServer() {}
 
@@ -222,6 +254,42 @@ func _Currency_Launch_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Currency_UpdateIcon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateIconRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyServer).UpdateIcon(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ocp.currency.v1.Currency/UpdateIcon",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyServer).UpdateIcon(ctx, req.(*UpdateIconRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Currency_UpdateMetadata_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMetadataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyServer).UpdateMetadata(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ocp.currency.v1.Currency/UpdateMetadata",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyServer).UpdateMetadata(ctx, req.(*UpdateMetadataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Currency_ServiceDesc is the grpc.ServiceDesc for Currency service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -240,6 +308,14 @@ var Currency_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Launch",
 			Handler:    _Currency_Launch_Handler,
+		},
+		{
+			MethodName: "UpdateIcon",
+			Handler:    _Currency_UpdateIcon_Handler,
+		},
+		{
+			MethodName: "UpdateMetadata",
+			Handler:    _Currency_UpdateMetadata_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
