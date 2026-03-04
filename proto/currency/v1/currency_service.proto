@@ -290,8 +290,10 @@ message SocialLink {
     oneof type {
         option (validate.required) = true;
 
-        Website website = 1;
-        X       x       = 2;
+        Website  website  = 1;
+        X        x        = 2;
+        Telegram telegram = 3;
+        Discord  discord  = 4;
     }
 
     message Website {
@@ -306,6 +308,24 @@ message SocialLink {
             min_len: 1,
             max_len: 15,
             pattern: "^[a-zA-Z0-9_]+$",
+        }];
+    }
+
+    message Telegram {
+        // Telegram username (without the @ prefix)
+        string username = 1 [(validate.rules).string = {
+            min_len: 1,
+            max_len: 32,
+            pattern: "^[a-zA-Z0-9_]+$",
+        }];
+    }
+
+    message Discord {
+        // Discord invite code (e.g. "abc123" from discord.gg/abc123)
+        string invite_code = 1 [(validate.rules).string = {
+            min_len: 1,
+            max_len: 32,
+            pattern: "^[a-zA-Z0-9]+$",
         }];
     }
 }
