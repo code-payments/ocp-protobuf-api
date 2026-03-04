@@ -1108,6 +1108,18 @@ export class SocialLink extends Message<SocialLink> {
      */
     value: SocialLink_X;
     case: "x";
+  } | {
+    /**
+     * @generated from field: ocp.currency.v1.SocialLink.Telegram telegram = 3;
+     */
+    value: SocialLink_Telegram;
+    case: "telegram";
+  } | {
+    /**
+     * @generated from field: ocp.currency.v1.SocialLink.Discord discord = 4;
+     */
+    value: SocialLink_Discord;
+    case: "discord";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<SocialLink>) {
@@ -1120,6 +1132,8 @@ export class SocialLink extends Message<SocialLink> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "website", kind: "message", T: SocialLink_Website, oneof: "type" },
     { no: 2, name: "x", kind: "message", T: SocialLink_X, oneof: "type" },
+    { no: 3, name: "telegram", kind: "message", T: SocialLink_Telegram, oneof: "type" },
+    { no: 4, name: "discord", kind: "message", T: SocialLink_Discord, oneof: "type" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SocialLink {
@@ -1210,6 +1224,84 @@ export class SocialLink_X extends Message<SocialLink_X> {
 
   static equals(a: SocialLink_X | PlainMessage<SocialLink_X> | undefined, b: SocialLink_X | PlainMessage<SocialLink_X> | undefined): boolean {
     return proto3.util.equals(SocialLink_X, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.SocialLink.Telegram
+ */
+export class SocialLink_Telegram extends Message<SocialLink_Telegram> {
+  /**
+   * Telegram username (without the @ prefix)
+   *
+   * @generated from field: string username = 1;
+   */
+  username = "";
+
+  constructor(data?: PartialMessage<SocialLink_Telegram>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.SocialLink.Telegram";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "username", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SocialLink_Telegram {
+    return new SocialLink_Telegram().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SocialLink_Telegram {
+    return new SocialLink_Telegram().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SocialLink_Telegram {
+    return new SocialLink_Telegram().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SocialLink_Telegram | PlainMessage<SocialLink_Telegram> | undefined, b: SocialLink_Telegram | PlainMessage<SocialLink_Telegram> | undefined): boolean {
+    return proto3.util.equals(SocialLink_Telegram, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.SocialLink.Discord
+ */
+export class SocialLink_Discord extends Message<SocialLink_Discord> {
+  /**
+   * Discord invite code (e.g. "abc123" from discord.gg/abc123)
+   *
+   * @generated from field: string invite_code = 1;
+   */
+  inviteCode = "";
+
+  constructor(data?: PartialMessage<SocialLink_Discord>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.SocialLink.Discord";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "invite_code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SocialLink_Discord {
+    return new SocialLink_Discord().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SocialLink_Discord {
+    return new SocialLink_Discord().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SocialLink_Discord {
+    return new SocialLink_Discord().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SocialLink_Discord | PlainMessage<SocialLink_Discord> | undefined, b: SocialLink_Discord | PlainMessage<SocialLink_Discord> | undefined): boolean {
+    return proto3.util.equals(SocialLink_Discord, a, b);
   }
 }
 

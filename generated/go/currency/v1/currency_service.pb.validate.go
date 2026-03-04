@@ -1729,6 +1729,30 @@ func (m *SocialLink) Validate() error {
 			}
 		}
 
+	case *SocialLink_Telegram_:
+
+		if v, ok := interface{}(m.GetTelegram()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SocialLinkValidationError{
+					field:  "Telegram",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *SocialLink_Discord_:
+
+		if v, ok := interface{}(m.GetDiscord()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SocialLinkValidationError{
+					field:  "Discord",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	default:
 		return SocialLinkValidationError{
 			field:  "Type",
@@ -2916,6 +2940,172 @@ var _ interface {
 } = SocialLink_XValidationError{}
 
 var _SocialLink_X_Username_Pattern = regexp.MustCompile("^[a-zA-Z0-9_]+$")
+
+// Validate checks the field values on SocialLink_Telegram with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *SocialLink_Telegram) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if l := utf8.RuneCountInString(m.GetUsername()); l < 1 || l > 32 {
+		return SocialLink_TelegramValidationError{
+			field:  "Username",
+			reason: "value length must be between 1 and 32 runes, inclusive",
+		}
+	}
+
+	if !_SocialLink_Telegram_Username_Pattern.MatchString(m.GetUsername()) {
+		return SocialLink_TelegramValidationError{
+			field:  "Username",
+			reason: "value does not match regex pattern \"^[a-zA-Z0-9_]+$\"",
+		}
+	}
+
+	return nil
+}
+
+// SocialLink_TelegramValidationError is the validation error returned by
+// SocialLink_Telegram.Validate if the designated constraints aren't met.
+type SocialLink_TelegramValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SocialLink_TelegramValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SocialLink_TelegramValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SocialLink_TelegramValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SocialLink_TelegramValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SocialLink_TelegramValidationError) ErrorName() string {
+	return "SocialLink_TelegramValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SocialLink_TelegramValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSocialLink_Telegram.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SocialLink_TelegramValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SocialLink_TelegramValidationError{}
+
+var _SocialLink_Telegram_Username_Pattern = regexp.MustCompile("^[a-zA-Z0-9_]+$")
+
+// Validate checks the field values on SocialLink_Discord with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *SocialLink_Discord) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if l := utf8.RuneCountInString(m.GetInviteCode()); l < 1 || l > 32 {
+		return SocialLink_DiscordValidationError{
+			field:  "InviteCode",
+			reason: "value length must be between 1 and 32 runes, inclusive",
+		}
+	}
+
+	if !_SocialLink_Discord_InviteCode_Pattern.MatchString(m.GetInviteCode()) {
+		return SocialLink_DiscordValidationError{
+			field:  "InviteCode",
+			reason: "value does not match regex pattern \"^[a-zA-Z0-9]+$\"",
+		}
+	}
+
+	return nil
+}
+
+// SocialLink_DiscordValidationError is the validation error returned by
+// SocialLink_Discord.Validate if the designated constraints aren't met.
+type SocialLink_DiscordValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SocialLink_DiscordValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SocialLink_DiscordValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SocialLink_DiscordValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SocialLink_DiscordValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SocialLink_DiscordValidationError) ErrorName() string {
+	return "SocialLink_DiscordValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SocialLink_DiscordValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSocialLink_Discord.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SocialLink_DiscordValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SocialLink_DiscordValidationError{}
+
+var _SocialLink_Discord_InviteCode_Pattern = regexp.MustCompile("^[a-zA-Z0-9]+$")
 
 // Validate checks the field values on UpdateMetadataRequest_DescriptionUpdate
 // with the rules defined in the proto definition for this message. If any
