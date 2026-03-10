@@ -550,11 +550,17 @@ export enum GetIntentMetadataResponse_Result {
    * @generated from enum value: NOT_FOUND = 1;
    */
   NOT_FOUND = 1,
+
+  /**
+   * @generated from enum value: DENIED = 2;
+   */
+  DENIED = 2,
 }
 // Retrieve enum metadata with: proto3.getEnumType(GetIntentMetadataResponse_Result)
 proto3.util.setEnumType(GetIntentMetadataResponse_Result, "ocp.transaction.v1.GetIntentMetadataResponse.Result", [
   { no: 0, name: "OK" },
   { no: 1, name: "NOT_FOUND" },
+  { no: 2, name: "DENIED" },
 ]);
 
 /**
