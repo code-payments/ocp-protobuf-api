@@ -7,6 +7,7 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
 import { AccountType, Signature, SolanaAccountId } from "../../common/v1/model_pb";
 import { ExchangeData } from "../../transaction/v1/transaction_service_pb";
+import { Mint, VerifiedLaunchpadCurrencyReserveState } from "../../currency/v1/currency_service_pb";
 
 /**
  * @generated from message ocp.account.v1.IsOcpAccountRequest
@@ -395,6 +396,20 @@ export class TokenAccountInfo extends Message<TokenAccountInfo> {
   mint?: SolanaAccountId;
 
   /**
+   * Mint metadata for the token account's mint
+   *
+   * @generated from field: ocp.currency.v1.Mint mint_metadata = 16;
+   */
+  mintMetadata?: Mint;
+
+  /**
+   * Live mint reserve state, if applicable
+   *
+   * @generated from field: ocp.currency.v1.VerifiedLaunchpadCurrencyReserveState live_reserve_state = 17;
+   */
+  liveReserveState?: VerifiedLaunchpadCurrencyReserveState;
+
+  /**
    * Time the account was created, if available. For OCP accounts, this is
    * the time of intent submission. Otherwise, for external accounts, it is
    * the time created on the blockchain.
@@ -439,6 +454,8 @@ export class TokenAccountInfo extends Message<TokenAccountInfo> {
     { no: 10, name: "claim_state", kind: "enum", T: proto3.getEnumType(TokenAccountInfo_ClaimState) },
     { no: 11, name: "original_exchange_data", kind: "message", T: ExchangeData },
     { no: 12, name: "mint", kind: "message", T: SolanaAccountId },
+    { no: 16, name: "mint_metadata", kind: "message", T: Mint },
+    { no: 17, name: "live_reserve_state", kind: "message", T: VerifiedLaunchpadCurrencyReserveState },
     { no: 13, name: "created_at", kind: "message", T: Timestamp },
     { no: 14, name: "is_gift_card_issuer", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 15, name: "usd_cost_basis", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
