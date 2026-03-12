@@ -2581,6 +2581,160 @@ var _ interface {
 	ErrorName() string
 } = UpdateMetadataResponseValidationError{}
 
+// Validate checks the field values on DiscoverRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *DiscoverRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+// DiscoverRequestValidationError is the validation error returned by
+// DiscoverRequest.Validate if the designated constraints aren't met.
+type DiscoverRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DiscoverRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DiscoverRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DiscoverRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DiscoverRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DiscoverRequestValidationError) ErrorName() string { return "DiscoverRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e DiscoverRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDiscoverRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DiscoverRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DiscoverRequestValidationError{}
+
+// Validate checks the field values on DiscoverResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *DiscoverResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Result
+
+	if len(m.GetMint()) > 1024 {
+		return DiscoverResponseValidationError{
+			field:  "Mint",
+			reason: "value must contain no more than 1024 item(s)",
+		}
+	}
+
+	for idx, item := range m.GetMint() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return DiscoverResponseValidationError{
+					field:  fmt.Sprintf("Mint[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// DiscoverResponseValidationError is the validation error returned by
+// DiscoverResponse.Validate if the designated constraints aren't met.
+type DiscoverResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DiscoverResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DiscoverResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DiscoverResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DiscoverResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DiscoverResponseValidationError) ErrorName() string { return "DiscoverResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e DiscoverResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDiscoverResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DiscoverResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DiscoverResponseValidationError{}
+
 // Validate checks the field values on StreamLiveMintDataRequest_Request with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, an error is returned.

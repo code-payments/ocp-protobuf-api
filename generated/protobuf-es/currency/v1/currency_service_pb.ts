@@ -1914,3 +1914,97 @@ proto3.util.setEnumType(UpdateMetadataResponse_Result, "ocp.currency.v1.UpdateMe
   { no: 2, name: "DENIED" },
 ]);
 
+/**
+ * @generated from message ocp.currency.v1.DiscoverRequest
+ */
+export class DiscoverRequest extends Message<DiscoverRequest> {
+  constructor(data?: PartialMessage<DiscoverRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.DiscoverRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DiscoverRequest {
+    return new DiscoverRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DiscoverRequest {
+    return new DiscoverRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DiscoverRequest {
+    return new DiscoverRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: DiscoverRequest | PlainMessage<DiscoverRequest> | undefined, b: DiscoverRequest | PlainMessage<DiscoverRequest> | undefined): boolean {
+    return proto3.util.equals(DiscoverRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.DiscoverResponse
+ */
+export class DiscoverResponse extends Message<DiscoverResponse> {
+  /**
+   * @generated from field: ocp.currency.v1.DiscoverResponse.Result result = 1;
+   */
+  result = DiscoverResponse_Result.OK;
+
+  /**
+   * @generated from field: repeated ocp.currency.v1.Mint mint = 2;
+   */
+  mint: Mint[] = [];
+
+  constructor(data?: PartialMessage<DiscoverResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.DiscoverResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(DiscoverResponse_Result) },
+    { no: 2, name: "mint", kind: "message", T: Mint, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DiscoverResponse {
+    return new DiscoverResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DiscoverResponse {
+    return new DiscoverResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DiscoverResponse {
+    return new DiscoverResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: DiscoverResponse | PlainMessage<DiscoverResponse> | undefined, b: DiscoverResponse | PlainMessage<DiscoverResponse> | undefined): boolean {
+    return proto3.util.equals(DiscoverResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum ocp.currency.v1.DiscoverResponse.Result
+ */
+export enum DiscoverResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: NOT_FOUND = 1;
+   */
+  NOT_FOUND = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(DiscoverResponse_Result)
+proto3.util.setEnumType(DiscoverResponse_Result, "ocp.currency.v1.DiscoverResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "NOT_FOUND" },
+]);
+
