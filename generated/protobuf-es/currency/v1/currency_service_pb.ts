@@ -704,8 +704,6 @@ export class LaunchpadMetadata extends Message<LaunchpadMetadata> {
   /**
    * Current circulating mint token supply in quarks
    *
-   * Deprecated: Use supply value from StreamLiveMintData
-   *
    * @generated from field: uint64 supply_from_bonding = 7;
    */
   supplyFromBonding = protoInt64.zero;

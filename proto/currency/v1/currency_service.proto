@@ -215,8 +215,6 @@ message LaunchpadMetadata {
     common.v1.SolanaAccountId core_mint_vault = 6 [(validate.rules).message.required = true];
 
     // Current circulating mint token supply in quarks
-    //
-    // Deprecated: Use supply value from StreamLiveMintData
     uint64 supply_from_bonding = 7;
 
     // Precent fee for sells in basis points, currently hardcoded to 1%

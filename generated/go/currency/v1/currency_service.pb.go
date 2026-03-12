@@ -1014,8 +1014,6 @@ type LaunchpadMetadata struct {
 	// The address where core mint tokens are locked against the liquidity pool
 	CoreMintVault *v1.SolanaAccountId `protobuf:"bytes,6,opt,name=core_mint_vault,json=coreMintVault,proto3" json:"core_mint_vault,omitempty"`
 	// Current circulating mint token supply in quarks
-	//
-	// Deprecated: Use supply value from StreamLiveMintData
 	SupplyFromBonding uint64 `protobuf:"varint,7,opt,name=supply_from_bonding,json=supplyFromBonding,proto3" json:"supply_from_bonding,omitempty"`
 	// Precent fee for sells in basis points, currently hardcoded to 1%
 	SellFeeBps uint32 `protobuf:"varint,8,opt,name=sell_fee_bps,json=sellFeeBps,proto3" json:"sell_fee_bps,omitempty"`
