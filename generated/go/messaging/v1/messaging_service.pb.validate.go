@@ -1209,6 +1209,91 @@ var _ interface {
 	ErrorName() string
 } = RequestToGrabBillValidationError{}
 
+// Validate checks the field values on RequestToGiveBillServerContext with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *RequestToGiveBillServerContext) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetMintMetadata() == nil {
+		return RequestToGiveBillServerContextValidationError{
+			field:  "MintMetadata",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetMintMetadata()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RequestToGiveBillServerContextValidationError{
+				field:  "MintMetadata",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// RequestToGiveBillServerContextValidationError is the validation error
+// returned by RequestToGiveBillServerContext.Validate if the designated
+// constraints aren't met.
+type RequestToGiveBillServerContextValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RequestToGiveBillServerContextValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RequestToGiveBillServerContextValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RequestToGiveBillServerContextValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RequestToGiveBillServerContextValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RequestToGiveBillServerContextValidationError) ErrorName() string {
+	return "RequestToGiveBillServerContextValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RequestToGiveBillServerContextValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRequestToGiveBillServerContext.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RequestToGiveBillServerContextValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RequestToGiveBillServerContextValidationError{}
+
 // Validate checks the field values on RequestToGiveBill with the rules defined
 // in the proto definition for this message. If any rules are violated, an
 // error is returned.
@@ -1330,6 +1415,16 @@ func (m *Message) Validate() error {
 		}
 	}
 
+	if v, ok := interface{}(m.GetAdditionalContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MessageValidationError{
+				field:  "AdditionalContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	switch m.Kind.(type) {
 
 	case *Message_RequestToGrabBill:
@@ -1420,3 +1515,92 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = MessageValidationError{}
+
+// Validate checks the field values on AdditionalServerContext with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *AdditionalServerContext) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	switch m.Type.(type) {
+
+	case *AdditionalServerContext_RequestToGiveBill:
+
+		if v, ok := interface{}(m.GetRequestToGiveBill()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return AdditionalServerContextValidationError{
+					field:  "RequestToGiveBill",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		return AdditionalServerContextValidationError{
+			field:  "Type",
+			reason: "value is required",
+		}
+
+	}
+
+	return nil
+}
+
+// AdditionalServerContextValidationError is the validation error returned by
+// AdditionalServerContext.Validate if the designated constraints aren't met.
+type AdditionalServerContextValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdditionalServerContextValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdditionalServerContextValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdditionalServerContextValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdditionalServerContextValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdditionalServerContextValidationError) ErrorName() string {
+	return "AdditionalServerContextValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdditionalServerContextValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdditionalServerContext.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdditionalServerContextValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdditionalServerContextValidationError{}
