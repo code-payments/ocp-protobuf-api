@@ -6,6 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message as Message$1, proto3 } from "@bufbuild/protobuf";
 import { ClientPong, ServerPing, Signature, SolanaAccountId } from "../../common/v1/model_pb";
+import { Mint } from "../../currency/v1/currency_service_pb";
 import { VerifiedExchangeData } from "../../transaction/v1/transaction_service_pb";
 
 /**
@@ -614,6 +615,45 @@ export class RequestToGrabBill extends Message$1<RequestToGrabBill> {
 }
 
 /**
+ * @generated from message ocp.messaging.v1.RequestToGiveBillServerContext
+ */
+export class RequestToGiveBillServerContext extends Message$1<RequestToGiveBillServerContext> {
+  /**
+   * Mint metadata for the bill's mint
+   *
+   * @generated from field: ocp.currency.v1.Mint mint_metadata = 1;
+   */
+  mintMetadata?: Mint;
+
+  constructor(data?: PartialMessage<RequestToGiveBillServerContext>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.messaging.v1.RequestToGiveBillServerContext";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "mint_metadata", kind: "message", T: Mint },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RequestToGiveBillServerContext {
+    return new RequestToGiveBillServerContext().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RequestToGiveBillServerContext {
+    return new RequestToGiveBillServerContext().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RequestToGiveBillServerContext {
+    return new RequestToGiveBillServerContext().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: RequestToGiveBillServerContext | PlainMessage<RequestToGiveBillServerContext> | undefined, b: RequestToGiveBillServerContext | PlainMessage<RequestToGiveBillServerContext> | undefined): boolean {
+    return proto3.util.equals(RequestToGiveBillServerContext, a, b);
+  }
+}
+
+/**
  * Request that a bill be given in the desired mint
  *
  * This message type is only initiated by clients.
@@ -708,6 +748,13 @@ export class Message extends Message$1<Message> {
     case: "requestToGiveBill";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
+  /**
+   * Additional server-provided context for messages sent by client
+   *
+   * @generated from field: ocp.messaging.v1.AdditionalServerContext additional_context = 5;
+   */
+  additionalContext?: AdditionalServerContext;
+
   constructor(data?: PartialMessage<Message>) {
     super();
     proto3.util.initPartial(data, this);
@@ -720,6 +767,7 @@ export class Message extends Message$1<Message> {
     { no: 2, name: "send_message_request_signature", kind: "message", T: Signature },
     { no: 3, name: "request_to_grab_bill", kind: "message", T: RequestToGrabBill, oneof: "kind" },
     { no: 4, name: "request_to_give_bill", kind: "message", T: RequestToGiveBill, oneof: "kind" },
+    { no: 5, name: "additional_context", kind: "message", T: AdditionalServerContext },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Message {
@@ -736,6 +784,49 @@ export class Message extends Message$1<Message> {
 
   static equals(a: Message | PlainMessage<Message> | undefined, b: Message | PlainMessage<Message> | undefined): boolean {
     return proto3.util.equals(Message, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.messaging.v1.AdditionalServerContext
+ */
+export class AdditionalServerContext extends Message$1<AdditionalServerContext> {
+  /**
+   * @generated from oneof ocp.messaging.v1.AdditionalServerContext.type
+   */
+  type: {
+    /**
+     * @generated from field: ocp.messaging.v1.RequestToGiveBillServerContext request_to_give_bill = 1;
+     */
+    value: RequestToGiveBillServerContext;
+    case: "requestToGiveBill";
+  } | { case: undefined; value?: undefined } = { case: undefined };
+
+  constructor(data?: PartialMessage<AdditionalServerContext>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.messaging.v1.AdditionalServerContext";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "request_to_give_bill", kind: "message", T: RequestToGiveBillServerContext, oneof: "type" },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AdditionalServerContext {
+    return new AdditionalServerContext().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AdditionalServerContext {
+    return new AdditionalServerContext().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AdditionalServerContext {
+    return new AdditionalServerContext().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: AdditionalServerContext | PlainMessage<AdditionalServerContext> | undefined, b: AdditionalServerContext | PlainMessage<AdditionalServerContext> | undefined): boolean {
+    return proto3.util.equals(AdditionalServerContext, a, b);
   }
 }
 
