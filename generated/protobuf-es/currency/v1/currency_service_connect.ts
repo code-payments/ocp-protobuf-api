@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetHistoricalMintDataRequest, GetHistoricalMintDataResponse, GetMintsRequest, GetMintsResponse, LaunchRequest, LaunchResponse, StreamLiveMintDataRequest, StreamLiveMintDataResponse, UpdateIconRequest, UpdateIconResponse, UpdateMetadataRequest, UpdateMetadataResponse } from "./currency_service_pb";
+import { DiscoverRequest, DiscoverResponse, GetHistoricalMintDataRequest, GetHistoricalMintDataResponse, GetMintsRequest, GetMintsResponse, LaunchRequest, LaunchResponse, StreamLiveMintDataRequest, StreamLiveMintDataResponse, UpdateIconRequest, UpdateIconResponse, UpdateMetadataRequest, UpdateMetadataResponse } from "./currency_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -77,6 +77,17 @@ export const Currency = {
       I: UpdateMetadataRequest,
       O: UpdateMetadataResponse,
       kind: MethodKind.Unary,
+    },
+    /**
+     * Discover returns a set of currencies to discover
+     *
+     * @generated from rpc ocp.currency.v1.Currency.Discover
+     */
+    discover: {
+      name: "Discover",
+      I: DiscoverRequest,
+      O: DiscoverResponse,
+      kind: MethodKind.ServerStreaming,
     },
   }
 } as const;

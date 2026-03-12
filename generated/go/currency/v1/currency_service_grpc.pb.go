@@ -34,6 +34,8 @@ type CurrencyClient interface {
 	UpdateIcon(ctx context.Context, in *UpdateIconRequest, opts ...grpc.CallOption) (*UpdateIconResponse, error)
 	// UpdateMetadata updates mutable metadata for a currency
 	UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*UpdateMetadataResponse, error)
+	// Discover returns a set of currencies to discover
+	Discover(ctx context.Context, in *DiscoverRequest, opts ...grpc.CallOption) (Currency_DiscoverClient, error)
 }
 
 type currencyClient struct {
@@ -120,6 +122,38 @@ func (c *currencyClient) UpdateMetadata(ctx context.Context, in *UpdateMetadataR
 	return out, nil
 }
 
+func (c *currencyClient) Discover(ctx context.Context, in *DiscoverRequest, opts ...grpc.CallOption) (Currency_DiscoverClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Currency_ServiceDesc.Streams[1], "/ocp.currency.v1.Currency/Discover", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &currencyDiscoverClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Currency_DiscoverClient interface {
+	Recv() (*DiscoverResponse, error)
+	grpc.ClientStream
+}
+
+type currencyDiscoverClient struct {
+	grpc.ClientStream
+}
+
+func (x *currencyDiscoverClient) Recv() (*DiscoverResponse, error) {
+	m := new(DiscoverResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // CurrencyServer is the server API for Currency service.
 // All implementations must embed UnimplementedCurrencyServer
 // for forward compatibility
@@ -136,6 +170,8 @@ type CurrencyServer interface {
 	UpdateIcon(context.Context, *UpdateIconRequest) (*UpdateIconResponse, error)
 	// UpdateMetadata updates mutable metadata for a currency
 	UpdateMetadata(context.Context, *UpdateMetadataRequest) (*UpdateMetadataResponse, error)
+	// Discover returns a set of currencies to discover
+	Discover(*DiscoverRequest, Currency_DiscoverServer) error
 	mustEmbedUnimplementedCurrencyServer()
 }
 
@@ -160,6 +196,9 @@ func (UnimplementedCurrencyServer) UpdateIcon(context.Context, *UpdateIconReques
 }
 func (UnimplementedCurrencyServer) UpdateMetadata(context.Context, *UpdateMetadataRequest) (*UpdateMetadataResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateMetadata not implemented")
+}
+func (UnimplementedCurrencyServer) Discover(*DiscoverRequest, Currency_DiscoverServer) error {
+	return status.Errorf(codes.Unimplemented, "method Discover not implemented")
 }
 func (UnimplementedCurrencyServer) mustEmbedUnimplementedCurrencyServer() {}
 
@@ -290,6 +329,27 @@ func _Currency_UpdateMetadata_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Currency_Discover_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(DiscoverRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CurrencyServer).Discover(m, &currencyDiscoverServer{stream})
+}
+
+type Currency_DiscoverServer interface {
+	Send(*DiscoverResponse) error
+	grpc.ServerStream
+}
+
+type currencyDiscoverServer struct {
+	grpc.ServerStream
+}
+
+func (x *currencyDiscoverServer) Send(m *DiscoverResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Currency_ServiceDesc is the grpc.ServiceDesc for Currency service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -324,6 +384,11 @@ var Currency_ServiceDesc = grpc.ServiceDesc{
 			Handler:       _Currency_StreamLiveMintData_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
+		},
+		{
+			StreamName:    "Discover",
+			Handler:       _Currency_Discover_Handler,
+			ServerStreams: true,
 		},
 	},
 	Metadata: "currency/v1/currency_service.proto",
