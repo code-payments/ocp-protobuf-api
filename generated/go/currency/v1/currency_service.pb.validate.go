@@ -2589,6 +2589,8 @@ func (m *DiscoverRequest) Validate() error {
 		return nil
 	}
 
+	// no validation rules for Category
+
 	return nil
 }
 
@@ -2656,20 +2658,20 @@ func (m *DiscoverResponse) Validate() error {
 
 	// no validation rules for Result
 
-	if len(m.GetMint()) > 1024 {
+	if len(m.GetMints()) > 1024 {
 		return DiscoverResponseValidationError{
-			field:  "Mint",
+			field:  "Mints",
 			reason: "value must contain no more than 1024 item(s)",
 		}
 	}
 
-	for idx, item := range m.GetMint() {
+	for idx, item := range m.GetMints() {
 		_, _ = idx, item
 
 		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return DiscoverResponseValidationError{
-					field:  fmt.Sprintf("Mint[%v]", idx),
+					field:  fmt.Sprintf("Mints[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}

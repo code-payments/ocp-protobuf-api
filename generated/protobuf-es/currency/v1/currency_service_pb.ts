@@ -1916,6 +1916,11 @@ proto3.util.setEnumType(UpdateMetadataResponse_Result, "ocp.currency.v1.UpdateMe
  * @generated from message ocp.currency.v1.DiscoverRequest
  */
 export class DiscoverRequest extends Message<DiscoverRequest> {
+  /**
+   * @generated from field: ocp.currency.v1.DiscoverRequest.Category category = 1;
+   */
+  category = DiscoverRequest_Category.POPULAR;
+
   constructor(data?: PartialMessage<DiscoverRequest>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1924,6 +1929,7 @@ export class DiscoverRequest extends Message<DiscoverRequest> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "ocp.currency.v1.DiscoverRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "category", kind: "enum", T: proto3.getEnumType(DiscoverRequest_Category) },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DiscoverRequest {
@@ -1944,6 +1950,26 @@ export class DiscoverRequest extends Message<DiscoverRequest> {
 }
 
 /**
+ * @generated from enum ocp.currency.v1.DiscoverRequest.Category
+ */
+export enum DiscoverRequest_Category {
+  /**
+   * @generated from enum value: POPULAR = 0;
+   */
+  POPULAR = 0,
+
+  /**
+   * @generated from enum value: NEW = 1;
+   */
+  NEW = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(DiscoverRequest_Category)
+proto3.util.setEnumType(DiscoverRequest_Category, "ocp.currency.v1.DiscoverRequest.Category", [
+  { no: 0, name: "POPULAR" },
+  { no: 1, name: "NEW" },
+]);
+
+/**
  * @generated from message ocp.currency.v1.DiscoverResponse
  */
 export class DiscoverResponse extends Message<DiscoverResponse> {
@@ -1953,9 +1979,9 @@ export class DiscoverResponse extends Message<DiscoverResponse> {
   result = DiscoverResponse_Result.OK;
 
   /**
-   * @generated from field: repeated ocp.currency.v1.Mint mint = 2;
+   * @generated from field: repeated ocp.currency.v1.Mint mints = 2;
    */
-  mint: Mint[] = [];
+  mints: Mint[] = [];
 
   constructor(data?: PartialMessage<DiscoverResponse>) {
     super();
@@ -1966,7 +1992,7 @@ export class DiscoverResponse extends Message<DiscoverResponse> {
   static readonly typeName = "ocp.currency.v1.DiscoverResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(DiscoverResponse_Result) },
-    { no: 2, name: "mint", kind: "message", T: Mint, repeated: true },
+    { no: 2, name: "mints", kind: "message", T: Mint, repeated: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DiscoverResponse {
