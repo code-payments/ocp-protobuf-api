@@ -223,7 +223,7 @@ func (m *GetHistoricalMintDataRequest) Validate() error {
 
 	switch m.Range.(type) {
 
-	case *GetHistoricalMintDataRequest_PredefinedRange_:
+	case *GetHistoricalMintDataRequest_PredefinedRange:
 		// no validation rules for PredefinedRange
 
 	default:
@@ -690,6 +690,16 @@ func (m *Mint) Validate() error {
 		if err := v.Validate(); err != nil {
 			return MintValidationError{
 				field:  "BillCustomization",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetHolderMetrics()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MintValidationError{
+				field:  "HolderMetrics",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -1980,6 +1990,95 @@ var _ interface {
 
 var _Color_Hex_Pattern = regexp.MustCompile("^#[0-9a-fA-F]{6}$")
 
+// Validate checks the field values on HolderMetrics with the rules defined in
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
+func (m *HolderMetrics) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for CurrentHolders
+
+	if len(m.GetHolderDeltas()) > 4 {
+		return HolderMetricsValidationError{
+			field:  "HolderDeltas",
+			reason: "value must contain no more than 4 item(s)",
+		}
+	}
+
+	for idx, item := range m.GetHolderDeltas() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return HolderMetricsValidationError{
+					field:  fmt.Sprintf("HolderDeltas[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// HolderMetricsValidationError is the validation error returned by
+// HolderMetrics.Validate if the designated constraints aren't met.
+type HolderMetricsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e HolderMetricsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e HolderMetricsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e HolderMetricsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e HolderMetricsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e HolderMetricsValidationError) ErrorName() string { return "HolderMetricsValidationError" }
+
+// Error satisfies the builtin error interface
+func (e HolderMetricsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sHolderMetrics.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = HolderMetricsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = HolderMetricsValidationError{}
+
 // Validate checks the field values on LaunchRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, an error
 // is returned.
@@ -3262,6 +3361,77 @@ var _ interface {
 } = SocialLink_DiscordValidationError{}
 
 var _SocialLink_Discord_InviteCode_Pattern = regexp.MustCompile("^[a-zA-Z0-9]+$")
+
+// Validate checks the field values on HolderMetrics_DeltaHolders with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *HolderMetrics_DeltaHolders) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Range
+
+	// no validation rules for Delta
+
+	return nil
+}
+
+// HolderMetrics_DeltaHoldersValidationError is the validation error returned
+// by HolderMetrics_DeltaHolders.Validate if the designated constraints aren't met.
+type HolderMetrics_DeltaHoldersValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e HolderMetrics_DeltaHoldersValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e HolderMetrics_DeltaHoldersValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e HolderMetrics_DeltaHoldersValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e HolderMetrics_DeltaHoldersValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e HolderMetrics_DeltaHoldersValidationError) ErrorName() string {
+	return "HolderMetrics_DeltaHoldersValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e HolderMetrics_DeltaHoldersValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sHolderMetrics_DeltaHolders.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = HolderMetrics_DeltaHoldersValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = HolderMetrics_DeltaHoldersValidationError{}
 
 // Validate checks the field values on UpdateMetadataRequest_DescriptionUpdate
 // with the rules defined in the proto definition for this message. If any

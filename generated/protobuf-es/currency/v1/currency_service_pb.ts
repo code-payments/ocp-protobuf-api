@@ -8,6 +8,44 @@ import { Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
 import { ClientPong, ServerPing, Signature, SolanaAccountId } from "../../common/v1/model_pb";
 
 /**
+ * @generated from enum ocp.currency.v1.PredefinedRange
+ */
+export enum PredefinedRange {
+  /**
+   * @generated from enum value: ALL_TIME = 0;
+   */
+  ALL_TIME = 0,
+
+  /**
+   * @generated from enum value: LAST_DAY = 1;
+   */
+  LAST_DAY = 1,
+
+  /**
+   * @generated from enum value: LAST_WEEK = 2;
+   */
+  LAST_WEEK = 2,
+
+  /**
+   * @generated from enum value: LAST_MONTH = 3;
+   */
+  LAST_MONTH = 3,
+
+  /**
+   * @generated from enum value: LAST_YEAR = 4;
+   */
+  LAST_YEAR = 4,
+}
+// Retrieve enum metadata with: proto3.getEnumType(PredefinedRange)
+proto3.util.setEnumType(PredefinedRange, "ocp.currency.v1.PredefinedRange", [
+  { no: 0, name: "ALL_TIME" },
+  { no: 1, name: "LAST_DAY" },
+  { no: 2, name: "LAST_WEEK" },
+  { no: 3, name: "LAST_MONTH" },
+  { no: 4, name: "LAST_YEAR" },
+]);
+
+/**
  * @generated from message ocp.currency.v1.GetMintsRequest
  */
 export class GetMintsRequest extends Message<GetMintsRequest> {
@@ -130,9 +168,9 @@ export class GetHistoricalMintDataRequest extends Message<GetHistoricalMintDataR
    */
   range: {
     /**
-     * @generated from field: ocp.currency.v1.GetHistoricalMintDataRequest.PredefinedRange predefined_range = 3;
+     * @generated from field: ocp.currency.v1.PredefinedRange predefined_range = 3;
      */
-    value: GetHistoricalMintDataRequest_PredefinedRange;
+    value: PredefinedRange;
     case: "predefinedRange";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
@@ -146,7 +184,7 @@ export class GetHistoricalMintDataRequest extends Message<GetHistoricalMintDataR
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "address", kind: "message", T: SolanaAccountId },
     { no: 2, name: "currency_code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "predefined_range", kind: "enum", T: proto3.getEnumType(GetHistoricalMintDataRequest_PredefinedRange), oneof: "range" },
+    { no: 3, name: "predefined_range", kind: "enum", T: proto3.getEnumType(PredefinedRange), oneof: "range" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetHistoricalMintDataRequest {
@@ -165,44 +203,6 @@ export class GetHistoricalMintDataRequest extends Message<GetHistoricalMintDataR
     return proto3.util.equals(GetHistoricalMintDataRequest, a, b);
   }
 }
-
-/**
- * @generated from enum ocp.currency.v1.GetHistoricalMintDataRequest.PredefinedRange
- */
-export enum GetHistoricalMintDataRequest_PredefinedRange {
-  /**
-   * @generated from enum value: ALL_TIME = 0;
-   */
-  ALL_TIME = 0,
-
-  /**
-   * @generated from enum value: LAST_DAY = 1;
-   */
-  LAST_DAY = 1,
-
-  /**
-   * @generated from enum value: LAST_WEEK = 2;
-   */
-  LAST_WEEK = 2,
-
-  /**
-   * @generated from enum value: LAST_MONTH = 3;
-   */
-  LAST_MONTH = 3,
-
-  /**
-   * @generated from enum value: LAST_YEAR = 4;
-   */
-  LAST_YEAR = 4,
-}
-// Retrieve enum metadata with: proto3.getEnumType(GetHistoricalMintDataRequest_PredefinedRange)
-proto3.util.setEnumType(GetHistoricalMintDataRequest_PredefinedRange, "ocp.currency.v1.GetHistoricalMintDataRequest.PredefinedRange", [
-  { no: 0, name: "ALL_TIME" },
-  { no: 1, name: "LAST_DAY" },
-  { no: 2, name: "LAST_WEEK" },
-  { no: 3, name: "LAST_MONTH" },
-  { no: 4, name: "LAST_YEAR" },
-]);
 
 /**
  * @generated from message ocp.currency.v1.GetHistoricalMintDataResponse
@@ -553,6 +553,13 @@ export class Mint extends Message<Mint> {
    */
   billCustomization?: BillCustomization;
 
+  /**
+   * Holder metrics. This is surfaced where needed (e.g. only in the Discover RPC)
+   *
+   * @generated from field: ocp.currency.v1.HolderMetrics holder_metrics = 12;
+   */
+  holderMetrics?: HolderMetrics;
+
   constructor(data?: PartialMessage<Mint>) {
     super();
     proto3.util.initPartial(data, this);
@@ -572,6 +579,7 @@ export class Mint extends Message<Mint> {
     { no: 9, name: "created_at", kind: "message", T: Timestamp },
     { no: 10, name: "social_links", kind: "message", T: SocialLink, repeated: true },
     { no: 11, name: "bill_customization", kind: "message", T: BillCustomization },
+    { no: 12, name: "holder_metrics", kind: "message", T: HolderMetrics },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Mint {
@@ -1378,6 +1386,98 @@ export class Color extends Message<Color> {
 
   static equals(a: Color | PlainMessage<Color> | undefined, b: Color | PlainMessage<Color> | undefined): boolean {
     return proto3.util.equals(Color, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.HolderMetrics
+ */
+export class HolderMetrics extends Message<HolderMetrics> {
+  /**
+   * The current number of holders for a currency
+   *
+   * @generated from field: uint64 current_holders = 1;
+   */
+  currentHolders = protoInt64.zero;
+
+  /**
+   * @generated from field: repeated ocp.currency.v1.HolderMetrics.DeltaHolders holder_deltas = 2;
+   */
+  holderDeltas: HolderMetrics_DeltaHolders[] = [];
+
+  constructor(data?: PartialMessage<HolderMetrics>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.HolderMetrics";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "current_holders", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 2, name: "holder_deltas", kind: "message", T: HolderMetrics_DeltaHolders, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): HolderMetrics {
+    return new HolderMetrics().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): HolderMetrics {
+    return new HolderMetrics().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): HolderMetrics {
+    return new HolderMetrics().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: HolderMetrics | PlainMessage<HolderMetrics> | undefined, b: HolderMetrics | PlainMessage<HolderMetrics> | undefined): boolean {
+    return proto3.util.equals(HolderMetrics, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.HolderMetrics.DeltaHolders
+ */
+export class HolderMetrics_DeltaHolders extends Message<HolderMetrics_DeltaHolders> {
+  /**
+   * Predefined range where delta is calculated from
+   *
+   * @generated from field: ocp.currency.v1.PredefinedRange range = 1;
+   */
+  range = PredefinedRange.ALL_TIME;
+
+  /**
+   * Net holders within the time range
+   *
+   * @generated from field: int64 delta = 2;
+   */
+  delta = protoInt64.zero;
+
+  constructor(data?: PartialMessage<HolderMetrics_DeltaHolders>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.HolderMetrics.DeltaHolders";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "range", kind: "enum", T: proto3.getEnumType(PredefinedRange) },
+    { no: 2, name: "delta", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): HolderMetrics_DeltaHolders {
+    return new HolderMetrics_DeltaHolders().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): HolderMetrics_DeltaHolders {
+    return new HolderMetrics_DeltaHolders().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): HolderMetrics_DeltaHolders {
+    return new HolderMetrics_DeltaHolders().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: HolderMetrics_DeltaHolders | PlainMessage<HolderMetrics_DeltaHolders> | undefined, b: HolderMetrics_DeltaHolders | PlainMessage<HolderMetrics_DeltaHolders> | undefined): boolean {
+    return proto3.util.equals(HolderMetrics_DeltaHolders, a, b);
   }
 }
 
