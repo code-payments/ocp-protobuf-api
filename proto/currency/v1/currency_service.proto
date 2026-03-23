@@ -31,6 +31,9 @@ service Currency {
 
     // Discover returns a set of currencies to discover
     rpc Discover(DiscoverRequest) returns (stream DiscoverResponse);
+
+    // CheckAvailability checks whether a currency name is available for launch
+    rpc CheckAvailability(CheckAvailabilityRequest) returns (CheckAvailabilityResponse);
 }
 
 message GetMintsRequest {
@@ -508,6 +511,24 @@ message DiscoverResponse {
         min_items: 0
         max_items: 1024 // Arbitrary
     }];
+}
+
+message CheckAvailabilityRequest {
+    // The currency name to check availability for
+    string name = 1 [(validate.rules).string = {
+        min_len: 1,
+        max_len: 32,
+    }];
+}
+
+message CheckAvailabilityResponse {
+    Result result = 1;
+    enum Result {
+        OK = 0;
+    }
+
+    // Whether the name is available for use
+    bool is_available = 2;
 }
 
 enum PredefinedRange {

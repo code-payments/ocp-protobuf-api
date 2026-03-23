@@ -36,6 +36,8 @@ type CurrencyClient interface {
 	UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*UpdateMetadataResponse, error)
 	// Discover returns a set of currencies to discover
 	Discover(ctx context.Context, in *DiscoverRequest, opts ...grpc.CallOption) (Currency_DiscoverClient, error)
+	// CheckAvailability checks whether a currency name is available for launch
+	CheckAvailability(ctx context.Context, in *CheckAvailabilityRequest, opts ...grpc.CallOption) (*CheckAvailabilityResponse, error)
 }
 
 type currencyClient struct {
@@ -154,6 +156,15 @@ func (x *currencyDiscoverClient) Recv() (*DiscoverResponse, error) {
 	return m, nil
 }
 
+func (c *currencyClient) CheckAvailability(ctx context.Context, in *CheckAvailabilityRequest, opts ...grpc.CallOption) (*CheckAvailabilityResponse, error) {
+	out := new(CheckAvailabilityResponse)
+	err := c.cc.Invoke(ctx, "/ocp.currency.v1.Currency/CheckAvailability", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CurrencyServer is the server API for Currency service.
 // All implementations must embed UnimplementedCurrencyServer
 // for forward compatibility
@@ -172,6 +183,8 @@ type CurrencyServer interface {
 	UpdateMetadata(context.Context, *UpdateMetadataRequest) (*UpdateMetadataResponse, error)
 	// Discover returns a set of currencies to discover
 	Discover(*DiscoverRequest, Currency_DiscoverServer) error
+	// CheckAvailability checks whether a currency name is available for launch
+	CheckAvailability(context.Context, *CheckAvailabilityRequest) (*CheckAvailabilityResponse, error)
 	mustEmbedUnimplementedCurrencyServer()
 }
 
@@ -199,6 +212,9 @@ func (UnimplementedCurrencyServer) UpdateMetadata(context.Context, *UpdateMetada
 }
 func (UnimplementedCurrencyServer) Discover(*DiscoverRequest, Currency_DiscoverServer) error {
 	return status.Errorf(codes.Unimplemented, "method Discover not implemented")
+}
+func (UnimplementedCurrencyServer) CheckAvailability(context.Context, *CheckAvailabilityRequest) (*CheckAvailabilityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckAvailability not implemented")
 }
 func (UnimplementedCurrencyServer) mustEmbedUnimplementedCurrencyServer() {}
 
@@ -350,6 +366,24 @@ func (x *currencyDiscoverServer) Send(m *DiscoverResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Currency_CheckAvailability_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckAvailabilityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyServer).CheckAvailability(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ocp.currency.v1.Currency/CheckAvailability",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyServer).CheckAvailability(ctx, req.(*CheckAvailabilityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Currency_ServiceDesc is the grpc.ServiceDesc for Currency service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -376,6 +410,10 @@ var Currency_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateMetadata",
 			Handler:    _Currency_UpdateMetadata_Handler,
+		},
+		{
+			MethodName: "CheckAvailability",
+			Handler:    _Currency_CheckAvailability_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
