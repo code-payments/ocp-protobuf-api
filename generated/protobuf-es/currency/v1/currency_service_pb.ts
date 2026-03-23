@@ -2164,3 +2164,101 @@ proto3.util.setEnumType(DiscoverResponse_Result, "ocp.currency.v1.DiscoverRespon
   { no: 1, name: "NOT_FOUND" },
 ]);
 
+/**
+ * @generated from message ocp.currency.v1.CheckAvailabilityRequest
+ */
+export class CheckAvailabilityRequest extends Message<CheckAvailabilityRequest> {
+  /**
+   * The currency name to check availability for
+   *
+   * @generated from field: string name = 1;
+   */
+  name = "";
+
+  constructor(data?: PartialMessage<CheckAvailabilityRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.CheckAvailabilityRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CheckAvailabilityRequest {
+    return new CheckAvailabilityRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CheckAvailabilityRequest {
+    return new CheckAvailabilityRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CheckAvailabilityRequest {
+    return new CheckAvailabilityRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: CheckAvailabilityRequest | PlainMessage<CheckAvailabilityRequest> | undefined, b: CheckAvailabilityRequest | PlainMessage<CheckAvailabilityRequest> | undefined): boolean {
+    return proto3.util.equals(CheckAvailabilityRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.CheckAvailabilityResponse
+ */
+export class CheckAvailabilityResponse extends Message<CheckAvailabilityResponse> {
+  /**
+   * @generated from field: ocp.currency.v1.CheckAvailabilityResponse.Result result = 1;
+   */
+  result = CheckAvailabilityResponse_Result.OK;
+
+  /**
+   * Whether the name is available for use
+   *
+   * @generated from field: bool is_available = 2;
+   */
+  isAvailable = false;
+
+  constructor(data?: PartialMessage<CheckAvailabilityResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.CheckAvailabilityResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(CheckAvailabilityResponse_Result) },
+    { no: 2, name: "is_available", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CheckAvailabilityResponse {
+    return new CheckAvailabilityResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CheckAvailabilityResponse {
+    return new CheckAvailabilityResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CheckAvailabilityResponse {
+    return new CheckAvailabilityResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: CheckAvailabilityResponse | PlainMessage<CheckAvailabilityResponse> | undefined, b: CheckAvailabilityResponse | PlainMessage<CheckAvailabilityResponse> | undefined): boolean {
+    return proto3.util.equals(CheckAvailabilityResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum ocp.currency.v1.CheckAvailabilityResponse.Result
+ */
+export enum CheckAvailabilityResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+}
+// Retrieve enum metadata with: proto3.getEnumType(CheckAvailabilityResponse_Result)
+proto3.util.setEnumType(CheckAvailabilityResponse_Result, "ocp.currency.v1.CheckAvailabilityResponse.Result", [
+  { no: 0, name: "OK" },
+]);
+

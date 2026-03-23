@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { DiscoverRequest, DiscoverResponse, GetHistoricalMintDataRequest, GetHistoricalMintDataResponse, GetMintsRequest, GetMintsResponse, LaunchRequest, LaunchResponse, StreamLiveMintDataRequest, StreamLiveMintDataResponse, UpdateIconRequest, UpdateIconResponse, UpdateMetadataRequest, UpdateMetadataResponse } from "./currency_service_pb";
+import { CheckAvailabilityRequest, CheckAvailabilityResponse, DiscoverRequest, DiscoverResponse, GetHistoricalMintDataRequest, GetHistoricalMintDataResponse, GetMintsRequest, GetMintsResponse, LaunchRequest, LaunchResponse, StreamLiveMintDataRequest, StreamLiveMintDataResponse, UpdateIconRequest, UpdateIconResponse, UpdateMetadataRequest, UpdateMetadataResponse } from "./currency_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -88,6 +88,17 @@ export const Currency = {
       I: DiscoverRequest,
       O: DiscoverResponse,
       kind: MethodKind.ServerStreaming,
+    },
+    /**
+     * CheckAvailability checks whether a currency name is available for launch
+     *
+     * @generated from rpc ocp.currency.v1.Currency.CheckAvailability
+     */
+    checkAvailability: {
+      name: "CheckAvailability",
+      I: CheckAvailabilityRequest,
+      O: CheckAvailabilityResponse,
+      kind: MethodKind.Unary,
     },
   }
 } as const;
