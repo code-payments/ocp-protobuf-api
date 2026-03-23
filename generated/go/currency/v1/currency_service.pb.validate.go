@@ -2135,6 +2135,30 @@ func (m *LaunchRequest) Validate() error {
 		}
 	}
 
+	if utf8.RuneCountInString(m.GetDescription()) > 4096 {
+		return LaunchRequestValidationError{
+			field:  "Description",
+			reason: "value length must be at most 4096 runes",
+		}
+	}
+
+	if v, ok := interface{}(m.GetBillCustomization()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LaunchRequestValidationError{
+				field:  "BillCustomization",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(m.GetIcon()) > 1048576 {
+		return LaunchRequestValidationError{
+			field:  "Icon",
+			reason: "value length must be at most 1048576 bytes",
+		}
+	}
+
 	return nil
 }
 
