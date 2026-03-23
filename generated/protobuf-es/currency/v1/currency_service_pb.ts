@@ -1516,6 +1516,27 @@ export class LaunchRequest extends Message<LaunchRequest> {
    */
   symbol = "";
 
+  /**
+   * Optional description
+   *
+   * @generated from field: string description = 5;
+   */
+  description = "";
+
+  /**
+   * Optional bill customization. If not provided, a default will be set.
+   *
+   * @generated from field: ocp.currency.v1.BillCustomization bill_customization = 6;
+   */
+  billCustomization?: BillCustomization;
+
+  /**
+   * The raw image data for the icon. If not provided, a default will be set.
+   *
+   * @generated from field: bytes icon = 7;
+   */
+  icon = new Uint8Array(0);
+
   constructor(data?: PartialMessage<LaunchRequest>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1528,6 +1549,9 @@ export class LaunchRequest extends Message<LaunchRequest> {
     { no: 2, name: "signature", kind: "message", T: Signature },
     { no: 3, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "symbol", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 6, name: "bill_customization", kind: "message", T: BillCustomization },
+    { no: 7, name: "icon", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LaunchRequest {
@@ -1611,15 +1635,23 @@ export enum LaunchResponse_Result {
   /**
    * A similar currency already exists
    *
-   * @generated from enum value: EXISTS = 2;
+   * @generated from enum value: NAME_EXISTS = 2;
    */
-  EXISTS = 2,
+  NAME_EXISTS = 2,
+
+  /**
+   * Provided icon is invalid
+   *
+   * @generated from enum value: INVALID_ICON = 3;
+   */
+  INVALID_ICON = 3,
 }
 // Retrieve enum metadata with: proto3.getEnumType(LaunchResponse_Result)
 proto3.util.setEnumType(LaunchResponse_Result, "ocp.currency.v1.LaunchResponse.Result", [
   { no: 0, name: "OK" },
   { no: 1, name: "DENIED" },
-  { no: 2, name: "EXISTS" },
+  { no: 2, name: "NAME_EXISTS" },
+  { no: 3, name: "INVALID_ICON" },
 ]);
 
 /**
