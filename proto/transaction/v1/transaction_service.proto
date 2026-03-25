@@ -354,7 +354,8 @@ message StatefulSwapRequest {
 
         // The user authority account that will sign to authorize the swap.
         //
-        // For Reserve contract buy/sell flows, this should be a random one-time use account.
+        // For Reserve contract buy/sell flows against existing currencies, this must be a random one-time use account.
+        // For Reserve contract buy flows against new currencies, this must be the owner account that is the currency creator.
         common.v1.SolanaAccountId swap_authority = 10 [(validate.rules).message.required = true];
 
         // The signature of serialize(VerifiedSwapMetadata) for the swap being initiated.
@@ -389,6 +390,7 @@ message StatefulSwapResponse {
             option (validate.required) = true;
 
             ReserveExistingCurrencyServerParameters reserve_existing_currency = 1;
+            ReserveNewCurrencyServerParameter       reserve_new_currency      = 2;
         }
 
         // Server parameters when executing stateful buy/sell flows against the
@@ -456,13 +458,85 @@ message StatefulSwapResponse {
 
             // Value provided into the Memo::Memo instruction. If the value length is 0,
             // then the instruction can be omitted.
-            string memo_value = 7 [(validate.rules).string. max_len = 64];
+            string memo_value = 7 [(validate.rules).string.max_len = 64];
 
             // The memory account where the destination virtual Timelock account lives
             common.v1.SolanaAccountId memory_account = 8 [(validate.rules).message.required = true];
 
             // The memory index where the destination virtual Timelock account lives
             uint32 memory_index = 9;
+        }
+
+        // Server parameters when executing stateful buy flows against the
+        // Reserve contract against a new currency. Only the creator of the
+        // currency will be able to execute this flow.
+        //
+        // Supported Solana transaction version: v0
+        //
+        // Instruction format:
+        //  1. System::AdvanceNonce
+        //  2. [Optional] ComputeBudget::SetComputeUnitLimit
+        //  3. [Optional] ComputeBudget::SetComputeUnitPrice
+        //  4. [Optional] Memo::Memo
+        //  5. Reserve::InitializeCurrency
+        //  6. Reserve::InitializePool
+        //  7. VM::InitializeVm
+        //  8. AssociatedTokenAccount::CreateIdempotent (open owner's Core Mint ATA)
+        //  9. AssociatedTokenAccount::CreateIdempotent (open owner's to_mint VM Deposit ATA)
+        // 10. VM::TransferForSwap (Core Mint VM swap ATA -> owner's Core Mint ATA)
+        // 11. Reserve::BuyTokens (limited buy transferring to_mint tokens into the to_mint VM Deposit ATA)
+        // 12. Token::CloseAccount (closes owner's Core Mint ATA)
+        //
+        // Note: Client should verify that the new currency's mint address matches that derived
+        //       from using these server parameters.
+        message ReserveNewCurrencyServerParameter {
+            // Subisdizer account that will be paying for the swap
+            common.v1.SolanaAccountId payer = 1 [(validate.rules).message.required = true];
+
+            // The nonce that is reserved for use in the swap transaction
+            common.v1.SolanaAccountId nonce = 2 [(validate.rules).message.required = true];
+
+            // The blockhash that is reserved for use in the swap transaction
+            common.v1.Blockhash blockhash = 3 [(validate.rules).message.required = true];
+
+            // ALTs that should be used when constructing the versioned transaction
+            repeated common.v1.SolanaAddressLookupTable alts = 4;
+
+            // Compute unit limit provided to the ComputeBudget::SetComputeUnitLimit
+            // instruction. If the value is 0, then the instruction can be omitted.
+            uint32 compute_unit_limit = 5;
+
+            // Compute unit price provided in the ComputeBudget::SetComputeUnitPrice
+            // instruction. If the value is 0, then the instruction can be omitted.
+            uint64 compute_unit_price = 6;
+
+            // Value provided into the Memo::Memo instruction. If the value length is 0,
+            // then the instruction can be omitted.
+            string memo_value = 7 [(validate.rules).string.max_len = 64];
+
+            // The VM and currency authority
+            common.v1.SolanaAccountId authority = 8 [(validate.rules).message.required = true];
+
+            // The currency name
+            string name = 9 [(validate.rules).string = {
+                min_len: 1,
+                max_len: 32,
+            }];
+
+            // The currency symbol
+            string symbol = 10 [(validate.rules).string = {
+                min_len: 1,
+                max_len: 8,
+            }];
+
+            // The random seed value used to generate a unique currency of the given name
+            common.v1.SolanaAccountId seed = 11 [(validate.rules).message.required = true];
+
+            // Liquidity pool's percent sell fee in basis points
+            uint32 sell_fee_bps = 12 [(validate.rules).uint32.const = 100];
+
+            // The VM lock duration
+            uint32 vm_lock_duration_in_days = 13 [(validate.rules).uint32.const = 21];
         }
     }
 

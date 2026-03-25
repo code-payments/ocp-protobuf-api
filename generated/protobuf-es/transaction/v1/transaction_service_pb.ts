@@ -1055,7 +1055,8 @@ export class StatefulSwapRequest_Initiate extends Message<StatefulSwapRequest_In
   /**
    * The user authority account that will sign to authorize the swap.
    *
-   * For Reserve contract buy/sell flows, this should be a random one-time use account.
+   * For Reserve contract buy/sell flows against existing currencies, this must be a random one-time use account.
+   * For Reserve contract buy flows against new currencies, this must be the owner account that is the currency creator.
    *
    * @generated from field: ocp.common.v1.SolanaAccountId swap_authority = 10;
    */
@@ -1302,6 +1303,12 @@ export class StatefulSwapResponse_ServerParameters extends Message<StatefulSwapR
      */
     value: StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters;
     case: "reserveExistingCurrency";
+  } | {
+    /**
+     * @generated from field: ocp.transaction.v1.StatefulSwapResponse.ServerParameters.ReserveNewCurrencyServerParameter reserve_new_currency = 2;
+     */
+    value: StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter;
+    case: "reserveNewCurrency";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<StatefulSwapResponse_ServerParameters>) {
@@ -1313,6 +1320,7 @@ export class StatefulSwapResponse_ServerParameters extends Message<StatefulSwapR
   static readonly typeName = "ocp.transaction.v1.StatefulSwapResponse.ServerParameters";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "reserve_existing_currency", kind: "message", T: StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters, oneof: "kind" },
+    { no: 2, name: "reserve_new_currency", kind: "message", T: StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter, oneof: "kind" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_ServerParameters {
@@ -1478,6 +1486,167 @@ export class StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServer
 
   static equals(a: StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters | PlainMessage<StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters> | undefined, b: StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters | PlainMessage<StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters> | undefined): boolean {
     return proto3.util.equals(StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters, a, b);
+  }
+}
+
+/**
+ * Server parameters when executing stateful buy flows against the
+ * Reserve contract against a new currency. Only the creator of the
+ * currency will be able to execute this flow.
+ *
+ * Supported Solana transaction version: v0
+ *
+ * Instruction format:
+ *  1. System::AdvanceNonce
+ *  2. [Optional] ComputeBudget::SetComputeUnitLimit
+ *  3. [Optional] ComputeBudget::SetComputeUnitPrice
+ *  4. [Optional] Memo::Memo
+ *  5. Reserve::InitializeCurrency
+ *  6. Reserve::InitializePool
+ *  7. VM::InitializeVm
+ *  8. AssociatedTokenAccount::CreateIdempotent (open owner's Core Mint ATA)
+ *  9. AssociatedTokenAccount::CreateIdempotent (open owner's to_mint VM Deposit ATA)
+ * 10. VM::TransferForSwap (Core Mint VM swap ATA -> owner's Core Mint ATA)
+ * 11. Reserve::BuyTokens (limited buy transferring to_mint tokens into the to_mint VM Deposit ATA)
+ * 12. Token::CloseAccount (closes owner's Core Mint ATA)
+ *
+ * Note: Client should verify that the new currency's mint address matches that derived
+ *       from using these server parameters.
+ *
+ * @generated from message ocp.transaction.v1.StatefulSwapResponse.ServerParameters.ReserveNewCurrencyServerParameter
+ */
+export class StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter extends Message<StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter> {
+  /**
+   * Subisdizer account that will be paying for the swap
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId payer = 1;
+   */
+  payer?: SolanaAccountId;
+
+  /**
+   * The nonce that is reserved for use in the swap transaction
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId nonce = 2;
+   */
+  nonce?: SolanaAccountId;
+
+  /**
+   * The blockhash that is reserved for use in the swap transaction
+   *
+   * @generated from field: ocp.common.v1.Blockhash blockhash = 3;
+   */
+  blockhash?: Blockhash;
+
+  /**
+   * ALTs that should be used when constructing the versioned transaction
+   *
+   * @generated from field: repeated ocp.common.v1.SolanaAddressLookupTable alts = 4;
+   */
+  alts: SolanaAddressLookupTable[] = [];
+
+  /**
+   * Compute unit limit provided to the ComputeBudget::SetComputeUnitLimit
+   * instruction. If the value is 0, then the instruction can be omitted.
+   *
+   * @generated from field: uint32 compute_unit_limit = 5;
+   */
+  computeUnitLimit = 0;
+
+  /**
+   * Compute unit price provided in the ComputeBudget::SetComputeUnitPrice
+   * instruction. If the value is 0, then the instruction can be omitted.
+   *
+   * @generated from field: uint64 compute_unit_price = 6;
+   */
+  computeUnitPrice = protoInt64.zero;
+
+  /**
+   * Value provided into the Memo::Memo instruction. If the value length is 0,
+   * then the instruction can be omitted.
+   *
+   * @generated from field: string memo_value = 7;
+   */
+  memoValue = "";
+
+  /**
+   * The VM and currency authority
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId authority = 8;
+   */
+  authority?: SolanaAccountId;
+
+  /**
+   * The currency name
+   *
+   * @generated from field: string name = 9;
+   */
+  name = "";
+
+  /**
+   * The currency symbol
+   *
+   * @generated from field: string symbol = 10;
+   */
+  symbol = "";
+
+  /**
+   * The random seed value used to generate a unique currency of the given name
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId seed = 11;
+   */
+  seed?: SolanaAccountId;
+
+  /**
+   * Liquidity pool's percent sell fee in basis points
+   *
+   * @generated from field: uint32 sell_fee_bps = 12;
+   */
+  sellFeeBps = 0;
+
+  /**
+   * The VM lock duration
+   *
+   * @generated from field: uint32 vm_lock_duration_in_days = 13;
+   */
+  vmLockDurationInDays = 0;
+
+  constructor(data?: PartialMessage<StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.transaction.v1.StatefulSwapResponse.ServerParameters.ReserveNewCurrencyServerParameter";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "payer", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "nonce", kind: "message", T: SolanaAccountId },
+    { no: 3, name: "blockhash", kind: "message", T: Blockhash },
+    { no: 4, name: "alts", kind: "message", T: SolanaAddressLookupTable, repeated: true },
+    { no: 5, name: "compute_unit_limit", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 6, name: "compute_unit_price", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 7, name: "memo_value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 8, name: "authority", kind: "message", T: SolanaAccountId },
+    { no: 9, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 10, name: "symbol", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 11, name: "seed", kind: "message", T: SolanaAccountId },
+    { no: 12, name: "sell_fee_bps", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 13, name: "vm_lock_duration_in_days", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter {
+    return new StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter {
+    return new StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter {
+    return new StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter | PlainMessage<StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter> | undefined, b: StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter | PlainMessage<StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter> | undefined): boolean {
+    return proto3.util.equals(StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter, a, b);
   }
 }
 
