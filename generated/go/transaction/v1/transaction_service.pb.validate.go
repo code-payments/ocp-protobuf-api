@@ -5190,10 +5190,10 @@ func (m *StatefulSwapRequest_SubmitSignatures) Validate() error {
 		return nil
 	}
 
-	if len(m.GetTransactionSignatures()) != 2 {
+	if l := len(m.GetTransactionSignatures()); l < 1 || l > 2 {
 		return StatefulSwapRequest_SubmitSignaturesValidationError{
 			field:  "TransactionSignatures",
-			reason: "value must contain exactly 2 item(s)",
+			reason: "value must contain between 1 and 2 items, inclusive",
 		}
 	}
 
