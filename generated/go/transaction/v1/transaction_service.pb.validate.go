@@ -5449,6 +5449,18 @@ func (m *StatefulSwapResponse_ServerParameters) Validate() error {
 			}
 		}
 
+	case *StatefulSwapResponse_ServerParameters_ReserveNewCurrency:
+
+		if v, ok := interface{}(m.GetReserveNewCurrency()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StatefulSwapResponse_ServerParametersValidationError{
+					field:  "ReserveNewCurrency",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	default:
 		return StatefulSwapResponse_ServerParametersValidationError{
 			field:  "Kind",
@@ -5844,6 +5856,223 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError{}
+
+// Validate checks the field values on
+// StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, an error is returned.
+func (m *StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetPayer() == nil {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+			field:  "Payer",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetPayer()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+				field:  "Payer",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetNonce() == nil {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+			field:  "Nonce",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetNonce()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+				field:  "Nonce",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetBlockhash() == nil {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+			field:  "Blockhash",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetBlockhash()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+				field:  "Blockhash",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	for idx, item := range m.GetAlts() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+					field:  fmt.Sprintf("Alts[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for ComputeUnitLimit
+
+	// no validation rules for ComputeUnitPrice
+
+	if utf8.RuneCountInString(m.GetMemoValue()) > 64 {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+			field:  "MemoValue",
+			reason: "value length must be at most 64 runes",
+		}
+	}
+
+	if m.GetAuthority() == nil {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+			field:  "Authority",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetAuthority()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+				field:  "Authority",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if l := utf8.RuneCountInString(m.GetName()); l < 1 || l > 32 {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+			field:  "Name",
+			reason: "value length must be between 1 and 32 runes, inclusive",
+		}
+	}
+
+	if l := utf8.RuneCountInString(m.GetSymbol()); l < 1 || l > 8 {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+			field:  "Symbol",
+			reason: "value length must be between 1 and 8 runes, inclusive",
+		}
+	}
+
+	if m.GetSeed() == nil {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+			field:  "Seed",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSeed()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+				field:  "Seed",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetSellFeeBps() != 100 {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+			field:  "SellFeeBps",
+			reason: "value must equal 100",
+		}
+	}
+
+	if m.GetVmLockDurationInDays() != 21 {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+			field:  "VmLockDurationInDays",
+			reason: "value must equal 21",
+		}
+	}
+
+	return nil
+}
+
+// StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError
+// is the validation error returned by
+// StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter.Validate
+// if the designated constraints aren't met.
+type StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError) ErrorName() string {
+	return "StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sStatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{}
 
 // Validate checks the field values on PublicDistributionMetadata_Distribution
 // with the rules defined in the proto definition for this message. If any
