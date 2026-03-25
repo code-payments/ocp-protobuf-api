@@ -4258,12 +4258,12 @@ func (m *VerifiedSwapMetadata) Validate() error {
 
 	switch m.Kind.(type) {
 
-	case *VerifiedSwapMetadata_CurrencyCreator:
+	case *VerifiedSwapMetadata_Reserve:
 
-		if v, ok := interface{}(m.GetCurrencyCreator()).(interface{ Validate() error }); ok {
+		if v, ok := interface{}(m.GetReserve()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return VerifiedSwapMetadataValidationError{
-					field:  "CurrencyCreator",
+					field:  "Reserve",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -4337,16 +4337,16 @@ var _ interface {
 	ErrorName() string
 } = VerifiedSwapMetadataValidationError{}
 
-// Validate checks the field values on VerifiedCurrencyCreatorSwapMetadata with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, an error is returned.
-func (m *VerifiedCurrencyCreatorSwapMetadata) Validate() error {
+// Validate checks the field values on VerifiedReserveSwapMetadata with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *VerifiedReserveSwapMetadata) Validate() error {
 	if m == nil {
 		return nil
 	}
 
 	if m.GetClientParameters() == nil {
-		return VerifiedCurrencyCreatorSwapMetadataValidationError{
+		return VerifiedReserveSwapMetadataValidationError{
 			field:  "ClientParameters",
 			reason: "value is required",
 		}
@@ -4354,7 +4354,7 @@ func (m *VerifiedCurrencyCreatorSwapMetadata) Validate() error {
 
 	if v, ok := interface{}(m.GetClientParameters()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return VerifiedCurrencyCreatorSwapMetadataValidationError{
+			return VerifiedReserveSwapMetadataValidationError{
 				field:  "ClientParameters",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -4365,10 +4365,10 @@ func (m *VerifiedCurrencyCreatorSwapMetadata) Validate() error {
 	return nil
 }
 
-// VerifiedCurrencyCreatorSwapMetadataValidationError is the validation error
-// returned by VerifiedCurrencyCreatorSwapMetadata.Validate if the designated
-// constraints aren't met.
-type VerifiedCurrencyCreatorSwapMetadataValidationError struct {
+// VerifiedReserveSwapMetadataValidationError is the validation error returned
+// by VerifiedReserveSwapMetadata.Validate if the designated constraints
+// aren't met.
+type VerifiedReserveSwapMetadataValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4376,24 +4376,24 @@ type VerifiedCurrencyCreatorSwapMetadataValidationError struct {
 }
 
 // Field function returns field value.
-func (e VerifiedCurrencyCreatorSwapMetadataValidationError) Field() string { return e.field }
+func (e VerifiedReserveSwapMetadataValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e VerifiedCurrencyCreatorSwapMetadataValidationError) Reason() string { return e.reason }
+func (e VerifiedReserveSwapMetadataValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e VerifiedCurrencyCreatorSwapMetadataValidationError) Cause() error { return e.cause }
+func (e VerifiedReserveSwapMetadataValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e VerifiedCurrencyCreatorSwapMetadataValidationError) Key() bool { return e.key }
+func (e VerifiedReserveSwapMetadataValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e VerifiedCurrencyCreatorSwapMetadataValidationError) ErrorName() string {
-	return "VerifiedCurrencyCreatorSwapMetadataValidationError"
+func (e VerifiedReserveSwapMetadataValidationError) ErrorName() string {
+	return "VerifiedReserveSwapMetadataValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e VerifiedCurrencyCreatorSwapMetadataValidationError) Error() string {
+func (e VerifiedReserveSwapMetadataValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4405,14 +4405,14 @@ func (e VerifiedCurrencyCreatorSwapMetadataValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sVerifiedCurrencyCreatorSwapMetadata.%s: %s%s",
+		"invalid %sVerifiedReserveSwapMetadata.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = VerifiedCurrencyCreatorSwapMetadataValidationError{}
+var _ error = VerifiedReserveSwapMetadataValidationError{}
 
 var _ interface {
 	Field() string
@@ -4420,7 +4420,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = VerifiedCurrencyCreatorSwapMetadataValidationError{}
+} = VerifiedReserveSwapMetadataValidationError{}
 
 // Validate checks the field values on SwapMetadata with the rules defined in
 // the proto definition for this message. If any rules are violated, an error
@@ -5102,12 +5102,12 @@ func (m *StatefulSwapRequest_Initiate) Validate() error {
 
 	switch m.Kind.(type) {
 
-	case *StatefulSwapRequest_Initiate_CurrencyCreator_:
+	case *StatefulSwapRequest_Initiate_Reserve:
 
-		if v, ok := interface{}(m.GetCurrencyCreator()).(interface{ Validate() error }); ok {
+		if v, ok := interface{}(m.GetReserve()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return StatefulSwapRequest_InitiateValidationError{
-					field:  "CurrencyCreator",
+					field:  "Reserve",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -5273,15 +5273,16 @@ var _ interface {
 } = StatefulSwapRequest_SubmitSignaturesValidationError{}
 
 // Validate checks the field values on
-// StatefulSwapRequest_Initiate_CurrencyCreator with the rules defined in the
-// proto definition for this message. If any rules are violated, an error is returned.
-func (m *StatefulSwapRequest_Initiate_CurrencyCreator) Validate() error {
+// StatefulSwapRequest_Initiate_ReserveSwapClientParameters with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *StatefulSwapRequest_Initiate_ReserveSwapClientParameters) Validate() error {
 	if m == nil {
 		return nil
 	}
 
 	if m.GetId() == nil {
-		return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
+		return StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{
 			field:  "Id",
 			reason: "value is required",
 		}
@@ -5289,7 +5290,7 @@ func (m *StatefulSwapRequest_Initiate_CurrencyCreator) Validate() error {
 
 	if v, ok := interface{}(m.GetId()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
+			return StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{
 				field:  "Id",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5298,7 +5299,7 @@ func (m *StatefulSwapRequest_Initiate_CurrencyCreator) Validate() error {
 	}
 
 	if m.GetFromMint() == nil {
-		return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
+		return StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{
 			field:  "FromMint",
 			reason: "value is required",
 		}
@@ -5306,7 +5307,7 @@ func (m *StatefulSwapRequest_Initiate_CurrencyCreator) Validate() error {
 
 	if v, ok := interface{}(m.GetFromMint()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
+			return StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{
 				field:  "FromMint",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5315,7 +5316,7 @@ func (m *StatefulSwapRequest_Initiate_CurrencyCreator) Validate() error {
 	}
 
 	if m.GetToMint() == nil {
-		return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
+		return StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{
 			field:  "ToMint",
 			reason: "value is required",
 		}
@@ -5323,7 +5324,7 @@ func (m *StatefulSwapRequest_Initiate_CurrencyCreator) Validate() error {
 
 	if v, ok := interface{}(m.GetToMint()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
+			return StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{
 				field:  "ToMint",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5332,21 +5333,21 @@ func (m *StatefulSwapRequest_Initiate_CurrencyCreator) Validate() error {
 	}
 
 	if m.GetAmount() <= 0 {
-		return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
+		return StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{
 			field:  "Amount",
 			reason: "value must be greater than 0",
 		}
 	}
 
-	if _, ok := _StatefulSwapRequest_Initiate_CurrencyCreator_FundingSource_InLookup[m.GetFundingSource()]; !ok {
-		return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
+	if _, ok := _StatefulSwapRequest_Initiate_ReserveSwapClientParameters_FundingSource_InLookup[m.GetFundingSource()]; !ok {
+		return StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{
 			field:  "FundingSource",
 			reason: "value must be in list [1 2]",
 		}
 	}
 
 	if l := utf8.RuneCountInString(m.GetFundingId()); l < 32 || l > 88 {
-		return StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{
+		return StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{
 			field:  "FundingId",
 			reason: "value length must be between 32 and 88 runes, inclusive",
 		}
@@ -5355,11 +5356,11 @@ func (m *StatefulSwapRequest_Initiate_CurrencyCreator) Validate() error {
 	return nil
 }
 
-// StatefulSwapRequest_Initiate_CurrencyCreatorValidationError is the
-// validation error returned by
-// StatefulSwapRequest_Initiate_CurrencyCreator.Validate if the designated
-// constraints aren't met.
-type StatefulSwapRequest_Initiate_CurrencyCreatorValidationError struct {
+// StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError is
+// the validation error returned by
+// StatefulSwapRequest_Initiate_ReserveSwapClientParameters.Validate if the
+// designated constraints aren't met.
+type StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5367,24 +5368,32 @@ type StatefulSwapRequest_Initiate_CurrencyCreatorValidationError struct {
 }
 
 // Field function returns field value.
-func (e StatefulSwapRequest_Initiate_CurrencyCreatorValidationError) Field() string { return e.field }
+func (e StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError) Field() string {
+	return e.field
+}
 
 // Reason function returns reason value.
-func (e StatefulSwapRequest_Initiate_CurrencyCreatorValidationError) Reason() string { return e.reason }
+func (e StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError) Reason() string {
+	return e.reason
+}
 
 // Cause function returns cause value.
-func (e StatefulSwapRequest_Initiate_CurrencyCreatorValidationError) Cause() error { return e.cause }
+func (e StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError) Cause() error {
+	return e.cause
+}
 
 // Key function returns key value.
-func (e StatefulSwapRequest_Initiate_CurrencyCreatorValidationError) Key() bool { return e.key }
+func (e StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError) Key() bool {
+	return e.key
+}
 
 // ErrorName returns error name.
-func (e StatefulSwapRequest_Initiate_CurrencyCreatorValidationError) ErrorName() string {
-	return "StatefulSwapRequest_Initiate_CurrencyCreatorValidationError"
+func (e StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError) ErrorName() string {
+	return "StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e StatefulSwapRequest_Initiate_CurrencyCreatorValidationError) Error() string {
+func (e StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5396,14 +5405,14 @@ func (e StatefulSwapRequest_Initiate_CurrencyCreatorValidationError) Error() str
 	}
 
 	return fmt.Sprintf(
-		"invalid %sStatefulSwapRequest_Initiate_CurrencyCreator.%s: %s%s",
+		"invalid %sStatefulSwapRequest_Initiate_ReserveSwapClientParameters.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{}
+var _ error = StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{}
 
 var _ interface {
 	Field() string
@@ -5411,9 +5420,9 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = StatefulSwapRequest_Initiate_CurrencyCreatorValidationError{}
+} = StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{}
 
-var _StatefulSwapRequest_Initiate_CurrencyCreator_FundingSource_InLookup = map[FundingSource]struct{}{
+var _StatefulSwapRequest_Initiate_ReserveSwapClientParameters_FundingSource_InLookup = map[FundingSource]struct{}{
 	1: {},
 	2: {},
 }
@@ -5428,12 +5437,12 @@ func (m *StatefulSwapResponse_ServerParameters) Validate() error {
 
 	switch m.Kind.(type) {
 
-	case *StatefulSwapResponse_ServerParameters_CurrencyCreator_:
+	case *StatefulSwapResponse_ServerParameters_ReserveExistingCurrency:
 
-		if v, ok := interface{}(m.GetCurrencyCreator()).(interface{ Validate() error }); ok {
+		if v, ok := interface{}(m.GetReserveExistingCurrency()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return StatefulSwapResponse_ServerParametersValidationError{
-					field:  "CurrencyCreator",
+					field:  "ReserveExistingCurrency",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -5663,16 +5672,16 @@ var _ interface {
 } = StatefulSwapResponse_ErrorValidationError{}
 
 // Validate checks the field values on
-// StatefulSwapResponse_ServerParameters_CurrencyCreator with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
-func (m *StatefulSwapResponse_ServerParameters_CurrencyCreator) Validate() error {
+// StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, an error is returned.
+func (m *StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters) Validate() error {
 	if m == nil {
 		return nil
 	}
 
 	if m.GetPayer() == nil {
-		return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
+		return StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError{
 			field:  "Payer",
 			reason: "value is required",
 		}
@@ -5680,7 +5689,7 @@ func (m *StatefulSwapResponse_ServerParameters_CurrencyCreator) Validate() error
 
 	if v, ok := interface{}(m.GetPayer()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
+			return StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError{
 				field:  "Payer",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5689,7 +5698,7 @@ func (m *StatefulSwapResponse_ServerParameters_CurrencyCreator) Validate() error
 	}
 
 	if m.GetNonce() == nil {
-		return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
+		return StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError{
 			field:  "Nonce",
 			reason: "value is required",
 		}
@@ -5697,7 +5706,7 @@ func (m *StatefulSwapResponse_ServerParameters_CurrencyCreator) Validate() error
 
 	if v, ok := interface{}(m.GetNonce()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
+			return StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError{
 				field:  "Nonce",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5706,7 +5715,7 @@ func (m *StatefulSwapResponse_ServerParameters_CurrencyCreator) Validate() error
 	}
 
 	if m.GetBlockhash() == nil {
-		return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
+		return StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError{
 			field:  "Blockhash",
 			reason: "value is required",
 		}
@@ -5714,7 +5723,7 @@ func (m *StatefulSwapResponse_ServerParameters_CurrencyCreator) Validate() error
 
 	if v, ok := interface{}(m.GetBlockhash()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
+			return StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError{
 				field:  "Blockhash",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5727,7 +5736,7 @@ func (m *StatefulSwapResponse_ServerParameters_CurrencyCreator) Validate() error
 
 		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
+				return StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError{
 					field:  fmt.Sprintf("Alts[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -5742,14 +5751,14 @@ func (m *StatefulSwapResponse_ServerParameters_CurrencyCreator) Validate() error
 	// no validation rules for ComputeUnitPrice
 
 	if utf8.RuneCountInString(m.GetMemoValue()) > 64 {
-		return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
+		return StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError{
 			field:  "MemoValue",
 			reason: "value length must be at most 64 runes",
 		}
 	}
 
 	if m.GetMemoryAccount() == nil {
-		return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
+		return StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError{
 			field:  "MemoryAccount",
 			reason: "value is required",
 		}
@@ -5757,7 +5766,7 @@ func (m *StatefulSwapResponse_ServerParameters_CurrencyCreator) Validate() error
 
 	if v, ok := interface{}(m.GetMemoryAccount()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{
+			return StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError{
 				field:  "MemoryAccount",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5770,11 +5779,11 @@ func (m *StatefulSwapResponse_ServerParameters_CurrencyCreator) Validate() error
 	return nil
 }
 
-// StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError is the
-// validation error returned by
-// StatefulSwapResponse_ServerParameters_CurrencyCreator.Validate if the
-// designated constraints aren't met.
-type StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError struct {
+// StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError
+// is the validation error returned by
+// StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters.Validate
+// if the designated constraints aren't met.
+type StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5782,32 +5791,32 @@ type StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError struct
 }
 
 // Field function returns field value.
-func (e StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError) Field() string {
+func (e StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError) Field() string {
 	return e.field
 }
 
 // Reason function returns reason value.
-func (e StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError) Reason() string {
+func (e StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError) Reason() string {
 	return e.reason
 }
 
 // Cause function returns cause value.
-func (e StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError) Cause() error {
+func (e StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError) Cause() error {
 	return e.cause
 }
 
 // Key function returns key value.
-func (e StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError) Key() bool {
+func (e StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError) Key() bool {
 	return e.key
 }
 
 // ErrorName returns error name.
-func (e StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError) ErrorName() string {
-	return "StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError"
+func (e StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError) ErrorName() string {
+	return "StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError) Error() string {
+func (e StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5819,14 +5828,14 @@ func (e StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError) Er
 	}
 
 	return fmt.Sprintf(
-		"invalid %sStatefulSwapResponse_ServerParameters_CurrencyCreator.%s: %s%s",
+		"invalid %sStatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{}
+var _ error = StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError{}
 
 var _ interface {
 	Field() string
@@ -5834,7 +5843,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = StatefulSwapResponse_ServerParameters_CurrencyCreatorValidationError{}
+} = StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError{}
 
 // Validate checks the field values on PublicDistributionMetadata_Distribution
 // with the rules defined in the proto definition for this message. If any
