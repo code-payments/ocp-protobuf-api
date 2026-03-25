@@ -1039,10 +1039,10 @@ export class StatefulSwapRequest_Initiate extends Message<StatefulSwapRequest_In
    */
   kind: {
     /**
-     * @generated from field: ocp.transaction.v1.StatefulSwapRequest.Initiate.CurrencyCreator currency_creator = 1;
+     * @generated from field: ocp.transaction.v1.StatefulSwapRequest.Initiate.ReserveSwapClientParameters reserve = 1;
      */
-    value: StatefulSwapRequest_Initiate_CurrencyCreator;
-    case: "currencyCreator";
+    value: StatefulSwapRequest_Initiate_ReserveSwapClientParameters;
+    case: "reserve";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   /**
@@ -1055,7 +1055,7 @@ export class StatefulSwapRequest_Initiate extends Message<StatefulSwapRequest_In
   /**
    * The user authority account that will sign to authorize the swap.
    *
-   * For Currency Creator program buy/sell flows, this should be a random one-time use account.
+   * For Reserve contract buy/sell flows, this should be a random one-time use account.
    *
    * @generated from field: ocp.common.v1.SolanaAccountId swap_authority = 10;
    */
@@ -1085,7 +1085,7 @@ export class StatefulSwapRequest_Initiate extends Message<StatefulSwapRequest_In
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "ocp.transaction.v1.StatefulSwapRequest.Initiate";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "currency_creator", kind: "message", T: StatefulSwapRequest_Initiate_CurrencyCreator, oneof: "kind" },
+    { no: 1, name: "reserve", kind: "message", T: StatefulSwapRequest_Initiate_ReserveSwapClientParameters, oneof: "kind" },
     { no: 9, name: "owner", kind: "message", T: SolanaAccountId },
     { no: 10, name: "swap_authority", kind: "message", T: SolanaAccountId },
     { no: 11, name: "proof_signature", kind: "message", T: Signature },
@@ -1110,11 +1110,11 @@ export class StatefulSwapRequest_Initiate extends Message<StatefulSwapRequest_In
 }
 
 /**
- * Server parameters for starting swaps against the Currency Creator program
+ * Client parameters for starting swaps against the Reserve contract
  *
- * @generated from message ocp.transaction.v1.StatefulSwapRequest.Initiate.CurrencyCreator
+ * @generated from message ocp.transaction.v1.StatefulSwapRequest.Initiate.ReserveSwapClientParameters
  */
-export class StatefulSwapRequest_Initiate_CurrencyCreator extends Message<StatefulSwapRequest_Initiate_CurrencyCreator> {
+export class StatefulSwapRequest_Initiate_ReserveSwapClientParameters extends Message<StatefulSwapRequest_Initiate_ReserveSwapClientParameters> {
   /**
    * The unique ID for this swap randomly generated on client
    *
@@ -1160,13 +1160,13 @@ export class StatefulSwapRequest_Initiate_CurrencyCreator extends Message<Statef
    */
   fundingId = "";
 
-  constructor(data?: PartialMessage<StatefulSwapRequest_Initiate_CurrencyCreator>) {
+  constructor(data?: PartialMessage<StatefulSwapRequest_Initiate_ReserveSwapClientParameters>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.StatefulSwapRequest.Initiate.CurrencyCreator";
+  static readonly typeName = "ocp.transaction.v1.StatefulSwapRequest.Initiate.ReserveSwapClientParameters";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "id", kind: "message", T: SwapId },
     { no: 2, name: "from_mint", kind: "message", T: SolanaAccountId },
@@ -1176,20 +1176,20 @@ export class StatefulSwapRequest_Initiate_CurrencyCreator extends Message<Statef
     { no: 6, name: "funding_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapRequest_Initiate_CurrencyCreator {
-    return new StatefulSwapRequest_Initiate_CurrencyCreator().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapRequest_Initiate_ReserveSwapClientParameters {
+    return new StatefulSwapRequest_Initiate_ReserveSwapClientParameters().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapRequest_Initiate_CurrencyCreator {
-    return new StatefulSwapRequest_Initiate_CurrencyCreator().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapRequest_Initiate_ReserveSwapClientParameters {
+    return new StatefulSwapRequest_Initiate_ReserveSwapClientParameters().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapRequest_Initiate_CurrencyCreator {
-    return new StatefulSwapRequest_Initiate_CurrencyCreator().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapRequest_Initiate_ReserveSwapClientParameters {
+    return new StatefulSwapRequest_Initiate_ReserveSwapClientParameters().fromJsonString(jsonString, options);
   }
 
-  static equals(a: StatefulSwapRequest_Initiate_CurrencyCreator | PlainMessage<StatefulSwapRequest_Initiate_CurrencyCreator> | undefined, b: StatefulSwapRequest_Initiate_CurrencyCreator | PlainMessage<StatefulSwapRequest_Initiate_CurrencyCreator> | undefined): boolean {
-    return proto3.util.equals(StatefulSwapRequest_Initiate_CurrencyCreator, a, b);
+  static equals(a: StatefulSwapRequest_Initiate_ReserveSwapClientParameters | PlainMessage<StatefulSwapRequest_Initiate_ReserveSwapClientParameters> | undefined, b: StatefulSwapRequest_Initiate_ReserveSwapClientParameters | PlainMessage<StatefulSwapRequest_Initiate_ReserveSwapClientParameters> | undefined): boolean {
+    return proto3.util.equals(StatefulSwapRequest_Initiate_ReserveSwapClientParameters, a, b);
   }
 }
 
@@ -1298,10 +1298,10 @@ export class StatefulSwapResponse_ServerParameters extends Message<StatefulSwapR
    */
   kind: {
     /**
-     * @generated from field: ocp.transaction.v1.StatefulSwapResponse.ServerParameters.CurrencyCreator currency_creator = 1;
+     * @generated from field: ocp.transaction.v1.StatefulSwapResponse.ServerParameters.ReserveExistingCurrencyServerParameters reserve_existing_currency = 1;
      */
-    value: StatefulSwapResponse_ServerParameters_CurrencyCreator;
-    case: "currencyCreator";
+    value: StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters;
+    case: "reserveExistingCurrency";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<StatefulSwapResponse_ServerParameters>) {
@@ -1312,7 +1312,7 @@ export class StatefulSwapResponse_ServerParameters extends Message<StatefulSwapR
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "ocp.transaction.v1.StatefulSwapResponse.ServerParameters";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "currency_creator", kind: "message", T: StatefulSwapResponse_ServerParameters_CurrencyCreator, oneof: "kind" },
+    { no: 1, name: "reserve_existing_currency", kind: "message", T: StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters, oneof: "kind" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_ServerParameters {
@@ -1334,7 +1334,7 @@ export class StatefulSwapResponse_ServerParameters extends Message<StatefulSwapR
 
 /**
  * Server parameters when executing stateful buy/sell flows against the
- * Currency Creator program
+ * Reserve contract against an existing currency
  *
  * Supported Solana transaction version: v0
  *
@@ -1347,7 +1347,7 @@ export class StatefulSwapResponse_ServerParameters extends Message<StatefulSwapR
  *  4. [Optional] Memo::Memo
  *  5. AssociatedTokenAccount::CreateIdempotent (open Core Mint temporary account)
  *  6. VM::TransferForSwap (Core Mint VM swap ATA -> Core Mint temporary account)
- *  6. CurrencyCreator::BuyAndDepositIntoVm (bounded buy depositing to_mint tokens into the to_mint VM)
+ *  6. Reserve::BuyAndDepositIntoVm (bounded buy depositing to_mint tokens into the to_mint VM)
  *  8. Token::CloseAccount (closes Core Mint temporary account)
  *  9. VM::CloseSwapAccountIfEmpty (closes Core Mint VM swap ATA if empty)
  *
@@ -1358,7 +1358,7 @@ export class StatefulSwapResponse_ServerParameters extends Message<StatefulSwapR
  *  4. [Optional] Memo::Memo
  *  5. AssociatedTokenAccount::CreateIdempotent (open from_mint temporary account)
  *  6. VM::TransferForSwap (from_mint VM swap ATA -> from_mint temporary account)
- *  7. CurrencyCreator::SellAndDepositIntoVm (bounded sell depositing Core Mint into the Core Mint VM)
+ *  7. Reserve::SellAndDepositIntoVm (bounded sell depositing Core Mint into the Core Mint VM)
  *  8. Token::CloseAccount (closes from_mint temporary account)
  *  9. VM::CloseSwapAccountIfEmpty (closes from_mint swap PDA/ATA if empty)
  *
@@ -1370,15 +1370,15 @@ export class StatefulSwapResponse_ServerParameters extends Message<StatefulSwapR
  *  5.  AssociatedTokenAccount::CreateIdempotent (open Core Mint temporary account)
  *  6.  AssociatedTokenAccount::CreateIdempotent (open from_mint temporary account)
  *  7.  VM::TransferForSwap (from_mint VM swap ATA -> from_mint temporary account)
- *  8.  CurrencyCreator::SellTokens (bounded sell transferring Core Mint into temporary account)
- *  9.  CurrencyCreator::BuyAndDepositIntoVm (unlimited buy depositing to_mint tokens into the to_mint VM)
+ *  8.  Reserve::SellTokens (bounded sell transferring Core Mint into temporary account)
+ *  9.  Reserve::BuyAndDepositIntoVm (unlimited buy depositing to_mint tokens into the to_mint VM)
  *  10. Token::CloseAccount (closes Core Mint temporary account)
  *  11. Token::CloseAccount (closes from_mint temporary account)
  *  12. VM::CloseSwapAccountIfEmpty (closes from_mint VM swap ATA if empty)
  *
- * @generated from message ocp.transaction.v1.StatefulSwapResponse.ServerParameters.CurrencyCreator
+ * @generated from message ocp.transaction.v1.StatefulSwapResponse.ServerParameters.ReserveExistingCurrencyServerParameters
  */
-export class StatefulSwapResponse_ServerParameters_CurrencyCreator extends Message<StatefulSwapResponse_ServerParameters_CurrencyCreator> {
+export class StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters extends Message<StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters> {
   /**
    * Subisdizer account that will be paying for the swap
    *
@@ -1445,13 +1445,13 @@ export class StatefulSwapResponse_ServerParameters_CurrencyCreator extends Messa
    */
   memoryIndex = 0;
 
-  constructor(data?: PartialMessage<StatefulSwapResponse_ServerParameters_CurrencyCreator>) {
+  constructor(data?: PartialMessage<StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.StatefulSwapResponse.ServerParameters.CurrencyCreator";
+  static readonly typeName = "ocp.transaction.v1.StatefulSwapResponse.ServerParameters.ReserveExistingCurrencyServerParameters";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "payer", kind: "message", T: SolanaAccountId },
     { no: 2, name: "nonce", kind: "message", T: SolanaAccountId },
@@ -1464,20 +1464,20 @@ export class StatefulSwapResponse_ServerParameters_CurrencyCreator extends Messa
     { no: 9, name: "memory_index", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_ServerParameters_CurrencyCreator {
-    return new StatefulSwapResponse_ServerParameters_CurrencyCreator().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters {
+    return new StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapResponse_ServerParameters_CurrencyCreator {
-    return new StatefulSwapResponse_ServerParameters_CurrencyCreator().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters {
+    return new StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapResponse_ServerParameters_CurrencyCreator {
-    return new StatefulSwapResponse_ServerParameters_CurrencyCreator().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters {
+    return new StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters().fromJsonString(jsonString, options);
   }
 
-  static equals(a: StatefulSwapResponse_ServerParameters_CurrencyCreator | PlainMessage<StatefulSwapResponse_ServerParameters_CurrencyCreator> | undefined, b: StatefulSwapResponse_ServerParameters_CurrencyCreator | PlainMessage<StatefulSwapResponse_ServerParameters_CurrencyCreator> | undefined): boolean {
-    return proto3.util.equals(StatefulSwapResponse_ServerParameters_CurrencyCreator, a, b);
+  static equals(a: StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters | PlainMessage<StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters> | undefined, b: StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters | PlainMessage<StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters> | undefined): boolean {
+    return proto3.util.equals(StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters, a, b);
   }
 }
 
@@ -3519,10 +3519,10 @@ export class VerifiedSwapMetadata extends Message<VerifiedSwapMetadata> {
    */
   kind: {
     /**
-     * @generated from field: ocp.transaction.v1.VerifiedCurrencyCreatorSwapMetadata currency_creator = 1;
+     * @generated from field: ocp.transaction.v1.VerifiedReserveSwapMetadata reserve = 1;
      */
-    value: VerifiedCurrencyCreatorSwapMetadata;
-    case: "currencyCreator";
+    value: VerifiedReserveSwapMetadata;
+    case: "reserve";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<VerifiedSwapMetadata>) {
@@ -3533,7 +3533,7 @@ export class VerifiedSwapMetadata extends Message<VerifiedSwapMetadata> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "ocp.transaction.v1.VerifiedSwapMetadata";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "currency_creator", kind: "message", T: VerifiedCurrencyCreatorSwapMetadata, oneof: "kind" },
+    { no: 1, name: "reserve", kind: "message", T: VerifiedReserveSwapMetadata, oneof: "kind" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VerifiedSwapMetadata {
@@ -3554,44 +3554,44 @@ export class VerifiedSwapMetadata extends Message<VerifiedSwapMetadata> {
 }
 
 /**
- * VerifiedCurrencyCreatorSwapMetadata is verified metadata for swaps against the
+ * VerifiedReserveSwapMetadata is verified metadata for swaps against the
  * Currency Creator program
  *
- * @generated from message ocp.transaction.v1.VerifiedCurrencyCreatorSwapMetadata
+ * @generated from message ocp.transaction.v1.VerifiedReserveSwapMetadata
  */
-export class VerifiedCurrencyCreatorSwapMetadata extends Message<VerifiedCurrencyCreatorSwapMetadata> {
+export class VerifiedReserveSwapMetadata extends Message<VerifiedReserveSwapMetadata> {
   /**
    * Verifiable client-side parameters that were provided during the StatefulSwap RPC
    *
-   * @generated from field: ocp.transaction.v1.StatefulSwapRequest.Initiate.CurrencyCreator client_parameters = 1;
+   * @generated from field: ocp.transaction.v1.StatefulSwapRequest.Initiate.ReserveSwapClientParameters client_parameters = 1;
    */
-  clientParameters?: StatefulSwapRequest_Initiate_CurrencyCreator;
+  clientParameters?: StatefulSwapRequest_Initiate_ReserveSwapClientParameters;
 
-  constructor(data?: PartialMessage<VerifiedCurrencyCreatorSwapMetadata>) {
+  constructor(data?: PartialMessage<VerifiedReserveSwapMetadata>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.VerifiedCurrencyCreatorSwapMetadata";
+  static readonly typeName = "ocp.transaction.v1.VerifiedReserveSwapMetadata";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "client_parameters", kind: "message", T: StatefulSwapRequest_Initiate_CurrencyCreator },
+    { no: 1, name: "client_parameters", kind: "message", T: StatefulSwapRequest_Initiate_ReserveSwapClientParameters },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VerifiedCurrencyCreatorSwapMetadata {
-    return new VerifiedCurrencyCreatorSwapMetadata().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VerifiedReserveSwapMetadata {
+    return new VerifiedReserveSwapMetadata().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): VerifiedCurrencyCreatorSwapMetadata {
-    return new VerifiedCurrencyCreatorSwapMetadata().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): VerifiedReserveSwapMetadata {
+    return new VerifiedReserveSwapMetadata().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): VerifiedCurrencyCreatorSwapMetadata {
-    return new VerifiedCurrencyCreatorSwapMetadata().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): VerifiedReserveSwapMetadata {
+    return new VerifiedReserveSwapMetadata().fromJsonString(jsonString, options);
   }
 
-  static equals(a: VerifiedCurrencyCreatorSwapMetadata | PlainMessage<VerifiedCurrencyCreatorSwapMetadata> | undefined, b: VerifiedCurrencyCreatorSwapMetadata | PlainMessage<VerifiedCurrencyCreatorSwapMetadata> | undefined): boolean {
-    return proto3.util.equals(VerifiedCurrencyCreatorSwapMetadata, a, b);
+  static equals(a: VerifiedReserveSwapMetadata | PlainMessage<VerifiedReserveSwapMetadata> | undefined, b: VerifiedReserveSwapMetadata | PlainMessage<VerifiedReserveSwapMetadata> | undefined): boolean {
+    return proto3.util.equals(VerifiedReserveSwapMetadata, a, b);
   }
 }
 
