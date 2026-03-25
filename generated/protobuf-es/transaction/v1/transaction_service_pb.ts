@@ -1199,7 +1199,9 @@ export class StatefulSwapRequest_Initiate_ReserveSwapClientParameters extends Me
  */
 export class StatefulSwapRequest_SubmitSignatures extends Message<StatefulSwapRequest_SubmitSignatures> {
   /**
-   * The signatures for the locally constructed swap transaction
+   * The signatures for the locally constructed swap transaction:
+   *   - owner is at index 0
+   *   - swap_authority is at index 1
    *
    * @generated from field: repeated ocp.common.v1.Signature transaction_signatures = 1;
    */

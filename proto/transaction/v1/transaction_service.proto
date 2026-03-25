@@ -368,9 +368,11 @@ message StatefulSwapRequest {
     }
 
     message SubmitSignatures {
-        // The signatures for the locally constructed swap transaction
+        // The signatures for the locally constructed swap transaction:
+        //   - owner is at index 0
+        //   - swap_authority is at index 1
         repeated common.v1.Signature transaction_signatures = 1 [(validate.rules).repeated = {
-            min_items: 2
+            min_items: 1
             max_items: 2
         }];
     }
