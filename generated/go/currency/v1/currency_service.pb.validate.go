@@ -2128,10 +2128,24 @@ func (m *LaunchRequest) Validate() error {
 		}
 	}
 
+	if !_LaunchRequest_Name_Pattern.MatchString(m.GetName()) {
+		return LaunchRequestValidationError{
+			field:  "Name",
+			reason: "value does not match regex pattern \"^[!-~]([ -~]*[!-~])?$\"",
+		}
+	}
+
 	if utf8.RuneCountInString(m.GetSymbol()) > 8 {
 		return LaunchRequestValidationError{
 			field:  "Symbol",
 			reason: "value length must be at most 8 runes",
+		}
+	}
+
+	if !_LaunchRequest_Symbol_Pattern.MatchString(m.GetSymbol()) {
+		return LaunchRequestValidationError{
+			field:  "Symbol",
+			reason: "value does not match regex pattern \"^[!-~]*$\"",
 		}
 	}
 
@@ -2215,6 +2229,10 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = LaunchRequestValidationError{}
+
+var _LaunchRequest_Name_Pattern = regexp.MustCompile("^[!-~]([ -~]*[!-~])?$")
+
+var _LaunchRequest_Symbol_Pattern = regexp.MustCompile("^[!-~]*$")
 
 // Validate checks the field values on LaunchResponse with the rules defined in
 // the proto definition for this message. If any rules are violated, an error

@@ -371,16 +371,22 @@ message LaunchRequest {
     // mechanism to the RPC.
     common.v1.Signature signature = 2 [(validate.rules).message.required = true];
 
-    // The name of the currency to launch
+    // The name of the currency to launch. Must be printable ASCII with no
+    // leading or trailing spaces.
     string name = 3 [(validate.rules).string = {
         min_len: 1,
         max_len: 32,
+        // [!-~] = printable ASCII excluding space; [ -~] = printable ASCII including space
+        pattern: "^[!-~]([ -~]*[!-~])?$",
     }];
 
-    // The ticker symbol for the currency. If not provided, a default will be
-    // generated using the currency name.
+    // The ticker symbol for the currency. Must be printable ASCII with no
+    // spaces. If not provided, a default will be generated using the currency
+    // name.
     string symbol = 4 [(validate.rules).string = {
         max_len: 8,
+        // [!-~] = printable ASCII excluding space
+        pattern: "^[!-~]*$",
     }];
 
     // Optional description
