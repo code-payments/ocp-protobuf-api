@@ -1502,15 +1502,17 @@ export class LaunchRequest extends Message<LaunchRequest> {
   signature?: Signature;
 
   /**
-   * The name of the currency to launch
+   * The name of the currency to launch. Must be printable ASCII with no
+   * leading or trailing spaces.
    *
    * @generated from field: string name = 3;
    */
   name = "";
 
   /**
-   * The ticker symbol for the currency. If not provided, a default will be
-   * generated using the currency name.
+   * The ticker symbol for the currency. Must be printable ASCII with no
+   * spaces. If not provided, a default will be generated using the currency
+   * name.
    *
    * @generated from field: string symbol = 4;
    */
