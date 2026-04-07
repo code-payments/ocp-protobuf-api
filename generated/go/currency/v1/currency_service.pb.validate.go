@@ -2893,6 +2893,13 @@ func (m *CheckAvailabilityRequest) Validate() error {
 		}
 	}
 
+	if !_CheckAvailabilityRequest_Name_Pattern.MatchString(m.GetName()) {
+		return CheckAvailabilityRequestValidationError{
+			field:  "Name",
+			reason: "value does not match regex pattern \"^[!-~]([ -~]*[!-~])?$\"",
+		}
+	}
+
 	return nil
 }
 
@@ -2951,6 +2958,8 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = CheckAvailabilityRequestValidationError{}
+
+var _CheckAvailabilityRequest_Name_Pattern = regexp.MustCompile("^[!-~]([ -~]*[!-~])?$")
 
 // Validate checks the field values on CheckAvailabilityResponse with the rules
 // defined in the proto definition for this message. If any rules are

@@ -524,6 +524,8 @@ message CheckAvailabilityRequest {
     string name = 1 [(validate.rules).string = {
         min_len: 1,
         max_len: 32,
+        // [!-~] = printable ASCII excluding space; [ -~] = printable ASCII including space
+        pattern: "^[!-~]([ -~]*[!-~])?$",
     }];
 }
 
