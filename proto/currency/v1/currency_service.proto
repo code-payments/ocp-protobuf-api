@@ -403,7 +403,7 @@ message LaunchRequest {
     }];
 
     // Attestation that the name passed moderation
-    ModerationAttestation name_moderation_attestation = 8;
+    ModerationAttestation name_moderation_attestation = 8 [(validate.rules).message.required = true];
 
     // Attestation that the symbol, if provided, passed moderation
     ModerationAttestation symbol_moderation_attestation = 9;
@@ -567,6 +567,7 @@ enum PredefinedRange {
 
 message ModerationAttestation {
     bytes raw_value = 1 [(validate.rules).bytes = {
+        min_len: 1,
         max_len: 4096,
     }];
 }
