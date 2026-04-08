@@ -2173,6 +2173,13 @@ func (m *LaunchRequest) Validate() error {
 		}
 	}
 
+	if m.GetNameModerationAttestation() == nil {
+		return LaunchRequestValidationError{
+			field:  "NameModerationAttestation",
+			reason: "value is required",
+		}
+	}
+
 	if v, ok := interface{}(m.GetNameModerationAttestation()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return LaunchRequestValidationError{
@@ -3097,10 +3104,10 @@ func (m *ModerationAttestation) Validate() error {
 		return nil
 	}
 
-	if len(m.GetRawValue()) > 4096 {
+	if l := len(m.GetRawValue()); l < 1 || l > 4096 {
 		return ModerationAttestationValidationError{
 			field:  "RawValue",
-			reason: "value length must be at most 4096 bytes",
+			reason: "value length must be between 1 and 4096 bytes, inclusive",
 		}
 	}
 
