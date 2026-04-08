@@ -2173,6 +2173,46 @@ func (m *LaunchRequest) Validate() error {
 		}
 	}
 
+	if v, ok := interface{}(m.GetNameModerationAttestation()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LaunchRequestValidationError{
+				field:  "NameModerationAttestation",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetSymbolModerationAttestation()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LaunchRequestValidationError{
+				field:  "SymbolModerationAttestation",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetDescriptionModerationAttestation()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LaunchRequestValidationError{
+				field:  "DescriptionModerationAttestation",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetIconModerationAttestation()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LaunchRequestValidationError{
+				field:  "IconModerationAttestation",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	return nil
 }
 
@@ -2374,6 +2414,23 @@ func (m *UpdateIconRequest) Validate() error {
 		return UpdateIconRequestValidationError{
 			field:  "Icon",
 			reason: "value length must be between 1 and 1048576 bytes, inclusive",
+		}
+	}
+
+	if m.GetModerationAttestation() == nil {
+		return UpdateIconRequestValidationError{
+			field:  "ModerationAttestation",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetModerationAttestation()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateIconRequestValidationError{
+				field:  "ModerationAttestation",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
 		}
 	}
 
@@ -3032,6 +3089,80 @@ var _ interface {
 	ErrorName() string
 } = CheckAvailabilityResponseValidationError{}
 
+// Validate checks the field values on ModerationAttestation with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *ModerationAttestation) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if len(m.GetRawValue()) > 4096 {
+		return ModerationAttestationValidationError{
+			field:  "RawValue",
+			reason: "value length must be at most 4096 bytes",
+		}
+	}
+
+	return nil
+}
+
+// ModerationAttestationValidationError is the validation error returned by
+// ModerationAttestation.Validate if the designated constraints aren't met.
+type ModerationAttestationValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ModerationAttestationValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ModerationAttestationValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ModerationAttestationValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ModerationAttestationValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ModerationAttestationValidationError) ErrorName() string {
+	return "ModerationAttestationValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ModerationAttestationValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sModerationAttestation.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ModerationAttestationValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ModerationAttestationValidationError{}
+
 // Validate checks the field values on StreamLiveMintDataRequest_Request with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, an error is returned.
@@ -3641,6 +3772,23 @@ func (m *UpdateMetadataRequest_DescriptionUpdate) Validate() error {
 		return UpdateMetadataRequest_DescriptionUpdateValidationError{
 			field:  "Value",
 			reason: "value length must be between 1 and 4096 runes, inclusive",
+		}
+	}
+
+	if m.GetModerationAttestation() == nil {
+		return UpdateMetadataRequest_DescriptionUpdateValidationError{
+			field:  "ModerationAttestation",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetModerationAttestation()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateMetadataRequest_DescriptionUpdateValidationError{
+				field:  "ModerationAttestation",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
 		}
 	}
 

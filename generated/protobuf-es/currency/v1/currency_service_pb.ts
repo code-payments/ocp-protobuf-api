@@ -1539,6 +1539,34 @@ export class LaunchRequest extends Message<LaunchRequest> {
    */
   icon = new Uint8Array(0);
 
+  /**
+   * Attestation that the name passed moderation
+   *
+   * @generated from field: ocp.currency.v1.ModerationAttestation name_moderation_attestation = 8;
+   */
+  nameModerationAttestation?: ModerationAttestation;
+
+  /**
+   * Attestation that the symbol, if provided, passed moderation
+   *
+   * @generated from field: ocp.currency.v1.ModerationAttestation symbol_moderation_attestation = 9;
+   */
+  symbolModerationAttestation?: ModerationAttestation;
+
+  /**
+   * Attestation that the descritpion, if provided, passed moderation
+   *
+   * @generated from field: ocp.currency.v1.ModerationAttestation description_moderation_attestation = 10;
+   */
+  descriptionModerationAttestation?: ModerationAttestation;
+
+  /**
+   * Attestation that the icon image, if provided, passed moderation
+   *
+   * @generated from field: ocp.currency.v1.ModerationAttestation icon_moderation_attestation = 11;
+   */
+  iconModerationAttestation?: ModerationAttestation;
+
   constructor(data?: PartialMessage<LaunchRequest>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1554,6 +1582,10 @@ export class LaunchRequest extends Message<LaunchRequest> {
     { no: 5, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 6, name: "bill_customization", kind: "message", T: BillCustomization },
     { no: 7, name: "icon", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 8, name: "name_moderation_attestation", kind: "message", T: ModerationAttestation },
+    { no: 9, name: "symbol_moderation_attestation", kind: "message", T: ModerationAttestation },
+    { no: 10, name: "description_moderation_attestation", kind: "message", T: ModerationAttestation },
+    { no: 11, name: "icon_moderation_attestation", kind: "message", T: ModerationAttestation },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LaunchRequest {
@@ -1690,6 +1722,13 @@ export class UpdateIconRequest extends Message<UpdateIconRequest> {
    */
   icon = new Uint8Array(0);
 
+  /**
+   * Attestation that the icon image passed moderation
+   *
+   * @generated from field: ocp.currency.v1.ModerationAttestation moderation_attestation = 5;
+   */
+  moderationAttestation?: ModerationAttestation;
+
   constructor(data?: PartialMessage<UpdateIconRequest>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1702,6 +1741,7 @@ export class UpdateIconRequest extends Message<UpdateIconRequest> {
     { no: 2, name: "signature", kind: "message", T: Signature },
     { no: 3, name: "mint", kind: "message", T: SolanaAccountId },
     { no: 4, name: "icon", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 5, name: "moderation_attestation", kind: "message", T: ModerationAttestation },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateIconRequest {
@@ -1881,6 +1921,13 @@ export class UpdateMetadataRequest_DescriptionUpdate extends Message<UpdateMetad
    */
   value = "";
 
+  /**
+   * Attestation that the description passed moderation
+   *
+   * @generated from field: ocp.currency.v1.ModerationAttestation moderation_attestation = 2;
+   */
+  moderationAttestation?: ModerationAttestation;
+
   constructor(data?: PartialMessage<UpdateMetadataRequest_DescriptionUpdate>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1890,6 +1937,7 @@ export class UpdateMetadataRequest_DescriptionUpdate extends Message<UpdateMetad
   static readonly typeName = "ocp.currency.v1.UpdateMetadataRequest.DescriptionUpdate";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "moderation_attestation", kind: "message", T: ModerationAttestation },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateMetadataRequest_DescriptionUpdate {
@@ -2263,4 +2311,41 @@ export enum CheckAvailabilityResponse_Result {
 proto3.util.setEnumType(CheckAvailabilityResponse_Result, "ocp.currency.v1.CheckAvailabilityResponse.Result", [
   { no: 0, name: "OK" },
 ]);
+
+/**
+ * @generated from message ocp.currency.v1.ModerationAttestation
+ */
+export class ModerationAttestation extends Message<ModerationAttestation> {
+  /**
+   * @generated from field: bytes raw_value = 1;
+   */
+  rawValue = new Uint8Array(0);
+
+  constructor(data?: PartialMessage<ModerationAttestation>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.ModerationAttestation";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "raw_value", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ModerationAttestation {
+    return new ModerationAttestation().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ModerationAttestation {
+    return new ModerationAttestation().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ModerationAttestation {
+    return new ModerationAttestation().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ModerationAttestation | PlainMessage<ModerationAttestation> | undefined, b: ModerationAttestation | PlainMessage<ModerationAttestation> | undefined): boolean {
+    return proto3.util.equals(ModerationAttestation, a, b);
+  }
+}
 
