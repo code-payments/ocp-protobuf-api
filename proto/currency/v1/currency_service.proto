@@ -401,6 +401,18 @@ message LaunchRequest {
     bytes icon = 7 [(validate.rules).bytes = {
         max_len: 1048576, // 1 MB
     }];
+
+    // Attestation that the name passed moderation
+    ModerationAttestation name_moderation_attestation = 8;
+
+    // Attestation that the symbol, if provided, passed moderation
+    ModerationAttestation symbol_moderation_attestation = 9;
+
+    // Attestation that the descritpion, if provided, passed moderation
+    ModerationAttestation description_moderation_attestation = 10;
+
+    // Attestation that the icon image, if provided, passed moderation
+    ModerationAttestation icon_moderation_attestation = 11;
 }
 
 message LaunchResponse {
@@ -436,6 +448,9 @@ message UpdateIconRequest {
         min_len: 1,
         max_len: 1048576, // 1 MB
     }];
+
+    // Attestation that the icon image passed moderation
+    ModerationAttestation moderation_attestation = 5 [(validate.rules).message.required = true];
 }
 
 message UpdateIconResponse {
@@ -475,6 +490,9 @@ message UpdateMetadataRequest {
             min_len: 1,
             max_len: 4096,
         }];
+
+        // Attestation that the description passed moderation
+        ModerationAttestation moderation_attestation = 2 [(validate.rules).message.required = true];
     }
 
     message BillCustomizationUpdate {
@@ -545,4 +563,10 @@ enum PredefinedRange {
     LAST_WEEK  = 2;
     LAST_MONTH = 3;
     LAST_YEAR  = 4;
+}
+
+message ModerationAttestation {
+    bytes raw_value = 1 [(validate.rules).bytes = {
+        max_len: 4096,
+    }];
 }
