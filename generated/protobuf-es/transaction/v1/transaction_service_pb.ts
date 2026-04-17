@@ -1140,9 +1140,9 @@ export class StatefulSwapRequest_Initiate_ReserveSwapClientParameters extends Me
   /**
    * The amount to swap from the source mint in quarks.
    *
-   * @generated from field: uint64 amount = 4;
+   * @generated from field: uint64 swap_amount = 4;
    */
-  amount = protoInt64.zero;
+  swapAmount = protoInt64.zero;
 
   /**
    * Where "amount" of "from_mint" will be sent from to the VM swap PDA
@@ -1161,6 +1161,13 @@ export class StatefulSwapRequest_Initiate_ReserveSwapClientParameters extends Me
    */
   fundingId = "";
 
+  /**
+   * The fee amount to pay for this swap
+   *
+   * @generated from field: uint64 fee_amount = 7;
+   */
+  feeAmount = protoInt64.zero;
+
   constructor(data?: PartialMessage<StatefulSwapRequest_Initiate_ReserveSwapClientParameters>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1172,9 +1179,10 @@ export class StatefulSwapRequest_Initiate_ReserveSwapClientParameters extends Me
     { no: 1, name: "id", kind: "message", T: SwapId },
     { no: 2, name: "from_mint", kind: "message", T: SolanaAccountId },
     { no: 3, name: "to_mint", kind: "message", T: SolanaAccountId },
-    { no: 4, name: "amount", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 4, name: "swap_amount", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
     { no: 5, name: "funding_source", kind: "enum", T: proto3.getEnumType(FundingSource) },
     { no: 6, name: "funding_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 7, name: "fee_amount", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapRequest_Initiate_ReserveSwapClientParameters {
@@ -1508,7 +1516,7 @@ export class StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServer
  *  7. VM::InitializeVm
  *  8. AssociatedTokenAccount::CreateIdempotent (open owner's Core Mint ATA)
  *  9. AssociatedTokenAccount::CreateIdempotent (open owner's to_mint VM Deposit ATA)
- * 10. VM::TransferForSwap (Core Mint VM swap ATA -> owner's Core Mint ATA)
+ * 10. VM::TransferForSwapWithFee (Core Mint VM swap ATA -> owner's Core Mint ATA (swap amount) and fee destination (fee amount))
  * 11. Reserve::BuyTokens (limited buy transferring to_mint tokens into the to_mint VM Deposit ATA)
  * 12. Token::CloseAccount (closes owner's Core Mint ATA)
  *
@@ -1612,6 +1620,13 @@ export class StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParam
    */
   vmLockDurationInDays = 0;
 
+  /**
+   * Destination account where fee should be paid
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId fee_destination = 14;
+   */
+  feeDestination?: SolanaAccountId;
+
   constructor(data?: PartialMessage<StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1633,6 +1648,7 @@ export class StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParam
     { no: 11, name: "seed", kind: "message", T: SolanaAccountId },
     { no: 12, name: "sell_fee_bps", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 13, name: "vm_lock_duration_in_days", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 14, name: "fee_destination", kind: "message", T: SolanaAccountId },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter {

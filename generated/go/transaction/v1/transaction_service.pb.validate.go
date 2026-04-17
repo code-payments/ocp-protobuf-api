@@ -5332,9 +5332,9 @@ func (m *StatefulSwapRequest_Initiate_ReserveSwapClientParameters) Validate() er
 		}
 	}
 
-	if m.GetAmount() <= 0 {
+	if m.GetSwapAmount() <= 0 {
 		return StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{
-			field:  "Amount",
+			field:  "SwapAmount",
 			reason: "value must be greater than 0",
 		}
 	}
@@ -5350,6 +5350,13 @@ func (m *StatefulSwapRequest_Initiate_ReserveSwapClientParameters) Validate() er
 		return StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{
 			field:  "FundingId",
 			reason: "value length must be between 32 and 88 runes, inclusive",
+		}
+	}
+
+	if m.GetFeeAmount() <= 0 {
+		return StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{
+			field:  "FeeAmount",
+			reason: "value must be greater than 0",
 		}
 	}
 
@@ -6002,6 +6009,23 @@ func (m *StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter
 		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
 			field:  "VmLockDurationInDays",
 			reason: "value must equal 21",
+		}
+	}
+
+	if m.GetFeeDestination() == nil {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+			field:  "FeeDestination",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetFeeDestination()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+				field:  "FeeDestination",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
 		}
 	}
 
