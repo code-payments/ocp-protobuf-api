@@ -5353,12 +5353,7 @@ func (m *StatefulSwapRequest_Initiate_ReserveSwapClientParameters) Validate() er
 		}
 	}
 
-	if m.GetFeeAmount() <= 0 {
-		return StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{
-			field:  "FeeAmount",
-			reason: "value must be greater than 0",
-		}
-	}
+	// no validation rules for FeeAmount
 
 	return nil
 }
