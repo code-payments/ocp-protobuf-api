@@ -1836,10 +1836,10 @@ func (m *BillCustomization) Validate() error {
 		return nil
 	}
 
-	if l := len(m.GetColors()); l < 2 || l > 3 {
+	if l := len(m.GetColors()); l < 1 || l > 3 {
 		return BillCustomizationValidationError{
 			field:  "Colors",
-			reason: "value must contain between 2 and 3 items, inclusive",
+			reason: "value must contain between 1 and 3 items, inclusive",
 		}
 	}
 
