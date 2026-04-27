@@ -4270,6 +4270,18 @@ func (m *VerifiedSwapMetadata) Validate() error {
 			}
 		}
 
+	case *VerifiedSwapMetadata_Stablecoin:
+
+		if v, ok := interface{}(m.GetStablecoin()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return VerifiedSwapMetadataValidationError{
+					field:  "Stablecoin",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	default:
 		return VerifiedSwapMetadataValidationError{
 			field:  "Kind",
@@ -4421,6 +4433,94 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = VerifiedReserveSwapMetadataValidationError{}
+
+// Validate checks the field values on
+// VerifiedCoinbaseStableSwapperClientParameters with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *VerifiedCoinbaseStableSwapperClientParameters) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetClientParameters() == nil {
+		return VerifiedCoinbaseStableSwapperClientParametersValidationError{
+			field:  "ClientParameters",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetClientParameters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return VerifiedCoinbaseStableSwapperClientParametersValidationError{
+				field:  "ClientParameters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// VerifiedCoinbaseStableSwapperClientParametersValidationError is the
+// validation error returned by
+// VerifiedCoinbaseStableSwapperClientParameters.Validate if the designated
+// constraints aren't met.
+type VerifiedCoinbaseStableSwapperClientParametersValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e VerifiedCoinbaseStableSwapperClientParametersValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e VerifiedCoinbaseStableSwapperClientParametersValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e VerifiedCoinbaseStableSwapperClientParametersValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e VerifiedCoinbaseStableSwapperClientParametersValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e VerifiedCoinbaseStableSwapperClientParametersValidationError) ErrorName() string {
+	return "VerifiedCoinbaseStableSwapperClientParametersValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e VerifiedCoinbaseStableSwapperClientParametersValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVerifiedCoinbaseStableSwapperClientParameters.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = VerifiedCoinbaseStableSwapperClientParametersValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = VerifiedCoinbaseStableSwapperClientParametersValidationError{}
 
 // Validate checks the field values on SwapMetadata with the rules defined in
 // the proto definition for this message. If any rules are violated, an error
@@ -5114,6 +5214,18 @@ func (m *StatefulSwapRequest_Initiate) Validate() error {
 			}
 		}
 
+	case *StatefulSwapRequest_Initiate_Stablecoin:
+
+		if v, ok := interface{}(m.GetStablecoin()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StatefulSwapRequest_InitiateValidationError{
+					field:  "Stablecoin",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	default:
 		return StatefulSwapRequest_InitiateValidationError{
 			field:  "Kind",
@@ -5429,6 +5541,180 @@ var _StatefulSwapRequest_Initiate_ReserveSwapClientParameters_FundingSource_InLo
 	2: {},
 }
 
+// Validate checks the field values on
+// StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetId() == nil {
+		return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
+			field:  "Id",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
+				field:  "Id",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetFromMint() == nil {
+		return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
+			field:  "FromMint",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetFromMint()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
+				field:  "FromMint",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetToMint() == nil {
+		return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
+			field:  "ToMint",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetToMint()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
+				field:  "ToMint",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetSwapAmount() <= 0 {
+		return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
+			field:  "SwapAmount",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	if _, ok := _StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters_FundingSource_InLookup[m.GetFundingSource()]; !ok {
+		return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
+			field:  "FundingSource",
+			reason: "value must be in list [1]",
+		}
+	}
+
+	if utf8.RuneCountInString(m.GetFundingId()) != 32 {
+		return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
+			field:  "FundingId",
+			reason: "value length must be 32 runes",
+		}
+
+	}
+
+	if m.GetDestinationOwner() == nil {
+		return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
+			field:  "DestinationOwner",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetDestinationOwner()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
+				field:  "DestinationOwner",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for FeeAmount
+
+	return nil
+}
+
+// StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError
+// is the validation error returned by
+// StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters.Validate
+// if the designated constraints aren't met.
+type StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError) ErrorName() string {
+	return "StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sStatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{}
+
+var _StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters_FundingSource_InLookup = map[FundingSource]struct{}{
+	1: {},
+}
+
 // Validate checks the field values on StatefulSwapResponse_ServerParameters
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, an error is returned.
@@ -5457,6 +5743,18 @@ func (m *StatefulSwapResponse_ServerParameters) Validate() error {
 			if err := v.Validate(); err != nil {
 				return StatefulSwapResponse_ServerParametersValidationError{
 					field:  "ReserveNewCurrency",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *StatefulSwapResponse_ServerParameters_Stablecoin:
+
+		if v, ok := interface{}(m.GetStablecoin()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StatefulSwapResponse_ServerParametersValidationError{
+					field:  "Stablecoin",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -6092,6 +6390,195 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{}
+
+// Validate checks the field values on
+// StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, an error is returned.
+func (m *StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetPayer() == nil {
+		return StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
+			field:  "Payer",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetPayer()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
+				field:  "Payer",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetNonce() == nil {
+		return StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
+			field:  "Nonce",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetNonce()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
+				field:  "Nonce",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetBlockhash() == nil {
+		return StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
+			field:  "Blockhash",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetBlockhash()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
+				field:  "Blockhash",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	for idx, item := range m.GetAlts() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
+					field:  fmt.Sprintf("Alts[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for ComputeUnitLimit
+
+	// no validation rules for ComputeUnitPrice
+
+	if utf8.RuneCountInString(m.GetMemoValue()) > 64 {
+		return StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
+			field:  "MemoValue",
+			reason: "value length must be at most 64 runes",
+		}
+	}
+
+	if m.GetFeeDestination() == nil {
+		return StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
+			field:  "FeeDestination",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetFeeDestination()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
+				field:  "FeeDestination",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetPoolFeeRecipient() == nil {
+		return StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
+			field:  "PoolFeeRecipient",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetPoolFeeRecipient()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
+				field:  "PoolFeeRecipient",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError
+// is the validation error returned by
+// StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter.Validate
+// if the designated constraints aren't met.
+type StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError) ErrorName() string {
+	return "StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sStatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{}
 
 // Validate checks the field values on PublicDistributionMetadata_Distribution
 // with the rules defined in the proto definition for this message. If any

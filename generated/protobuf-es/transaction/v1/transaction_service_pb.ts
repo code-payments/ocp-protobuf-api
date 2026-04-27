@@ -1043,6 +1043,12 @@ export class StatefulSwapRequest_Initiate extends Message<StatefulSwapRequest_In
      */
     value: StatefulSwapRequest_Initiate_ReserveSwapClientParameters;
     case: "reserve";
+  } | {
+    /**
+     * @generated from field: ocp.transaction.v1.StatefulSwapRequest.Initiate.CoinbaseStableSwapperClientParameters stablecoin = 2;
+     */
+    value: StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters;
+    case: "stablecoin";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   /**
@@ -1057,6 +1063,7 @@ export class StatefulSwapRequest_Initiate extends Message<StatefulSwapRequest_In
    *
    * For Reserve contract buy/sell flows against existing currencies, this must be a random one-time use account.
    * For Reserve contract buy flows against new currencies, this must be the owner account that is the currency creator.
+   * For Coinbase Stable Swapper swap flows, this must be a random one-time use account.
    *
    * @generated from field: ocp.common.v1.SolanaAccountId swap_authority = 10;
    */
@@ -1087,6 +1094,7 @@ export class StatefulSwapRequest_Initiate extends Message<StatefulSwapRequest_In
   static readonly typeName = "ocp.transaction.v1.StatefulSwapRequest.Initiate";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "reserve", kind: "message", T: StatefulSwapRequest_Initiate_ReserveSwapClientParameters, oneof: "kind" },
+    { no: 2, name: "stablecoin", kind: "message", T: StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters, oneof: "kind" },
     { no: 9, name: "owner", kind: "message", T: SolanaAccountId },
     { no: 10, name: "swap_authority", kind: "message", T: SolanaAccountId },
     { no: 11, name: "proof_signature", kind: "message", T: Signature },
@@ -1199,6 +1207,107 @@ export class StatefulSwapRequest_Initiate_ReserveSwapClientParameters extends Me
 
   static equals(a: StatefulSwapRequest_Initiate_ReserveSwapClientParameters | PlainMessage<StatefulSwapRequest_Initiate_ReserveSwapClientParameters> | undefined, b: StatefulSwapRequest_Initiate_ReserveSwapClientParameters | PlainMessage<StatefulSwapRequest_Initiate_ReserveSwapClientParameters> | undefined): boolean {
     return proto3.util.equals(StatefulSwapRequest_Initiate_ReserveSwapClientParameters, a, b);
+  }
+}
+
+/**
+ * Client parameters for starting swaps against the Coinbase Stable Swaper program
+ *
+ * @generated from message ocp.transaction.v1.StatefulSwapRequest.Initiate.CoinbaseStableSwapperClientParameters
+ */
+export class StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters extends Message<StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters> {
+  /**
+   * The unique ID for this swap randomly generated on client
+   *
+   * @generated from field: ocp.common.v1.SwapId id = 1;
+   */
+  id?: SwapId;
+
+  /**
+   * The source mint that will be swapped from
+   *
+   * Note: Currently always the core mint
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId from_mint = 2;
+   */
+  fromMint?: SolanaAccountId;
+
+  /**
+   * The destination mint that will be swapped to
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId to_mint = 3;
+   */
+  toMint?: SolanaAccountId;
+
+  /**
+   * The amount to swap from the source mint in quarks.
+   *
+   * @generated from field: uint64 swap_amount = 4;
+   */
+  swapAmount = protoInt64.zero;
+
+  /**
+   * Where "amount" of "from_mint" will be sent from to the VM swap PDA
+   *
+   * @generated from field: ocp.transaction.v1.FundingSource funding_source = 5;
+   */
+  fundingSource = FundingSource.UNKNOWN;
+
+  /**
+   * The ID of the "transaction" to lookup funding state.
+   *
+   * For FUNDING_SOURCE_SUBMIT_INTENT, this value is the base58 encoded intent ID.
+   *
+   * @generated from field: string funding_id = 6;
+   */
+  fundingId = "";
+
+  /**
+   * Destination owner account where from_mint tokens will land
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId destination_owner = 7;
+   */
+  destinationOwner?: SolanaAccountId;
+
+  /**
+   * The fee amount to pay for this swap
+   *
+   * @generated from field: uint64 fee_amount = 8;
+   */
+  feeAmount = protoInt64.zero;
+
+  constructor(data?: PartialMessage<StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.transaction.v1.StatefulSwapRequest.Initiate.CoinbaseStableSwapperClientParameters";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "id", kind: "message", T: SwapId },
+    { no: 2, name: "from_mint", kind: "message", T: SolanaAccountId },
+    { no: 3, name: "to_mint", kind: "message", T: SolanaAccountId },
+    { no: 4, name: "swap_amount", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 5, name: "funding_source", kind: "enum", T: proto3.getEnumType(FundingSource) },
+    { no: 6, name: "funding_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 7, name: "destination_owner", kind: "message", T: SolanaAccountId },
+    { no: 8, name: "fee_amount", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters {
+    return new StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters {
+    return new StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters {
+    return new StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters | PlainMessage<StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters> | undefined, b: StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters | PlainMessage<StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters> | undefined): boolean {
+    return proto3.util.equals(StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters, a, b);
   }
 }
 
@@ -1319,6 +1428,12 @@ export class StatefulSwapResponse_ServerParameters extends Message<StatefulSwapR
      */
     value: StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter;
     case: "reserveNewCurrency";
+  } | {
+    /**
+     * @generated from field: ocp.transaction.v1.StatefulSwapResponse.ServerParameters.CoinbaseStableSwapperServerParameter stablecoin = 3;
+     */
+    value: StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter;
+    case: "stablecoin";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<StatefulSwapResponse_ServerParameters>) {
@@ -1331,6 +1446,7 @@ export class StatefulSwapResponse_ServerParameters extends Message<StatefulSwapR
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "reserve_existing_currency", kind: "message", T: StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters, oneof: "kind" },
     { no: 2, name: "reserve_new_currency", kind: "message", T: StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter, oneof: "kind" },
+    { no: 3, name: "stablecoin", kind: "message", T: StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter, oneof: "kind" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_ServerParameters {
@@ -1665,6 +1781,130 @@ export class StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParam
 
   static equals(a: StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter | PlainMessage<StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter> | undefined, b: StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter | PlainMessage<StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter> | undefined): boolean {
     return proto3.util.equals(StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter, a, b);
+  }
+}
+
+/**
+ * Server parameters when executing stateful swap flows against the
+ * Coinbase Stable Swapper program.
+ *
+ * Supported Solana transaction version: v0
+ *
+ * Instruction format:
+ *  1. System::AdvanceNonce
+ *  2. [Optional] ComputeBudget::SetComputeUnitLimit
+ *  3. [Optional] ComputeBudget::SetComputeUnitPrice
+ *  4. [Optional] Memo::Memo
+ *  5. AssociatedTokenAccount::CreateIdempotent (open swap authority's from_mint ATA)
+ *  6. AssociatedTokenAccount::CreateIdempotent (open destination owner's to_mint ATA)
+ *  7. VM::TransferForSwapWithFee (from_mint VM swap ATA -> swap authority's from_mint ATA (swap amount) and fee destination (fee amount))
+ *  8. CoinbaseStableSwapper::Swap (from_mint swap authority ATA -> to_mint destination owner ATA)
+ *  9. Token::CloseAccount (closes swap authority's from_mint ATA)
+ *
+ * @generated from message ocp.transaction.v1.StatefulSwapResponse.ServerParameters.CoinbaseStableSwapperServerParameter
+ */
+export class StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter extends Message<StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter> {
+  /**
+   * Subisdizer account that will be paying for the swap
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId payer = 1;
+   */
+  payer?: SolanaAccountId;
+
+  /**
+   * The nonce that is reserved for use in the swap transaction
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId nonce = 2;
+   */
+  nonce?: SolanaAccountId;
+
+  /**
+   * The blockhash that is reserved for use in the swap transaction
+   *
+   * @generated from field: ocp.common.v1.Blockhash blockhash = 3;
+   */
+  blockhash?: Blockhash;
+
+  /**
+   * ALTs that should be used when constructing the versioned transaction
+   *
+   * @generated from field: repeated ocp.common.v1.SolanaAddressLookupTable alts = 4;
+   */
+  alts: SolanaAddressLookupTable[] = [];
+
+  /**
+   * Compute unit limit provided to the ComputeBudget::SetComputeUnitLimit
+   * instruction. If the value is 0, then the instruction can be omitted.
+   *
+   * @generated from field: uint32 compute_unit_limit = 5;
+   */
+  computeUnitLimit = 0;
+
+  /**
+   * Compute unit price provided in the ComputeBudget::SetComputeUnitPrice
+   * instruction. If the value is 0, then the instruction can be omitted.
+   *
+   * @generated from field: uint64 compute_unit_price = 6;
+   */
+  computeUnitPrice = protoInt64.zero;
+
+  /**
+   * Value provided into the Memo::Memo instruction. If the value length is 0,
+   * then the instruction can be omitted.
+   *
+   * @generated from field: string memo_value = 7;
+   */
+  memoValue = "";
+
+  /**
+   * Destination account where fee should be paid
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId fee_destination = 8;
+   */
+  feeDestination?: SolanaAccountId;
+
+  /**
+   * The CoinbaseStableSwapper liquidity pool's configured fee recipient,
+   * sourced from the on-chain LiquidityPool account. Required by the
+   * CoinbaseStableSwapper::Swap instruction.
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId pool_fee_recipient = 9;
+   */
+  poolFeeRecipient?: SolanaAccountId;
+
+  constructor(data?: PartialMessage<StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.transaction.v1.StatefulSwapResponse.ServerParameters.CoinbaseStableSwapperServerParameter";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "payer", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "nonce", kind: "message", T: SolanaAccountId },
+    { no: 3, name: "blockhash", kind: "message", T: Blockhash },
+    { no: 4, name: "alts", kind: "message", T: SolanaAddressLookupTable, repeated: true },
+    { no: 5, name: "compute_unit_limit", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 6, name: "compute_unit_price", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 7, name: "memo_value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 8, name: "fee_destination", kind: "message", T: SolanaAccountId },
+    { no: 9, name: "pool_fee_recipient", kind: "message", T: SolanaAccountId },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter {
+    return new StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter {
+    return new StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter {
+    return new StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter | PlainMessage<StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter> | undefined, b: StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter | PlainMessage<StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter> | undefined): boolean {
+    return proto3.util.equals(StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter, a, b);
   }
 }
 
@@ -3710,6 +3950,12 @@ export class VerifiedSwapMetadata extends Message<VerifiedSwapMetadata> {
      */
     value: VerifiedReserveSwapMetadata;
     case: "reserve";
+  } | {
+    /**
+     * @generated from field: ocp.transaction.v1.VerifiedCoinbaseStableSwapperClientParameters stablecoin = 2;
+     */
+    value: VerifiedCoinbaseStableSwapperClientParameters;
+    case: "stablecoin";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   constructor(data?: PartialMessage<VerifiedSwapMetadata>) {
@@ -3721,6 +3967,7 @@ export class VerifiedSwapMetadata extends Message<VerifiedSwapMetadata> {
   static readonly typeName = "ocp.transaction.v1.VerifiedSwapMetadata";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "reserve", kind: "message", T: VerifiedReserveSwapMetadata, oneof: "kind" },
+    { no: 2, name: "stablecoin", kind: "message", T: VerifiedCoinbaseStableSwapperClientParameters, oneof: "kind" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VerifiedSwapMetadata {
@@ -3779,6 +4026,48 @@ export class VerifiedReserveSwapMetadata extends Message<VerifiedReserveSwapMeta
 
   static equals(a: VerifiedReserveSwapMetadata | PlainMessage<VerifiedReserveSwapMetadata> | undefined, b: VerifiedReserveSwapMetadata | PlainMessage<VerifiedReserveSwapMetadata> | undefined): boolean {
     return proto3.util.equals(VerifiedReserveSwapMetadata, a, b);
+  }
+}
+
+/**
+ * VerifiedCoinbaseStableSwapperClientParameters is verified metadata for swaps against the
+ * Coinbase Stable Swapper program
+ *
+ * @generated from message ocp.transaction.v1.VerifiedCoinbaseStableSwapperClientParameters
+ */
+export class VerifiedCoinbaseStableSwapperClientParameters extends Message<VerifiedCoinbaseStableSwapperClientParameters> {
+  /**
+   * Verifiable client-side parameters that were provided during the StatefulSwap RPC
+   *
+   * @generated from field: ocp.transaction.v1.StatefulSwapRequest.Initiate.CoinbaseStableSwapperClientParameters client_parameters = 1;
+   */
+  clientParameters?: StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters;
+
+  constructor(data?: PartialMessage<VerifiedCoinbaseStableSwapperClientParameters>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.transaction.v1.VerifiedCoinbaseStableSwapperClientParameters";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "client_parameters", kind: "message", T: StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VerifiedCoinbaseStableSwapperClientParameters {
+    return new VerifiedCoinbaseStableSwapperClientParameters().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): VerifiedCoinbaseStableSwapperClientParameters {
+    return new VerifiedCoinbaseStableSwapperClientParameters().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): VerifiedCoinbaseStableSwapperClientParameters {
+    return new VerifiedCoinbaseStableSwapperClientParameters().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: VerifiedCoinbaseStableSwapperClientParameters | PlainMessage<VerifiedCoinbaseStableSwapperClientParameters> | undefined, b: VerifiedCoinbaseStableSwapperClientParameters | PlainMessage<VerifiedCoinbaseStableSwapperClientParameters> | undefined): boolean {
+    return proto3.util.equals(VerifiedCoinbaseStableSwapperClientParameters, a, b);
   }
 }
 
