@@ -1263,14 +1263,16 @@ export class StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters 
   fundingId = "";
 
   /**
-   * Destination owner account where from_mint tokens will land
+   * Destination owner account where from_mint tokens will land. Use
+   * CanWithdrawToAccountResponse to determine if an account is an owner.
    *
    * @generated from field: ocp.common.v1.SolanaAccountId destination_owner = 7;
    */
   destinationOwner?: SolanaAccountId;
 
   /**
-   * The fee amount to pay for this swap
+   * The fee amount to pay for this swap, which should be exactly
+   * CanWithdrawToAccountResponse.fee_amount
    *
    * @generated from field: uint64 fee_amount = 8;
    */

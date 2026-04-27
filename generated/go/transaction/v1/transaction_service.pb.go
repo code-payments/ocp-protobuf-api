@@ -4700,9 +4700,11 @@ type StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters struct {
 	//
 	// For FUNDING_SOURCE_SUBMIT_INTENT, this value is the base58 encoded intent ID.
 	FundingId string `protobuf:"bytes,6,opt,name=funding_id,json=fundingId,proto3" json:"funding_id,omitempty"`
-	// Destination owner account where from_mint tokens will land
+	// Destination owner account where from_mint tokens will land. Use
+	// CanWithdrawToAccountResponse to determine if an account is an owner.
 	DestinationOwner *v1.SolanaAccountId `protobuf:"bytes,7,opt,name=destination_owner,json=destinationOwner,proto3" json:"destination_owner,omitempty"`
-	// The fee amount to pay for this swap
+	// The fee amount to pay for this swap, which should be exactly
+	// CanWithdrawToAccountResponse.fee_amount
 	FeeAmount uint64 `protobuf:"varint,8,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"`
 }
 
