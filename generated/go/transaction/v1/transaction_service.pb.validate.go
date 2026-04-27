@@ -5611,14 +5611,32 @@ func (m *StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters) Val
 	if _, ok := _StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters_FundingSource_InLookup[m.GetFundingSource()]; !ok {
 		return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
 			field:  "FundingSource",
-			reason: "value must be in list [1 2]",
+			reason: "value must be in list [1]",
 		}
 	}
 
-	if l := utf8.RuneCountInString(m.GetFundingId()); l < 32 || l > 88 {
+	if utf8.RuneCountInString(m.GetFundingId()) != 32 {
 		return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
 			field:  "FundingId",
-			reason: "value length must be between 32 and 88 runes, inclusive",
+			reason: "value length must be 32 runes",
+		}
+
+	}
+
+	if m.GetDestinationOwner() == nil {
+		return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
+			field:  "DestinationOwner",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetDestinationOwner()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
+				field:  "DestinationOwner",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
 		}
 	}
 
@@ -5695,7 +5713,6 @@ var _ interface {
 
 var _StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters_FundingSource_InLookup = map[FundingSource]struct{}{
 	1: {},
-	2: {},
 }
 
 // Validate checks the field values on StatefulSwapResponse_ServerParameters

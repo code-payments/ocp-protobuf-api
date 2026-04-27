@@ -1063,7 +1063,7 @@ export class StatefulSwapRequest_Initiate extends Message<StatefulSwapRequest_In
    *
    * For Reserve contract buy/sell flows against existing currencies, this must be a random one-time use account.
    * For Reserve contract buy flows against new currencies, this must be the owner account that is the currency creator.
-   * For Coinbase Stable Swapper swap flows, this must be the destination owner.
+   * For Coinbase Stable Swapper swap flows, this must be a random one-time use account.
    *
    * @generated from field: ocp.common.v1.SolanaAccountId swap_authority = 10;
    */
@@ -1226,6 +1226,8 @@ export class StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters 
   /**
    * The source mint that will be swapped from
    *
+   * Note: Currently always the core mint
+   *
    * @generated from field: ocp.common.v1.SolanaAccountId from_mint = 2;
    */
   fromMint?: SolanaAccountId;
@@ -1255,16 +1257,22 @@ export class StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters 
    * The ID of the "transaction" to lookup funding state.
    *
    * For FUNDING_SOURCE_SUBMIT_INTENT, this value is the base58 encoded intent ID.
-   * For FUNDING_SOURCE_EXTERNAL_WALLET, this value is the base58 encoded transaction signature.
    *
    * @generated from field: string funding_id = 6;
    */
   fundingId = "";
 
   /**
+   * Destination owner account where from_mint tokens will land
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId destination_owner = 7;
+   */
+  destinationOwner?: SolanaAccountId;
+
+  /**
    * The fee amount to pay for this swap
    *
-   * @generated from field: uint64 fee_amount = 7;
+   * @generated from field: uint64 fee_amount = 8;
    */
   feeAmount = protoInt64.zero;
 
@@ -1282,7 +1290,8 @@ export class StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters 
     { no: 4, name: "swap_amount", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
     { no: 5, name: "funding_source", kind: "enum", T: proto3.getEnumType(FundingSource) },
     { no: 6, name: "funding_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 7, name: "fee_amount", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 7, name: "destination_owner", kind: "message", T: SolanaAccountId },
+    { no: 8, name: "fee_amount", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters {
@@ -1786,9 +1795,11 @@ export class StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParam
  *  2. [Optional] ComputeBudget::SetComputeUnitLimit
  *  3. [Optional] ComputeBudget::SetComputeUnitPrice
  *  4. [Optional] Memo::Memo
- *  5. AssociatedTokenAccount::CreateIdempotent (open swap authority's to_mint ATA)
- *  6. VM::TransferForSwapWithFee (from_mint VM swap ATA -> swap authority's to_mint ATA (swap amount) and fee destination (fee amount))
- *  7. CoinbaseStableSwapper::Swap (from_mint swap authority ATA -> to_mint swap authority ATA)
+ *  5. AssociatedTokenAccount::CreateIdempotent (open swap authority's from_mint ATA)
+ *  6. AssociatedTokenAccount::CreateIdempotent (open destination owner's to_mint ATA)
+ *  7. VM::TransferForSwapWithFee (from_mint VM swap ATA -> swap authority's from_mint ATA (swap amount) and fee destination (fee amount))
+ *  8. CoinbaseStableSwapper::Swap (from_mint swap authority ATA -> to_mint destination owner ATA)
+ *  9. Token::CloseAccount (closes swap authority's from_mint ATA)
  *
  * @generated from message ocp.transaction.v1.StatefulSwapResponse.ServerParameters.CoinbaseStableSwapperServerParameter
  */
