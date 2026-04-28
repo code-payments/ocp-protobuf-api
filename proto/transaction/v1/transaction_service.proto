@@ -1168,8 +1168,8 @@ message VerifiedSwapMetadata {
     oneof kind {
         option (validate.required) = true;
 
-        VerifiedReserveSwapMetadata                   reserve    = 1;
-        VerifiedCoinbaseStableSwapperClientParameters stablecoin = 2;
+        VerifiedReserveSwapMetadata               reserve    = 1;
+        VerifiedCoinbaseStableSwapperSwapMetadata stablecoin = 2;
     }
 }
 
@@ -1180,9 +1180,9 @@ message VerifiedReserveSwapMetadata {
     StatefulSwapRequest.Initiate.ReserveSwapClientParameters client_parameters = 1 [(validate.rules).message.required = true];
 }
 
-// VerifiedCoinbaseStableSwapperClientParameters is verified metadata for swaps against the
+// VerifiedCoinbaseStableSwapperSwapMetadata is verified metadata for swaps against the
 // Coinbase Stable Swapper program
-message VerifiedCoinbaseStableSwapperClientParameters {
+message VerifiedCoinbaseStableSwapperSwapMetadata {
     // Verifiable client-side parameters that were provided during the StatefulSwap RPC
     StatefulSwapRequest.Initiate.CoinbaseStableSwapperClientParameters client_parameters = 1 [(validate.rules).message.required = true];
 }
