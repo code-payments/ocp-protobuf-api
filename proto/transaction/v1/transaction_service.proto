@@ -379,7 +379,7 @@ message StatefulSwapRequest {
             // For FUNDING_SOURCE_SUBMIT_INTENT, this value is the base58 encoded intent ID.
             string funding_id = 6 [(validate.rules).string = {
                 min_len: 32,
-                max_len: 32,
+                max_len: 44,
             }];
 
             // Destination owner account where from_mint tokens will land. Use
