@@ -5612,12 +5612,11 @@ func (m *StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters) Val
 		}
 	}
 
-	if utf8.RuneCountInString(m.GetFundingId()) != 32 {
+	if l := utf8.RuneCountInString(m.GetFundingId()); l < 32 || l > 44 {
 		return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
 			field:  "FundingId",
-			reason: "value length must be 32 runes",
+			reason: "value length must be between 32 and 44 runes, inclusive",
 		}
-
 	}
 
 	if m.GetDestinationOwner() == nil {
