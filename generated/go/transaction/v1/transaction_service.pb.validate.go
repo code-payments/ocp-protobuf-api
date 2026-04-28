@@ -4435,15 +4435,15 @@ var _ interface {
 } = VerifiedReserveSwapMetadataValidationError{}
 
 // Validate checks the field values on
-// VerifiedCoinbaseStableSwapperClientParameters with the rules defined in the
+// VerifiedCoinbaseStableSwapperSwapMetadata with the rules defined in the
 // proto definition for this message. If any rules are violated, an error is returned.
-func (m *VerifiedCoinbaseStableSwapperClientParameters) Validate() error {
+func (m *VerifiedCoinbaseStableSwapperSwapMetadata) Validate() error {
 	if m == nil {
 		return nil
 	}
 
 	if m.GetClientParameters() == nil {
-		return VerifiedCoinbaseStableSwapperClientParametersValidationError{
+		return VerifiedCoinbaseStableSwapperSwapMetadataValidationError{
 			field:  "ClientParameters",
 			reason: "value is required",
 		}
@@ -4451,7 +4451,7 @@ func (m *VerifiedCoinbaseStableSwapperClientParameters) Validate() error {
 
 	if v, ok := interface{}(m.GetClientParameters()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return VerifiedCoinbaseStableSwapperClientParametersValidationError{
+			return VerifiedCoinbaseStableSwapperSwapMetadataValidationError{
 				field:  "ClientParameters",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -4462,11 +4462,10 @@ func (m *VerifiedCoinbaseStableSwapperClientParameters) Validate() error {
 	return nil
 }
 
-// VerifiedCoinbaseStableSwapperClientParametersValidationError is the
-// validation error returned by
-// VerifiedCoinbaseStableSwapperClientParameters.Validate if the designated
-// constraints aren't met.
-type VerifiedCoinbaseStableSwapperClientParametersValidationError struct {
+// VerifiedCoinbaseStableSwapperSwapMetadataValidationError is the validation
+// error returned by VerifiedCoinbaseStableSwapperSwapMetadata.Validate if the
+// designated constraints aren't met.
+type VerifiedCoinbaseStableSwapperSwapMetadataValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4474,26 +4473,24 @@ type VerifiedCoinbaseStableSwapperClientParametersValidationError struct {
 }
 
 // Field function returns field value.
-func (e VerifiedCoinbaseStableSwapperClientParametersValidationError) Field() string { return e.field }
+func (e VerifiedCoinbaseStableSwapperSwapMetadataValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e VerifiedCoinbaseStableSwapperClientParametersValidationError) Reason() string {
-	return e.reason
-}
+func (e VerifiedCoinbaseStableSwapperSwapMetadataValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e VerifiedCoinbaseStableSwapperClientParametersValidationError) Cause() error { return e.cause }
+func (e VerifiedCoinbaseStableSwapperSwapMetadataValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e VerifiedCoinbaseStableSwapperClientParametersValidationError) Key() bool { return e.key }
+func (e VerifiedCoinbaseStableSwapperSwapMetadataValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e VerifiedCoinbaseStableSwapperClientParametersValidationError) ErrorName() string {
-	return "VerifiedCoinbaseStableSwapperClientParametersValidationError"
+func (e VerifiedCoinbaseStableSwapperSwapMetadataValidationError) ErrorName() string {
+	return "VerifiedCoinbaseStableSwapperSwapMetadataValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e VerifiedCoinbaseStableSwapperClientParametersValidationError) Error() string {
+func (e VerifiedCoinbaseStableSwapperSwapMetadataValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4505,14 +4502,14 @@ func (e VerifiedCoinbaseStableSwapperClientParametersValidationError) Error() st
 	}
 
 	return fmt.Sprintf(
-		"invalid %sVerifiedCoinbaseStableSwapperClientParameters.%s: %s%s",
+		"invalid %sVerifiedCoinbaseStableSwapperSwapMetadata.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = VerifiedCoinbaseStableSwapperClientParametersValidationError{}
+var _ error = VerifiedCoinbaseStableSwapperSwapMetadataValidationError{}
 
 var _ interface {
 	Field() string
@@ -4520,7 +4517,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = VerifiedCoinbaseStableSwapperClientParametersValidationError{}
+} = VerifiedCoinbaseStableSwapperSwapMetadataValidationError{}
 
 // Validate checks the field values on SwapMetadata with the rules defined in
 // the proto definition for this message. If any rules are violated, an error

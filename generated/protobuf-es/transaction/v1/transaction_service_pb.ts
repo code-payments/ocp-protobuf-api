@@ -3954,9 +3954,9 @@ export class VerifiedSwapMetadata extends Message<VerifiedSwapMetadata> {
     case: "reserve";
   } | {
     /**
-     * @generated from field: ocp.transaction.v1.VerifiedCoinbaseStableSwapperClientParameters stablecoin = 2;
+     * @generated from field: ocp.transaction.v1.VerifiedCoinbaseStableSwapperSwapMetadata stablecoin = 2;
      */
-    value: VerifiedCoinbaseStableSwapperClientParameters;
+    value: VerifiedCoinbaseStableSwapperSwapMetadata;
     case: "stablecoin";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
@@ -3969,7 +3969,7 @@ export class VerifiedSwapMetadata extends Message<VerifiedSwapMetadata> {
   static readonly typeName = "ocp.transaction.v1.VerifiedSwapMetadata";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "reserve", kind: "message", T: VerifiedReserveSwapMetadata, oneof: "kind" },
-    { no: 2, name: "stablecoin", kind: "message", T: VerifiedCoinbaseStableSwapperClientParameters, oneof: "kind" },
+    { no: 2, name: "stablecoin", kind: "message", T: VerifiedCoinbaseStableSwapperSwapMetadata, oneof: "kind" },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VerifiedSwapMetadata {
@@ -4032,12 +4032,12 @@ export class VerifiedReserveSwapMetadata extends Message<VerifiedReserveSwapMeta
 }
 
 /**
- * VerifiedCoinbaseStableSwapperClientParameters is verified metadata for swaps against the
+ * VerifiedCoinbaseStableSwapperSwapMetadata is verified metadata for swaps against the
  * Coinbase Stable Swapper program
  *
- * @generated from message ocp.transaction.v1.VerifiedCoinbaseStableSwapperClientParameters
+ * @generated from message ocp.transaction.v1.VerifiedCoinbaseStableSwapperSwapMetadata
  */
-export class VerifiedCoinbaseStableSwapperClientParameters extends Message<VerifiedCoinbaseStableSwapperClientParameters> {
+export class VerifiedCoinbaseStableSwapperSwapMetadata extends Message<VerifiedCoinbaseStableSwapperSwapMetadata> {
   /**
    * Verifiable client-side parameters that were provided during the StatefulSwap RPC
    *
@@ -4045,31 +4045,31 @@ export class VerifiedCoinbaseStableSwapperClientParameters extends Message<Verif
    */
   clientParameters?: StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters;
 
-  constructor(data?: PartialMessage<VerifiedCoinbaseStableSwapperClientParameters>) {
+  constructor(data?: PartialMessage<VerifiedCoinbaseStableSwapperSwapMetadata>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "ocp.transaction.v1.VerifiedCoinbaseStableSwapperClientParameters";
+  static readonly typeName = "ocp.transaction.v1.VerifiedCoinbaseStableSwapperSwapMetadata";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "client_parameters", kind: "message", T: StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VerifiedCoinbaseStableSwapperClientParameters {
-    return new VerifiedCoinbaseStableSwapperClientParameters().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): VerifiedCoinbaseStableSwapperSwapMetadata {
+    return new VerifiedCoinbaseStableSwapperSwapMetadata().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): VerifiedCoinbaseStableSwapperClientParameters {
-    return new VerifiedCoinbaseStableSwapperClientParameters().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): VerifiedCoinbaseStableSwapperSwapMetadata {
+    return new VerifiedCoinbaseStableSwapperSwapMetadata().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): VerifiedCoinbaseStableSwapperClientParameters {
-    return new VerifiedCoinbaseStableSwapperClientParameters().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): VerifiedCoinbaseStableSwapperSwapMetadata {
+    return new VerifiedCoinbaseStableSwapperSwapMetadata().fromJsonString(jsonString, options);
   }
 
-  static equals(a: VerifiedCoinbaseStableSwapperClientParameters | PlainMessage<VerifiedCoinbaseStableSwapperClientParameters> | undefined, b: VerifiedCoinbaseStableSwapperClientParameters | PlainMessage<VerifiedCoinbaseStableSwapperClientParameters> | undefined): boolean {
-    return proto3.util.equals(VerifiedCoinbaseStableSwapperClientParameters, a, b);
+  static equals(a: VerifiedCoinbaseStableSwapperSwapMetadata | PlainMessage<VerifiedCoinbaseStableSwapperSwapMetadata> | undefined, b: VerifiedCoinbaseStableSwapperSwapMetadata | PlainMessage<VerifiedCoinbaseStableSwapperSwapMetadata> | undefined): boolean {
+    return proto3.util.equals(VerifiedCoinbaseStableSwapperSwapMetadata, a, b);
   }
 }
 
