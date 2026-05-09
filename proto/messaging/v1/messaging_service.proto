@@ -31,6 +31,16 @@ service Messaging {
     //   6. The payment recipient sends the destination address in a RequestToGrabBill message.
     //   7. The payment sender receives the RequestToGrabBill message in real time, submits the intent
     //      for the payment to the provided destination, and then closes the stream.
+    //
+    // For merchant payments (receiving a bill), the expected flow is as follows:
+    //   1. The merchant/integrator creates a payment request scan code (Kind=RequestPayment).
+    //   2. The merchant/integrator calls OpenMessageStream on the rendezvous public key.
+    //   3. The merchant/integrator uses SendMessage to send a RequestToReceiveBill message.
+    //   4. The merchant/integrator shows the scan code containing the rendezvous public key.
+    //   5. The customer scans the code.
+    //   6. The customer uses PollMessages to get the RequestToReceiveBill message from part 3.
+    //   7. The customer confirms payment and submits the intent. The server atomically routes
+    //      the payment amount to the requestor and any additional fees to the specified destinations.
     rpc OpenMessageStream(OpenMessageStreamRequest) returns (stream OpenMessageStreamResponse);
 
     // OpenMessageStreamWithKeepAlive is like OpenMessageStream, but enables a ping/pong
@@ -231,6 +241,12 @@ message Message {
 
         RequestToGrabBill request_to_grab_bill = 3;
         RequestToGiveBill request_to_give_bill = 4;
+
+        //
+        // Section: Merchant Payments
+        //
+
+        RequestToReceiveBill request_to_receive_bill = 6;
     }
 
     // Additional server-provided context for messages sent by client
@@ -242,5 +258,37 @@ message AdditionalServerContext {
         option (validate.required) = true;
 
         RequestToGiveBillServerContext request_to_give_bill = 1;
+        RequestToReceiveBillServerContext request_to_receive_bill = 2;
     }
+}
+
+// Request that a bill be received in the desired mint.
+//
+// This message type is only initiated by clients.
+message RequestToReceiveBill {
+    // Requestor is the virtual token account on the VM to which a payment
+    // should be sent.
+    common.v1.SolanaAccountId requestor_account = 1 [(validate.rules).message.required = true];
+
+    // The mint that the bill should be received in
+    common.v1.SolanaAccountId mint = 2 [(validate.rules).message.required = true];
+
+    // The validated exchange data that was used to compute the fiat value
+    transaction.v1.VerifiedExchangeData exchange_data = 3;
+
+    // Optional fees to be routed atomically as part of the payment
+    repeated AdditionalFeePayment additional_fees = 4 [(validate.rules).repeated.max_items = 10];
+}
+
+message AdditionalFeePayment {
+    // The virtual token account on the VM where the fee should be sent
+    common.v1.SolanaAccountId destination = 1 [(validate.rules).message.required = true];
+
+    // Fee amount in basis points
+    uint32 fee_bps = 2 [(validate.rules).uint32 = {gte: 1, lte: 5000}];
+}
+
+message RequestToReceiveBillServerContext {
+    // Mint metadata for the bill's mint
+    currency.v1.Mint mint_metadata = 1 [(validate.rules).message.required = true];
 }
