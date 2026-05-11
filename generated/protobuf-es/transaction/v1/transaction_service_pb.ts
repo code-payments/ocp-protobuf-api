@@ -26,12 +26,18 @@ export enum FundingSource {
    * @generated from enum value: FUNDING_SOURCE_EXTERNAL_WALLET = 2;
    */
   EXTERNAL_WALLET = 2,
+
+  /**
+   * @generated from enum value: FUNDING_SOURCE_COINBASE_ONRAMP = 3;
+   */
+  COINBASE_ONRAMP = 3,
 }
 // Retrieve enum metadata with: proto3.getEnumType(FundingSource)
 proto3.util.setEnumType(FundingSource, "ocp.transaction.v1.FundingSource", [
   { no: 0, name: "FUNDING_SOURCE_UNKNOWN" },
   { no: 1, name: "FUNDING_SOURCE_SUBMIT_INTENT" },
   { no: 2, name: "FUNDING_SOURCE_EXTERNAL_WALLET" },
+  { no: 3, name: "FUNDING_SOURCE_COINBASE_ONRAMP" },
 ]);
 
 /**
@@ -1164,6 +1170,7 @@ export class StatefulSwapRequest_Initiate_ReserveSwapClientParameters extends Me
    *
    * For FUNDING_SOURCE_SUBMIT_INTENT, this value is the base58 encoded intent ID.
    * For FUNDING_SOURCE_EXTERNAL_WALLET, this value is the base58 encoded transaction signature.
+   * For FUNDING_SOURCE_COINBASE_ONRAMP, this value is the order ID
    *
    * @generated from field: string funding_id = 6;
    */

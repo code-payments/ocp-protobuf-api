@@ -5451,7 +5451,7 @@ func (m *StatefulSwapRequest_Initiate_ReserveSwapClientParameters) Validate() er
 	if _, ok := _StatefulSwapRequest_Initiate_ReserveSwapClientParameters_FundingSource_InLookup[m.GetFundingSource()]; !ok {
 		return StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{
 			field:  "FundingSource",
-			reason: "value must be in list [1 2]",
+			reason: "value must be in list [1 2 3]",
 		}
 	}
 
@@ -5536,6 +5536,7 @@ var _ interface {
 var _StatefulSwapRequest_Initiate_ReserveSwapClientParameters_FundingSource_InLookup = map[FundingSource]struct{}{
 	1: {},
 	2: {},
+	3: {},
 }
 
 // Validate checks the field values on
