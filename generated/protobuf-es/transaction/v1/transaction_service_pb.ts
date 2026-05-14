@@ -2232,9 +2232,9 @@ export class StatelessSwapRequest_SubmitSignatures extends Message<StatelessSwap
   /**
    * The owner's signature over the locally constructed swap transaction.
    *
-   * @generated from field: ocp.common.v1.Signature transaction_signature = 1;
+   * @generated from field: repeated ocp.common.v1.Signature transaction_signatures = 1;
    */
-  transactionSignature?: Signature;
+  transactionSignatures: Signature[] = [];
 
   constructor(data?: PartialMessage<StatelessSwapRequest_SubmitSignatures>) {
     super();
@@ -2244,7 +2244,7 @@ export class StatelessSwapRequest_SubmitSignatures extends Message<StatelessSwap
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "ocp.transaction.v1.StatelessSwapRequest.SubmitSignatures";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "transaction_signature", kind: "message", T: Signature },
+    { no: 1, name: "transaction_signatures", kind: "message", T: Signature, repeated: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatelessSwapRequest_SubmitSignatures {

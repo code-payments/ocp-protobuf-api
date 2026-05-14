@@ -6925,21 +6925,26 @@ func (m *StatelessSwapRequest_SubmitSignatures) Validate() error {
 		return nil
 	}
 
-	if m.GetTransactionSignature() == nil {
+	if len(m.GetTransactionSignatures()) != 1 {
 		return StatelessSwapRequest_SubmitSignaturesValidationError{
-			field:  "TransactionSignature",
-			reason: "value is required",
+			field:  "TransactionSignatures",
+			reason: "value must contain exactly 1 item(s)",
 		}
 	}
 
-	if v, ok := interface{}(m.GetTransactionSignature()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return StatelessSwapRequest_SubmitSignaturesValidationError{
-				field:  "TransactionSignature",
-				reason: "embedded message failed validation",
-				cause:  err,
+	for idx, item := range m.GetTransactionSignatures() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StatelessSwapRequest_SubmitSignaturesValidationError{
+					field:  fmt.Sprintf("TransactionSignatures[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
 			}
 		}
+
 	}
 
 	return nil
