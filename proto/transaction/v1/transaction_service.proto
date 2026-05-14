@@ -746,8 +746,6 @@ message StatelessSwapResponse {
         //  3. [Optional] Memo::Memo
         //  4. AssociatedTokenAccount::CreateIdempotent (open owner's to_mint VM Deposit ATA)
         //  5. CoinbaseStableSwapper::Swap (owner's from_mint ATA -> owner's to_mint VM Deposit ATA)
-        //  6. Vm::DepositFromPda (owner's to_mint VM Deposit ATA -> owner's to_mint VTA)
-        //  7. Vm::CloseDepositAccountIfEmpty (closes to_mint VM deposit ATA if empty)
         message CoinbaseStableSwapperServerParameter {
             // Subsidizer account that will pay the transaction fee.
             common.v1.SolanaAccountId payer = 1 [(validate.rules).message.required = true];
@@ -775,12 +773,6 @@ message StatelessSwapResponse {
             // sourced from the on-chain LiquidityPool account. Required by the
             // CoinbaseStableSwapper::Swap instruction.
             common.v1.SolanaAccountId pool_fee_recipient = 7 [(validate.rules).message.required = true];
-
-            // The memory account where the destination virtual Timelock account lives
-            common.v1.SolanaAccountId memory_account = 8 [(validate.rules).message.required = true];
-
-            // The memory index where the destination virtual Timelock account lives
-            uint32 memory_index = 9;
         }
     }
 

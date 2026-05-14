@@ -7474,25 +7474,6 @@ func (m *StatelessSwapResponse_ServerParameters_CoinbaseStableSwapperServerParam
 		}
 	}
 
-	if m.GetMemoryAccount() == nil {
-		return StatelessSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
-			field:  "MemoryAccount",
-			reason: "value is required",
-		}
-	}
-
-	if v, ok := interface{}(m.GetMemoryAccount()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return StatelessSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
-				field:  "MemoryAccount",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for MemoryIndex
-
 	return nil
 }
 

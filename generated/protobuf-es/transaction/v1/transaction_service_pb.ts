@@ -2376,8 +2376,6 @@ export class StatelessSwapResponse_ServerParameters extends Message<StatelessSwa
  *  3. [Optional] Memo::Memo
  *  4. AssociatedTokenAccount::CreateIdempotent (open owner's to_mint VM Deposit ATA)
  *  5. CoinbaseStableSwapper::Swap (owner's from_mint ATA -> owner's to_mint VM Deposit ATA)
- *  6. Vm::DepositFromPda (owner's to_mint VM Deposit ATA -> owner's to_mint VTA)
- *  7. Vm::CloseDepositAccountIfEmpty (closes to_mint VM deposit ATA if empty)
  *
  * @generated from message ocp.transaction.v1.StatelessSwapResponse.ServerParameters.CoinbaseStableSwapperServerParameter
  */
@@ -2437,20 +2435,6 @@ export class StatelessSwapResponse_ServerParameters_CoinbaseStableSwapperServerP
    */
   poolFeeRecipient?: SolanaAccountId;
 
-  /**
-   * The memory account where the destination virtual Timelock account lives
-   *
-   * @generated from field: ocp.common.v1.SolanaAccountId memory_account = 8;
-   */
-  memoryAccount?: SolanaAccountId;
-
-  /**
-   * The memory index where the destination virtual Timelock account lives
-   *
-   * @generated from field: uint32 memory_index = 9;
-   */
-  memoryIndex = 0;
-
   constructor(data?: PartialMessage<StatelessSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter>) {
     super();
     proto3.util.initPartial(data, this);
@@ -2466,8 +2450,6 @@ export class StatelessSwapResponse_ServerParameters_CoinbaseStableSwapperServerP
     { no: 5, name: "compute_unit_price", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
     { no: 6, name: "memo_value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 7, name: "pool_fee_recipient", kind: "message", T: SolanaAccountId },
-    { no: 8, name: "memory_account", kind: "message", T: SolanaAccountId },
-    { no: 9, name: "memory_index", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatelessSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter {
