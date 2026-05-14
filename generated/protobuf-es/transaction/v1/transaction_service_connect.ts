@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { CanWithdrawToAccountRequest, CanWithdrawToAccountResponse, GetIntentMetadataRequest, GetIntentMetadataResponse, GetLimitsRequest, GetLimitsResponse, GetPendingSwapsRequest, GetPendingSwapsResponse, GetSwapRequest, GetSwapResponse, StatefulSwapRequest, StatefulSwapResponse, SubmitIntentRequest, SubmitIntentResponse, VoidGiftCardRequest, VoidGiftCardResponse } from "./transaction_service_pb";
+import { CanWithdrawToAccountRequest, CanWithdrawToAccountResponse, GetIntentMetadataRequest, GetIntentMetadataResponse, GetLimitsRequest, GetLimitsResponse, GetPendingSwapsRequest, GetPendingSwapsResponse, GetSwapRequest, GetSwapResponse, StatefulSwapRequest, StatefulSwapResponse, StatelessSwapRequest, StatelessSwapResponse, SubmitIntentRequest, SubmitIntentResponse, VoidGiftCardRequest, VoidGiftCardResponse } from "./transaction_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -127,6 +127,18 @@ export const Transaction = {
       name: "StatefulSwap",
       I: StatefulSwapRequest,
       O: StatefulSwapResponse,
+      kind: MethodKind.BiDiStreaming,
+    },
+    /**
+     * StatelessSwap is like StatefulSwap, but without a state management system and a
+     * best-effort submission system.
+     *
+     * @generated from rpc ocp.transaction.v1.Transaction.StatelessSwap
+     */
+    statelessSwap: {
+      name: "StatelessSwap",
+      I: StatelessSwapRequest,
+      O: StatelessSwapResponse,
       kind: MethodKind.BiDiStreaming,
     },
     /**

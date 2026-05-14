@@ -87,6 +87,9 @@ type TransactionClient interface {
 	// Swap transaction signatures are collected up-front. They are executed once the
 	// swap is funded.
 	StatefulSwap(ctx context.Context, opts ...grpc.CallOption) (Transaction_StatefulSwapClient, error)
+	// StatelessSwap is like StatefulSwap, but without a state management system and a
+	// best-effort submission system.
+	StatelessSwap(ctx context.Context, opts ...grpc.CallOption) (Transaction_StatelessSwapClient, error)
 	// GetSwap gets metadata for a swap
 	GetSwap(ctx context.Context, in *GetSwapRequest, opts ...grpc.CallOption) (*GetSwapResponse, error)
 	// GetPendingSwaps gets swaps that are pending client actions which include:
@@ -200,6 +203,37 @@ func (x *transactionStatefulSwapClient) Recv() (*StatefulSwapResponse, error) {
 	return m, nil
 }
 
+func (c *transactionClient) StatelessSwap(ctx context.Context, opts ...grpc.CallOption) (Transaction_StatelessSwapClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Transaction_ServiceDesc.Streams[2], "/ocp.transaction.v1.Transaction/StatelessSwap", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &transactionStatelessSwapClient{stream}
+	return x, nil
+}
+
+type Transaction_StatelessSwapClient interface {
+	Send(*StatelessSwapRequest) error
+	Recv() (*StatelessSwapResponse, error)
+	grpc.ClientStream
+}
+
+type transactionStatelessSwapClient struct {
+	grpc.ClientStream
+}
+
+func (x *transactionStatelessSwapClient) Send(m *StatelessSwapRequest) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *transactionStatelessSwapClient) Recv() (*StatelessSwapResponse, error) {
+	m := new(StatelessSwapResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *transactionClient) GetSwap(ctx context.Context, in *GetSwapRequest, opts ...grpc.CallOption) (*GetSwapResponse, error) {
 	out := new(GetSwapResponse)
 	err := c.cc.Invoke(ctx, "/ocp.transaction.v1.Transaction/GetSwap", in, out, opts...)
@@ -287,6 +321,9 @@ type TransactionServer interface {
 	// Swap transaction signatures are collected up-front. They are executed once the
 	// swap is funded.
 	StatefulSwap(Transaction_StatefulSwapServer) error
+	// StatelessSwap is like StatefulSwap, but without a state management system and a
+	// best-effort submission system.
+	StatelessSwap(Transaction_StatelessSwapServer) error
 	// GetSwap gets metadata for a swap
 	GetSwap(context.Context, *GetSwapRequest) (*GetSwapResponse, error)
 	// GetPendingSwaps gets swaps that are pending client actions which include:
@@ -316,6 +353,9 @@ func (UnimplementedTransactionServer) VoidGiftCard(context.Context, *VoidGiftCar
 }
 func (UnimplementedTransactionServer) StatefulSwap(Transaction_StatefulSwapServer) error {
 	return status.Errorf(codes.Unimplemented, "method StatefulSwap not implemented")
+}
+func (UnimplementedTransactionServer) StatelessSwap(Transaction_StatelessSwapServer) error {
+	return status.Errorf(codes.Unimplemented, "method StatelessSwap not implemented")
 }
 func (UnimplementedTransactionServer) GetSwap(context.Context, *GetSwapRequest) (*GetSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSwap not implemented")
@@ -460,6 +500,32 @@ func (x *transactionStatefulSwapServer) Recv() (*StatefulSwapRequest, error) {
 	return m, nil
 }
 
+func _Transaction_StatelessSwap_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(TransactionServer).StatelessSwap(&transactionStatelessSwapServer{stream})
+}
+
+type Transaction_StatelessSwapServer interface {
+	Send(*StatelessSwapResponse) error
+	Recv() (*StatelessSwapRequest, error)
+	grpc.ServerStream
+}
+
+type transactionStatelessSwapServer struct {
+	grpc.ServerStream
+}
+
+func (x *transactionStatelessSwapServer) Send(m *StatelessSwapResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *transactionStatelessSwapServer) Recv() (*StatelessSwapRequest, error) {
+	m := new(StatelessSwapRequest)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func _Transaction_GetSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetSwapRequest)
 	if err := dec(in); err != nil {
@@ -538,6 +604,12 @@ var Transaction_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StatefulSwap",
 			Handler:       _Transaction_StatefulSwap_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "StatelessSwap",
+			Handler:       _Transaction_StatelessSwap_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},
