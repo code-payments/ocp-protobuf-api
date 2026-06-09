@@ -1818,6 +1818,16 @@ func (m *Metadata) Validate() error {
 		return nil
 	}
 
+	if v, ok := interface{}(m.GetAppMetadata()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MetadataValidationError{
+				field:  "AppMetadata",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	switch m.Type.(type) {
 
 	case *Metadata_OpenAccounts:
@@ -4842,6 +4852,78 @@ var _ interface {
 var _SwapMetadata_State_NotInLookup = map[SwapMetadata_State]struct{}{
 	0: {},
 }
+
+// Validate checks the field values on AppMetadata with the rules defined in
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
+func (m *AppMetadata) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if l := len(m.GetValue()); l < 1 || l > 4096 {
+		return AppMetadataValidationError{
+			field:  "Value",
+			reason: "value length must be between 1 and 4096 bytes, inclusive",
+		}
+	}
+
+	return nil
+}
+
+// AppMetadataValidationError is the validation error returned by
+// AppMetadata.Validate if the designated constraints aren't met.
+type AppMetadataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AppMetadataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AppMetadataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AppMetadataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AppMetadataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AppMetadataValidationError) ErrorName() string { return "AppMetadataValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AppMetadataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAppMetadata.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AppMetadataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AppMetadataValidationError{}
 
 // Validate checks the field values on SubmitIntentRequest_SubmitActions with
 // the rules defined in the proto definition for this message. If any rules

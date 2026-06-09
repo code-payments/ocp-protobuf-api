@@ -870,6 +870,9 @@ message Metadata {
         ReceivePaymentsPubliclyMetadata receive_payments_publicly = 3;
         PublicDistributionMetadata      public_distribution       = 4;
     }
+
+    // Optional app-level metadata
+    AppMetadata app_metadata = 10;
 }
 
 // Open a set of accounts
@@ -1370,4 +1373,12 @@ enum FundingSource {
     FUNDING_SOURCE_SUBMIT_INTENT   = 1;
     FUNDING_SOURCE_EXTERNAL_WALLET = 2;
     FUNDING_SOURCE_COINBASE_ONRAMP = 3;
+}
+
+// AppMetadata is additional app-level metadata provided for an intent
+message AppMetadata {
+    bytes value = 1 [(validate.rules).bytes = {
+        min_len: 1
+        max_len: 4096
+    }];
 }
