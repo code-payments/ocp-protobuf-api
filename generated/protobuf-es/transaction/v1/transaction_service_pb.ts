@@ -2895,6 +2895,13 @@ export class Metadata extends Message<Metadata> {
     case: "publicDistribution";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
+  /**
+   * Optional app-level metadata
+   *
+   * @generated from field: ocp.transaction.v1.AppMetadata app_metadata = 10;
+   */
+  appMetadata?: AppMetadata;
+
   constructor(data?: PartialMessage<Metadata>) {
     super();
     proto3.util.initPartial(data, this);
@@ -2907,6 +2914,7 @@ export class Metadata extends Message<Metadata> {
     { no: 2, name: "send_public_payment", kind: "message", T: SendPublicPaymentMetadata, oneof: "type" },
     { no: 3, name: "receive_payments_publicly", kind: "message", T: ReceivePaymentsPubliclyMetadata, oneof: "type" },
     { no: 4, name: "public_distribution", kind: "message", T: PublicDistributionMetadata, oneof: "type" },
+    { no: 10, name: "app_metadata", kind: "message", T: AppMetadata },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Metadata {
@@ -4795,4 +4803,43 @@ proto3.util.setEnumType(SwapMetadata_State, "ocp.transaction.v1.SwapMetadata.Sta
   { no: 7, name: "CANCELLING" },
   { no: 8, name: "CANCELLED" },
 ]);
+
+/**
+ * AppMetadata is additional app-level metadata provided for an intent
+ *
+ * @generated from message ocp.transaction.v1.AppMetadata
+ */
+export class AppMetadata extends Message<AppMetadata> {
+  /**
+   * @generated from field: bytes value = 1;
+   */
+  value = new Uint8Array(0);
+
+  constructor(data?: PartialMessage<AppMetadata>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.transaction.v1.AppMetadata";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "value", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppMetadata {
+    return new AppMetadata().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppMetadata {
+    return new AppMetadata().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppMetadata {
+    return new AppMetadata().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: AppMetadata | PlainMessage<AppMetadata> | undefined, b: AppMetadata | PlainMessage<AppMetadata> | undefined): boolean {
+    return proto3.util.equals(AppMetadata, a, b);
+  }
+}
 
