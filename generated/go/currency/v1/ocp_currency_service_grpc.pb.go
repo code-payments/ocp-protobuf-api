@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.21.12
-// source: currency/v1/currency_service.proto
+// source: currency/v1/ocp_currency_service.proto
 
 package currency
 
@@ -429,5 +429,5 @@ var Currency_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "currency/v1/currency_service.proto",
+	Metadata: "currency/v1/ocp_currency_service.proto",
 }

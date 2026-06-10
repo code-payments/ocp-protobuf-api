@@ -1,2 +1,2 @@
-export * from './messaging_service_connect';
-export * from './messaging_service_pb';
+export * from './ocp_messaging_service_pb';
+export * from './ocp_messaging_service_connect';
