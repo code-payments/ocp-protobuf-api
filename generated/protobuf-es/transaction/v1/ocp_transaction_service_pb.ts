@@ -3030,7 +3030,7 @@ proto3.util.setEnumType(OpenAccountsMetadata_AccountSet, "ocp.transaction.v1.Ope
  *   actions.push_back(FeePaymentAction(PRIMARY, feeAccount, feeAmount))
  * }
  *
- * Action Spec (Remote Send):
+ * Action Spec (Indirect Send):
  *
  * actions = [
  *   OpenAccountAction(REMOTE_SEND_GIFT_CARD),
@@ -3097,9 +3097,9 @@ export class SendPublicPaymentMetadata extends Message<SendPublicPaymentMetadata
   /**
    * Is the payment going to a new gift card? Note is_withdrawal must be false.
    *
-   * @generated from field: bool is_remote_send = 6;
+   * @generated from field: bool is_indirect_send = 6;
    */
-  isRemoteSend = false;
+  isIndirectSend = false;
 
   /**
    * The mint that this intent will be operating against
@@ -3122,7 +3122,7 @@ export class SendPublicPaymentMetadata extends Message<SendPublicPaymentMetadata
     { no: 4, name: "server_exchange_data", kind: "message", T: ExchangeData, oneof: "exchange_data" },
     { no: 8, name: "client_exchange_data", kind: "message", T: VerifiedExchangeData, oneof: "exchange_data" },
     { no: 5, name: "is_withdrawal", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 6, name: "is_remote_send", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 6, name: "is_indirect_send", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 7, name: "mint", kind: "message", T: SolanaAccountId },
   ]);
 
@@ -3147,7 +3147,7 @@ export class SendPublicPaymentMetadata extends Message<SendPublicPaymentMetadata
  * Receive funds into a user-owned account publicly. All use cases of this intent
  * close the account, so all funds must be moved.
  *
- * Action Spec (Remote Send):
+ * Action Spec (Indirect Send):
  *
  * actions = [NoPrivacyWithdrawAction(REMOTE_SEND_GIFT_CARD, PRIMARY, quarks)]
  *
@@ -3172,12 +3172,12 @@ export class ReceivePaymentsPubliclyMetadata extends Message<ReceivePaymentsPubl
    * Is the receipt of funds from a remote send gift card? Currently, this is
    * the only use case for this intent and validation enforces the flag to true.
    *
-   * @generated from field: bool is_remote_send = 3;
+   * @generated from field: bool is_indirect_send = 3;
    */
-  isRemoteSend = false;
+  isIndirectSend = false;
 
   /**
-   * If is_remote_send is true, the original exchange data that was provided as
+   * If is_indirect_send is true, the original exchange data that was provided as
    * part of creating the gift card account. This is purely a server-provided value.
    * SubmitIntent will disallow this being set.
    *
@@ -3202,7 +3202,7 @@ export class ReceivePaymentsPubliclyMetadata extends Message<ReceivePaymentsPubl
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "source", kind: "message", T: SolanaAccountId },
     { no: 2, name: "quarks", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
-    { no: 3, name: "is_remote_send", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 3, name: "is_indirect_send", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 4, name: "exchange_data", kind: "message", T: ExchangeData },
     { no: 5, name: "mint", kind: "message", T: SolanaAccountId },
   ]);

@@ -2088,7 +2088,7 @@ func (m *SendPublicPaymentMetadata) Validate() error {
 
 	// no validation rules for IsWithdrawal
 
-	// no validation rules for IsRemoteSend
+	// no validation rules for IsIndirectSend
 
 	if m.GetMint() == nil {
 		return SendPublicPaymentMetadataValidationError{
@@ -2232,9 +2232,9 @@ func (m *ReceivePaymentsPubliclyMetadata) Validate() error {
 		}
 	}
 
-	if m.GetIsRemoteSend() != true {
+	if m.GetIsIndirectSend() != true {
 		return ReceivePaymentsPubliclyMetadataValidationError{
-			field:  "IsRemoteSend",
+			field:  "IsIndirectSend",
 			reason: "value must equal true",
 		}
 	}
