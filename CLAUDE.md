@@ -4,97 +4,110 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This repository contains the Open Code Protocol (OCP) Protobuf API definitions for communication between OCP clients and server. It uses Protocol Buffers to define gRPC services and generates client code for multiple languages (Go and TypeScript/JavaScript).
+This repository contains the Open Code Protocol (OCP) Protobuf API definitions for communication between OCP clients and server. It uses Protocol Buffers to define gRPC services and generates client code for Go and TypeScript/JavaScript. The APIs target the Solana blockchain (Ed25519 keys, Solana transactions, the Code VM) and power payment, currency launchpad, and swap flows.
 
 ## Build & Code Generation
 
-All code generation is handled via Docker to ensure consistent builds across environments. Generated code is committed to the repository under `generated/`.
+All code generation runs in Docker containers to ensure consistent builds across environments. Generated code is committed to the repository under `generated/`.
 
-### Generate all code:
 ```bash
-make
-```
-
-### Generate specific language:
-```bash
+make                 # Clean, build Docker images, and generate all code
 make go              # Generate Go code only
 make protobuf-es     # Generate TypeScript/JavaScript code only
+make clean           # Remove all generated code
+make docker-build    # Build Docker images without generating
 ```
 
-### Clean generated code:
-```bash
-make clean
-```
+There are no tests in this repository; correctness is enforced via buf linting/breaking-change detection (`proto/buf.yaml`, FILE-level breaking rules) and by regenerating code.
 
-### Build Docker images without generating:
-```bash
-make docker-build
-```
+### How generation works
+- `build/go/Dockerfile` + `build/go/generate.sh` - golang:1.25 image with protoc, protoc-gen-go, protoc-gen-go-grpc, and protoc-gen-validate. Generates into `generated/go/` (the Makefile flattens the `github.com/...` output path).
+- `build/protobuf-es/Dockerfile` + `build/protobuf-es/generate.sh` - generates TypeScript via protoc-gen-es and protoc-gen-connect-es into `generated/protobuf-es/`, and auto-creates `index.ts` barrel files with namespaced exports (e.g. `export * as Common from './common/v1'`).
+- After changing any `.proto` file, run `make` and commit the regenerated code along with the proto change.
 
 ## Project Structure
 
-### Proto Definitions
-- `proto/` - All Protocol Buffer definitions organized by service and version
-  - `proto/common/v1/model.proto` - Shared types used across all services (SolanaAccountId, Transaction, Signature, etc.)
-  - `proto/account/v1/` - Account management service (checking Code accounts, token account metadata)
-  - `proto/transaction/v1/` - Transaction and intent submission service (largest service at ~1200 lines)
-  - `proto/messaging/v1/` - Messaging service
-  - `proto/currency/v1/` - Currency/exchange rate service
-  - `proto/buf.yaml` - Buf configuration with breaking change detection and linting
+### Proto Definitions (`proto/`)
+Service proto files are prefixed with `ocp_` to avoid filename conflicts with implementation apps (renamed in PR #51 — keep this convention for new files):
+
+- `proto/common/v1/model.proto` - Shared types used across all services
+- `proto/account/v1/ocp_account_service.proto` (~215 lines) - Account service
+- `proto/currency/v1/ocp_currency_service.proto` (~570 lines) - Currency/launchpad service
+- `proto/messaging/v1/ocp_messaging_service.proto` (~245 lines) - Messaging service
+- `proto/transaction/v1/ocp_transaction_service.proto` (~1385 lines) - Transaction/intent/swap service (largest and most complex)
+- `proto/buf.yaml` - Buf config (FILE breaking detection, DEFAULT lint, deps on protoc-gen-validate and googleapis)
+
+Package names follow `ocp.<service>.v1`. Go packages are `github.com/code-payments/ocp-protobuf-api/generated/go/<service>/v1`.
+
+Import dependency graph (relevant when adding cross-service types):
+- `common` depends on nothing (besides google/validate)
+- `currency` imports `common`
+- `transaction` imports `common`, `currency`
+- `account` and `messaging` import `common`, `currency`, `transaction`
 
 ### Generated Code
-- `generated/go/` - Generated Go code with gRPC stubs
-- `generated/protobuf-es/` - Generated TypeScript/JavaScript code using Protobuf-ES
-
-### Build Configuration
-- `build/go/Dockerfile` - Docker image for Go code generation (uses golang:1.25, protoc, protoc-gen-go, protoc-gen-validate)
-- `build/protobuf-es/Dockerfile` - Docker image for TypeScript/JavaScript code generation
-- `Makefile` - Orchestrates Docker-based code generation
+- `generated/go/` - Go code with gRPC stubs and validate methods
+- `generated/protobuf-es/` - TypeScript via Protobuf-ES/Connect-ES with index.ts barrels
 
 ## Architecture
 
 ### Common Types (proto/common/v1/model.proto)
-The `common/v1/model.proto` file defines foundational types used throughout the API:
-- **Account Types**: Enum defining how accounts are used (PRIMARY, REMOTE_SEND_GIFT_CARD, SWAP, ASSOCIATED_TOKEN_ACCOUNT, POOL)
-- **Solana Primitives**: SolanaAccountId (32-byte Ed25519 public keys), Transaction, Blockhash, Signature
-- **Code Primitives**: IntentId, SwapId, Hash, UUID
-- **Generic RPC Wrappers**: Request/Response with versioning
-- **Ping/Pong**: ServerPing and ClientPong for network latency measurements
+- **AccountType enum**: how an account is used (PRIMARY, REMOTE_SEND_GIFT_CARD, SWAP, ASSOCIATED_TOKEN_ACCOUNT, POOL)
+- **Solana primitives**: SolanaAccountId (32-byte Ed25519 key), SolanaAddressLookupTable (ALTs for versioned transactions), Transaction (max 1232 bytes), Blockhash, Signature (64 bytes)
+- **OCP primitives**: IntentId, SwapId, Hash (32 bytes), UUID (16 bytes)
+- **Generic RPC wrappers**: Request/Response with versioning
+- **ServerPing/ClientPong**: keepalive protocol used by streaming RPCs (currency live data, messaging keepalive streams)
+- **Interval enum**: RAW/SECOND/MINUTE/HOUR/DAY/WEEK
 
-### Service Organization
-Services follow versioned API patterns (`v1`) with clear separation of concerns:
+### Account Service (2 RPCs)
+- `IsOcpAccount` - whether an owner account is an OCP account (can fail with UNLOCKED_TIMELOCK_ACCOUNT)
+- `GetTokenAccountInfos` - token account metadata for an owner, with optional filters (token address, account type, mint). `TokenAccountInfo` carries balance source (blockchain vs cache), management state (LOCKING/LOCKED/UNLOCKING/UNLOCKED/CLOSING/CLOSED — reflects OCP's co-signing authority over timelock accounts), blockchain state, gift card claim state, mint metadata, live launchpad reserve state, and USD cost basis. Supports a secondary `requesting_owner` signature for cases like a user inspecting a gift card account.
 
-1. **Account Service** - Manages Code account verification and token account metadata including balance sources (blockchain vs cache), management states (locked/unlocked), and claim states for gift cards
+### Currency Service (8 RPCs) — launchpad + market data
+- `GetMints` - mint metadata by address. `Mint` includes decimals, name/symbol/description, image, social links, bill customization (1-3 hex colors), holder metrics, `VmMetadata` (VM address/authority/omnibus; only currencies with a VM are usable for payments; 21-day lock duration), and `LaunchpadMetadata` (currency config, liquidity pool, seed, bonding-curve supply, hardcoded 1% sell fee, price, market cap).
+- `GetHistoricalMintData` / `StreamLiveMintData` - historical market cap and live streamed data (verified core-mint fiat exchange rates and launchpad reserve states) with ping/pong keepalive.
+- `Launch` - launch a new currency on the launchpad. Name/symbol are printable-ASCII validated; name, symbol, description, and icon each require/accept a `ModerationAttestation` (opaque server-verifiable proof that content passed moderation).
+- `UpdateIcon` / `UpdateMetadata` - mutate icon, description, bill customization, social links (with moderation attestations).
+- `Discover` - server-streamed currency discovery (POPULAR/NEW categories).
+- `CheckAvailability` - check whether a currency name is available before launch.
 
-2. **Transaction Service** - Handles intent submission using a streaming RPC pattern for DB-level transaction semantics. Client and server independently construct transactions and exchange only accounts/arguments. Also manages swaps as time-sensitive operations outside the main intent system.
+**Verified data pattern**: `VerifiedCoreMintFiatExchangeRate` and `VerifiedLaunchpadCurrencyReserveState` wrap data with a server signature so clients can later submit them as proofs in payment/swap flows (e.g. `VerifiedExchangeData` in intents). New price/state data that feeds payments should follow this pattern.
 
-3. **Messaging Service** - Handles messaging functionality
+### Transaction Service (9 RPCs) — intents and swaps
 
-4. **Currency Service** - Manages currency and exchange rate data
+**Intent system** (`SubmitIntent`): client and server never exchange transactions/instructions directly — they exchange required accounts and arguments, and each side independently constructs and validates transactions (or Code VM virtual instructions). The streaming RPC bundles two unary calls for DB-level transaction semantics: client sends `SubmitActions` (intent ID, owner, metadata, ordered actions, auth signature) → server validates and returns `ServerParameters` (one per action, including durable nonces/blockhashes) → client constructs locally, validates, signs → client sends `SubmitSignatures` → server verifies against its own locally constructed transactions and returns `Success` or `Error` (with structured `ErrorDetails`, e.g. the expected transaction or virtual instruction hash on signature mismatch).
 
-### Authentication Pattern
-Services use signature-based authentication where clients sign requests with private keys. Requests include both the data and a signature field that is computed over the serialized request without the signature field set.
+Intent metadata types (each proto comment documents its exact "Action Spec"):
+- `OpenAccountsMetadata` - open user (PRIMARY) or POOL accounts
+- `SendPublicPaymentMetadata` - payments, withdrawals (with optional CREATE_ON_SEND_WITHDRAWAL fee), and remote send (gift card creation with auto-return)
+- `ReceivePaymentsPubliclyMetadata` - claim a gift card (closes the account)
+- `PublicDistributionMetadata` - distribute all of a pool's funds and close it
+- Optional `AppMetadata` (opaque app-level bytes) can be attached to any intent
 
-### Intent System
-The Transaction service uses an "intent" model where:
-- Client and server never exchange transactions/instructions directly
-- Instead they exchange required accounts and arguments
-- Both sides independently construct and validate transactions
-- Signatures are only generated after full validation
-- Uses streaming RPC with two-phase commit semantics
+Action types: `OpenAccountAction`, `NoPrivacyTransferAction`, `NoPrivacyWithdrawAction`, `FeePaymentAction`. Every action/metadata carries the `mint` it operates against (multi-mint support). New-intent submissions use `VerifiedExchangeData` (proof-backed via verified exchange rate / reserve state); server returns plain `ExchangeData` for submitted intents.
+
+**Swaps** sit outside the intent system because they're time-sensitive and unreliable; transactions are submitted best-effort outside the Code sequencer and balance changes apply after finalization:
+- `StatefulSwap` - non-custodial state-managed swaps. Mirrors SubmitIntent flow (Initiate → ServerParameters → SubmitSignatures, 1-2 signatures: owner and swap_authority). Two client parameter kinds: **Reserve** (launchpad bonding-curve buy/sell/swap; funding via SUBMIT_INTENT, EXTERNAL_WALLET, or COINBASE_ONRAMP) and **CoinbaseStableSwapper** (stablecoin swaps). Server parameter variants cover existing-currency Reserve flows, new-currency Reserve flows (atomic currency creation + buy, creator-only), and Coinbase Stable Swapper flows — each documents the exact Solana v0 transaction instruction format in proto comments. Swap state machine: CREATED → FUNDING → FUNDED → SUBMITTING → FINALIZED / FAILED / CANCELLING / CANCELLED.
+- `StatelessSwap` - like StatefulSwap but with no state management; currently CoinbaseStableSwapper only, single owner signature, regular blockhash (no durable nonce), optional `wait_for_finalization`.
+- `GetSwap` / `GetPendingSwaps` - swap metadata and swaps pending client action. `SwapMetadata` wraps `VerifiedSwapMetadata` signed by the owner so state can't be tampered with.
+- Also: `GetIntentMetadata`, `GetLimits` (identity-aware send limits by currency), `CanWithdrawToAccount` (withdrawal destination hints + fee), `VoidGiftCard` (idempotent).
+
+### Messaging Service (5 RPCs)
+Messages are routed via a **rendezvous key** — a keypair typically derived from a scan code payload, establishing an anonymous channel between payment participants. RPCs: `OpenMessageStream`, `OpenMessageStreamWithKeepAlive` (ping/pong protocol), `PollMessages` (temporary polling alternative), `AckMessages`, `SendMessage`. Message kinds: `RequestToGiveBill` (sender specifies mint + verified exchange data) and `RequestToGrabBill` (recipient provides destination). Server injects message IDs and echoes the sender's request signature so recipients can detect MITM tampering. The bill give/grab scan-code flow is documented step-by-step in the `OpenMessageStream` comment.
+
+## Conventions
+
+- **Authentication**: requests include a `signature` field computed with the relevant private key over `serialize(request)` with the signature field(s) unset. Nearly every RPC follows this; new RPCs should too.
+- **Validation**: `protoc-gen-validate` annotations everywhere — required messages, byte lengths, regex patterns (currency codes `^[a-z]{3,4}$`, printable-ASCII names, hex colors), enum restrictions, repeated min/max items. Add validation rules to all new fields.
+- **Result enums**: responses define a nested `Result`/`Code` enum with `OK = 0` plus failure cases, rather than using gRPC status codes.
+- **Streaming request/response oneofs**: bidirectional streams use a `oneof` with `option (validate.required) = true` to multiplex message types (request/pong, response/ping, etc.).
+- **Versioning**: services live under `v1` packages; buf FILE-level breaking change detection applies, so never renumber/retype existing fields — add new fields or new oneof variants instead.
+- **Quarks**: token amounts are in quarks (the smallest unit of a mint), as uint64.
+- Proto comments are the source of truth for protocol flows (action specs, instruction formats, keepalive protocols) — keep them updated when changing behavior.
 
 ## Dependencies
 
-- **Buf**: Used for proto linting, breaking change detection, and remote dependencies
-- **protoc-gen-validate**: Provides validation annotations (required fields, size constraints, etc.)
-- **googleapis**: Google common protos (timestamp, duration)
-- Go 1.25+ for Go code generation
-- Protobuf-ES for TypeScript/JavaScript generation
-
-## Important Notes
-
-- Generated code is committed to version control
-- All code generation runs in Docker containers to ensure reproducibility
-- Proto files use validation rules extensively via `protoc-gen-validate`
-- The codebase targets Solana blockchain primitives (Ed25519 keys, Solana transactions)
-- Transaction service is the most complex (~1200 lines) with streaming RPCs and swap functionality
+- **Buf**: proto linting, FILE-level breaking change detection, remote deps (`buf.build/envoyproxy/protoc-gen-validate`, `buf.build/googleapis/googleapis`)
+- **protoc-gen-validate** v1.2.1: validation annotations and generated `Validate()` methods
+- Go 1.25+, grpc v1.71, protobuf v1.36 (see `go.mod`)
+- **Protobuf-ES / Connect-ES** for TypeScript generation
