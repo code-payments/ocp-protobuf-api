@@ -1,2 +1,2 @@
-export * from './transaction_service_pb';
-export * from './transaction_service_connect';
+export * from './ocp_transaction_service_connect';
+export * from './ocp_transaction_service_pb';
