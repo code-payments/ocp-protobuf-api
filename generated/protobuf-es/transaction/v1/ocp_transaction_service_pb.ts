@@ -1181,9 +1181,24 @@ export class StatefulSwapRequest_Initiate_ReserveSwapClientParameters extends Me
   /**
    * The fee amount to pay for this swap
    *
+   * Note: Amounts are coordinated outside this RPC for user verifications
+   *       and validated in this RPC.
+   *
    * @generated from field: uint64 fee_amount = 7;
    */
   feeAmount = protoInt64.zero;
+
+  /**
+   * Verified exchange data for flows that require a specific fiat value
+   * over the full amount (swap + fee). For intent fundings, it's expected
+   * that this exchange data will be used.
+   *
+   * Required for the following flows:
+   *  - Initializing a new reserve currency outside of the core mint
+   *
+   * @generated from field: ocp.transaction.v1.VerifiedExchangeData full_amount_exchange_data = 8;
+   */
+  fullAmountExchangeData?: VerifiedExchangeData;
 
   constructor(data?: PartialMessage<StatefulSwapRequest_Initiate_ReserveSwapClientParameters>) {
     super();
@@ -1200,6 +1215,7 @@ export class StatefulSwapRequest_Initiate_ReserveSwapClientParameters extends Me
     { no: 5, name: "funding_source", kind: "enum", T: proto3.getEnumType(FundingSource) },
     { no: 6, name: "funding_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 7, name: "fee_amount", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 8, name: "full_amount_exchange_data", kind: "message", T: VerifiedExchangeData },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapRequest_Initiate_ReserveSwapClientParameters {
@@ -1492,7 +1508,7 @@ export class StatefulSwapResponse_ServerParameters extends Message<StatefulSwapR
  *  4. [Optional] Memo::Memo
  *  5. AssociatedTokenAccount::CreateIdempotent (open Core Mint temporary account)
  *  6. VM::TransferForSwap (Core Mint VM swap ATA -> Core Mint temporary account)
- *  6. Reserve::BuyAndDepositIntoVm (bounded buy depositing to_mint tokens into the to_mint VM)
+ *  7. Reserve::BuyAndDepositIntoVm (bounded buy depositing to_mint tokens into the to_mint VM)
  *  8. Token::CloseAccount (closes Core Mint temporary account)
  *  9. VM::CloseSwapAccountIfEmpty (closes Core Mint VM swap ATA if empty)
  *
@@ -1633,7 +1649,7 @@ export class StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServer
  *
  * Supported Solana transaction version: v0
  *
- * Instruction format:
+ * Instruction format (paying with Core Mint):
  *  1. System::AdvanceNonce
  *  2. [Optional] ComputeBudget::SetComputeUnitLimit
  *  3. [Optional] ComputeBudget::SetComputeUnitPrice
@@ -1646,6 +1662,17 @@ export class StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServer
  * 10. VM::TransferForSwapWithFee (Core Mint VM swap ATA -> owner's Core Mint ATA (swap amount) and fee destination (fee amount))
  * 11. Reserve::BuyTokens (limited buy transferring to_mint tokens into the to_mint VM Deposit ATA)
  * 12. Token::CloseAccount (closes owner's Core Mint ATA)
+ *
+ * Instruction format (all other cases):
+ *  1. System::AdvanceNonce
+ *  2. [Optional] ComputeBudget::SetComputeUnitLimit
+ *  3. [Optional] ComputeBudget::SetComputeUnitPrice
+ *  4. [Optional] Memo::Memo
+ *  5. Reserve::InitializeCurrency
+ *  6. Reserve::InitializePool
+ *  7. VM::InitializeVm
+ *  8. VM::TransferForSwapWithFee (VM swap ATA -> fee destination (swap + fee amount))
+ *  9. Reserve::BuyTokens (limited buy transferring to_mint tokens into the to_mint VM Deposit ATA using a treasury holding Core Mint tokens)
  *
  * Note: Client should verify that the new currency's mint address matches that derived
  *       from using these server parameters.
@@ -1754,6 +1781,13 @@ export class StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParam
    */
   feeDestination?: SolanaAccountId;
 
+  /**
+   * Server-controlled treasury for flows that require it
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId treasury = 15;
+   */
+  treasury?: SolanaAccountId;
+
   constructor(data?: PartialMessage<StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1776,6 +1810,7 @@ export class StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParam
     { no: 12, name: "sell_fee_bps", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 13, name: "vm_lock_duration_in_days", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 14, name: "fee_destination", kind: "message", T: SolanaAccountId },
+    { no: 15, name: "treasury", kind: "message", T: SolanaAccountId },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter {
