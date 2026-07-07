@@ -5760,6 +5760,16 @@ func (m *StatefulSwapRequest_Initiate_ReserveSwapClientParameters) Validate() er
 
 	// no validation rules for FeeAmount
 
+	if v, ok := interface{}(m.GetFullAmountExchangeData()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapRequest_Initiate_ReserveSwapClientParametersValidationError{
+				field:  "FullAmountExchangeData",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	return nil
 }
 
@@ -6609,6 +6619,16 @@ func (m *StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter
 		if err := v.Validate(); err != nil {
 			return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
 				field:  "FeeDestination",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetTreasury()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+				field:  "Treasury",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
