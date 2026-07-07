@@ -1397,6 +1397,8 @@ type CanWithdrawToAccountResponse struct {
 	// not subsidize the token account creation.
 	//
 	// Note: The fee is always paid in the target mint.
+	//
+	// Deprecated: The implementing application coordinates fee amounts
 	FeeAmount *ExchangeDataWithoutRate `protobuf:"bytes,4,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"`
 }
 

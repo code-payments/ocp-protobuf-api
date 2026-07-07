@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
-import { ClientPong, ServerPing, Signature, SolanaAccountId } from "../../common/v1/model_pb";
+import { ClientPong, IntentId, ServerPing, Signature, SolanaAccountId } from "../../common/v1/model_pb";
 
 /**
  * @generated from enum ocp.currency.v1.PredefinedRange
@@ -1567,6 +1567,19 @@ export class LaunchRequest extends Message<LaunchRequest> {
    */
   iconModerationAttestation?: ModerationAttestation;
 
+  /**
+   * The optional client-generated intent ID when paying for the launch via
+   * SubmitIntent. Otherwise, the client uses the swap flow to initialize
+   * the currency.
+   *
+   * The expected payment flow is an external withdraw. The destination owner and
+   * payment amount are coordinated by the implementing application and enforced in
+   * SubmitIntent. Client derives the ATA of the mint they intend to pay in.
+   *
+   * @generated from field: ocp.common.v1.IntentId payment_intent_id = 12;
+   */
+  paymentIntentId?: IntentId;
+
   constructor(data?: PartialMessage<LaunchRequest>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1586,6 +1599,7 @@ export class LaunchRequest extends Message<LaunchRequest> {
     { no: 9, name: "symbol_moderation_attestation", kind: "message", T: ModerationAttestation },
     { no: 10, name: "description_moderation_attestation", kind: "message", T: ModerationAttestation },
     { no: 11, name: "icon_moderation_attestation", kind: "message", T: ModerationAttestation },
+    { no: 12, name: "payment_intent_id", kind: "message", T: IntentId },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LaunchRequest {
@@ -1621,6 +1635,13 @@ export class LaunchResponse extends Message<LaunchResponse> {
    */
   mint?: SolanaAccountId;
 
+  /**
+   * When the name reservation expires if the launch is not funded in time
+   *
+   * @generated from field: google.protobuf.Timestamp expires_at = 3;
+   */
+  expiresAt?: Timestamp;
+
   constructor(data?: PartialMessage<LaunchResponse>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1631,6 +1652,7 @@ export class LaunchResponse extends Message<LaunchResponse> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(LaunchResponse_Result) },
     { no: 2, name: "mint", kind: "message", T: SolanaAccountId },
+    { no: 3, name: "expires_at", kind: "message", T: Timestamp },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LaunchResponse {
@@ -1679,6 +1701,13 @@ export enum LaunchResponse_Result {
    * @generated from enum value: INVALID_ICON = 3;
    */
   INVALID_ICON = 3,
+
+  /**
+   * The provided payment_intent_id already exists
+   *
+   * @generated from enum value: INTENT_EXISTS = 4;
+   */
+  INTENT_EXISTS = 4,
 }
 // Retrieve enum metadata with: proto3.getEnumType(LaunchResponse_Result)
 proto3.util.setEnumType(LaunchResponse_Result, "ocp.currency.v1.LaunchResponse.Result", [
@@ -1686,6 +1715,7 @@ proto3.util.setEnumType(LaunchResponse_Result, "ocp.currency.v1.LaunchResponse.R
   { no: 1, name: "DENIED" },
   { no: 2, name: "NAME_EXISTS" },
   { no: 3, name: "INVALID_ICON" },
+  { no: 4, name: "INTENT_EXISTS" },
 ]);
 
 /**
