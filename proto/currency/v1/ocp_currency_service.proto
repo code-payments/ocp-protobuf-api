@@ -413,15 +413,6 @@ message LaunchRequest {
 
     // Attestation that the icon image, if provided, passed moderation
     ModerationAttestation icon_moderation_attestation = 11;
-
-    // The optional client-generated intent ID when paying for the launch via
-    // SubmitIntent. Otherwise, the client uses the swap flow to initialize
-    // the currency.
-    //
-    // The expected payment flow is an external withdraw. The destination owner and
-    // payment amount are coordinated by the implementing application and enforced in
-    // SubmitIntent. Client derives the ATA of the mint they intend to pay in.
-    common.v1.IntentId payment_intent_id = 12;
 }
 
 message LaunchResponse {
@@ -434,15 +425,10 @@ message LaunchResponse {
         NAME_EXISTS = 2;
         // Provided icon is invalid
         INVALID_ICON = 3;
-        // The provided payment_intent_id already exists
-        INTENT_EXISTS = 4;
     }
 
     // The mint address of the launched currency on success
     common.v1.SolanaAccountId mint = 2;
-
-    // When the name reservation expires if the launch is not funded in time
-    google.protobuf.Timestamp expires_at = 3;
 }
 
 message UpdateIconRequest {

@@ -2220,16 +2220,6 @@ func (m *LaunchRequest) Validate() error {
 		}
 	}
 
-	if v, ok := interface{}(m.GetPaymentIntentId()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return LaunchRequestValidationError{
-				field:  "PaymentIntentId",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	return nil
 }
 
@@ -2305,16 +2295,6 @@ func (m *LaunchResponse) Validate() error {
 		if err := v.Validate(); err != nil {
 			return LaunchResponseValidationError{
 				field:  "Mint",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if v, ok := interface{}(m.GetExpiresAt()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return LaunchResponseValidationError{
-				field:  "ExpiresAt",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
