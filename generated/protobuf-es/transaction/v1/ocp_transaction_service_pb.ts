@@ -1666,9 +1666,8 @@ export class StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServer
  *  2. [Optional] ComputeBudget::SetComputeUnitLimit
  *  3. [Optional] ComputeBudget::SetComputeUnitPrice
  *  4. [Optional] Memo::Memo
- *  5. Reserve::InitializeCurrency
- *  6. VM::TransferForSwapWithFee (VM swap ATA -> fee destination (swap + fee amount))
- *  7. Reserve::BuyTokens (limited buy transferring to_mint tokens into the to_mint VM Deposit ATA using a treasury holding Core Mint tokens)
+ *  5. VM::TransferForSwapWithFee (VM swap ATA -> fee destination (swap + fee amount))
+ *  6. Reserve::BuyTokens (limited buy transferring to_mint tokens into the to_mint VM Deposit ATA using a treasury holding Core Mint tokens)
  * Note: The currency and deposit ATA will be initialized prior to executing this transaction.
  *       Atomicity cannot be guaranteed to due transaction size limits, which will be revisited
  *       when the v1 transaction format is released.
