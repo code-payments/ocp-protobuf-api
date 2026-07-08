@@ -280,8 +280,6 @@ message CanWithdrawToAccountResponse {
     // not subsidize the token account creation.
     //
     // Note: The fee is always paid in the target mint.
-    //
-    // Deprecated: The implementing application coordinates fee amounts
     ExchangeDataWithoutRate fee_amount = 4;
 }
 

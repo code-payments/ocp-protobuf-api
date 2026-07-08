@@ -787,8 +787,6 @@ export class CanWithdrawToAccountResponse extends Message<CanWithdrawToAccountRe
    *
    * Note: The fee is always paid in the target mint.
    *
-   * Deprecated: The implementing application coordinates fee amounts
-   *
    * @generated from field: ocp.transaction.v1.ExchangeDataWithoutRate fee_amount = 4;
    */
   feeAmount?: ExchangeDataWithoutRate;
