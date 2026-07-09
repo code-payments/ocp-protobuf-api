@@ -6635,6 +6635,8 @@ func (m *StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter
 		}
 	}
 
+	// no validation rules for TreasuryPurchaseAmount
+
 	return nil
 }
 
