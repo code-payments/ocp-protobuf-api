@@ -6391,6 +6391,16 @@ func (m *StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerPara
 
 	// no validation rules for MemoryIndex
 
+	if v, ok := interface{}(m.GetFeeDestination()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError{
+				field:  "FeeDestination",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	return nil
 }
 
