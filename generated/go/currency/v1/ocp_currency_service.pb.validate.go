@@ -706,6 +706,16 @@ func (m *Mint) Validate() error {
 		}
 	}
 
+	if v, ok := interface{}(m.GetMarketCapMetrics()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MintValidationError{
+				field:  "MarketCapMetrics",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	return nil
 }
 
@@ -2078,6 +2088,95 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = HolderMetricsValidationError{}
+
+// Validate checks the field values on MarketCapMetrics with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *MarketCapMetrics) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for CurrentMarketCap
+
+	if len(m.GetMarketCapDeltas()) > 4 {
+		return MarketCapMetricsValidationError{
+			field:  "MarketCapDeltas",
+			reason: "value must contain no more than 4 item(s)",
+		}
+	}
+
+	for idx, item := range m.GetMarketCapDeltas() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MarketCapMetricsValidationError{
+					field:  fmt.Sprintf("MarketCapDeltas[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarketCapMetricsValidationError is the validation error returned by
+// MarketCapMetrics.Validate if the designated constraints aren't met.
+type MarketCapMetricsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MarketCapMetricsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MarketCapMetricsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MarketCapMetricsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MarketCapMetricsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MarketCapMetricsValidationError) ErrorName() string { return "MarketCapMetricsValidationError" }
+
+// Error satisfies the builtin error interface
+func (e MarketCapMetricsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMarketCapMetrics.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MarketCapMetricsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MarketCapMetricsValidationError{}
 
 // Validate checks the field values on LaunchRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, an error
@@ -3766,6 +3865,78 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = HolderMetrics_DeltaHoldersValidationError{}
+
+// Validate checks the field values on MarketCapMetrics_DeltaMarketCap with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *MarketCapMetrics_DeltaMarketCap) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Range
+
+	// no validation rules for Delta
+
+	return nil
+}
+
+// MarketCapMetrics_DeltaMarketCapValidationError is the validation error
+// returned by MarketCapMetrics_DeltaMarketCap.Validate if the designated
+// constraints aren't met.
+type MarketCapMetrics_DeltaMarketCapValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MarketCapMetrics_DeltaMarketCapValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MarketCapMetrics_DeltaMarketCapValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MarketCapMetrics_DeltaMarketCapValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MarketCapMetrics_DeltaMarketCapValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MarketCapMetrics_DeltaMarketCapValidationError) ErrorName() string {
+	return "MarketCapMetrics_DeltaMarketCapValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MarketCapMetrics_DeltaMarketCapValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMarketCapMetrics_DeltaMarketCap.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MarketCapMetrics_DeltaMarketCapValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MarketCapMetrics_DeltaMarketCapValidationError{}
 
 // Validate checks the field values on UpdateMetadataRequest_DescriptionUpdate
 // with the rules defined in the proto definition for this message. If any
