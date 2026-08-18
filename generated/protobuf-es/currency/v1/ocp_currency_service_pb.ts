@@ -560,6 +560,13 @@ export class Mint extends Message<Mint> {
    */
   holderMetrics?: HolderMetrics;
 
+  /**
+   * Market cap metrics. This is surfaced where needed (e.g. only in the Discover RPC)
+   *
+   * @generated from field: ocp.currency.v1.MarketCapMetrics market_cap_metrics = 13;
+   */
+  marketCapMetrics?: MarketCapMetrics;
+
   constructor(data?: PartialMessage<Mint>) {
     super();
     proto3.util.initPartial(data, this);
@@ -580,6 +587,7 @@ export class Mint extends Message<Mint> {
     { no: 10, name: "social_links", kind: "message", T: SocialLink, repeated: true },
     { no: 11, name: "bill_customization", kind: "message", T: BillCustomization },
     { no: 12, name: "holder_metrics", kind: "message", T: HolderMetrics },
+    { no: 13, name: "market_cap_metrics", kind: "message", T: MarketCapMetrics },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Mint {
@@ -1478,6 +1486,98 @@ export class HolderMetrics_DeltaHolders extends Message<HolderMetrics_DeltaHolde
 
   static equals(a: HolderMetrics_DeltaHolders | PlainMessage<HolderMetrics_DeltaHolders> | undefined, b: HolderMetrics_DeltaHolders | PlainMessage<HolderMetrics_DeltaHolders> | undefined): boolean {
     return proto3.util.equals(HolderMetrics_DeltaHolders, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.MarketCapMetrics
+ */
+export class MarketCapMetrics extends Message<MarketCapMetrics> {
+  /**
+   * The current market capitalization in USD for a currency
+   *
+   * @generated from field: double current_market_cap = 1;
+   */
+  currentMarketCap = 0;
+
+  /**
+   * @generated from field: repeated ocp.currency.v1.MarketCapMetrics.DeltaMarketCap market_cap_deltas = 2;
+   */
+  marketCapDeltas: MarketCapMetrics_DeltaMarketCap[] = [];
+
+  constructor(data?: PartialMessage<MarketCapMetrics>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.MarketCapMetrics";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "current_market_cap", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 2, name: "market_cap_deltas", kind: "message", T: MarketCapMetrics_DeltaMarketCap, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MarketCapMetrics {
+    return new MarketCapMetrics().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MarketCapMetrics {
+    return new MarketCapMetrics().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MarketCapMetrics {
+    return new MarketCapMetrics().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: MarketCapMetrics | PlainMessage<MarketCapMetrics> | undefined, b: MarketCapMetrics | PlainMessage<MarketCapMetrics> | undefined): boolean {
+    return proto3.util.equals(MarketCapMetrics, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.currency.v1.MarketCapMetrics.DeltaMarketCap
+ */
+export class MarketCapMetrics_DeltaMarketCap extends Message<MarketCapMetrics_DeltaMarketCap> {
+  /**
+   * Predefined range where delta is calculated from
+   *
+   * @generated from field: ocp.currency.v1.PredefinedRange range = 1;
+   */
+  range = PredefinedRange.ALL_TIME;
+
+  /**
+   * Net change in market capitalization in USD within the time range
+   *
+   * @generated from field: double delta = 2;
+   */
+  delta = 0;
+
+  constructor(data?: PartialMessage<MarketCapMetrics_DeltaMarketCap>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.currency.v1.MarketCapMetrics.DeltaMarketCap";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "range", kind: "enum", T: proto3.getEnumType(PredefinedRange) },
+    { no: 2, name: "delta", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MarketCapMetrics_DeltaMarketCap {
+    return new MarketCapMetrics_DeltaMarketCap().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MarketCapMetrics_DeltaMarketCap {
+    return new MarketCapMetrics_DeltaMarketCap().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MarketCapMetrics_DeltaMarketCap {
+    return new MarketCapMetrics_DeltaMarketCap().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: MarketCapMetrics_DeltaMarketCap | PlainMessage<MarketCapMetrics_DeltaMarketCap> | undefined, b: MarketCapMetrics_DeltaMarketCap | PlainMessage<MarketCapMetrics_DeltaMarketCap> | undefined): boolean {
+    return proto3.util.equals(MarketCapMetrics_DeltaMarketCap, a, b);
   }
 }
 
