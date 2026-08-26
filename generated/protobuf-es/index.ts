@@ -1,4 +1,5 @@
 export * as Transaction from './transaction/v1';
+export * as Balance from './balance/v1';
 export * as Common from './common/v1';
 export * as Account from './account/v1';
 export * as Messaging from './messaging/v1';

@@ -32,6 +32,7 @@ Service proto files are prefixed with `ocp_` to avoid filename conflicts with im
 
 - `proto/common/v1/model.proto` - Shared types used across all services
 - `proto/account/v1/ocp_account_service.proto` (~215 lines) - Account service
+- `proto/balance/v1/ocp_balance_service.proto` (~30 lines) - Balance service
 - `proto/currency/v1/ocp_currency_service.proto` (~570 lines) - Currency/launchpad service
 - `proto/messaging/v1/ocp_messaging_service.proto` (~245 lines) - Messaging service
 - `proto/transaction/v1/ocp_transaction_service.proto` (~1385 lines) - Transaction/intent/swap service (largest and most complex)
@@ -44,6 +45,7 @@ Import dependency graph (relevant when adding cross-service types):
 - `currency` imports `common`
 - `transaction` imports `common`, `currency`
 - `account` and `messaging` import `common`, `currency`, `transaction`
+- `balance` imports `common`
 
 ### Generated Code
 - `generated/go/` - Go code with gRPC stubs and validate methods
@@ -62,6 +64,9 @@ Import dependency graph (relevant when adding cross-service types):
 ### Account Service (2 RPCs)
 - `IsOcpAccount` - whether an owner account is an OCP account (can fail with UNLOCKED_TIMELOCK_ACCOUNT)
 - `GetTokenAccountInfos` - token account metadata for an owner, with optional filters (token address, account type, mint). `TokenAccountInfo` carries balance source (blockchain vs cache), management state (LOCKING/LOCKED/UNLOCKING/UNLOCKED/CLOSING/CLOSED — reflects OCP's co-signing authority over timelock accounts), blockchain state, gift card claim state, mint metadata, live launchpad reserve state, and USD cost basis. Supports a secondary `requesting_owner` signature for cases like a user inspecting a gift card account.
+
+### Balance Service (1 RPC)
+- `GetBalance` - core mint balance for any owner account. Unauthenticated (no `signature` field) since balances are public blockchain state, so it can be called against any public key. Returns `core_mint_value` in quarks, with `Result` of OK/DENIED/NOT_FOUND.
 
 ### Currency Service (8 RPCs) — launchpad + market data
 - `GetMints` - mint metadata by address. `Mint` includes decimals, name/symbol/description, image, social links, bill customization (1-3 hex colors), holder metrics, `VmMetadata` (VM address/authority/omnibus; only currencies with a VM are usable for payments; 21-day lock duration), and `LaunchpadMetadata` (currency config, liquidity pool, seed, bonding-curve supply, hardcoded 1% sell fee, price, market cap).
