@@ -8,6 +8,7 @@ The APIs and models for communication between Open Code Protocol clients and ser
 ## Services
 
 - [Account](https://github.com/code-payments/ocp-protobuf-api/blob/main/proto/account/v1/ocp_account_service.proto)
+- [Balance](https://github.com/code-payments/ocp-protobuf-api/blob/main/proto/balance/v1/ocp_balance_service.proto)
 - [Currency](https://github.com/code-payments/ocp-protobuf-api/blob/main/proto/currency/v1/ocp_currency_service.proto)
 - [Messaging](https://github.com/code-payments/ocp-protobuf-api/blob/main/proto/messaging/v1/ocp_messaging_service.proto)
 - [Transaction](https://github.com/code-payments/ocp-protobuf-api/blob/main/proto/transaction/v1/ocp_transaction_service.proto)
