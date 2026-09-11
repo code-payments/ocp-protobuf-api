@@ -58,6 +58,28 @@ func (m *GetBalanceRequest) Validate() error {
 		}
 	}
 
+	if len(m.GetMints()) > 1024 {
+		return GetBalanceRequestValidationError{
+			field:  "Mints",
+			reason: "value must contain no more than 1024 item(s)",
+		}
+	}
+
+	for idx, item := range m.GetMints() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetBalanceRequestValidationError{
+					field:  fmt.Sprintf("Mints[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -129,6 +151,8 @@ func (m *GetBalanceResponse) Validate() error {
 
 	// no validation rules for CoreMintValue
 
+	// no validation rules for BalancesByMint
+
 	return nil
 }
 
@@ -187,3 +211,87 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetBalanceResponseValidationError{}
+
+// Validate checks the field values on MintBalance with the rules defined in
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
+func (m *MintBalance) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetMint() == nil {
+		return MintBalanceValidationError{
+			field:  "Mint",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetMint()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return MintBalanceValidationError{
+				field:  "Mint",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for CoreMintValue
+
+	return nil
+}
+
+// MintBalanceValidationError is the validation error returned by
+// MintBalance.Validate if the designated constraints aren't met.
+type MintBalanceValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MintBalanceValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MintBalanceValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MintBalanceValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MintBalanceValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MintBalanceValidationError) ErrorName() string { return "MintBalanceValidationError" }
+
+// Error satisfies the builtin error interface
+func (e MintBalanceValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMintBalance.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MintBalanceValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MintBalanceValidationError{}
