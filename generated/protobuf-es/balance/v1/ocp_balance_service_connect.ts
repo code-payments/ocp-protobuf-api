@@ -13,7 +13,8 @@ export const Balance = {
   typeName: "ocp.balance.v1.Balance",
   methods: {
     /**
-     * GetBalance returns balance data for any owner account
+     * GetBalance returns balance data for any owner account, optionally filtered
+     * by a set of mints
      *
      * @generated from rpc ocp.balance.v1.Balance.GetBalance
      */

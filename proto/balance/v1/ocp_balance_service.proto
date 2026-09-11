@@ -10,12 +10,20 @@ import "common/v1/model.proto";
 import "validate/validate.proto";
 
 service Balance {
-    // GetBalance returns balance data for any owner account
+    // GetBalance returns balance data for any owner account, optionally filtered
+    // by a set of mints
     rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse);
 }
 
 message GetBalanceRequest {
+    // The owner account to fetch balances for
     common.v1.SolanaAccountId owner = 1 [(validate.rules).message.required = true];
+
+    // Optional filter to limit the response to balances for the provided mints.
+    // When empty, balances for all mints held by the owner are returned.
+    repeated common.v1.SolanaAccountId mints = 2 [(validate.rules).repeated = {
+        max_items: 1024 // Arbitrary
+    }];
 }
 
 message GetBalanceResponse {
@@ -26,5 +34,17 @@ message GetBalanceResponse {
         NOT_FOUND = 2;
     }
 
+    // The total core mint value, in quarks, across all balances in the response
+    uint64 core_mint_value = 2;
+
+    // Individual balances keyed by mint address
+    map<string, MintBalance> balances_by_mint = 3;
+}
+
+message MintBalance {
+    // The mint the balance is for
+    common.v1.SolanaAccountId mint = 1 [(validate.rules).message.required = true];
+
+    // The balance value, in quarks, denominated in the core mint
     uint64 core_mint_value = 2;
 }

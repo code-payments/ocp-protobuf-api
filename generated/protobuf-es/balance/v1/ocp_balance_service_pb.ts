@@ -12,9 +12,19 @@ import { SolanaAccountId } from "../../common/v1/model_pb";
  */
 export class GetBalanceRequest extends Message<GetBalanceRequest> {
   /**
+   * The owner account to fetch balances for
+   *
    * @generated from field: ocp.common.v1.SolanaAccountId owner = 1;
    */
   owner?: SolanaAccountId;
+
+  /**
+   * Optional filter to limit the response to balances for the provided mints.
+   * When empty, balances for all mints held by the owner are returned.
+   *
+   * @generated from field: repeated ocp.common.v1.SolanaAccountId mints = 2;
+   */
+  mints: SolanaAccountId[] = [];
 
   constructor(data?: PartialMessage<GetBalanceRequest>) {
     super();
@@ -25,6 +35,7 @@ export class GetBalanceRequest extends Message<GetBalanceRequest> {
   static readonly typeName = "ocp.balance.v1.GetBalanceRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "owner", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "mints", kind: "message", T: SolanaAccountId, repeated: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetBalanceRequest {
@@ -54,9 +65,18 @@ export class GetBalanceResponse extends Message<GetBalanceResponse> {
   result = GetBalanceResponse_Result.OK;
 
   /**
+   * The total core mint value, in quarks, across all balances in the response
+   *
    * @generated from field: uint64 core_mint_value = 2;
    */
   coreMintValue = protoInt64.zero;
+
+  /**
+   * Individual balances keyed by mint address
+   *
+   * @generated from field: map<string, ocp.balance.v1.MintBalance> balances_by_mint = 3;
+   */
+  balancesByMint: { [key: string]: MintBalance } = {};
 
   constructor(data?: PartialMessage<GetBalanceResponse>) {
     super();
@@ -68,6 +88,7 @@ export class GetBalanceResponse extends Message<GetBalanceResponse> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(GetBalanceResponse_Result) },
     { no: 2, name: "core_mint_value", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 3, name: "balances_by_mint", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: MintBalance} },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetBalanceResponse {
@@ -112,4 +133,51 @@ proto3.util.setEnumType(GetBalanceResponse_Result, "ocp.balance.v1.GetBalanceRes
   { no: 1, name: "DENIED" },
   { no: 2, name: "NOT_FOUND" },
 ]);
+
+/**
+ * @generated from message ocp.balance.v1.MintBalance
+ */
+export class MintBalance extends Message<MintBalance> {
+  /**
+   * The mint the balance is for
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId mint = 1;
+   */
+  mint?: SolanaAccountId;
+
+  /**
+   * The balance value, in quarks, denominated in the core mint
+   *
+   * @generated from field: uint64 core_mint_value = 2;
+   */
+  coreMintValue = protoInt64.zero;
+
+  constructor(data?: PartialMessage<MintBalance>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.MintBalance";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "mint", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "core_mint_value", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MintBalance {
+    return new MintBalance().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MintBalance {
+    return new MintBalance().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MintBalance {
+    return new MintBalance().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: MintBalance | PlainMessage<MintBalance> | undefined, b: MintBalance | PlainMessage<MintBalance> | undefined): boolean {
+    return proto3.util.equals(MintBalance, a, b);
+  }
+}
 
