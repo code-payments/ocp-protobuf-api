@@ -13,6 +13,10 @@ service Balance {
     // GetBalance returns balance data for any owner account, optionally filtered
     // by a set of mints
     rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse);
+
+    // GetBalances returns balance data for a set of owner accounts, optionally
+    // filtered by a set of mints
+    rpc GetBalances(GetBalancesRequest) returns (GetBalancesResponse);
 }
 
 message GetBalanceRequest {
@@ -35,6 +39,42 @@ message GetBalanceResponse {
     }
 
     // The total core mint value, in quarks, across all balances in the response
+    uint64 core_mint_value = 2;
+
+    // Individual balances keyed by mint address
+    map<string, MintBalance> balances_by_mint = 3;
+}
+
+message GetBalancesRequest {
+    // The owner accounts to fetch balances for
+    repeated common.v1.SolanaAccountId owners = 1 [(validate.rules).repeated = {
+        min_items: 1
+        max_items: 1024 // Arbitrary
+    }];
+
+    // Optional filter to limit the response to balances for the provided mints.
+    // When empty, balances for all mints held by each owner are returned.
+    repeated common.v1.SolanaAccountId mints = 2 [(validate.rules).repeated = {
+        max_items: 1024 // Arbitrary
+    }];
+}
+
+message GetBalancesResponse {
+    Result result = 1;
+    enum Result {
+        OK        = 0;
+        DENIED    = 1;
+    }
+
+    // Individual owner balances keyed by owner address
+    map<string, OwnerBalance> balances_by_owner = 2;
+}
+
+message OwnerBalance {
+    // The owner account the balance is for
+    common.v1.SolanaAccountId owner = 1 [(validate.rules).message.required = true];
+
+    // The total core mint value, in quarks, across all balances for the owner
     uint64 core_mint_value = 2;
 
     // Individual balances keyed by mint address

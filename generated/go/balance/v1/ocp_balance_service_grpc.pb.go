@@ -25,6 +25,9 @@ type BalanceClient interface {
 	// GetBalance returns balance data for any owner account, optionally filtered
 	// by a set of mints
 	GetBalance(ctx context.Context, in *GetBalanceRequest, opts ...grpc.CallOption) (*GetBalanceResponse, error)
+	// GetBalances returns balance data for a set of owner accounts, optionally
+	// filtered by a set of mints
+	GetBalances(ctx context.Context, in *GetBalancesRequest, opts ...grpc.CallOption) (*GetBalancesResponse, error)
 }
 
 type balanceClient struct {
@@ -44,6 +47,15 @@ func (c *balanceClient) GetBalance(ctx context.Context, in *GetBalanceRequest, o
 	return out, nil
 }
 
+func (c *balanceClient) GetBalances(ctx context.Context, in *GetBalancesRequest, opts ...grpc.CallOption) (*GetBalancesResponse, error) {
+	out := new(GetBalancesResponse)
+	err := c.cc.Invoke(ctx, "/ocp.balance.v1.Balance/GetBalances", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BalanceServer is the server API for Balance service.
 // All implementations must embed UnimplementedBalanceServer
 // for forward compatibility
@@ -51,6 +63,9 @@ type BalanceServer interface {
 	// GetBalance returns balance data for any owner account, optionally filtered
 	// by a set of mints
 	GetBalance(context.Context, *GetBalanceRequest) (*GetBalanceResponse, error)
+	// GetBalances returns balance data for a set of owner accounts, optionally
+	// filtered by a set of mints
+	GetBalances(context.Context, *GetBalancesRequest) (*GetBalancesResponse, error)
 	mustEmbedUnimplementedBalanceServer()
 }
 
@@ -60,6 +75,9 @@ type UnimplementedBalanceServer struct {
 
 func (UnimplementedBalanceServer) GetBalance(context.Context, *GetBalanceRequest) (*GetBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBalance not implemented")
+}
+func (UnimplementedBalanceServer) GetBalances(context.Context, *GetBalancesRequest) (*GetBalancesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBalances not implemented")
 }
 func (UnimplementedBalanceServer) mustEmbedUnimplementedBalanceServer() {}
 
@@ -92,6 +110,24 @@ func _Balance_GetBalance_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Balance_GetBalances_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBalancesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BalanceServer).GetBalances(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ocp.balance.v1.Balance/GetBalances",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BalanceServer).GetBalances(ctx, req.(*GetBalancesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Balance_ServiceDesc is the grpc.ServiceDesc for Balance service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -102,6 +138,10 @@ var Balance_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetBalance",
 			Handler:    _Balance_GetBalance_Handler,
+		},
+		{
+			MethodName: "GetBalances",
+			Handler:    _Balance_GetBalances_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
