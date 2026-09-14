@@ -212,6 +212,274 @@ var _ interface {
 	ErrorName() string
 } = GetBalanceResponseValidationError{}
 
+// Validate checks the field values on GetBalancesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *GetBalancesRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if l := len(m.GetOwners()); l < 1 || l > 1024 {
+		return GetBalancesRequestValidationError{
+			field:  "Owners",
+			reason: "value must contain between 1 and 1024 items, inclusive",
+		}
+	}
+
+	for idx, item := range m.GetOwners() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetBalancesRequestValidationError{
+					field:  fmt.Sprintf("Owners[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(m.GetMints()) > 1024 {
+		return GetBalancesRequestValidationError{
+			field:  "Mints",
+			reason: "value must contain no more than 1024 item(s)",
+		}
+	}
+
+	for idx, item := range m.GetMints() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetBalancesRequestValidationError{
+					field:  fmt.Sprintf("Mints[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// GetBalancesRequestValidationError is the validation error returned by
+// GetBalancesRequest.Validate if the designated constraints aren't met.
+type GetBalancesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBalancesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBalancesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBalancesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBalancesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBalancesRequestValidationError) ErrorName() string {
+	return "GetBalancesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBalancesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBalancesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBalancesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBalancesRequestValidationError{}
+
+// Validate checks the field values on GetBalancesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *GetBalancesResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Result
+
+	// no validation rules for BalancesByOwner
+
+	return nil
+}
+
+// GetBalancesResponseValidationError is the validation error returned by
+// GetBalancesResponse.Validate if the designated constraints aren't met.
+type GetBalancesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBalancesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBalancesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBalancesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBalancesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBalancesResponseValidationError) ErrorName() string {
+	return "GetBalancesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBalancesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBalancesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBalancesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBalancesResponseValidationError{}
+
+// Validate checks the field values on OwnerBalance with the rules defined in
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
+func (m *OwnerBalance) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetOwner() == nil {
+		return OwnerBalanceValidationError{
+			field:  "Owner",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetOwner()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return OwnerBalanceValidationError{
+				field:  "Owner",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for CoreMintValue
+
+	// no validation rules for BalancesByMint
+
+	return nil
+}
+
+// OwnerBalanceValidationError is the validation error returned by
+// OwnerBalance.Validate if the designated constraints aren't met.
+type OwnerBalanceValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OwnerBalanceValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OwnerBalanceValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OwnerBalanceValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OwnerBalanceValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OwnerBalanceValidationError) ErrorName() string { return "OwnerBalanceValidationError" }
+
+// Error satisfies the builtin error interface
+func (e OwnerBalanceValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOwnerBalance.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OwnerBalanceValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OwnerBalanceValidationError{}
+
 // Validate checks the field values on MintBalance with the rules defined in
 // the proto definition for this message. If any rules are violated, an error
 // is returned.

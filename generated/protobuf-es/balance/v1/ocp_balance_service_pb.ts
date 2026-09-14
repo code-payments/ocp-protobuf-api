@@ -135,6 +135,174 @@ proto3.util.setEnumType(GetBalanceResponse_Result, "ocp.balance.v1.GetBalanceRes
 ]);
 
 /**
+ * @generated from message ocp.balance.v1.GetBalancesRequest
+ */
+export class GetBalancesRequest extends Message<GetBalancesRequest> {
+  /**
+   * The owner accounts to fetch balances for
+   *
+   * @generated from field: repeated ocp.common.v1.SolanaAccountId owners = 1;
+   */
+  owners: SolanaAccountId[] = [];
+
+  /**
+   * Optional filter to limit the response to balances for the provided mints.
+   * When empty, balances for all mints held by each owner are returned.
+   *
+   * @generated from field: repeated ocp.common.v1.SolanaAccountId mints = 2;
+   */
+  mints: SolanaAccountId[] = [];
+
+  constructor(data?: PartialMessage<GetBalancesRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.GetBalancesRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "owners", kind: "message", T: SolanaAccountId, repeated: true },
+    { no: 2, name: "mints", kind: "message", T: SolanaAccountId, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetBalancesRequest {
+    return new GetBalancesRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetBalancesRequest {
+    return new GetBalancesRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetBalancesRequest {
+    return new GetBalancesRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetBalancesRequest | PlainMessage<GetBalancesRequest> | undefined, b: GetBalancesRequest | PlainMessage<GetBalancesRequest> | undefined): boolean {
+    return proto3.util.equals(GetBalancesRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.balance.v1.GetBalancesResponse
+ */
+export class GetBalancesResponse extends Message<GetBalancesResponse> {
+  /**
+   * @generated from field: ocp.balance.v1.GetBalancesResponse.Result result = 1;
+   */
+  result = GetBalancesResponse_Result.OK;
+
+  /**
+   * Individual owner balances keyed by owner address
+   *
+   * @generated from field: map<string, ocp.balance.v1.OwnerBalance> balances_by_owner = 2;
+   */
+  balancesByOwner: { [key: string]: OwnerBalance } = {};
+
+  constructor(data?: PartialMessage<GetBalancesResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.GetBalancesResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(GetBalancesResponse_Result) },
+    { no: 2, name: "balances_by_owner", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: OwnerBalance} },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetBalancesResponse {
+    return new GetBalancesResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetBalancesResponse {
+    return new GetBalancesResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetBalancesResponse {
+    return new GetBalancesResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetBalancesResponse | PlainMessage<GetBalancesResponse> | undefined, b: GetBalancesResponse | PlainMessage<GetBalancesResponse> | undefined): boolean {
+    return proto3.util.equals(GetBalancesResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum ocp.balance.v1.GetBalancesResponse.Result
+ */
+export enum GetBalancesResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(GetBalancesResponse_Result)
+proto3.util.setEnumType(GetBalancesResponse_Result, "ocp.balance.v1.GetBalancesResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+]);
+
+/**
+ * @generated from message ocp.balance.v1.OwnerBalance
+ */
+export class OwnerBalance extends Message<OwnerBalance> {
+  /**
+   * The owner account the balance is for
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId owner = 1;
+   */
+  owner?: SolanaAccountId;
+
+  /**
+   * The total core mint value, in quarks, across all balances for the owner
+   *
+   * @generated from field: uint64 core_mint_value = 2;
+   */
+  coreMintValue = protoInt64.zero;
+
+  /**
+   * Individual balances keyed by mint address
+   *
+   * @generated from field: map<string, ocp.balance.v1.MintBalance> balances_by_mint = 3;
+   */
+  balancesByMint: { [key: string]: MintBalance } = {};
+
+  constructor(data?: PartialMessage<OwnerBalance>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.OwnerBalance";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "owner", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "core_mint_value", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 3, name: "balances_by_mint", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: MintBalance} },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OwnerBalance {
+    return new OwnerBalance().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): OwnerBalance {
+    return new OwnerBalance().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): OwnerBalance {
+    return new OwnerBalance().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: OwnerBalance | PlainMessage<OwnerBalance> | undefined, b: OwnerBalance | PlainMessage<OwnerBalance> | undefined): boolean {
+    return proto3.util.equals(OwnerBalance, a, b);
+  }
+}
+
+/**
  * @generated from message ocp.balance.v1.MintBalance
  */
 export class MintBalance extends Message<MintBalance> {
