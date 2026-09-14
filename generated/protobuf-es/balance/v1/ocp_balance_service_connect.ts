@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetBalanceRequest, GetBalanceResponse, GetBalancesRequest, GetBalancesResponse } from "./ocp_balance_service_pb";
+import { GetBalancesRequest, GetBalancesResponse } from "./ocp_balance_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -12,18 +12,6 @@ import { MethodKind } from "@bufbuild/protobuf";
 export const Balance = {
   typeName: "ocp.balance.v1.Balance",
   methods: {
-    /**
-     * GetBalance returns balance data for any owner account, optionally filtered
-     * by a set of mints
-     *
-     * @generated from rpc ocp.balance.v1.Balance.GetBalance
-     */
-    getBalance: {
-      name: "GetBalance",
-      I: GetBalanceRequest,
-      O: GetBalanceResponse,
-      kind: MethodKind.Unary,
-    },
     /**
      * GetBalances returns balance data for a set of owner accounts, optionally
      * filtered by a set of mints
