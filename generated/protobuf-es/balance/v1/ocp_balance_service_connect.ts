@@ -14,7 +14,8 @@ export const Balance = {
   methods: {
     /**
      * GetBalances returns balance data for a set of owner accounts, optionally
-     * filtered by a set of mints
+     * filtered by a set of mints. Balances are always denominated in the core
+     * mint, and can additionally be denominated in a set of fiat currencies.
      *
      * @generated from rpc ocp.balance.v1.Balance.GetBalances
      */

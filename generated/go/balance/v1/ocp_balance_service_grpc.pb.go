@@ -23,7 +23,8 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BalanceClient interface {
 	// GetBalances returns balance data for a set of owner accounts, optionally
-	// filtered by a set of mints
+	// filtered by a set of mints. Balances are always denominated in the core
+	// mint, and can additionally be denominated in a set of fiat currencies.
 	GetBalances(ctx context.Context, in *GetBalancesRequest, opts ...grpc.CallOption) (*GetBalancesResponse, error)
 }
 
@@ -49,7 +50,8 @@ func (c *balanceClient) GetBalances(ctx context.Context, in *GetBalancesRequest,
 // for forward compatibility
 type BalanceServer interface {
 	// GetBalances returns balance data for a set of owner accounts, optionally
-	// filtered by a set of mints
+	// filtered by a set of mints. Balances are always denominated in the core
+	// mint, and can additionally be denominated in a set of fiat currencies.
 	GetBalances(context.Context, *GetBalancesRequest) (*GetBalancesResponse, error)
 	mustEmbedUnimplementedBalanceServer()
 }
