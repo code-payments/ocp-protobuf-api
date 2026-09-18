@@ -26,6 +26,15 @@ export class GetBalancesRequest extends Message<GetBalancesRequest> {
    */
   mints: SolanaAccountId[] = [];
 
+  /**
+   * Optional set of ISO 4217 alpha-3 currency codes (e.g., "usd") to also
+   * denominate balance values in, in addition to the core mint value. When
+   * empty, only core mint values are returned.
+   *
+   * @generated from field: repeated string currency_codes = 3;
+   */
+  currencyCodes: string[] = [];
+
   constructor(data?: PartialMessage<GetBalancesRequest>) {
     super();
     proto3.util.initPartial(data, this);
@@ -36,6 +45,7 @@ export class GetBalancesRequest extends Message<GetBalancesRequest> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "owners", kind: "message", T: SolanaAccountId, repeated: true },
     { no: 2, name: "mints", kind: "message", T: SolanaAccountId, repeated: true },
+    { no: 3, name: "currency_codes", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetBalancesRequest {
@@ -145,6 +155,15 @@ export class OwnerBalance extends Message<OwnerBalance> {
    */
   balancesByMint: { [key: string]: MintBalance } = {};
 
+  /**
+   * The total fiat value across all balances for the owner, keyed by currency
+   * code. Only populated for the currency codes requested in
+   * GetBalancesRequest.currency_codes.
+   *
+   * @generated from field: map<string, double> fiat_values_by_currency = 4;
+   */
+  fiatValuesByCurrency: { [key: string]: number } = {};
+
   constructor(data?: PartialMessage<OwnerBalance>) {
     super();
     proto3.util.initPartial(data, this);
@@ -156,6 +175,7 @@ export class OwnerBalance extends Message<OwnerBalance> {
     { no: 1, name: "owner", kind: "message", T: SolanaAccountId },
     { no: 2, name: "core_mint_value", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
     { no: 3, name: "balances_by_mint", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: MintBalance} },
+    { no: 4, name: "fiat_values_by_currency", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 1 /* ScalarType.DOUBLE */} },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OwnerBalance {
@@ -193,6 +213,15 @@ export class MintBalance extends Message<MintBalance> {
    */
   coreMintValue = protoInt64.zero;
 
+  /**
+   * The balance value denominated in fiat, keyed by currency code. Only
+   * populated for the currency codes requested in
+   * GetBalancesRequest.currency_codes.
+   *
+   * @generated from field: map<string, double> fiat_values_by_currency = 3;
+   */
+  fiatValuesByCurrency: { [key: string]: number } = {};
+
   constructor(data?: PartialMessage<MintBalance>) {
     super();
     proto3.util.initPartial(data, this);
@@ -203,6 +232,7 @@ export class MintBalance extends Message<MintBalance> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "mint", kind: "message", T: SolanaAccountId },
     { no: 2, name: "core_mint_value", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 3, name: "fiat_values_by_currency", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 1 /* ScalarType.DOUBLE */} },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MintBalance {

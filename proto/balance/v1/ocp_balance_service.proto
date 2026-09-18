@@ -11,7 +11,8 @@ import "validate/validate.proto";
 
 service Balance {
     // GetBalances returns balance data for a set of owner accounts, optionally
-    // filtered by a set of mints
+    // filtered by a set of mints. Balances are always denominated in the core
+    // mint, and can additionally be denominated in a set of fiat currencies.
     rpc GetBalances(GetBalancesRequest) returns (GetBalancesResponse);
 }
 
@@ -26,6 +27,19 @@ message GetBalancesRequest {
     // When empty, balances for all mints held by each owner are returned.
     repeated common.v1.SolanaAccountId mints = 2 [(validate.rules).repeated = {
         max_items: 1024 // Arbitrary
+    }];
+
+    // Optional set of ISO 4217 alpha-3 currency codes (e.g., "usd") to also
+    // denominate balance values in, in addition to the core mint value. When
+    // empty, only core mint values are returned.
+    repeated string currency_codes = 3 [(validate.rules).repeated = {
+        max_items: 256
+        unique: true
+        items: {
+            string: {
+                pattern: "^[a-z]{3,4}$"
+            }
+        }
     }];
 }
 
@@ -49,6 +63,11 @@ message OwnerBalance {
 
     // Individual balances keyed by mint address
     map<string, MintBalance> balances_by_mint = 3;
+
+    // The total fiat value across all balances for the owner, keyed by currency
+    // code. Only populated for the currency codes requested in
+    // GetBalancesRequest.currency_codes.
+    map<string, double> fiat_values_by_currency = 4;
 }
 
 message MintBalance {
@@ -57,4 +76,9 @@ message MintBalance {
 
     // The balance value, in quarks, denominated in the core mint
     uint64 core_mint_value = 2;
+
+    // The balance value denominated in fiat, keyed by currency code. Only
+    // populated for the currency codes requested in
+    // GetBalancesRequest.currency_codes.
+    map<string, double> fiat_values_by_currency = 3;
 }

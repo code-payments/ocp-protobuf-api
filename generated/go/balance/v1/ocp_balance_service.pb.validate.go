@@ -85,6 +85,36 @@ func (m *GetBalancesRequest) Validate() error {
 
 	}
 
+	if len(m.GetCurrencyCodes()) > 256 {
+		return GetBalancesRequestValidationError{
+			field:  "CurrencyCodes",
+			reason: "value must contain no more than 256 item(s)",
+		}
+	}
+
+	_GetBalancesRequest_CurrencyCodes_Unique := make(map[string]struct{}, len(m.GetCurrencyCodes()))
+
+	for idx, item := range m.GetCurrencyCodes() {
+		_, _ = idx, item
+
+		if _, exists := _GetBalancesRequest_CurrencyCodes_Unique[item]; exists {
+			return GetBalancesRequestValidationError{
+				field:  fmt.Sprintf("CurrencyCodes[%v]", idx),
+				reason: "repeated value must contain unique items",
+			}
+		} else {
+			_GetBalancesRequest_CurrencyCodes_Unique[item] = struct{}{}
+		}
+
+		if !_GetBalancesRequest_CurrencyCodes_Pattern.MatchString(item) {
+			return GetBalancesRequestValidationError{
+				field:  fmt.Sprintf("CurrencyCodes[%v]", idx),
+				reason: "value does not match regex pattern \"^[a-z]{3,4}$\"",
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -143,6 +173,8 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetBalancesRequestValidationError{}
+
+var _GetBalancesRequest_CurrencyCodes_Pattern = regexp.MustCompile("^[a-z]{3,4}$")
 
 // Validate checks the field values on GetBalancesResponse with the rules
 // defined in the proto definition for this message. If any rules are
@@ -244,6 +276,8 @@ func (m *OwnerBalance) Validate() error {
 
 	// no validation rules for BalancesByMint
 
+	// no validation rules for FiatValuesByCurrency
+
 	return nil
 }
 
@@ -327,6 +361,8 @@ func (m *MintBalance) Validate() error {
 	}
 
 	// no validation rules for CoreMintValue
+
+	// no validation rules for FiatValuesByCurrency
 
 	return nil
 }
