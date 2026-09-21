@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetBalancesRequest, GetBalancesResponse } from "./ocp_balance_service_pb";
+import { AckWatchEventsRequest, AckWatchEventsResponse, DeleteWatchRequest, DeleteWatchResponse, GetBalancesRequest, GetBalancesResponse, GetWatchesRequest, GetWatchesResponse, ListWatchesRequest, ListWatchesResponse, PollWatchEventsRequest, PollWatchEventsResponse, PutWatchRequest, PutWatchResponse } from "./ocp_balance_service_pb";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -23,6 +23,103 @@ export const Balance = {
       name: "GetBalances",
       I: GetBalancesRequest,
       O: GetBalancesResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * PutWatch creates a watch, or replaces the threshold, mints and grace of
+     * the watch already held under the same (owner, key), and evaluates it
+     * before returning. The returned watch carries the state that was true
+     * when the write committed, and the watch exists from that moment, so a
+     * caller may use the response to gate an action on the owner's balance
+     * knowing the balance is being watched from the instant the check passed.
+     * A balance change that lands after the evaluation is caught by the watch,
+     * never lost between the check and the caller's action.
+     *
+     * Replacing a watch keeps its state history where the new threshold
+     * agrees with it and re-derives the state where it does not, with a
+     * transition event either way it changed. Every put, changed or not,
+     * increments the watch's generation.
+     *
+     * @generated from rpc ocp.balance.v1.Balance.PutWatch
+     */
+    putWatch: {
+      name: "PutWatch",
+      I: PutWatchRequest,
+      O: PutWatchResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * DeleteWatch removes a watch, fenced by generation: the delete applies
+     * only if the watch's generation is the one given, and is answered STALE
+     * otherwise. A caller that records the generation PutWatch returned when
+     * it granted something, and deletes with that generation when it revokes
+     * it, can never remove a watch that a concurrent, newer PutWatch re-armed.
+     * Deleting a watch that does not exist is OK.
+     *
+     * Unacked events for the watch are discarded with it.
+     *
+     * @generated from rpc ocp.balance.v1.Balance.DeleteWatch
+     */
+    deleteWatch: {
+      name: "DeleteWatch",
+      I: DeleteWatchRequest,
+      O: DeleteWatchResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * GetWatches returns the subscriber's watches on one owner, a page at a
+     * time in key order, or a set of watches by key. A key with no watch is
+     * left out of the response.
+     *
+     * @generated from rpc ocp.balance.v1.Balance.GetWatches
+     */
+    getWatches: {
+      name: "GetWatches",
+      I: GetWatchesRequest,
+      O: GetWatchesResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * ListWatches pages through every watch the subscriber holds, in no
+     * particular order but stable across pages. It is the reconciliation
+     * read: a subscriber walks it to find watches whose reason for existing
+     * is gone, and compares it with its own records to find watches it is
+     * missing.
+     *
+     * @generated from rpc ocp.balance.v1.Balance.ListWatches
+     */
+    listWatches: {
+      name: "ListWatches",
+      I: ListWatchesRequest,
+      O: ListWatchesResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * PollWatchEvents leases a batch of the subscriber's undelivered events.
+     * A leased event is withheld from other polls for the lease duration and
+     * returns to the queue if not acked by then, so several processes of one
+     * subscriber can poll concurrently and each event is being handled by at
+     * most one of them at a time.
+     *
+     * @generated from rpc ocp.balance.v1.Balance.PollWatchEvents
+     */
+    pollWatchEvents: {
+      name: "PollWatchEvents",
+      I: PollWatchEventsRequest,
+      O: PollWatchEventsResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * AckWatchEvents acks events the subscriber has finished processing.
+     * Acked events are never delivered again and become eligible for
+     * deletion. Acking an unknown or already acked event is OK.
+     *
+     * @generated from rpc ocp.balance.v1.Balance.AckWatchEvents
+     */
+    ackWatchEvents: {
+      name: "AckWatchEvents",
+      I: AckWatchEventsRequest,
+      O: AckWatchEventsResponse,
       kind: MethodKind.Unary,
     },
   }

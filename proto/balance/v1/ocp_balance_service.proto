@@ -7,6 +7,8 @@ option java_package = "com.codeinc.gen.balance.v1";
 option objc_class_prefix = "CPBBalanceV1";
 
 import "common/v1/model.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
 import "validate/validate.proto";
 
 service Balance {
@@ -14,6 +16,117 @@ service Balance {
     // filtered by a set of mints. Balances are always denominated in the core
     // mint, and can additionally be denominated in a set of fiat currencies.
     rpc GetBalances(GetBalancesRequest) returns (GetBalancesResponse);
+
+    //
+    // Section: Watches
+    //
+    // A watch lets a subscriber be told when an owner's balance crosses a
+    // threshold, instead of polling GetBalances.
+    //
+    // A watch is registered by a subscriber against an owner account with a
+    // threshold, and from then on the server tracks whether the owner's
+    // balance is at or above it. A watch is always in one of three states:
+    //
+    //   ABOVE            the balance meets the threshold
+    //   BELOW            the balance fell under the threshold; the grace
+    //                    period is running
+    //   BELOW_SUSTAINED  the balance has stayed under the threshold for the
+    //                    whole grace period
+    //
+    // Every transition between states is delivered to the subscriber as a
+    // WatchEvent. A watch with no grace period skips BELOW and moves straight
+    // to BELOW_SUSTAINED. Recovery to ABOVE is possible from either BELOW
+    // state.
+    //
+    // Valuation is exactly GetBalances': the owner's holdings across every
+    // account the server manages, non-core mints valued in the core mint at
+    // the current launchpad reserve state, and, for a fiat threshold,
+    // converted at the server's current exchange rate. A watch and a
+    // GetBalances call made at the same moment can never disagree. Accounts
+    // the server no longer manages (an unlocked timelock account) hold nothing
+    // for both.
+    //
+    // What the server watches, and how promptly:
+    //   * Every balance change the server itself applies (payments,
+    //     withdrawals, swaps, gift cards, external deposits) re-evaluates the
+    //     owner's watches as part of committing the change, so a crossing
+    //     caused by the owner's own activity is never missed.
+    //   * A change in valuation the owner did not cause (someone else moving
+    //     a launchpad currency's price, an exchange rate moving) is picked up
+    //     on a schedule paced by how close the watch is to its threshold: a
+    //     watch within a few percent of its threshold is re-evaluated every
+    //     minute or two, one far from it a few times a day, and one whose
+    //     core mint holdings alone clear it only as a safety net.
+    //   Detection latency is therefore seconds for the owner's own activity
+    //   and minutes for market moves, which the grace period is expected to
+    //   dwarf.
+    //
+    // Identity and authentication. Every watch request is made by a
+    // subscriber, an Ed25519 key the server has registered, and carries a
+    // signature by that key over serialize(request) with the signature field
+    // unset. Watches and events are scoped to the subscriber: one subscriber
+    // never sees another's. A watch is identified by (subscriber, owner,
+    // key), where key is opaque to the server and is the subscriber's own
+    // name for the watch; a subscriber may hold any number of watches on one
+    // owner under distinct keys. Balances are public blockchain state, so the
+    // owner's consent is not part of the protocol; what the subscriber
+    // identity gates is the server's work, which is subject to per-subscriber
+    // quotas.
+    //
+    // Delivery. Events are durable until acked and delivered at least once,
+    // so a subscriber must process them idempotently; WatchEvent.id is stable
+    // across redeliveries. Events about one owner are delivered in the order
+    // they happened. No ordering holds across owners.
+    //
+
+    // PutWatch creates a watch, or replaces the threshold, mints and grace of
+    // the watch already held under the same (owner, key), and evaluates it
+    // before returning. The returned watch carries the state that was true
+    // when the write committed, and the watch exists from that moment, so a
+    // caller may use the response to gate an action on the owner's balance
+    // knowing the balance is being watched from the instant the check passed.
+    // A balance change that lands after the evaluation is caught by the watch,
+    // never lost between the check and the caller's action.
+    //
+    // Replacing a watch keeps its state history where the new threshold
+    // agrees with it and re-derives the state where it does not, with a
+    // transition event either way it changed. Every put, changed or not,
+    // increments the watch's generation.
+    rpc PutWatch(PutWatchRequest) returns (PutWatchResponse);
+
+    // DeleteWatch removes a watch, fenced by generation: the delete applies
+    // only if the watch's generation is the one given, and is answered STALE
+    // otherwise. A caller that records the generation PutWatch returned when
+    // it granted something, and deletes with that generation when it revokes
+    // it, can never remove a watch that a concurrent, newer PutWatch re-armed.
+    // Deleting a watch that does not exist is OK.
+    //
+    // Unacked events for the watch are discarded with it.
+    rpc DeleteWatch(DeleteWatchRequest) returns (DeleteWatchResponse);
+
+    // GetWatches returns the subscriber's watches on one owner, a page at a
+    // time in key order, or a set of watches by key. A key with no watch is
+    // left out of the response.
+    rpc GetWatches(GetWatchesRequest) returns (GetWatchesResponse);
+
+    // ListWatches pages through every watch the subscriber holds, in no
+    // particular order but stable across pages. It is the reconciliation
+    // read: a subscriber walks it to find watches whose reason for existing
+    // is gone, and compares it with its own records to find watches it is
+    // missing.
+    rpc ListWatches(ListWatchesRequest) returns (ListWatchesResponse);
+
+    // PollWatchEvents leases a batch of the subscriber's undelivered events.
+    // A leased event is withheld from other polls for the lease duration and
+    // returns to the queue if not acked by then, so several processes of one
+    // subscriber can poll concurrently and each event is being handled by at
+    // most one of them at a time.
+    rpc PollWatchEvents(PollWatchEventsRequest) returns (PollWatchEventsResponse);
+
+    // AckWatchEvents acks events the subscriber has finished processing.
+    // Acked events are never delivered again and become eligible for
+    // deletion. Acking an unknown or already acked event is OK.
+    rpc AckWatchEvents(AckWatchEventsRequest) returns (AckWatchEventsResponse);
 }
 
 message GetBalancesRequest {
@@ -81,4 +194,358 @@ message MintBalance {
     // populated for the currency codes requested in
     // GetBalancesRequest.currency_codes.
     map<string, double> fiat_values_by_currency = 3;
+}
+
+//
+// Section: Watches
+//
+
+message PutWatchRequest {
+    // The subscriber registering the watch
+    common.v1.SolanaAccountId subscriber = 1 [(validate.rules).message.required = true];
+
+    // The watch's identity within the subscriber
+    WatchKey key = 2 [(validate.rules).message.required = true];
+
+    // The balance the owner must hold to be ABOVE
+    Threshold threshold = 3 [(validate.rules).message.required = true];
+
+    // Optional filter to limit the watched balance to holdings of the provided
+    // mints, with the semantics of GetBalancesRequest.mints. When empty, the
+    // owner's holdings across every mint are watched.
+    repeated common.v1.SolanaAccountId mints = 4 [(validate.rules).repeated = {
+        max_items: 1024 // Arbitrary
+    }];
+
+    // How long the balance must stay under the threshold before the watch
+    // moves from BELOW to BELOW_SUSTAINED. Unset or zero moves the watch to
+    // BELOW_SUSTAINED as soon as it falls under.
+    google.protobuf.Duration grace = 5 [(validate.rules).duration = {
+        gte: { seconds: 0 }
+    }];
+
+    // The signature is of serialize(PutWatchRequest) using subscriber.
+    common.v1.Signature signature = 6 [(validate.rules).message.required = true];
+}
+
+message PutWatchResponse {
+    Result result = 1;
+    enum Result {
+        OK                   = 0;
+        // The subscriber is unknown or the signature is not theirs
+        DENIED               = 1;
+        // The owner account is not an account the server tracks balances for
+        OWNER_NOT_FOUND      = 2;
+        // The server cannot value a balance in the threshold's fiat currency
+        UNSUPPORTED_CURRENCY = 3;
+        // The put would exceed one of the subscriber's quotas
+        QUOTA_EXCEEDED       = 4;
+    }
+
+    // The watch as written and evaluated. Set if result == OK.
+    Watch watch = 2;
+}
+
+message DeleteWatchRequest {
+    common.v1.SolanaAccountId subscriber = 1 [(validate.rules).message.required = true];
+
+    WatchKey key = 2 [(validate.rules).message.required = true];
+
+    // The generation the caller last saw for the watch. The delete applies
+    // only if it is the watch's current generation.
+    uint64 generation = 3 [(validate.rules).uint64.gt = 0];
+
+    // The signature is of serialize(DeleteWatchRequest) using subscriber.
+    common.v1.Signature signature = 4 [(validate.rules).message.required = true];
+}
+
+message DeleteWatchResponse {
+    Result result = 1;
+    enum Result {
+        OK     = 0;
+        DENIED = 1;
+        // The watch exists at a generation other than the one given
+        STALE  = 2;
+    }
+}
+
+message GetWatchesRequest {
+    common.v1.SolanaAccountId subscriber = 1 [(validate.rules).message.required = true];
+
+    oneof query {
+        option (validate.required) = true;
+
+        // A page of the watches the subscriber holds on one owner
+        OwnerQuery owner = 2;
+
+        // The watches with these keys
+        WatchKeys keys = 3;
+    }
+
+    // OwnerQuery pages through the subscriber's watches on one owner, in key
+    // order. There is no bound on how many watches a subscriber may hold on
+    // an owner, so the read is paged; a page is a single strongly consistent
+    // read of the owner.
+    message OwnerQuery {
+        common.v1.SolanaAccountId owner = 1 [(validate.rules).message.required = true];
+
+        // The most watches to return on this page
+        uint32 page_size = 2 [(validate.rules).uint32 = {
+            gt: 0
+            lte: 1024 // Arbitrary
+        }];
+
+        // The token returned with the previous page. Unset for the first page.
+        PagingToken paging_token = 3;
+    }
+
+    // The signature is of serialize(GetWatchesRequest) using subscriber.
+    common.v1.Signature signature = 4 [(validate.rules).message.required = true];
+}
+
+message GetWatchesResponse {
+    Result result = 1;
+    enum Result {
+        OK            = 0;
+        DENIED        = 1;
+        // The paging token is not one this subscriber's query of this owner
+        // issued
+        INVALID_TOKEN = 2;
+    }
+
+    repeated Watch watches = 2 [(validate.rules).repeated = {
+        max_items: 1024 // Arbitrary
+    }];
+
+    // The token for the next page of an OwnerQuery. Unset when this is the
+    // last page, and never set for a query by keys.
+    PagingToken next_paging_token = 3;
+}
+
+message ListWatchesRequest {
+    common.v1.SolanaAccountId subscriber = 1 [(validate.rules).message.required = true];
+
+    // The most watches to return on this page
+    uint32 page_size = 2 [(validate.rules).uint32 = {
+        gt: 0
+        lte: 1024 // Arbitrary
+    }];
+
+    // The token returned with the previous page. Unset for the first page.
+    PagingToken paging_token = 3;
+
+    // The signature is of serialize(ListWatchesRequest) using subscriber.
+    common.v1.Signature signature = 4 [(validate.rules).message.required = true];
+}
+
+message ListWatchesResponse {
+    Result result = 1;
+    enum Result {
+        OK            = 0;
+        DENIED        = 1;
+        // The paging token is not one this subscriber's listing issued
+        INVALID_TOKEN = 2;
+    }
+
+    repeated Watch watches = 2 [(validate.rules).repeated = {
+        max_items: 1024 // Arbitrary
+    }];
+
+    // The token for the next page. Unset when this is the last page.
+    PagingToken next_paging_token = 3;
+}
+
+message PollWatchEventsRequest {
+    common.v1.SolanaAccountId subscriber = 1 [(validate.rules).message.required = true];
+
+    // The most events to lease on this poll
+    uint32 limit = 2 [(validate.rules).uint32 = {
+        gt: 0
+        lte: 1024 // Arbitrary
+    }];
+
+    // How long the returned events are withheld from other polls. Unset uses
+    // the server's default; the server may cap it.
+    google.protobuf.Duration lease = 3 [(validate.rules).duration = {
+        gte: { seconds: 0 }
+    }];
+
+    // The signature is of serialize(PollWatchEventsRequest) using subscriber.
+    common.v1.Signature signature = 4 [(validate.rules).message.required = true];
+}
+
+message PollWatchEventsResponse {
+    Result result = 1;
+    enum Result {
+        OK     = 0;
+        DENIED = 1;
+    }
+
+    repeated WatchEvent events = 2 [(validate.rules).repeated = {
+        max_items: 1024 // Arbitrary
+    }];
+}
+
+message AckWatchEventsRequest {
+    common.v1.SolanaAccountId subscriber = 1 [(validate.rules).message.required = true];
+
+    repeated common.v1.UUID event_ids = 2 [(validate.rules).repeated = {
+        min_items: 1
+        max_items: 1024 // Arbitrary
+    }];
+
+    // The signature is of serialize(AckWatchEventsRequest) using subscriber.
+    common.v1.Signature signature = 3 [(validate.rules).message.required = true];
+}
+
+message AckWatchEventsResponse {
+    Result result = 1;
+    enum Result {
+        OK     = 0;
+        DENIED = 1;
+    }
+}
+
+// WatchKey identifies a watch within a subscriber: the owner whose balance is
+// watched, and a key of the subscriber's choosing that is opaque to the
+// server. A subscriber holds at most one watch per (owner, key).
+message WatchKey {
+    common.v1.SolanaAccountId owner = 1 [(validate.rules).message.required = true];
+
+    bytes key = 2 [(validate.rules).bytes = {
+        min_len: 1
+        max_len: 64
+    }];
+}
+
+message WatchKeys {
+    repeated WatchKey keys = 1 [(validate.rules).repeated = {
+        min_items: 1
+        max_items: 1024 // Arbitrary
+    }];
+}
+
+// Threshold is the balance a watched owner must hold to be ABOVE.
+message Threshold {
+    oneof kind {
+        option (validate.required) = true;
+
+        // A core mint value, in quarks. Compared exactly, with no exchange
+        // rate involved.
+        uint64 core_mint_quarks = 1 [(validate.rules).uint64.gt = 0];
+
+        // A fiat value, compared against the balance valued at the server's
+        // current exchange rate, allowing half a minor unit of the currency
+        // for rounding.
+        FiatAmount fiat = 2;
+    }
+}
+
+message FiatAmount {
+    // ISO 4217 alpha-3 currency code (e.g., "usd")
+    string currency = 1 [(validate.rules).string = {
+        pattern: "^[a-z]{3,4}$"
+    }];
+
+    // The amount in the currency's major unit
+    double native_amount = 2 [(validate.rules).double.gt = 0];
+}
+
+// WatchState is where an owner's balance stands against a watch's threshold.
+enum WatchState {
+    UNKNOWN_STATE   = 0;
+    ABOVE           = 1;
+    BELOW           = 2;
+    BELOW_SUSTAINED = 3;
+}
+
+message Watch {
+    common.v1.SolanaAccountId subscriber = 1 [(validate.rules).message.required = true];
+
+    WatchKey key = 2 [(validate.rules).message.required = true];
+
+    Threshold threshold = 3 [(validate.rules).message.required = true];
+
+    repeated common.v1.SolanaAccountId mints = 4 [(validate.rules).repeated = {
+        max_items: 1024 // Arbitrary
+    }];
+
+    google.protobuf.Duration grace = 5 [(validate.rules).duration = {
+        gte: { seconds: 0 }
+    }];
+
+    WatchState state = 6 [(validate.rules).enum = {
+        defined_only: true
+        not_in: [0]
+    }];
+
+    // When the watch entered its current state. For BELOW_SUSTAINED this is
+    // when the balance fell under the threshold, i.e. the start of the grace
+    // period that has since elapsed, not its end.
+    google.protobuf.Timestamp state_since = 7 [(validate.rules).timestamp.required = true];
+
+    // Incremented by every PutWatch of this (owner, key). The fence for
+    // DeleteWatch.
+    uint64 generation = 8 [(validate.rules).uint64.gt = 0];
+
+    // The balance as of the watch's last evaluation
+    Valuation last_valuation = 9 [(validate.rules).message.required = true];
+}
+
+// Valuation is what a watched balance was worth when a watch was evaluated,
+// restricted to the watch's mints.
+message Valuation {
+    // The core mint value, in quarks, of the watched holdings. This is the
+    // value a core mint threshold is compared against.
+    uint64 core_mint_value = 1;
+
+    // The value of the watched holdings in the threshold's fiat currency, at
+    // the exchange rate the evaluation used. This is the value a fiat
+    // threshold is compared against. Set only for a fiat threshold.
+    double fiat_value = 2;
+
+    google.protobuf.Timestamp evaluated_at = 3 [(validate.rules).timestamp.required = true];
+}
+
+// WatchEvent announces state transitions on a subscriber's watches. One event
+// carries every transition one evaluation produced for one owner, so an owner
+// whose balance crosses several of the subscriber's thresholds at once is
+// announced once. An evaluation that produces more transitions than fit in
+// one event produces several, each with a distinct id.
+message WatchEvent {
+    // Server-generated, stable across redeliveries; the handle for
+    // AckWatchEvents and the subscriber's idempotency key.
+    common.v1.UUID id = 1 [(validate.rules).message.required = true];
+
+    // The owner every transition in this event is about
+    common.v1.SolanaAccountId owner = 2 [(validate.rules).message.required = true];
+
+    repeated WatchTransition transitions = 3 [(validate.rules).repeated = {
+        min_items: 1
+        max_items: 1024 // Arbitrary
+    }];
+
+    // When the evaluation that produced these transitions ran
+    google.protobuf.Timestamp timestamp = 4 [(validate.rules).timestamp.required = true];
+}
+
+message WatchTransition {
+    // The watch after the transition, including its new state and the
+    // valuation that caused it
+    Watch watch = 1 [(validate.rules).message.required = true];
+
+    // The state the watch was in before this transition
+    WatchState previous_state = 2 [(validate.rules).enum = {
+        defined_only: true
+        not_in: [0]
+    }];
+}
+
+// PagingToken is an opaque cursor issued by a paged RPC, valid only with the
+// RPC and subscriber that issued it.
+message PagingToken {
+    bytes value = 1 [(validate.rules).bytes = {
+        min_len: 1
+        max_len: 256
+    }];
 }

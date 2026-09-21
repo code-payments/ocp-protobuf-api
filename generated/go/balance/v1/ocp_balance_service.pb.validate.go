@@ -420,3 +420,2349 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = MintBalanceValidationError{}
+
+// Validate checks the field values on PutWatchRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *PutWatchRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetSubscriber() == nil {
+		return PutWatchRequestValidationError{
+			field:  "Subscriber",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSubscriber()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PutWatchRequestValidationError{
+				field:  "Subscriber",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetKey() == nil {
+		return PutWatchRequestValidationError{
+			field:  "Key",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetKey()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PutWatchRequestValidationError{
+				field:  "Key",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetThreshold() == nil {
+		return PutWatchRequestValidationError{
+			field:  "Threshold",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetThreshold()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PutWatchRequestValidationError{
+				field:  "Threshold",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(m.GetMints()) > 1024 {
+		return PutWatchRequestValidationError{
+			field:  "Mints",
+			reason: "value must contain no more than 1024 item(s)",
+		}
+	}
+
+	for idx, item := range m.GetMints() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PutWatchRequestValidationError{
+					field:  fmt.Sprintf("Mints[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if d := m.GetGrace(); d != nil {
+		dur, err := ptypes.Duration(d)
+		if err != nil {
+			return PutWatchRequestValidationError{
+				field:  "Grace",
+				reason: "value is not a valid duration",
+				cause:  err,
+			}
+		}
+
+		gte := time.Duration(0*time.Second + 0*time.Nanosecond)
+
+		if dur < gte {
+			return PutWatchRequestValidationError{
+				field:  "Grace",
+				reason: "value must be greater than or equal to 0s",
+			}
+		}
+
+	}
+
+	if m.GetSignature() == nil {
+		return PutWatchRequestValidationError{
+			field:  "Signature",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSignature()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PutWatchRequestValidationError{
+				field:  "Signature",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// PutWatchRequestValidationError is the validation error returned by
+// PutWatchRequest.Validate if the designated constraints aren't met.
+type PutWatchRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PutWatchRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PutWatchRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PutWatchRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PutWatchRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PutWatchRequestValidationError) ErrorName() string { return "PutWatchRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PutWatchRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPutWatchRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PutWatchRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PutWatchRequestValidationError{}
+
+// Validate checks the field values on PutWatchResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *PutWatchResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Result
+
+	if v, ok := interface{}(m.GetWatch()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PutWatchResponseValidationError{
+				field:  "Watch",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// PutWatchResponseValidationError is the validation error returned by
+// PutWatchResponse.Validate if the designated constraints aren't met.
+type PutWatchResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PutWatchResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PutWatchResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PutWatchResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PutWatchResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PutWatchResponseValidationError) ErrorName() string { return "PutWatchResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PutWatchResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPutWatchResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PutWatchResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PutWatchResponseValidationError{}
+
+// Validate checks the field values on DeleteWatchRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *DeleteWatchRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetSubscriber() == nil {
+		return DeleteWatchRequestValidationError{
+			field:  "Subscriber",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSubscriber()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DeleteWatchRequestValidationError{
+				field:  "Subscriber",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetKey() == nil {
+		return DeleteWatchRequestValidationError{
+			field:  "Key",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetKey()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DeleteWatchRequestValidationError{
+				field:  "Key",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetGeneration() <= 0 {
+		return DeleteWatchRequestValidationError{
+			field:  "Generation",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	if m.GetSignature() == nil {
+		return DeleteWatchRequestValidationError{
+			field:  "Signature",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSignature()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DeleteWatchRequestValidationError{
+				field:  "Signature",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// DeleteWatchRequestValidationError is the validation error returned by
+// DeleteWatchRequest.Validate if the designated constraints aren't met.
+type DeleteWatchRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteWatchRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteWatchRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteWatchRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteWatchRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteWatchRequestValidationError) ErrorName() string {
+	return "DeleteWatchRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteWatchRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteWatchRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteWatchRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteWatchRequestValidationError{}
+
+// Validate checks the field values on DeleteWatchResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *DeleteWatchResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Result
+
+	return nil
+}
+
+// DeleteWatchResponseValidationError is the validation error returned by
+// DeleteWatchResponse.Validate if the designated constraints aren't met.
+type DeleteWatchResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteWatchResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteWatchResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteWatchResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteWatchResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteWatchResponseValidationError) ErrorName() string {
+	return "DeleteWatchResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteWatchResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteWatchResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteWatchResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteWatchResponseValidationError{}
+
+// Validate checks the field values on GetWatchesRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *GetWatchesRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetSubscriber() == nil {
+		return GetWatchesRequestValidationError{
+			field:  "Subscriber",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSubscriber()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetWatchesRequestValidationError{
+				field:  "Subscriber",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetSignature() == nil {
+		return GetWatchesRequestValidationError{
+			field:  "Signature",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSignature()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetWatchesRequestValidationError{
+				field:  "Signature",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	switch m.Query.(type) {
+
+	case *GetWatchesRequest_Owner:
+
+		if v, ok := interface{}(m.GetOwner()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetWatchesRequestValidationError{
+					field:  "Owner",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *GetWatchesRequest_Keys:
+
+		if v, ok := interface{}(m.GetKeys()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetWatchesRequestValidationError{
+					field:  "Keys",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		return GetWatchesRequestValidationError{
+			field:  "Query",
+			reason: "value is required",
+		}
+
+	}
+
+	return nil
+}
+
+// GetWatchesRequestValidationError is the validation error returned by
+// GetWatchesRequest.Validate if the designated constraints aren't met.
+type GetWatchesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetWatchesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetWatchesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetWatchesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetWatchesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetWatchesRequestValidationError) ErrorName() string {
+	return "GetWatchesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetWatchesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetWatchesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetWatchesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetWatchesRequestValidationError{}
+
+// Validate checks the field values on GetWatchesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *GetWatchesResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Result
+
+	if len(m.GetWatches()) > 1024 {
+		return GetWatchesResponseValidationError{
+			field:  "Watches",
+			reason: "value must contain no more than 1024 item(s)",
+		}
+	}
+
+	for idx, item := range m.GetWatches() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetWatchesResponseValidationError{
+					field:  fmt.Sprintf("Watches[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if v, ok := interface{}(m.GetNextPagingToken()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetWatchesResponseValidationError{
+				field:  "NextPagingToken",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// GetWatchesResponseValidationError is the validation error returned by
+// GetWatchesResponse.Validate if the designated constraints aren't met.
+type GetWatchesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetWatchesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetWatchesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetWatchesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetWatchesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetWatchesResponseValidationError) ErrorName() string {
+	return "GetWatchesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetWatchesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetWatchesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetWatchesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetWatchesResponseValidationError{}
+
+// Validate checks the field values on ListWatchesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *ListWatchesRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetSubscriber() == nil {
+		return ListWatchesRequestValidationError{
+			field:  "Subscriber",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSubscriber()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListWatchesRequestValidationError{
+				field:  "Subscriber",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if val := m.GetPageSize(); val <= 0 || val > 1024 {
+		return ListWatchesRequestValidationError{
+			field:  "PageSize",
+			reason: "value must be inside range (0, 1024]",
+		}
+	}
+
+	if v, ok := interface{}(m.GetPagingToken()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListWatchesRequestValidationError{
+				field:  "PagingToken",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetSignature() == nil {
+		return ListWatchesRequestValidationError{
+			field:  "Signature",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSignature()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListWatchesRequestValidationError{
+				field:  "Signature",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// ListWatchesRequestValidationError is the validation error returned by
+// ListWatchesRequest.Validate if the designated constraints aren't met.
+type ListWatchesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListWatchesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListWatchesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListWatchesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListWatchesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListWatchesRequestValidationError) ErrorName() string {
+	return "ListWatchesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListWatchesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListWatchesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListWatchesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListWatchesRequestValidationError{}
+
+// Validate checks the field values on ListWatchesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *ListWatchesResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Result
+
+	if len(m.GetWatches()) > 1024 {
+		return ListWatchesResponseValidationError{
+			field:  "Watches",
+			reason: "value must contain no more than 1024 item(s)",
+		}
+	}
+
+	for idx, item := range m.GetWatches() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListWatchesResponseValidationError{
+					field:  fmt.Sprintf("Watches[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if v, ok := interface{}(m.GetNextPagingToken()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListWatchesResponseValidationError{
+				field:  "NextPagingToken",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// ListWatchesResponseValidationError is the validation error returned by
+// ListWatchesResponse.Validate if the designated constraints aren't met.
+type ListWatchesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListWatchesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListWatchesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListWatchesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListWatchesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListWatchesResponseValidationError) ErrorName() string {
+	return "ListWatchesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListWatchesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListWatchesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListWatchesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListWatchesResponseValidationError{}
+
+// Validate checks the field values on PollWatchEventsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *PollWatchEventsRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetSubscriber() == nil {
+		return PollWatchEventsRequestValidationError{
+			field:  "Subscriber",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSubscriber()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PollWatchEventsRequestValidationError{
+				field:  "Subscriber",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if val := m.GetLimit(); val <= 0 || val > 1024 {
+		return PollWatchEventsRequestValidationError{
+			field:  "Limit",
+			reason: "value must be inside range (0, 1024]",
+		}
+	}
+
+	if d := m.GetLease(); d != nil {
+		dur, err := ptypes.Duration(d)
+		if err != nil {
+			return PollWatchEventsRequestValidationError{
+				field:  "Lease",
+				reason: "value is not a valid duration",
+				cause:  err,
+			}
+		}
+
+		gte := time.Duration(0*time.Second + 0*time.Nanosecond)
+
+		if dur < gte {
+			return PollWatchEventsRequestValidationError{
+				field:  "Lease",
+				reason: "value must be greater than or equal to 0s",
+			}
+		}
+
+	}
+
+	if m.GetSignature() == nil {
+		return PollWatchEventsRequestValidationError{
+			field:  "Signature",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSignature()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PollWatchEventsRequestValidationError{
+				field:  "Signature",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// PollWatchEventsRequestValidationError is the validation error returned by
+// PollWatchEventsRequest.Validate if the designated constraints aren't met.
+type PollWatchEventsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PollWatchEventsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PollWatchEventsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PollWatchEventsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PollWatchEventsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PollWatchEventsRequestValidationError) ErrorName() string {
+	return "PollWatchEventsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PollWatchEventsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPollWatchEventsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PollWatchEventsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PollWatchEventsRequestValidationError{}
+
+// Validate checks the field values on PollWatchEventsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *PollWatchEventsResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Result
+
+	if len(m.GetEvents()) > 1024 {
+		return PollWatchEventsResponseValidationError{
+			field:  "Events",
+			reason: "value must contain no more than 1024 item(s)",
+		}
+	}
+
+	for idx, item := range m.GetEvents() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PollWatchEventsResponseValidationError{
+					field:  fmt.Sprintf("Events[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// PollWatchEventsResponseValidationError is the validation error returned by
+// PollWatchEventsResponse.Validate if the designated constraints aren't met.
+type PollWatchEventsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PollWatchEventsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PollWatchEventsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PollWatchEventsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PollWatchEventsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PollWatchEventsResponseValidationError) ErrorName() string {
+	return "PollWatchEventsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PollWatchEventsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPollWatchEventsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PollWatchEventsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PollWatchEventsResponseValidationError{}
+
+// Validate checks the field values on AckWatchEventsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *AckWatchEventsRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetSubscriber() == nil {
+		return AckWatchEventsRequestValidationError{
+			field:  "Subscriber",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSubscriber()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AckWatchEventsRequestValidationError{
+				field:  "Subscriber",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if l := len(m.GetEventIds()); l < 1 || l > 1024 {
+		return AckWatchEventsRequestValidationError{
+			field:  "EventIds",
+			reason: "value must contain between 1 and 1024 items, inclusive",
+		}
+	}
+
+	for idx, item := range m.GetEventIds() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return AckWatchEventsRequestValidationError{
+					field:  fmt.Sprintf("EventIds[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.GetSignature() == nil {
+		return AckWatchEventsRequestValidationError{
+			field:  "Signature",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSignature()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AckWatchEventsRequestValidationError{
+				field:  "Signature",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// AckWatchEventsRequestValidationError is the validation error returned by
+// AckWatchEventsRequest.Validate if the designated constraints aren't met.
+type AckWatchEventsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AckWatchEventsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AckWatchEventsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AckWatchEventsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AckWatchEventsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AckWatchEventsRequestValidationError) ErrorName() string {
+	return "AckWatchEventsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AckWatchEventsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAckWatchEventsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AckWatchEventsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AckWatchEventsRequestValidationError{}
+
+// Validate checks the field values on AckWatchEventsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *AckWatchEventsResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Result
+
+	return nil
+}
+
+// AckWatchEventsResponseValidationError is the validation error returned by
+// AckWatchEventsResponse.Validate if the designated constraints aren't met.
+type AckWatchEventsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AckWatchEventsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AckWatchEventsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AckWatchEventsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AckWatchEventsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AckWatchEventsResponseValidationError) ErrorName() string {
+	return "AckWatchEventsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AckWatchEventsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAckWatchEventsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AckWatchEventsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AckWatchEventsResponseValidationError{}
+
+// Validate checks the field values on WatchKey with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *WatchKey) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetOwner() == nil {
+		return WatchKeyValidationError{
+			field:  "Owner",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetOwner()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WatchKeyValidationError{
+				field:  "Owner",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if l := len(m.GetKey()); l < 1 || l > 64 {
+		return WatchKeyValidationError{
+			field:  "Key",
+			reason: "value length must be between 1 and 64 bytes, inclusive",
+		}
+	}
+
+	return nil
+}
+
+// WatchKeyValidationError is the validation error returned by
+// WatchKey.Validate if the designated constraints aren't met.
+type WatchKeyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e WatchKeyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e WatchKeyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e WatchKeyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e WatchKeyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e WatchKeyValidationError) ErrorName() string { return "WatchKeyValidationError" }
+
+// Error satisfies the builtin error interface
+func (e WatchKeyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sWatchKey.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = WatchKeyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = WatchKeyValidationError{}
+
+// Validate checks the field values on WatchKeys with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *WatchKeys) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if l := len(m.GetKeys()); l < 1 || l > 1024 {
+		return WatchKeysValidationError{
+			field:  "Keys",
+			reason: "value must contain between 1 and 1024 items, inclusive",
+		}
+	}
+
+	for idx, item := range m.GetKeys() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return WatchKeysValidationError{
+					field:  fmt.Sprintf("Keys[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// WatchKeysValidationError is the validation error returned by
+// WatchKeys.Validate if the designated constraints aren't met.
+type WatchKeysValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e WatchKeysValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e WatchKeysValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e WatchKeysValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e WatchKeysValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e WatchKeysValidationError) ErrorName() string { return "WatchKeysValidationError" }
+
+// Error satisfies the builtin error interface
+func (e WatchKeysValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sWatchKeys.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = WatchKeysValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = WatchKeysValidationError{}
+
+// Validate checks the field values on Threshold with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *Threshold) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	switch m.Kind.(type) {
+
+	case *Threshold_CoreMintQuarks:
+
+		if m.GetCoreMintQuarks() <= 0 {
+			return ThresholdValidationError{
+				field:  "CoreMintQuarks",
+				reason: "value must be greater than 0",
+			}
+		}
+
+	case *Threshold_Fiat:
+
+		if v, ok := interface{}(m.GetFiat()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ThresholdValidationError{
+					field:  "Fiat",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		return ThresholdValidationError{
+			field:  "Kind",
+			reason: "value is required",
+		}
+
+	}
+
+	return nil
+}
+
+// ThresholdValidationError is the validation error returned by
+// Threshold.Validate if the designated constraints aren't met.
+type ThresholdValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ThresholdValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ThresholdValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ThresholdValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ThresholdValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ThresholdValidationError) ErrorName() string { return "ThresholdValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ThresholdValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sThreshold.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ThresholdValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ThresholdValidationError{}
+
+// Validate checks the field values on FiatAmount with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *FiatAmount) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if !_FiatAmount_Currency_Pattern.MatchString(m.GetCurrency()) {
+		return FiatAmountValidationError{
+			field:  "Currency",
+			reason: "value does not match regex pattern \"^[a-z]{3,4}$\"",
+		}
+	}
+
+	if m.GetNativeAmount() <= 0 {
+		return FiatAmountValidationError{
+			field:  "NativeAmount",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	return nil
+}
+
+// FiatAmountValidationError is the validation error returned by
+// FiatAmount.Validate if the designated constraints aren't met.
+type FiatAmountValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e FiatAmountValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e FiatAmountValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e FiatAmountValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e FiatAmountValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e FiatAmountValidationError) ErrorName() string { return "FiatAmountValidationError" }
+
+// Error satisfies the builtin error interface
+func (e FiatAmountValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sFiatAmount.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = FiatAmountValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = FiatAmountValidationError{}
+
+var _FiatAmount_Currency_Pattern = regexp.MustCompile("^[a-z]{3,4}$")
+
+// Validate checks the field values on Watch with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *Watch) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetSubscriber() == nil {
+		return WatchValidationError{
+			field:  "Subscriber",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSubscriber()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WatchValidationError{
+				field:  "Subscriber",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetKey() == nil {
+		return WatchValidationError{
+			field:  "Key",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetKey()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WatchValidationError{
+				field:  "Key",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetThreshold() == nil {
+		return WatchValidationError{
+			field:  "Threshold",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetThreshold()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WatchValidationError{
+				field:  "Threshold",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(m.GetMints()) > 1024 {
+		return WatchValidationError{
+			field:  "Mints",
+			reason: "value must contain no more than 1024 item(s)",
+		}
+	}
+
+	for idx, item := range m.GetMints() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return WatchValidationError{
+					field:  fmt.Sprintf("Mints[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if d := m.GetGrace(); d != nil {
+		dur, err := ptypes.Duration(d)
+		if err != nil {
+			return WatchValidationError{
+				field:  "Grace",
+				reason: "value is not a valid duration",
+				cause:  err,
+			}
+		}
+
+		gte := time.Duration(0*time.Second + 0*time.Nanosecond)
+
+		if dur < gte {
+			return WatchValidationError{
+				field:  "Grace",
+				reason: "value must be greater than or equal to 0s",
+			}
+		}
+
+	}
+
+	if _, ok := _Watch_State_NotInLookup[m.GetState()]; ok {
+		return WatchValidationError{
+			field:  "State",
+			reason: "value must not be in list [0]",
+		}
+	}
+
+	if _, ok := WatchState_name[int32(m.GetState())]; !ok {
+		return WatchValidationError{
+			field:  "State",
+			reason: "value must be one of the defined enum values",
+		}
+	}
+
+	if m.GetStateSince() == nil {
+		return WatchValidationError{
+			field:  "StateSince",
+			reason: "value is required",
+		}
+	}
+
+	if m.GetGeneration() <= 0 {
+		return WatchValidationError{
+			field:  "Generation",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	if m.GetLastValuation() == nil {
+		return WatchValidationError{
+			field:  "LastValuation",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetLastValuation()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WatchValidationError{
+				field:  "LastValuation",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// WatchValidationError is the validation error returned by Watch.Validate if
+// the designated constraints aren't met.
+type WatchValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e WatchValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e WatchValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e WatchValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e WatchValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e WatchValidationError) ErrorName() string { return "WatchValidationError" }
+
+// Error satisfies the builtin error interface
+func (e WatchValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sWatch.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = WatchValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = WatchValidationError{}
+
+var _Watch_State_NotInLookup = map[WatchState]struct{}{
+	0: {},
+}
+
+// Validate checks the field values on Valuation with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *Valuation) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for CoreMintValue
+
+	// no validation rules for FiatValue
+
+	if m.GetEvaluatedAt() == nil {
+		return ValuationValidationError{
+			field:  "EvaluatedAt",
+			reason: "value is required",
+		}
+	}
+
+	return nil
+}
+
+// ValuationValidationError is the validation error returned by
+// Valuation.Validate if the designated constraints aren't met.
+type ValuationValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ValuationValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ValuationValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ValuationValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ValuationValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ValuationValidationError) ErrorName() string { return "ValuationValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ValuationValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sValuation.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ValuationValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ValuationValidationError{}
+
+// Validate checks the field values on WatchEvent with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *WatchEvent) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetId() == nil {
+		return WatchEventValidationError{
+			field:  "Id",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetId()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WatchEventValidationError{
+				field:  "Id",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetOwner() == nil {
+		return WatchEventValidationError{
+			field:  "Owner",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetOwner()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WatchEventValidationError{
+				field:  "Owner",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if l := len(m.GetTransitions()); l < 1 || l > 1024 {
+		return WatchEventValidationError{
+			field:  "Transitions",
+			reason: "value must contain between 1 and 1024 items, inclusive",
+		}
+	}
+
+	for idx, item := range m.GetTransitions() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return WatchEventValidationError{
+					field:  fmt.Sprintf("Transitions[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.GetTimestamp() == nil {
+		return WatchEventValidationError{
+			field:  "Timestamp",
+			reason: "value is required",
+		}
+	}
+
+	return nil
+}
+
+// WatchEventValidationError is the validation error returned by
+// WatchEvent.Validate if the designated constraints aren't met.
+type WatchEventValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e WatchEventValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e WatchEventValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e WatchEventValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e WatchEventValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e WatchEventValidationError) ErrorName() string { return "WatchEventValidationError" }
+
+// Error satisfies the builtin error interface
+func (e WatchEventValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sWatchEvent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = WatchEventValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = WatchEventValidationError{}
+
+// Validate checks the field values on WatchTransition with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *WatchTransition) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetWatch() == nil {
+		return WatchTransitionValidationError{
+			field:  "Watch",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetWatch()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WatchTransitionValidationError{
+				field:  "Watch",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if _, ok := _WatchTransition_PreviousState_NotInLookup[m.GetPreviousState()]; ok {
+		return WatchTransitionValidationError{
+			field:  "PreviousState",
+			reason: "value must not be in list [0]",
+		}
+	}
+
+	if _, ok := WatchState_name[int32(m.GetPreviousState())]; !ok {
+		return WatchTransitionValidationError{
+			field:  "PreviousState",
+			reason: "value must be one of the defined enum values",
+		}
+	}
+
+	return nil
+}
+
+// WatchTransitionValidationError is the validation error returned by
+// WatchTransition.Validate if the designated constraints aren't met.
+type WatchTransitionValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e WatchTransitionValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e WatchTransitionValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e WatchTransitionValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e WatchTransitionValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e WatchTransitionValidationError) ErrorName() string { return "WatchTransitionValidationError" }
+
+// Error satisfies the builtin error interface
+func (e WatchTransitionValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sWatchTransition.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = WatchTransitionValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = WatchTransitionValidationError{}
+
+var _WatchTransition_PreviousState_NotInLookup = map[WatchState]struct{}{
+	0: {},
+}
+
+// Validate checks the field values on PagingToken with the rules defined in
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
+func (m *PagingToken) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if l := len(m.GetValue()); l < 1 || l > 256 {
+		return PagingTokenValidationError{
+			field:  "Value",
+			reason: "value length must be between 1 and 256 bytes, inclusive",
+		}
+	}
+
+	return nil
+}
+
+// PagingTokenValidationError is the validation error returned by
+// PagingToken.Validate if the designated constraints aren't met.
+type PagingTokenValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PagingTokenValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PagingTokenValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PagingTokenValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PagingTokenValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PagingTokenValidationError) ErrorName() string { return "PagingTokenValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PagingTokenValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPagingToken.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PagingTokenValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PagingTokenValidationError{}
+
+// Validate checks the field values on GetWatchesRequest_OwnerQuery with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *GetWatchesRequest_OwnerQuery) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetOwner() == nil {
+		return GetWatchesRequest_OwnerQueryValidationError{
+			field:  "Owner",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetOwner()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetWatchesRequest_OwnerQueryValidationError{
+				field:  "Owner",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if val := m.GetPageSize(); val <= 0 || val > 1024 {
+		return GetWatchesRequest_OwnerQueryValidationError{
+			field:  "PageSize",
+			reason: "value must be inside range (0, 1024]",
+		}
+	}
+
+	if v, ok := interface{}(m.GetPagingToken()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetWatchesRequest_OwnerQueryValidationError{
+				field:  "PagingToken",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// GetWatchesRequest_OwnerQueryValidationError is the validation error returned
+// by GetWatchesRequest_OwnerQuery.Validate if the designated constraints
+// aren't met.
+type GetWatchesRequest_OwnerQueryValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetWatchesRequest_OwnerQueryValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetWatchesRequest_OwnerQueryValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetWatchesRequest_OwnerQueryValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetWatchesRequest_OwnerQueryValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetWatchesRequest_OwnerQueryValidationError) ErrorName() string {
+	return "GetWatchesRequest_OwnerQueryValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetWatchesRequest_OwnerQueryValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetWatchesRequest_OwnerQuery.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetWatchesRequest_OwnerQueryValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetWatchesRequest_OwnerQueryValidationError{}

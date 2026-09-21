@@ -4,8 +4,42 @@
 // @ts-nocheck
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
-import { Message, proto3, protoInt64 } from "@bufbuild/protobuf";
-import { SolanaAccountId } from "../../common/v1/model_pb";
+import { Duration, Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
+import { Signature, SolanaAccountId, UUID } from "../../common/v1/model_pb";
+
+/**
+ * WatchState is where an owner's balance stands against a watch's threshold.
+ *
+ * @generated from enum ocp.balance.v1.WatchState
+ */
+export enum WatchState {
+  /**
+   * @generated from enum value: UNKNOWN_STATE = 0;
+   */
+  UNKNOWN_STATE = 0,
+
+  /**
+   * @generated from enum value: ABOVE = 1;
+   */
+  ABOVE = 1,
+
+  /**
+   * @generated from enum value: BELOW = 2;
+   */
+  BELOW = 2,
+
+  /**
+   * @generated from enum value: BELOW_SUSTAINED = 3;
+   */
+  BELOW_SUSTAINED = 3,
+}
+// Retrieve enum metadata with: proto3.getEnumType(WatchState)
+proto3.util.setEnumType(WatchState, "ocp.balance.v1.WatchState", [
+  { no: 0, name: "UNKNOWN_STATE" },
+  { no: 1, name: "ABOVE" },
+  { no: 2, name: "BELOW" },
+  { no: 3, name: "BELOW_SUSTAINED" },
+]);
 
 /**
  * @generated from message ocp.balance.v1.GetBalancesRequest
@@ -249,6 +283,1384 @@ export class MintBalance extends Message<MintBalance> {
 
   static equals(a: MintBalance | PlainMessage<MintBalance> | undefined, b: MintBalance | PlainMessage<MintBalance> | undefined): boolean {
     return proto3.util.equals(MintBalance, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.balance.v1.PutWatchRequest
+ */
+export class PutWatchRequest extends Message<PutWatchRequest> {
+  /**
+   * The subscriber registering the watch
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId subscriber = 1;
+   */
+  subscriber?: SolanaAccountId;
+
+  /**
+   * The watch's identity within the subscriber
+   *
+   * @generated from field: ocp.balance.v1.WatchKey key = 2;
+   */
+  key?: WatchKey;
+
+  /**
+   * The balance the owner must hold to be ABOVE
+   *
+   * @generated from field: ocp.balance.v1.Threshold threshold = 3;
+   */
+  threshold?: Threshold;
+
+  /**
+   * Optional filter to limit the watched balance to holdings of the provided
+   * mints, with the semantics of GetBalancesRequest.mints. When empty, the
+   * owner's holdings across every mint are watched.
+   *
+   * @generated from field: repeated ocp.common.v1.SolanaAccountId mints = 4;
+   */
+  mints: SolanaAccountId[] = [];
+
+  /**
+   * How long the balance must stay under the threshold before the watch
+   * moves from BELOW to BELOW_SUSTAINED. Unset or zero moves the watch to
+   * BELOW_SUSTAINED as soon as it falls under.
+   *
+   * @generated from field: google.protobuf.Duration grace = 5;
+   */
+  grace?: Duration;
+
+  /**
+   * The signature is of serialize(PutWatchRequest) using subscriber.
+   *
+   * @generated from field: ocp.common.v1.Signature signature = 6;
+   */
+  signature?: Signature;
+
+  constructor(data?: PartialMessage<PutWatchRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.PutWatchRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "subscriber", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "key", kind: "message", T: WatchKey },
+    { no: 3, name: "threshold", kind: "message", T: Threshold },
+    { no: 4, name: "mints", kind: "message", T: SolanaAccountId, repeated: true },
+    { no: 5, name: "grace", kind: "message", T: Duration },
+    { no: 6, name: "signature", kind: "message", T: Signature },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PutWatchRequest {
+    return new PutWatchRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PutWatchRequest {
+    return new PutWatchRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PutWatchRequest {
+    return new PutWatchRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: PutWatchRequest | PlainMessage<PutWatchRequest> | undefined, b: PutWatchRequest | PlainMessage<PutWatchRequest> | undefined): boolean {
+    return proto3.util.equals(PutWatchRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.balance.v1.PutWatchResponse
+ */
+export class PutWatchResponse extends Message<PutWatchResponse> {
+  /**
+   * @generated from field: ocp.balance.v1.PutWatchResponse.Result result = 1;
+   */
+  result = PutWatchResponse_Result.OK;
+
+  /**
+   * The watch as written and evaluated. Set if result == OK.
+   *
+   * @generated from field: ocp.balance.v1.Watch watch = 2;
+   */
+  watch?: Watch;
+
+  constructor(data?: PartialMessage<PutWatchResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.PutWatchResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(PutWatchResponse_Result) },
+    { no: 2, name: "watch", kind: "message", T: Watch },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PutWatchResponse {
+    return new PutWatchResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PutWatchResponse {
+    return new PutWatchResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PutWatchResponse {
+    return new PutWatchResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: PutWatchResponse | PlainMessage<PutWatchResponse> | undefined, b: PutWatchResponse | PlainMessage<PutWatchResponse> | undefined): boolean {
+    return proto3.util.equals(PutWatchResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum ocp.balance.v1.PutWatchResponse.Result
+ */
+export enum PutWatchResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * The subscriber is unknown or the signature is not theirs
+   *
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+
+  /**
+   * The owner account is not an account the server tracks balances for
+   *
+   * @generated from enum value: OWNER_NOT_FOUND = 2;
+   */
+  OWNER_NOT_FOUND = 2,
+
+  /**
+   * The server cannot value a balance in the threshold's fiat currency
+   *
+   * @generated from enum value: UNSUPPORTED_CURRENCY = 3;
+   */
+  UNSUPPORTED_CURRENCY = 3,
+
+  /**
+   * The put would exceed one of the subscriber's quotas
+   *
+   * @generated from enum value: QUOTA_EXCEEDED = 4;
+   */
+  QUOTA_EXCEEDED = 4,
+}
+// Retrieve enum metadata with: proto3.getEnumType(PutWatchResponse_Result)
+proto3.util.setEnumType(PutWatchResponse_Result, "ocp.balance.v1.PutWatchResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+  { no: 2, name: "OWNER_NOT_FOUND" },
+  { no: 3, name: "UNSUPPORTED_CURRENCY" },
+  { no: 4, name: "QUOTA_EXCEEDED" },
+]);
+
+/**
+ * @generated from message ocp.balance.v1.DeleteWatchRequest
+ */
+export class DeleteWatchRequest extends Message<DeleteWatchRequest> {
+  /**
+   * @generated from field: ocp.common.v1.SolanaAccountId subscriber = 1;
+   */
+  subscriber?: SolanaAccountId;
+
+  /**
+   * @generated from field: ocp.balance.v1.WatchKey key = 2;
+   */
+  key?: WatchKey;
+
+  /**
+   * The generation the caller last saw for the watch. The delete applies
+   * only if it is the watch's current generation.
+   *
+   * @generated from field: uint64 generation = 3;
+   */
+  generation = protoInt64.zero;
+
+  /**
+   * The signature is of serialize(DeleteWatchRequest) using subscriber.
+   *
+   * @generated from field: ocp.common.v1.Signature signature = 4;
+   */
+  signature?: Signature;
+
+  constructor(data?: PartialMessage<DeleteWatchRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.DeleteWatchRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "subscriber", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "key", kind: "message", T: WatchKey },
+    { no: 3, name: "generation", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 4, name: "signature", kind: "message", T: Signature },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteWatchRequest {
+    return new DeleteWatchRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteWatchRequest {
+    return new DeleteWatchRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteWatchRequest {
+    return new DeleteWatchRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: DeleteWatchRequest | PlainMessage<DeleteWatchRequest> | undefined, b: DeleteWatchRequest | PlainMessage<DeleteWatchRequest> | undefined): boolean {
+    return proto3.util.equals(DeleteWatchRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.balance.v1.DeleteWatchResponse
+ */
+export class DeleteWatchResponse extends Message<DeleteWatchResponse> {
+  /**
+   * @generated from field: ocp.balance.v1.DeleteWatchResponse.Result result = 1;
+   */
+  result = DeleteWatchResponse_Result.OK;
+
+  constructor(data?: PartialMessage<DeleteWatchResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.DeleteWatchResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(DeleteWatchResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteWatchResponse {
+    return new DeleteWatchResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteWatchResponse {
+    return new DeleteWatchResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteWatchResponse {
+    return new DeleteWatchResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: DeleteWatchResponse | PlainMessage<DeleteWatchResponse> | undefined, b: DeleteWatchResponse | PlainMessage<DeleteWatchResponse> | undefined): boolean {
+    return proto3.util.equals(DeleteWatchResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum ocp.balance.v1.DeleteWatchResponse.Result
+ */
+export enum DeleteWatchResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+
+  /**
+   * The watch exists at a generation other than the one given
+   *
+   * @generated from enum value: STALE = 2;
+   */
+  STALE = 2,
+}
+// Retrieve enum metadata with: proto3.getEnumType(DeleteWatchResponse_Result)
+proto3.util.setEnumType(DeleteWatchResponse_Result, "ocp.balance.v1.DeleteWatchResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+  { no: 2, name: "STALE" },
+]);
+
+/**
+ * @generated from message ocp.balance.v1.GetWatchesRequest
+ */
+export class GetWatchesRequest extends Message<GetWatchesRequest> {
+  /**
+   * @generated from field: ocp.common.v1.SolanaAccountId subscriber = 1;
+   */
+  subscriber?: SolanaAccountId;
+
+  /**
+   * @generated from oneof ocp.balance.v1.GetWatchesRequest.query
+   */
+  query: {
+    /**
+     * A page of the watches the subscriber holds on one owner
+     *
+     * @generated from field: ocp.balance.v1.GetWatchesRequest.OwnerQuery owner = 2;
+     */
+    value: GetWatchesRequest_OwnerQuery;
+    case: "owner";
+  } | {
+    /**
+     * The watches with these keys
+     *
+     * @generated from field: ocp.balance.v1.WatchKeys keys = 3;
+     */
+    value: WatchKeys;
+    case: "keys";
+  } | { case: undefined; value?: undefined } = { case: undefined };
+
+  /**
+   * The signature is of serialize(GetWatchesRequest) using subscriber.
+   *
+   * @generated from field: ocp.common.v1.Signature signature = 4;
+   */
+  signature?: Signature;
+
+  constructor(data?: PartialMessage<GetWatchesRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.GetWatchesRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "subscriber", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "owner", kind: "message", T: GetWatchesRequest_OwnerQuery, oneof: "query" },
+    { no: 3, name: "keys", kind: "message", T: WatchKeys, oneof: "query" },
+    { no: 4, name: "signature", kind: "message", T: Signature },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetWatchesRequest {
+    return new GetWatchesRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetWatchesRequest {
+    return new GetWatchesRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetWatchesRequest {
+    return new GetWatchesRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetWatchesRequest | PlainMessage<GetWatchesRequest> | undefined, b: GetWatchesRequest | PlainMessage<GetWatchesRequest> | undefined): boolean {
+    return proto3.util.equals(GetWatchesRequest, a, b);
+  }
+}
+
+/**
+ * OwnerQuery pages through the subscriber's watches on one owner, in key
+ * order. There is no bound on how many watches a subscriber may hold on
+ * an owner, so the read is paged; a page is a single strongly consistent
+ * read of the owner.
+ *
+ * @generated from message ocp.balance.v1.GetWatchesRequest.OwnerQuery
+ */
+export class GetWatchesRequest_OwnerQuery extends Message<GetWatchesRequest_OwnerQuery> {
+  /**
+   * @generated from field: ocp.common.v1.SolanaAccountId owner = 1;
+   */
+  owner?: SolanaAccountId;
+
+  /**
+   * The most watches to return on this page
+   *
+   * @generated from field: uint32 page_size = 2;
+   */
+  pageSize = 0;
+
+  /**
+   * The token returned with the previous page. Unset for the first page.
+   *
+   * @generated from field: ocp.balance.v1.PagingToken paging_token = 3;
+   */
+  pagingToken?: PagingToken;
+
+  constructor(data?: PartialMessage<GetWatchesRequest_OwnerQuery>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.GetWatchesRequest.OwnerQuery";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "owner", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "page_size", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 3, name: "paging_token", kind: "message", T: PagingToken },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetWatchesRequest_OwnerQuery {
+    return new GetWatchesRequest_OwnerQuery().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetWatchesRequest_OwnerQuery {
+    return new GetWatchesRequest_OwnerQuery().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetWatchesRequest_OwnerQuery {
+    return new GetWatchesRequest_OwnerQuery().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetWatchesRequest_OwnerQuery | PlainMessage<GetWatchesRequest_OwnerQuery> | undefined, b: GetWatchesRequest_OwnerQuery | PlainMessage<GetWatchesRequest_OwnerQuery> | undefined): boolean {
+    return proto3.util.equals(GetWatchesRequest_OwnerQuery, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.balance.v1.GetWatchesResponse
+ */
+export class GetWatchesResponse extends Message<GetWatchesResponse> {
+  /**
+   * @generated from field: ocp.balance.v1.GetWatchesResponse.Result result = 1;
+   */
+  result = GetWatchesResponse_Result.OK;
+
+  /**
+   * @generated from field: repeated ocp.balance.v1.Watch watches = 2;
+   */
+  watches: Watch[] = [];
+
+  /**
+   * The token for the next page of an OwnerQuery. Unset when this is the
+   * last page, and never set for a query by keys.
+   *
+   * @generated from field: ocp.balance.v1.PagingToken next_paging_token = 3;
+   */
+  nextPagingToken?: PagingToken;
+
+  constructor(data?: PartialMessage<GetWatchesResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.GetWatchesResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(GetWatchesResponse_Result) },
+    { no: 2, name: "watches", kind: "message", T: Watch, repeated: true },
+    { no: 3, name: "next_paging_token", kind: "message", T: PagingToken },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetWatchesResponse {
+    return new GetWatchesResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetWatchesResponse {
+    return new GetWatchesResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetWatchesResponse {
+    return new GetWatchesResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: GetWatchesResponse | PlainMessage<GetWatchesResponse> | undefined, b: GetWatchesResponse | PlainMessage<GetWatchesResponse> | undefined): boolean {
+    return proto3.util.equals(GetWatchesResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum ocp.balance.v1.GetWatchesResponse.Result
+ */
+export enum GetWatchesResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+
+  /**
+   * The paging token is not one this subscriber's query of this owner
+   * issued
+   *
+   * @generated from enum value: INVALID_TOKEN = 2;
+   */
+  INVALID_TOKEN = 2,
+}
+// Retrieve enum metadata with: proto3.getEnumType(GetWatchesResponse_Result)
+proto3.util.setEnumType(GetWatchesResponse_Result, "ocp.balance.v1.GetWatchesResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+  { no: 2, name: "INVALID_TOKEN" },
+]);
+
+/**
+ * @generated from message ocp.balance.v1.ListWatchesRequest
+ */
+export class ListWatchesRequest extends Message<ListWatchesRequest> {
+  /**
+   * @generated from field: ocp.common.v1.SolanaAccountId subscriber = 1;
+   */
+  subscriber?: SolanaAccountId;
+
+  /**
+   * The most watches to return on this page
+   *
+   * @generated from field: uint32 page_size = 2;
+   */
+  pageSize = 0;
+
+  /**
+   * The token returned with the previous page. Unset for the first page.
+   *
+   * @generated from field: ocp.balance.v1.PagingToken paging_token = 3;
+   */
+  pagingToken?: PagingToken;
+
+  /**
+   * The signature is of serialize(ListWatchesRequest) using subscriber.
+   *
+   * @generated from field: ocp.common.v1.Signature signature = 4;
+   */
+  signature?: Signature;
+
+  constructor(data?: PartialMessage<ListWatchesRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.ListWatchesRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "subscriber", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "page_size", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 3, name: "paging_token", kind: "message", T: PagingToken },
+    { no: 4, name: "signature", kind: "message", T: Signature },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListWatchesRequest {
+    return new ListWatchesRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListWatchesRequest {
+    return new ListWatchesRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListWatchesRequest {
+    return new ListWatchesRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ListWatchesRequest | PlainMessage<ListWatchesRequest> | undefined, b: ListWatchesRequest | PlainMessage<ListWatchesRequest> | undefined): boolean {
+    return proto3.util.equals(ListWatchesRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.balance.v1.ListWatchesResponse
+ */
+export class ListWatchesResponse extends Message<ListWatchesResponse> {
+  /**
+   * @generated from field: ocp.balance.v1.ListWatchesResponse.Result result = 1;
+   */
+  result = ListWatchesResponse_Result.OK;
+
+  /**
+   * @generated from field: repeated ocp.balance.v1.Watch watches = 2;
+   */
+  watches: Watch[] = [];
+
+  /**
+   * The token for the next page. Unset when this is the last page.
+   *
+   * @generated from field: ocp.balance.v1.PagingToken next_paging_token = 3;
+   */
+  nextPagingToken?: PagingToken;
+
+  constructor(data?: PartialMessage<ListWatchesResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.ListWatchesResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(ListWatchesResponse_Result) },
+    { no: 2, name: "watches", kind: "message", T: Watch, repeated: true },
+    { no: 3, name: "next_paging_token", kind: "message", T: PagingToken },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListWatchesResponse {
+    return new ListWatchesResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListWatchesResponse {
+    return new ListWatchesResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListWatchesResponse {
+    return new ListWatchesResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ListWatchesResponse | PlainMessage<ListWatchesResponse> | undefined, b: ListWatchesResponse | PlainMessage<ListWatchesResponse> | undefined): boolean {
+    return proto3.util.equals(ListWatchesResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum ocp.balance.v1.ListWatchesResponse.Result
+ */
+export enum ListWatchesResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+
+  /**
+   * The paging token is not one this subscriber's listing issued
+   *
+   * @generated from enum value: INVALID_TOKEN = 2;
+   */
+  INVALID_TOKEN = 2,
+}
+// Retrieve enum metadata with: proto3.getEnumType(ListWatchesResponse_Result)
+proto3.util.setEnumType(ListWatchesResponse_Result, "ocp.balance.v1.ListWatchesResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+  { no: 2, name: "INVALID_TOKEN" },
+]);
+
+/**
+ * @generated from message ocp.balance.v1.PollWatchEventsRequest
+ */
+export class PollWatchEventsRequest extends Message<PollWatchEventsRequest> {
+  /**
+   * @generated from field: ocp.common.v1.SolanaAccountId subscriber = 1;
+   */
+  subscriber?: SolanaAccountId;
+
+  /**
+   * The most events to lease on this poll
+   *
+   * @generated from field: uint32 limit = 2;
+   */
+  limit = 0;
+
+  /**
+   * How long the returned events are withheld from other polls. Unset uses
+   * the server's default; the server may cap it.
+   *
+   * @generated from field: google.protobuf.Duration lease = 3;
+   */
+  lease?: Duration;
+
+  /**
+   * The signature is of serialize(PollWatchEventsRequest) using subscriber.
+   *
+   * @generated from field: ocp.common.v1.Signature signature = 4;
+   */
+  signature?: Signature;
+
+  constructor(data?: PartialMessage<PollWatchEventsRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.PollWatchEventsRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "subscriber", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "limit", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 3, name: "lease", kind: "message", T: Duration },
+    { no: 4, name: "signature", kind: "message", T: Signature },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PollWatchEventsRequest {
+    return new PollWatchEventsRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PollWatchEventsRequest {
+    return new PollWatchEventsRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PollWatchEventsRequest {
+    return new PollWatchEventsRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: PollWatchEventsRequest | PlainMessage<PollWatchEventsRequest> | undefined, b: PollWatchEventsRequest | PlainMessage<PollWatchEventsRequest> | undefined): boolean {
+    return proto3.util.equals(PollWatchEventsRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.balance.v1.PollWatchEventsResponse
+ */
+export class PollWatchEventsResponse extends Message<PollWatchEventsResponse> {
+  /**
+   * @generated from field: ocp.balance.v1.PollWatchEventsResponse.Result result = 1;
+   */
+  result = PollWatchEventsResponse_Result.OK;
+
+  /**
+   * @generated from field: repeated ocp.balance.v1.WatchEvent events = 2;
+   */
+  events: WatchEvent[] = [];
+
+  constructor(data?: PartialMessage<PollWatchEventsResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.PollWatchEventsResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(PollWatchEventsResponse_Result) },
+    { no: 2, name: "events", kind: "message", T: WatchEvent, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PollWatchEventsResponse {
+    return new PollWatchEventsResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PollWatchEventsResponse {
+    return new PollWatchEventsResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PollWatchEventsResponse {
+    return new PollWatchEventsResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: PollWatchEventsResponse | PlainMessage<PollWatchEventsResponse> | undefined, b: PollWatchEventsResponse | PlainMessage<PollWatchEventsResponse> | undefined): boolean {
+    return proto3.util.equals(PollWatchEventsResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum ocp.balance.v1.PollWatchEventsResponse.Result
+ */
+export enum PollWatchEventsResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(PollWatchEventsResponse_Result)
+proto3.util.setEnumType(PollWatchEventsResponse_Result, "ocp.balance.v1.PollWatchEventsResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+]);
+
+/**
+ * @generated from message ocp.balance.v1.AckWatchEventsRequest
+ */
+export class AckWatchEventsRequest extends Message<AckWatchEventsRequest> {
+  /**
+   * @generated from field: ocp.common.v1.SolanaAccountId subscriber = 1;
+   */
+  subscriber?: SolanaAccountId;
+
+  /**
+   * @generated from field: repeated ocp.common.v1.UUID event_ids = 2;
+   */
+  eventIds: UUID[] = [];
+
+  /**
+   * The signature is of serialize(AckWatchEventsRequest) using subscriber.
+   *
+   * @generated from field: ocp.common.v1.Signature signature = 3;
+   */
+  signature?: Signature;
+
+  constructor(data?: PartialMessage<AckWatchEventsRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.AckWatchEventsRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "subscriber", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "event_ids", kind: "message", T: UUID, repeated: true },
+    { no: 3, name: "signature", kind: "message", T: Signature },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AckWatchEventsRequest {
+    return new AckWatchEventsRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AckWatchEventsRequest {
+    return new AckWatchEventsRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AckWatchEventsRequest {
+    return new AckWatchEventsRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: AckWatchEventsRequest | PlainMessage<AckWatchEventsRequest> | undefined, b: AckWatchEventsRequest | PlainMessage<AckWatchEventsRequest> | undefined): boolean {
+    return proto3.util.equals(AckWatchEventsRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.balance.v1.AckWatchEventsResponse
+ */
+export class AckWatchEventsResponse extends Message<AckWatchEventsResponse> {
+  /**
+   * @generated from field: ocp.balance.v1.AckWatchEventsResponse.Result result = 1;
+   */
+  result = AckWatchEventsResponse_Result.OK;
+
+  constructor(data?: PartialMessage<AckWatchEventsResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.AckWatchEventsResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "result", kind: "enum", T: proto3.getEnumType(AckWatchEventsResponse_Result) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AckWatchEventsResponse {
+    return new AckWatchEventsResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AckWatchEventsResponse {
+    return new AckWatchEventsResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AckWatchEventsResponse {
+    return new AckWatchEventsResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: AckWatchEventsResponse | PlainMessage<AckWatchEventsResponse> | undefined, b: AckWatchEventsResponse | PlainMessage<AckWatchEventsResponse> | undefined): boolean {
+    return proto3.util.equals(AckWatchEventsResponse, a, b);
+  }
+}
+
+/**
+ * @generated from enum ocp.balance.v1.AckWatchEventsResponse.Result
+ */
+export enum AckWatchEventsResponse_Result {
+  /**
+   * @generated from enum value: OK = 0;
+   */
+  OK = 0,
+
+  /**
+   * @generated from enum value: DENIED = 1;
+   */
+  DENIED = 1,
+}
+// Retrieve enum metadata with: proto3.getEnumType(AckWatchEventsResponse_Result)
+proto3.util.setEnumType(AckWatchEventsResponse_Result, "ocp.balance.v1.AckWatchEventsResponse.Result", [
+  { no: 0, name: "OK" },
+  { no: 1, name: "DENIED" },
+]);
+
+/**
+ * WatchKey identifies a watch within a subscriber: the owner whose balance is
+ * watched, and a key of the subscriber's choosing that is opaque to the
+ * server. A subscriber holds at most one watch per (owner, key).
+ *
+ * @generated from message ocp.balance.v1.WatchKey
+ */
+export class WatchKey extends Message<WatchKey> {
+  /**
+   * @generated from field: ocp.common.v1.SolanaAccountId owner = 1;
+   */
+  owner?: SolanaAccountId;
+
+  /**
+   * @generated from field: bytes key = 2;
+   */
+  key = new Uint8Array(0);
+
+  constructor(data?: PartialMessage<WatchKey>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.WatchKey";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "owner", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "key", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): WatchKey {
+    return new WatchKey().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): WatchKey {
+    return new WatchKey().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): WatchKey {
+    return new WatchKey().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: WatchKey | PlainMessage<WatchKey> | undefined, b: WatchKey | PlainMessage<WatchKey> | undefined): boolean {
+    return proto3.util.equals(WatchKey, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.balance.v1.WatchKeys
+ */
+export class WatchKeys extends Message<WatchKeys> {
+  /**
+   * @generated from field: repeated ocp.balance.v1.WatchKey keys = 1;
+   */
+  keys: WatchKey[] = [];
+
+  constructor(data?: PartialMessage<WatchKeys>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.WatchKeys";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "keys", kind: "message", T: WatchKey, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): WatchKeys {
+    return new WatchKeys().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): WatchKeys {
+    return new WatchKeys().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): WatchKeys {
+    return new WatchKeys().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: WatchKeys | PlainMessage<WatchKeys> | undefined, b: WatchKeys | PlainMessage<WatchKeys> | undefined): boolean {
+    return proto3.util.equals(WatchKeys, a, b);
+  }
+}
+
+/**
+ * Threshold is the balance a watched owner must hold to be ABOVE.
+ *
+ * @generated from message ocp.balance.v1.Threshold
+ */
+export class Threshold extends Message<Threshold> {
+  /**
+   * @generated from oneof ocp.balance.v1.Threshold.kind
+   */
+  kind: {
+    /**
+     * A core mint value, in quarks. Compared exactly, with no exchange
+     * rate involved.
+     *
+     * @generated from field: uint64 core_mint_quarks = 1;
+     */
+    value: bigint;
+    case: "coreMintQuarks";
+  } | {
+    /**
+     * A fiat value, compared against the balance valued at the server's
+     * current exchange rate, allowing half a minor unit of the currency
+     * for rounding.
+     *
+     * @generated from field: ocp.balance.v1.FiatAmount fiat = 2;
+     */
+    value: FiatAmount;
+    case: "fiat";
+  } | { case: undefined; value?: undefined } = { case: undefined };
+
+  constructor(data?: PartialMessage<Threshold>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.Threshold";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "core_mint_quarks", kind: "scalar", T: 4 /* ScalarType.UINT64 */, oneof: "kind" },
+    { no: 2, name: "fiat", kind: "message", T: FiatAmount, oneof: "kind" },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Threshold {
+    return new Threshold().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Threshold {
+    return new Threshold().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Threshold {
+    return new Threshold().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: Threshold | PlainMessage<Threshold> | undefined, b: Threshold | PlainMessage<Threshold> | undefined): boolean {
+    return proto3.util.equals(Threshold, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.balance.v1.FiatAmount
+ */
+export class FiatAmount extends Message<FiatAmount> {
+  /**
+   * ISO 4217 alpha-3 currency code (e.g., "usd")
+   *
+   * @generated from field: string currency = 1;
+   */
+  currency = "";
+
+  /**
+   * The amount in the currency's major unit
+   *
+   * @generated from field: double native_amount = 2;
+   */
+  nativeAmount = 0;
+
+  constructor(data?: PartialMessage<FiatAmount>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.FiatAmount";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "currency", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "native_amount", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): FiatAmount {
+    return new FiatAmount().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): FiatAmount {
+    return new FiatAmount().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): FiatAmount {
+    return new FiatAmount().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: FiatAmount | PlainMessage<FiatAmount> | undefined, b: FiatAmount | PlainMessage<FiatAmount> | undefined): boolean {
+    return proto3.util.equals(FiatAmount, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.balance.v1.Watch
+ */
+export class Watch extends Message<Watch> {
+  /**
+   * @generated from field: ocp.common.v1.SolanaAccountId subscriber = 1;
+   */
+  subscriber?: SolanaAccountId;
+
+  /**
+   * @generated from field: ocp.balance.v1.WatchKey key = 2;
+   */
+  key?: WatchKey;
+
+  /**
+   * @generated from field: ocp.balance.v1.Threshold threshold = 3;
+   */
+  threshold?: Threshold;
+
+  /**
+   * @generated from field: repeated ocp.common.v1.SolanaAccountId mints = 4;
+   */
+  mints: SolanaAccountId[] = [];
+
+  /**
+   * @generated from field: google.protobuf.Duration grace = 5;
+   */
+  grace?: Duration;
+
+  /**
+   * @generated from field: ocp.balance.v1.WatchState state = 6;
+   */
+  state = WatchState.UNKNOWN_STATE;
+
+  /**
+   * When the watch entered its current state. For BELOW_SUSTAINED this is
+   * when the balance fell under the threshold, i.e. the start of the grace
+   * period that has since elapsed, not its end.
+   *
+   * @generated from field: google.protobuf.Timestamp state_since = 7;
+   */
+  stateSince?: Timestamp;
+
+  /**
+   * Incremented by every PutWatch of this (owner, key). The fence for
+   * DeleteWatch.
+   *
+   * @generated from field: uint64 generation = 8;
+   */
+  generation = protoInt64.zero;
+
+  /**
+   * The balance as of the watch's last evaluation
+   *
+   * @generated from field: ocp.balance.v1.Valuation last_valuation = 9;
+   */
+  lastValuation?: Valuation;
+
+  constructor(data?: PartialMessage<Watch>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.Watch";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "subscriber", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "key", kind: "message", T: WatchKey },
+    { no: 3, name: "threshold", kind: "message", T: Threshold },
+    { no: 4, name: "mints", kind: "message", T: SolanaAccountId, repeated: true },
+    { no: 5, name: "grace", kind: "message", T: Duration },
+    { no: 6, name: "state", kind: "enum", T: proto3.getEnumType(WatchState) },
+    { no: 7, name: "state_since", kind: "message", T: Timestamp },
+    { no: 8, name: "generation", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 9, name: "last_valuation", kind: "message", T: Valuation },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Watch {
+    return new Watch().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Watch {
+    return new Watch().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Watch {
+    return new Watch().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: Watch | PlainMessage<Watch> | undefined, b: Watch | PlainMessage<Watch> | undefined): boolean {
+    return proto3.util.equals(Watch, a, b);
+  }
+}
+
+/**
+ * Valuation is what a watched balance was worth when a watch was evaluated,
+ * restricted to the watch's mints.
+ *
+ * @generated from message ocp.balance.v1.Valuation
+ */
+export class Valuation extends Message<Valuation> {
+  /**
+   * The core mint value, in quarks, of the watched holdings. This is the
+   * value a core mint threshold is compared against.
+   *
+   * @generated from field: uint64 core_mint_value = 1;
+   */
+  coreMintValue = protoInt64.zero;
+
+  /**
+   * The value of the watched holdings in the threshold's fiat currency, at
+   * the exchange rate the evaluation used. This is the value a fiat
+   * threshold is compared against. Set only for a fiat threshold.
+   *
+   * @generated from field: double fiat_value = 2;
+   */
+  fiatValue = 0;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp evaluated_at = 3;
+   */
+  evaluatedAt?: Timestamp;
+
+  constructor(data?: PartialMessage<Valuation>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.Valuation";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "core_mint_value", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 2, name: "fiat_value", kind: "scalar", T: 1 /* ScalarType.DOUBLE */ },
+    { no: 3, name: "evaluated_at", kind: "message", T: Timestamp },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Valuation {
+    return new Valuation().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Valuation {
+    return new Valuation().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Valuation {
+    return new Valuation().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: Valuation | PlainMessage<Valuation> | undefined, b: Valuation | PlainMessage<Valuation> | undefined): boolean {
+    return proto3.util.equals(Valuation, a, b);
+  }
+}
+
+/**
+ * WatchEvent announces state transitions on a subscriber's watches. One event
+ * carries every transition one evaluation produced for one owner, so an owner
+ * whose balance crosses several of the subscriber's thresholds at once is
+ * announced once. An evaluation that produces more transitions than fit in
+ * one event produces several, each with a distinct id.
+ *
+ * @generated from message ocp.balance.v1.WatchEvent
+ */
+export class WatchEvent extends Message<WatchEvent> {
+  /**
+   * Server-generated, stable across redeliveries; the handle for
+   * AckWatchEvents and the subscriber's idempotency key.
+   *
+   * @generated from field: ocp.common.v1.UUID id = 1;
+   */
+  id?: UUID;
+
+  /**
+   * The owner every transition in this event is about
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId owner = 2;
+   */
+  owner?: SolanaAccountId;
+
+  /**
+   * @generated from field: repeated ocp.balance.v1.WatchTransition transitions = 3;
+   */
+  transitions: WatchTransition[] = [];
+
+  /**
+   * When the evaluation that produced these transitions ran
+   *
+   * @generated from field: google.protobuf.Timestamp timestamp = 4;
+   */
+  timestamp?: Timestamp;
+
+  constructor(data?: PartialMessage<WatchEvent>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.WatchEvent";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "id", kind: "message", T: UUID },
+    { no: 2, name: "owner", kind: "message", T: SolanaAccountId },
+    { no: 3, name: "transitions", kind: "message", T: WatchTransition, repeated: true },
+    { no: 4, name: "timestamp", kind: "message", T: Timestamp },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): WatchEvent {
+    return new WatchEvent().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): WatchEvent {
+    return new WatchEvent().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): WatchEvent {
+    return new WatchEvent().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: WatchEvent | PlainMessage<WatchEvent> | undefined, b: WatchEvent | PlainMessage<WatchEvent> | undefined): boolean {
+    return proto3.util.equals(WatchEvent, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.balance.v1.WatchTransition
+ */
+export class WatchTransition extends Message<WatchTransition> {
+  /**
+   * The watch after the transition, including its new state and the
+   * valuation that caused it
+   *
+   * @generated from field: ocp.balance.v1.Watch watch = 1;
+   */
+  watch?: Watch;
+
+  /**
+   * The state the watch was in before this transition
+   *
+   * @generated from field: ocp.balance.v1.WatchState previous_state = 2;
+   */
+  previousState = WatchState.UNKNOWN_STATE;
+
+  constructor(data?: PartialMessage<WatchTransition>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.WatchTransition";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "watch", kind: "message", T: Watch },
+    { no: 2, name: "previous_state", kind: "enum", T: proto3.getEnumType(WatchState) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): WatchTransition {
+    return new WatchTransition().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): WatchTransition {
+    return new WatchTransition().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): WatchTransition {
+    return new WatchTransition().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: WatchTransition | PlainMessage<WatchTransition> | undefined, b: WatchTransition | PlainMessage<WatchTransition> | undefined): boolean {
+    return proto3.util.equals(WatchTransition, a, b);
+  }
+}
+
+/**
+ * PagingToken is an opaque cursor issued by a paged RPC, valid only with the
+ * RPC and subscriber that issued it.
+ *
+ * @generated from message ocp.balance.v1.PagingToken
+ */
+export class PagingToken extends Message<PagingToken> {
+  /**
+   * @generated from field: bytes value = 1;
+   */
+  value = new Uint8Array(0);
+
+  constructor(data?: PartialMessage<PagingToken>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.balance.v1.PagingToken";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "value", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PagingToken {
+    return new PagingToken().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PagingToken {
+    return new PagingToken().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PagingToken {
+    return new PagingToken().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: PagingToken | PlainMessage<PagingToken> | undefined, b: PagingToken | PlainMessage<PagingToken> | undefined): boolean {
+    return proto3.util.equals(PagingToken, a, b);
   }
 }
 

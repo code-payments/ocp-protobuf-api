@@ -26,6 +26,49 @@ type BalanceClient interface {
 	// filtered by a set of mints. Balances are always denominated in the core
 	// mint, and can additionally be denominated in a set of fiat currencies.
 	GetBalances(ctx context.Context, in *GetBalancesRequest, opts ...grpc.CallOption) (*GetBalancesResponse, error)
+	// PutWatch creates a watch, or replaces the threshold, mints and grace of
+	// the watch already held under the same (owner, key), and evaluates it
+	// before returning. The returned watch carries the state that was true
+	// when the write committed, and the watch exists from that moment, so a
+	// caller may use the response to gate an action on the owner's balance
+	// knowing the balance is being watched from the instant the check passed.
+	// A balance change that lands after the evaluation is caught by the watch,
+	// never lost between the check and the caller's action.
+	//
+	// Replacing a watch keeps its state history where the new threshold
+	// agrees with it and re-derives the state where it does not, with a
+	// transition event either way it changed. Every put, changed or not,
+	// increments the watch's generation.
+	PutWatch(ctx context.Context, in *PutWatchRequest, opts ...grpc.CallOption) (*PutWatchResponse, error)
+	// DeleteWatch removes a watch, fenced by generation: the delete applies
+	// only if the watch's generation is the one given, and is answered STALE
+	// otherwise. A caller that records the generation PutWatch returned when
+	// it granted something, and deletes with that generation when it revokes
+	// it, can never remove a watch that a concurrent, newer PutWatch re-armed.
+	// Deleting a watch that does not exist is OK.
+	//
+	// Unacked events for the watch are discarded with it.
+	DeleteWatch(ctx context.Context, in *DeleteWatchRequest, opts ...grpc.CallOption) (*DeleteWatchResponse, error)
+	// GetWatches returns the subscriber's watches on one owner, a page at a
+	// time in key order, or a set of watches by key. A key with no watch is
+	// left out of the response.
+	GetWatches(ctx context.Context, in *GetWatchesRequest, opts ...grpc.CallOption) (*GetWatchesResponse, error)
+	// ListWatches pages through every watch the subscriber holds, in no
+	// particular order but stable across pages. It is the reconciliation
+	// read: a subscriber walks it to find watches whose reason for existing
+	// is gone, and compares it with its own records to find watches it is
+	// missing.
+	ListWatches(ctx context.Context, in *ListWatchesRequest, opts ...grpc.CallOption) (*ListWatchesResponse, error)
+	// PollWatchEvents leases a batch of the subscriber's undelivered events.
+	// A leased event is withheld from other polls for the lease duration and
+	// returns to the queue if not acked by then, so several processes of one
+	// subscriber can poll concurrently and each event is being handled by at
+	// most one of them at a time.
+	PollWatchEvents(ctx context.Context, in *PollWatchEventsRequest, opts ...grpc.CallOption) (*PollWatchEventsResponse, error)
+	// AckWatchEvents acks events the subscriber has finished processing.
+	// Acked events are never delivered again and become eligible for
+	// deletion. Acking an unknown or already acked event is OK.
+	AckWatchEvents(ctx context.Context, in *AckWatchEventsRequest, opts ...grpc.CallOption) (*AckWatchEventsResponse, error)
 }
 
 type balanceClient struct {
@@ -45,6 +88,60 @@ func (c *balanceClient) GetBalances(ctx context.Context, in *GetBalancesRequest,
 	return out, nil
 }
 
+func (c *balanceClient) PutWatch(ctx context.Context, in *PutWatchRequest, opts ...grpc.CallOption) (*PutWatchResponse, error) {
+	out := new(PutWatchResponse)
+	err := c.cc.Invoke(ctx, "/ocp.balance.v1.Balance/PutWatch", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *balanceClient) DeleteWatch(ctx context.Context, in *DeleteWatchRequest, opts ...grpc.CallOption) (*DeleteWatchResponse, error) {
+	out := new(DeleteWatchResponse)
+	err := c.cc.Invoke(ctx, "/ocp.balance.v1.Balance/DeleteWatch", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *balanceClient) GetWatches(ctx context.Context, in *GetWatchesRequest, opts ...grpc.CallOption) (*GetWatchesResponse, error) {
+	out := new(GetWatchesResponse)
+	err := c.cc.Invoke(ctx, "/ocp.balance.v1.Balance/GetWatches", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *balanceClient) ListWatches(ctx context.Context, in *ListWatchesRequest, opts ...grpc.CallOption) (*ListWatchesResponse, error) {
+	out := new(ListWatchesResponse)
+	err := c.cc.Invoke(ctx, "/ocp.balance.v1.Balance/ListWatches", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *balanceClient) PollWatchEvents(ctx context.Context, in *PollWatchEventsRequest, opts ...grpc.CallOption) (*PollWatchEventsResponse, error) {
+	out := new(PollWatchEventsResponse)
+	err := c.cc.Invoke(ctx, "/ocp.balance.v1.Balance/PollWatchEvents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *balanceClient) AckWatchEvents(ctx context.Context, in *AckWatchEventsRequest, opts ...grpc.CallOption) (*AckWatchEventsResponse, error) {
+	out := new(AckWatchEventsResponse)
+	err := c.cc.Invoke(ctx, "/ocp.balance.v1.Balance/AckWatchEvents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BalanceServer is the server API for Balance service.
 // All implementations must embed UnimplementedBalanceServer
 // for forward compatibility
@@ -53,6 +150,49 @@ type BalanceServer interface {
 	// filtered by a set of mints. Balances are always denominated in the core
 	// mint, and can additionally be denominated in a set of fiat currencies.
 	GetBalances(context.Context, *GetBalancesRequest) (*GetBalancesResponse, error)
+	// PutWatch creates a watch, or replaces the threshold, mints and grace of
+	// the watch already held under the same (owner, key), and evaluates it
+	// before returning. The returned watch carries the state that was true
+	// when the write committed, and the watch exists from that moment, so a
+	// caller may use the response to gate an action on the owner's balance
+	// knowing the balance is being watched from the instant the check passed.
+	// A balance change that lands after the evaluation is caught by the watch,
+	// never lost between the check and the caller's action.
+	//
+	// Replacing a watch keeps its state history where the new threshold
+	// agrees with it and re-derives the state where it does not, with a
+	// transition event either way it changed. Every put, changed or not,
+	// increments the watch's generation.
+	PutWatch(context.Context, *PutWatchRequest) (*PutWatchResponse, error)
+	// DeleteWatch removes a watch, fenced by generation: the delete applies
+	// only if the watch's generation is the one given, and is answered STALE
+	// otherwise. A caller that records the generation PutWatch returned when
+	// it granted something, and deletes with that generation when it revokes
+	// it, can never remove a watch that a concurrent, newer PutWatch re-armed.
+	// Deleting a watch that does not exist is OK.
+	//
+	// Unacked events for the watch are discarded with it.
+	DeleteWatch(context.Context, *DeleteWatchRequest) (*DeleteWatchResponse, error)
+	// GetWatches returns the subscriber's watches on one owner, a page at a
+	// time in key order, or a set of watches by key. A key with no watch is
+	// left out of the response.
+	GetWatches(context.Context, *GetWatchesRequest) (*GetWatchesResponse, error)
+	// ListWatches pages through every watch the subscriber holds, in no
+	// particular order but stable across pages. It is the reconciliation
+	// read: a subscriber walks it to find watches whose reason for existing
+	// is gone, and compares it with its own records to find watches it is
+	// missing.
+	ListWatches(context.Context, *ListWatchesRequest) (*ListWatchesResponse, error)
+	// PollWatchEvents leases a batch of the subscriber's undelivered events.
+	// A leased event is withheld from other polls for the lease duration and
+	// returns to the queue if not acked by then, so several processes of one
+	// subscriber can poll concurrently and each event is being handled by at
+	// most one of them at a time.
+	PollWatchEvents(context.Context, *PollWatchEventsRequest) (*PollWatchEventsResponse, error)
+	// AckWatchEvents acks events the subscriber has finished processing.
+	// Acked events are never delivered again and become eligible for
+	// deletion. Acking an unknown or already acked event is OK.
+	AckWatchEvents(context.Context, *AckWatchEventsRequest) (*AckWatchEventsResponse, error)
 	mustEmbedUnimplementedBalanceServer()
 }
 
@@ -62,6 +202,24 @@ type UnimplementedBalanceServer struct {
 
 func (UnimplementedBalanceServer) GetBalances(context.Context, *GetBalancesRequest) (*GetBalancesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBalances not implemented")
+}
+func (UnimplementedBalanceServer) PutWatch(context.Context, *PutWatchRequest) (*PutWatchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PutWatch not implemented")
+}
+func (UnimplementedBalanceServer) DeleteWatch(context.Context, *DeleteWatchRequest) (*DeleteWatchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteWatch not implemented")
+}
+func (UnimplementedBalanceServer) GetWatches(context.Context, *GetWatchesRequest) (*GetWatchesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWatches not implemented")
+}
+func (UnimplementedBalanceServer) ListWatches(context.Context, *ListWatchesRequest) (*ListWatchesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListWatches not implemented")
+}
+func (UnimplementedBalanceServer) PollWatchEvents(context.Context, *PollWatchEventsRequest) (*PollWatchEventsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PollWatchEvents not implemented")
+}
+func (UnimplementedBalanceServer) AckWatchEvents(context.Context, *AckWatchEventsRequest) (*AckWatchEventsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AckWatchEvents not implemented")
 }
 func (UnimplementedBalanceServer) mustEmbedUnimplementedBalanceServer() {}
 
@@ -94,6 +252,114 @@ func _Balance_GetBalances_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Balance_PutWatch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutWatchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BalanceServer).PutWatch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ocp.balance.v1.Balance/PutWatch",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BalanceServer).PutWatch(ctx, req.(*PutWatchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Balance_DeleteWatch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteWatchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BalanceServer).DeleteWatch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ocp.balance.v1.Balance/DeleteWatch",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BalanceServer).DeleteWatch(ctx, req.(*DeleteWatchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Balance_GetWatches_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWatchesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BalanceServer).GetWatches(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ocp.balance.v1.Balance/GetWatches",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BalanceServer).GetWatches(ctx, req.(*GetWatchesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Balance_ListWatches_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListWatchesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BalanceServer).ListWatches(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ocp.balance.v1.Balance/ListWatches",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BalanceServer).ListWatches(ctx, req.(*ListWatchesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Balance_PollWatchEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PollWatchEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BalanceServer).PollWatchEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ocp.balance.v1.Balance/PollWatchEvents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BalanceServer).PollWatchEvents(ctx, req.(*PollWatchEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Balance_AckWatchEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AckWatchEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BalanceServer).AckWatchEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ocp.balance.v1.Balance/AckWatchEvents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BalanceServer).AckWatchEvents(ctx, req.(*AckWatchEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Balance_ServiceDesc is the grpc.ServiceDesc for Balance service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -104,6 +370,30 @@ var Balance_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetBalances",
 			Handler:    _Balance_GetBalances_Handler,
+		},
+		{
+			MethodName: "PutWatch",
+			Handler:    _Balance_PutWatch_Handler,
+		},
+		{
+			MethodName: "DeleteWatch",
+			Handler:    _Balance_DeleteWatch_Handler,
+		},
+		{
+			MethodName: "GetWatches",
+			Handler:    _Balance_GetWatches_Handler,
+		},
+		{
+			MethodName: "ListWatches",
+			Handler:    _Balance_ListWatches_Handler,
+		},
+		{
+			MethodName: "PollWatchEvents",
+			Handler:    _Balance_PollWatchEvents_Handler,
+		},
+		{
+			MethodName: "AckWatchEvents",
+			Handler:    _Balance_AckWatchEvents_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
