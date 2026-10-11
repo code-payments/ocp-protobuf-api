@@ -115,6 +115,8 @@ func (m *GetBalancesRequest) Validate() error {
 
 	}
 
+	// no validation rules for ExcludePerMintBalances
+
 	return nil
 }
 
@@ -363,6 +365,8 @@ func (m *MintBalance) Validate() error {
 	// no validation rules for CoreMintValue
 
 	// no validation rules for FiatValuesByCurrency
+
+	// no validation rules for Quarks
 
 	return nil
 }
