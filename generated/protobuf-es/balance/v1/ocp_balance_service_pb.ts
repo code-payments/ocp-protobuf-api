@@ -35,6 +35,14 @@ export class GetBalancesRequest extends Message<GetBalancesRequest> {
    */
   currencyCodes: string[] = [];
 
+  /**
+   * When true, OwnerBalance.balances_by_mint is not populated. Owner totals
+   * are unaffected and still account for every mint matching the mints filter.
+   *
+   * @generated from field: bool exclude_per_mint_balances = 4;
+   */
+  excludePerMintBalances = false;
+
   constructor(data?: PartialMessage<GetBalancesRequest>) {
     super();
     proto3.util.initPartial(data, this);
@@ -46,6 +54,7 @@ export class GetBalancesRequest extends Message<GetBalancesRequest> {
     { no: 1, name: "owners", kind: "message", T: SolanaAccountId, repeated: true },
     { no: 2, name: "mints", kind: "message", T: SolanaAccountId, repeated: true },
     { no: 3, name: "currency_codes", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 4, name: "exclude_per_mint_balances", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetBalancesRequest {
@@ -149,7 +158,8 @@ export class OwnerBalance extends Message<OwnerBalance> {
   coreMintValue = protoInt64.zero;
 
   /**
-   * Individual balances keyed by mint address
+   * Individual balances keyed by mint address. Not populated when
+   * GetBalancesRequest.exclude_per_mint_balances is true.
    *
    * @generated from field: map<string, ocp.balance.v1.MintBalance> balances_by_mint = 3;
    */
@@ -222,6 +232,13 @@ export class MintBalance extends Message<MintBalance> {
    */
   fiatValuesByCurrency: { [key: string]: number } = {};
 
+  /**
+   * The balance amount, in quarks, of the mint the balance is for
+   *
+   * @generated from field: uint64 quarks = 4;
+   */
+  quarks = protoInt64.zero;
+
   constructor(data?: PartialMessage<MintBalance>) {
     super();
     proto3.util.initPartial(data, this);
@@ -233,6 +250,7 @@ export class MintBalance extends Message<MintBalance> {
     { no: 1, name: "mint", kind: "message", T: SolanaAccountId },
     { no: 2, name: "core_mint_value", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
     { no: 3, name: "fiat_values_by_currency", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 1 /* ScalarType.DOUBLE */} },
+    { no: 4, name: "quarks", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MintBalance {
