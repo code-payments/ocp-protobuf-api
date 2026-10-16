@@ -1878,6 +1878,18 @@ func (m *Metadata) Validate() error {
 			}
 		}
 
+	case *Metadata_SendPublicMultiPayment:
+
+		if v, ok := interface{}(m.GetSendPublicMultiPayment()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MetadataValidationError{
+					field:  "SendPublicMultiPayment",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	default:
 		return MetadataValidationError{
 			field:  "Type",
@@ -2448,6 +2460,130 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = PublicDistributionMetadataValidationError{}
+
+// Validate checks the field values on SendPublicMultiPaymentMetadata with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *SendPublicMultiPaymentMetadata) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetSource() == nil {
+		return SendPublicMultiPaymentMetadataValidationError{
+			field:  "Source",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetSource()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendPublicMultiPaymentMetadataValidationError{
+				field:  "Source",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if l := len(m.GetPayments()); l < 2 || l > 10 {
+		return SendPublicMultiPaymentMetadataValidationError{
+			field:  "Payments",
+			reason: "value must contain between 2 and 10 items, inclusive",
+		}
+	}
+
+	for idx, item := range m.GetPayments() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SendPublicMultiPaymentMetadataValidationError{
+					field:  fmt.Sprintf("Payments[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.GetMint() == nil {
+		return SendPublicMultiPaymentMetadataValidationError{
+			field:  "Mint",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetMint()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendPublicMultiPaymentMetadataValidationError{
+				field:  "Mint",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// SendPublicMultiPaymentMetadataValidationError is the validation error
+// returned by SendPublicMultiPaymentMetadata.Validate if the designated
+// constraints aren't met.
+type SendPublicMultiPaymentMetadataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendPublicMultiPaymentMetadataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendPublicMultiPaymentMetadataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendPublicMultiPaymentMetadataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendPublicMultiPaymentMetadataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendPublicMultiPaymentMetadataValidationError) ErrorName() string {
+	return "SendPublicMultiPaymentMetadataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendPublicMultiPaymentMetadataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendPublicMultiPaymentMetadata.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendPublicMultiPaymentMetadataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendPublicMultiPaymentMetadataValidationError{}
 
 // Validate checks the field values on Action with the rules defined in the
 // proto definition for this message. If any rules are violated, an error is returned.
@@ -7748,3 +7884,132 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = PublicDistributionMetadata_DistributionValidationError{}
+
+// Validate checks the field values on SendPublicMultiPaymentMetadata_Payment
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, an error is returned.
+func (m *SendPublicMultiPaymentMetadata_Payment) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetDestination() == nil {
+		return SendPublicMultiPaymentMetadata_PaymentValidationError{
+			field:  "Destination",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetDestination()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendPublicMultiPaymentMetadata_PaymentValidationError{
+				field:  "Destination",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetDestinationOwner()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SendPublicMultiPaymentMetadata_PaymentValidationError{
+				field:  "DestinationOwner",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	switch m.ExchangeData.(type) {
+
+	case *SendPublicMultiPaymentMetadata_Payment_ServerExchangeData:
+
+		if v, ok := interface{}(m.GetServerExchangeData()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SendPublicMultiPaymentMetadata_PaymentValidationError{
+					field:  "ServerExchangeData",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	case *SendPublicMultiPaymentMetadata_Payment_ClientExchangeData:
+
+		if v, ok := interface{}(m.GetClientExchangeData()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SendPublicMultiPaymentMetadata_PaymentValidationError{
+					field:  "ClientExchangeData",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	default:
+		return SendPublicMultiPaymentMetadata_PaymentValidationError{
+			field:  "ExchangeData",
+			reason: "value is required",
+		}
+
+	}
+
+	return nil
+}
+
+// SendPublicMultiPaymentMetadata_PaymentValidationError is the validation
+// error returned by SendPublicMultiPaymentMetadata_Payment.Validate if the
+// designated constraints aren't met.
+type SendPublicMultiPaymentMetadata_PaymentValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SendPublicMultiPaymentMetadata_PaymentValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SendPublicMultiPaymentMetadata_PaymentValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SendPublicMultiPaymentMetadata_PaymentValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SendPublicMultiPaymentMetadata_PaymentValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SendPublicMultiPaymentMetadata_PaymentValidationError) ErrorName() string {
+	return "SendPublicMultiPaymentMetadata_PaymentValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SendPublicMultiPaymentMetadata_PaymentValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSendPublicMultiPaymentMetadata_Payment.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SendPublicMultiPaymentMetadata_PaymentValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SendPublicMultiPaymentMetadata_PaymentValidationError{}
