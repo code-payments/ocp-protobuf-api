@@ -918,6 +918,7 @@ message Metadata {
         SendPublicPaymentMetadata       send_public_payment       = 2;
         ReceivePaymentsPubliclyMetadata receive_payments_publicly = 3;
         PublicDistributionMetadata      public_distribution       = 4;
+        SendPublicMultiPaymentMetadata  send_public_multi_payment = 5;
     }
 
     // Optional app-level metadata
@@ -1060,6 +1061,64 @@ message PublicDistributionMetadata {
 
     // The mint that this intent will be operating against
     common.v1.SolanaAccountId mint = 3 [(validate.rules).message.required = true];;
+}
+
+// Send payments publicly from the user's primary account to multiple OCP
+// primary accounts.
+//
+// Action Spec:
+//
+// for payment in payments
+//   actions.push_back(NoPrivacyTransferAction(PRIMARY, payment.destination, payment.ExchangeData.Quarks))
+//
+// Notes:
+//  - Every destination must be a PRIMARY account of the intent mint that is
+//    managed by OCP. Withdrawals, indirect sends and fee payments are not
+//    supported.
+//  - If a destination owner is an existing OCP user without a PRIMARY account
+//    on the intent mint, the server auto-opens it as part of the intent. The
+//    destination must be the owner's derived PRIMARY timelock vault for the
+//    intent mint, and destination_owner must be provided.
+//  - Destinations, and the owners of destinations, must be unique and cannot
+//    be the source or its owner.
+//  - Every payment's client exchange data must use the same currency, verified
+//    core mint fiat exchange rate and, for launchpad currencies, verified
+//    reserve state.
+//  - The server may enforce a lower maximum number of payments than allowed
+//    by validation here.
+message SendPublicMultiPaymentMetadata {
+    // The source account where funds will be sent from. Currently, this is always
+    // the user's primary account.
+    common.v1.SolanaAccountId source = 1 [(validate.rules).message.required = true];
+
+    // The set of payments
+    repeated Payment payments = 2 [(validate.rules).repeated = {
+        min_items: 2,
+        max_items: 10, // Arbitrary
+    }];
+    message Payment {
+        // The destination primary account to send funds to
+        common.v1.SolanaAccountId destination = 1 [(validate.rules).message.required = true];
+
+        // The owner of the destination account, which is required when the
+        // destination PRIMARY account doesn't exist yet and will be auto-opened.
+        // It can be omitted when the destination already exists.
+        common.v1.SolanaAccountId destination_owner = 2;
+
+        // The exchange data of funds being sent to the destination
+        oneof exchange_data {
+            option (validate.required) = true;
+
+            // Provided by server for submitted intents
+            ExchangeData server_exchange_data = 3;
+
+            // Provided by clients when submitting new intents
+            VerifiedExchangeData client_exchange_data = 4;
+        }
+    }
+
+    // The mint that this intent will be operating against
+    common.v1.SolanaAccountId mint = 3 [(validate.rules).message.required = true];
 }
 
 //

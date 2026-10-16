@@ -2962,6 +2962,12 @@ export class Metadata extends Message<Metadata> {
      */
     value: PublicDistributionMetadata;
     case: "publicDistribution";
+  } | {
+    /**
+     * @generated from field: ocp.transaction.v1.SendPublicMultiPaymentMetadata send_public_multi_payment = 5;
+     */
+    value: SendPublicMultiPaymentMetadata;
+    case: "sendPublicMultiPayment";
   } | { case: undefined; value?: undefined } = { case: undefined };
 
   /**
@@ -2983,6 +2989,7 @@ export class Metadata extends Message<Metadata> {
     { no: 2, name: "send_public_payment", kind: "message", T: SendPublicPaymentMetadata, oneof: "type" },
     { no: 3, name: "receive_payments_publicly", kind: "message", T: ReceivePaymentsPubliclyMetadata, oneof: "type" },
     { no: 4, name: "public_distribution", kind: "message", T: PublicDistributionMetadata, oneof: "type" },
+    { no: 5, name: "send_public_multi_payment", kind: "message", T: SendPublicMultiPaymentMetadata, oneof: "type" },
     { no: 10, name: "app_metadata", kind: "message", T: AppMetadata },
   ]);
 
@@ -3405,6 +3412,160 @@ export class PublicDistributionMetadata_Distribution extends Message<PublicDistr
 
   static equals(a: PublicDistributionMetadata_Distribution | PlainMessage<PublicDistributionMetadata_Distribution> | undefined, b: PublicDistributionMetadata_Distribution | PlainMessage<PublicDistributionMetadata_Distribution> | undefined): boolean {
     return proto3.util.equals(PublicDistributionMetadata_Distribution, a, b);
+  }
+}
+
+/**
+ * Send payments publicly from the user's primary account to multiple OCP
+ * primary accounts.
+ *
+ * Action Spec:
+ *
+ * for payment in payments
+ *   actions.push_back(NoPrivacyTransferAction(PRIMARY, payment.destination, payment.ExchangeData.Quarks))
+ *
+ * Notes:
+ *  - Every destination must be a PRIMARY account of the intent mint that is
+ *    managed by OCP. Withdrawals, indirect sends and fee payments are not
+ *    supported.
+ *  - If a destination owner is an existing OCP user without a PRIMARY account
+ *    on the intent mint, the server auto-opens it as part of the intent. The
+ *    destination must be the owner's derived PRIMARY timelock vault for the
+ *    intent mint, and destination_owner must be provided.
+ *  - Destinations, and the owners of destinations, must be unique and cannot
+ *    be the source or its owner.
+ *  - Every payment's client exchange data must use the same currency, verified
+ *    core mint fiat exchange rate and, for launchpad currencies, verified
+ *    reserve state.
+ *  - The server may enforce a lower maximum number of payments than allowed
+ *    by validation here.
+ *
+ * @generated from message ocp.transaction.v1.SendPublicMultiPaymentMetadata
+ */
+export class SendPublicMultiPaymentMetadata extends Message<SendPublicMultiPaymentMetadata> {
+  /**
+   * The source account where funds will be sent from. Currently, this is always
+   * the user's primary account.
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId source = 1;
+   */
+  source?: SolanaAccountId;
+
+  /**
+   * The set of payments
+   *
+   * @generated from field: repeated ocp.transaction.v1.SendPublicMultiPaymentMetadata.Payment payments = 2;
+   */
+  payments: SendPublicMultiPaymentMetadata_Payment[] = [];
+
+  /**
+   * The mint that this intent will be operating against
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId mint = 3;
+   */
+  mint?: SolanaAccountId;
+
+  constructor(data?: PartialMessage<SendPublicMultiPaymentMetadata>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.transaction.v1.SendPublicMultiPaymentMetadata";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "source", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "payments", kind: "message", T: SendPublicMultiPaymentMetadata_Payment, repeated: true },
+    { no: 3, name: "mint", kind: "message", T: SolanaAccountId },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendPublicMultiPaymentMetadata {
+    return new SendPublicMultiPaymentMetadata().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SendPublicMultiPaymentMetadata {
+    return new SendPublicMultiPaymentMetadata().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SendPublicMultiPaymentMetadata {
+    return new SendPublicMultiPaymentMetadata().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SendPublicMultiPaymentMetadata | PlainMessage<SendPublicMultiPaymentMetadata> | undefined, b: SendPublicMultiPaymentMetadata | PlainMessage<SendPublicMultiPaymentMetadata> | undefined): boolean {
+    return proto3.util.equals(SendPublicMultiPaymentMetadata, a, b);
+  }
+}
+
+/**
+ * @generated from message ocp.transaction.v1.SendPublicMultiPaymentMetadata.Payment
+ */
+export class SendPublicMultiPaymentMetadata_Payment extends Message<SendPublicMultiPaymentMetadata_Payment> {
+  /**
+   * The destination primary account to send funds to
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId destination = 1;
+   */
+  destination?: SolanaAccountId;
+
+  /**
+   * The owner of the destination account, which is required when the
+   * destination PRIMARY account doesn't exist yet and will be auto-opened.
+   * It can be omitted when the destination already exists.
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId destination_owner = 2;
+   */
+  destinationOwner?: SolanaAccountId;
+
+  /**
+   * The exchange data of funds being sent to the destination
+   *
+   * @generated from oneof ocp.transaction.v1.SendPublicMultiPaymentMetadata.Payment.exchange_data
+   */
+  exchangeData: {
+    /**
+     * Provided by server for submitted intents
+     *
+     * @generated from field: ocp.transaction.v1.ExchangeData server_exchange_data = 3;
+     */
+    value: ExchangeData;
+    case: "serverExchangeData";
+  } | {
+    /**
+     * Provided by clients when submitting new intents
+     *
+     * @generated from field: ocp.transaction.v1.VerifiedExchangeData client_exchange_data = 4;
+     */
+    value: VerifiedExchangeData;
+    case: "clientExchangeData";
+  } | { case: undefined; value?: undefined } = { case: undefined };
+
+  constructor(data?: PartialMessage<SendPublicMultiPaymentMetadata_Payment>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.transaction.v1.SendPublicMultiPaymentMetadata.Payment";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "destination", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "destination_owner", kind: "message", T: SolanaAccountId },
+    { no: 3, name: "server_exchange_data", kind: "message", T: ExchangeData, oneof: "exchange_data" },
+    { no: 4, name: "client_exchange_data", kind: "message", T: VerifiedExchangeData, oneof: "exchange_data" },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SendPublicMultiPaymentMetadata_Payment {
+    return new SendPublicMultiPaymentMetadata_Payment().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SendPublicMultiPaymentMetadata_Payment {
+    return new SendPublicMultiPaymentMetadata_Payment().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SendPublicMultiPaymentMetadata_Payment {
+    return new SendPublicMultiPaymentMetadata_Payment().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SendPublicMultiPaymentMetadata_Payment | PlainMessage<SendPublicMultiPaymentMetadata_Payment> | undefined, b: SendPublicMultiPaymentMetadata_Payment | PlainMessage<SendPublicMultiPaymentMetadata_Payment> | undefined): boolean {
+    return proto3.util.equals(SendPublicMultiPaymentMetadata_Payment, a, b);
   }
 }
 
