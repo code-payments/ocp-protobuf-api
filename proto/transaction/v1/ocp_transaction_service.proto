@@ -405,6 +405,11 @@ message StatefulSwapRequest {
             // The fee amount to pay for this swap, which should be exactly
             // CanWithdrawToAccountResponse.fee_amount
             uint64 fee_amount = 8;
+
+            // The CoinbaseStableSwapper swap instruction version the client will
+            // use when constructing the transaction. 2 uses SwapV2. Any other value,
+            // including unset, uses the legacy Swap instruction.
+            uint32 swap_version = 9 [(validate.rules).uint32.lte = 2];
         }
 
         // The owner account starting the swap
@@ -655,7 +660,7 @@ message StatefulSwapResponse {
         //  5. AssociatedTokenAccount::CreateIdempotent (open swap authority's from_mint ATA)
         //  6. AssociatedTokenAccount::CreateIdempotent (open destination owner's to_mint ATA)
         //  7. VM::TransferForSwapWithFee (from_mint VM swap ATA -> swap authority's from_mint ATA (swap amount) and fee destination (fee amount))
-        //  8. CoinbaseStableSwapper::Swap (from_mint swap authority ATA -> to_mint destination owner ATA)
+        //  8. CoinbaseStableSwapper::Swap or CoinbaseStableSwapper::SwapV2, per client swap_version (from_mint swap authority ATA -> to_mint destination owner ATA)
         //  9. Token::CloseAccount (closes swap authority's from_mint ATA)
         message CoinbaseStableSwapperServerParameter {
             // Subisdizer account that will be paying for the swap
@@ -741,6 +746,11 @@ message StatelessSwapRequest {
 
             // The amount to swap from the source mint in quarks.
             uint64 swap_amount = 3 [(validate.rules).uint64.gt = 0];
+
+            // The CoinbaseStableSwapper swap instruction version the client will
+            // use when constructing the transaction. 2 uses SwapV2. Any other value,
+            // including unset, uses the legacy Swap instruction.
+            uint32 swap_version = 4 [(validate.rules).uint32.lte = 2];
         }
 
         // The owner account that owns the source ATA and the destination VM
@@ -794,7 +804,7 @@ message StatelessSwapResponse {
         //  2. [Optional] ComputeBudget::SetComputeUnitPrice
         //  3. [Optional] Memo::Memo
         //  4. AssociatedTokenAccount::CreateIdempotent (open owner's to_mint VM Deposit ATA)
-        //  5. CoinbaseStableSwapper::Swap (owner's from_mint ATA -> owner's to_mint VM Deposit ATA)
+        //  5. CoinbaseStableSwapper::Swap or CoinbaseStableSwapper::SwapV2, per client swap_version (owner's from_mint ATA -> owner's to_mint VM Deposit ATA)
         message CoinbaseStableSwapperServerParameter {
             // Subsidizer account that will pay the transaction fee.
             common.v1.SolanaAccountId payer = 1 [(validate.rules).message.required = true];

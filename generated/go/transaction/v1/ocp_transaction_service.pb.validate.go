@@ -6081,6 +6081,13 @@ func (m *StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters) Val
 
 	// no validation rules for FeeAmount
 
+	if m.GetSwapVersion() > 2 {
+		return StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
+			field:  "SwapVersion",
+			reason: "value must be less than or equal to 2",
+		}
+	}
+
 	return nil
 }
 
@@ -7304,6 +7311,13 @@ func (m *StatelessSwapRequest_Initiate_CoinbaseStableSwapperClientParameters) Va
 		return StatelessSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
 			field:  "SwapAmount",
 			reason: "value must be greater than 0",
+		}
+	}
+
+	if m.GetSwapVersion() > 2 {
+		return StatelessSwapRequest_Initiate_CoinbaseStableSwapperClientParametersValidationError{
+			field:  "SwapVersion",
+			reason: "value must be less than or equal to 2",
 		}
 	}
 
