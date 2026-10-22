@@ -1301,6 +1301,15 @@ export class StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters 
    */
   feeAmount = protoInt64.zero;
 
+  /**
+   * The CoinbaseStableSwapper swap instruction version the client will
+   * use when constructing the transaction. 2 uses SwapV2. Any other value,
+   * including unset, uses the legacy Swap instruction.
+   *
+   * @generated from field: uint32 swap_version = 9;
+   */
+  swapVersion = 0;
+
   constructor(data?: PartialMessage<StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1317,6 +1326,7 @@ export class StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters 
     { no: 6, name: "funding_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 7, name: "destination_owner", kind: "message", T: SolanaAccountId },
     { no: 8, name: "fee_amount", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 9, name: "swap_version", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapRequest_Initiate_CoinbaseStableSwapperClientParameters {
@@ -1876,7 +1886,7 @@ export class StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParam
  *  5. AssociatedTokenAccount::CreateIdempotent (open swap authority's from_mint ATA)
  *  6. AssociatedTokenAccount::CreateIdempotent (open destination owner's to_mint ATA)
  *  7. VM::TransferForSwapWithFee (from_mint VM swap ATA -> swap authority's from_mint ATA (swap amount) and fee destination (fee amount))
- *  8. CoinbaseStableSwapper::Swap (from_mint swap authority ATA -> to_mint destination owner ATA)
+ *  8. CoinbaseStableSwapper::Swap or CoinbaseStableSwapper::SwapV2, per client swap_version (from_mint swap authority ATA -> to_mint destination owner ATA)
  *  9. Token::CloseAccount (closes swap authority's from_mint ATA)
  *
  * @generated from message ocp.transaction.v1.StatefulSwapResponse.ServerParameters.CoinbaseStableSwapperServerParameter
@@ -2264,6 +2274,15 @@ export class StatelessSwapRequest_Initiate_CoinbaseStableSwapperClientParameters
    */
   swapAmount = protoInt64.zero;
 
+  /**
+   * The CoinbaseStableSwapper swap instruction version the client will
+   * use when constructing the transaction. 2 uses SwapV2. Any other value,
+   * including unset, uses the legacy Swap instruction.
+   *
+   * @generated from field: uint32 swap_version = 4;
+   */
+  swapVersion = 0;
+
   constructor(data?: PartialMessage<StatelessSwapRequest_Initiate_CoinbaseStableSwapperClientParameters>) {
     super();
     proto3.util.initPartial(data, this);
@@ -2275,6 +2294,7 @@ export class StatelessSwapRequest_Initiate_CoinbaseStableSwapperClientParameters
     { no: 1, name: "from_mint", kind: "message", T: SolanaAccountId },
     { no: 2, name: "to_mint", kind: "message", T: SolanaAccountId },
     { no: 3, name: "swap_amount", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 4, name: "swap_version", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatelessSwapRequest_Initiate_CoinbaseStableSwapperClientParameters {
@@ -2444,7 +2464,7 @@ export class StatelessSwapResponse_ServerParameters extends Message<StatelessSwa
  *  2. [Optional] ComputeBudget::SetComputeUnitPrice
  *  3. [Optional] Memo::Memo
  *  4. AssociatedTokenAccount::CreateIdempotent (open owner's to_mint VM Deposit ATA)
- *  5. CoinbaseStableSwapper::Swap (owner's from_mint ATA -> owner's to_mint VM Deposit ATA)
+ *  5. CoinbaseStableSwapper::Swap or CoinbaseStableSwapper::SwapV2, per client swap_version (owner's from_mint ATA -> owner's to_mint VM Deposit ATA)
  *
  * @generated from message ocp.transaction.v1.StatelessSwapResponse.ServerParameters.CoinbaseStableSwapperServerParameter
  */
