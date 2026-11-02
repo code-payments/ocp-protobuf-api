@@ -39,12 +39,45 @@ message SolanaAddressLookupTable {
     }];
 }
 
+// Fee and resource configuration for a Solana v1 transaction message
+// (SIMD-0385). It replaces ComputeBudget instructions, which are ignored in
+// v1 transactions.
+//
+// The config is part of the signed message, so it must be encoded exactly:
+// compute_unit_limit, loaded_accounts_data_size_limit and priority_fee_lamports
+// are always present in the transaction config (including when
+// priority_fee_lamports is 0), and heap_size is present only when non-zero.
+message SolanaTransactionConfig {
+    // The compute unit limit for the transaction
+    uint32 compute_unit_limit = 1 [(validate.rules).uint32 = {
+        gt: 0,
+        lte: 1400000,
+    }];
+
+    // The loaded accounts data size limit for the transaction, in bytes
+    uint32 loaded_accounts_data_size_limit = 2 [(validate.rules).uint32 = {
+        gt: 0,
+        lte: 67108864, // 64 MiB
+    }];
+
+    // The total priority fee for the transaction, in lamports. Unlike
+    // ComputeBudget::SetComputeUnitPrice, this is not a per compute unit price.
+    uint64 priority_fee_lamports = 3;
+
+    // The requested heap size in bytes. When 0, it's omitted from the
+    // transaction config and the runtime default is used. Otherwise, it must
+    // be a multiple of 1024 between 32 KiB and 256 KiB.
+    uint32 heap_size = 4 [(validate.rules).uint32.lte = 262144];
+}
+
 // Transaction is a raw binary Solana transaction
 message Transaction {
-    // Maximum size taken from: https://github.com/solana-labs/solana/blob/39b3ac6a8d29e14faa1de73d8b46d390ad41797b/sdk/src/packet.rs#L9-L13
+    // Maximum size is that of a v1 transaction taken from: https://github.com/solana-foundation/solana-improvement-documents/blob/main/proposals/0296-larger-transactions.md
+    //
+    // Note: Legacy and v0 transactions are limited to 1232 bytes.
     bytes value = 1 [(validate.rules).bytes = {
         min_len: 1
-        max_len: 1232
+        max_len: 4096
     }];
 }
 

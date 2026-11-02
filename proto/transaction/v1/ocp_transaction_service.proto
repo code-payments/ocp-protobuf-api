@@ -418,7 +418,11 @@ message StatefulSwapRequest {
         // The user authority account that will sign to authorize the swap.
         //
         // For Reserve contract buy/sell flows against existing currencies, this must be a random one-time use account.
-        // For Reserve contract buy flows against new currencies, this must be the owner account that is the currency creator.
+        // For Reserve contract buy flows against new currencies:
+        //   - For v1 transactions paying with Core Mint, this must be a random one-time use account
+        //     other than the owner. It owns the temporary Core Mint account, which can't be known
+        //     ahead of the transaction, so nobody can pre-fund it to make closing it fail.
+        //   - Otherwise, this must be the owner account that is the currency creator.
         // For Coinbase Stable Swapper swap flows, this must be a random one-time use account.
         common.v1.SolanaAccountId swap_authority = 10 [(validate.rules).message.required = true];
 
@@ -429,6 +433,12 @@ message StatefulSwapRequest {
         // set using the private key of the owner account. This provides an authentication
         // mechanism to the RPC.
         common.v1.Signature signature = 12 [(validate.rules).message.required = true];
+
+        // The Solana transaction version the client supports constructing for the
+        // swap. 0 (unset) is v0 with ALTs. 1 is v1, which is only used when the
+        // server returns ServerParameters with transaction_config set. Clients
+        // that request v1 must still support v0 server parameters.
+        uint32 transaction_version = 13 [(validate.rules).uint32.lte = 1];
     }
 
     message SubmitSignatures {
@@ -463,7 +473,8 @@ message StatefulSwapResponse {
         // Server parameters when executing stateful buy/sell flows against the
         // Reserve contract against an existing currency
         //
-        // Supported Solana transaction version: v0
+        // Supported Solana transaction versions: v0, or v1 when transaction_config
+        // is set. ComputeBudget instructions are always omitted from v1 transactions.
         //
         // Instruction formats:
         //
@@ -548,13 +559,19 @@ message StatefulSwapResponse {
             // Destination account where the buy fee should be paid. Only set when
             // a non-zero fee_amount was provided in the client parameters.
             common.v1.SolanaAccountId fee_destination = 10;
+
+            // Set only when the transaction must be constructed as v1. When set,
+            // alts is empty, compute_unit_limit and compute_unit_price are 0, and
+            // the transaction is built as v1 without ALTs using this config.
+            common.v1.SolanaTransactionConfig transaction_config = 11;
         }
 
         // Server parameters when executing stateful buy flows against the
         // Reserve contract against a new currency. Only the creator of the
         // currency will be able to execute this flow.
         //
-        // Supported Solana transaction version: v0
+        // Supported Solana transaction versions: v0, or v1 when transaction_config
+        // is set. ComputeBudget instructions are always omitted from v1 transactions.
         //
         // Instruction format (paying with Core Mint):
         //  1. System::AdvanceNonce
@@ -580,9 +597,51 @@ message StatefulSwapResponse {
         //  7. Reserve::SellTokens (limited sell of the full swap + fee amount, transferring the Core Mint value into the fee destination)
         //  8. Reserve::BuyTokens (limited buy funded by the treasury's Core Mint ATA, transferring to_mint tokens into the to_mint VM Deposit ATA)
         //
-        // Note: The currency, VM and to_mint VM Deposit ATA will be initialized prior to
-        //       executing this transaction. Atomicity cannot be guaranteed due to transaction
-        //       size limits, which will be revisited when the v1 transaction format is released.
+        // Note: For v0 transactions in all other cases, the currency, VM and to_mint VM Deposit
+        //       ATA will be initialized prior to executing this transaction, so atomicity cannot
+        //       be guaranteed.
+        //
+        // v1 instruction format (paying with Core Mint):
+        //  1. System::AdvanceNonce
+        //  2. [Optional] Memo::Memo
+        //  3. Reserve::InitializeCurrency
+        //  4. Reserve::InitializePool
+        //  5. VM::InitializeVm
+        //  6. AssociatedTokenAccount::CreateIdempotent (open swap_authority's Core Mint temporary ATA, paid by authority)
+        //  7. AssociatedTokenAccount::CreateIdempotent (open owner's to_mint VM Deposit ATA, paid by authority)
+        //  8. VM::TransferForSwapWithFee (Core Mint VM swap ATA -> swap_authority's Core Mint temporary ATA (swap amount) and fee destination (fee amount))
+        //  9. Reserve::BuyTokens (limited buy by swap_authority, funded by its Core Mint temporary ATA, transferring to_mint tokens into the owner's to_mint VM Deposit ATA)
+        // 10. Token::CloseAccount (closes swap_authority's Core Mint temporary ATA, signed by swap_authority, rent to authority)
+        // 11. Reserve::InitializeMetadata
+        // 12. VM::InitMemory, for each of memory_accounts in order
+        // 13. AssociatedTokenAccount::CreateIdempotent (open fee_account_owner's to_mint ATA, paid by authority)
+        // 14. System::Transfer (authority -> memory account, rent_top_up_lamports), for each of memory_accounts in order
+        // 15. VM::ResizeMemory, for each of memory_accounts in order, for each of its resize_sizes in order
+        //
+        // v1 instruction format (all other cases):
+        //  1. System::AdvanceNonce
+        //  2. [Optional] Memo::Memo
+        //  3. Reserve::InitializeCurrency
+        //  4. Reserve::InitializePool
+        //  5. VM::InitializeVm
+        //  6. AssociatedTokenAccount::CreateIdempotent (open owner's to_mint VM Deposit ATA, paid by authority)
+        //  7. AssociatedTokenAccount::CreateIdempotent (open treasury's from_mint ATA, paid by authority)
+        //  8. VM::TransferForSwapWithFee (from_mint VM swap ATA -> treasury's from_mint ATA (swap + fee amount))
+        //  9. Reserve::SellTokens (limited sell of the full swap + fee amount, transferring the Core Mint value into the fee destination)
+        // 10. Reserve::BuyTokens (limited buy funded by the treasury's Core Mint ATA, transferring to_mint tokens into the to_mint VM Deposit ATA)
+        // 11. Reserve::InitializeMetadata
+        // 12. VM::InitMemory, for each of memory_accounts in order
+        // 13. AssociatedTokenAccount::CreateIdempotent (open fee_account_owner's to_mint ATA, paid by authority)
+        // 14. System::Transfer (authority -> memory account, rent_top_up_lamports), for each of memory_accounts in order
+        // 15. VM::ResizeMemory, for each of memory_accounts in order, for each of its resize_sizes in order
+        //
+        // Note: v1 transactions are atomic in all cases. Nothing is initialized prior to
+        //       executing the transaction.
+        //
+        // Note: The rent top-ups pre-fund each memory account for its final size, so
+        //       VM::ResizeMemory doesn't transfer rent. That keeps the transaction within the
+        //       runtime's limit of 64 instructions, including CPIs. Clients must use the
+        //       server-provided values exactly.
         //
         // Note: Client should verify that the new currency's mint address matches that derived
         //       from using these server parameters.
@@ -645,12 +704,61 @@ message StatefulSwapResponse {
             // validate this is as expected based on a pre-coordinated amount
             // accepted by the user.
             uint64 treasury_purchase_amount = 16;
+
+            // Set only when the transaction must be constructed as v1. When set,
+            // alts is empty, compute_unit_limit and compute_unit_price are 0, and
+            // the transaction is built as v1 without ALTs using this config.
+            common.v1.SolanaTransactionConfig transaction_config = 17;
+
+            // VM memory accounts initialized and resized to full capacity within the
+            // transaction, in instruction order. Only set when transaction_config is set.
+            repeated VmMemoryAccountInitialization memory_accounts = 18 [(validate.rules).repeated = {
+                max_items: 8, // Arbitrary
+            }];
+
+            // Owner of the to_mint fee account, which v1 transactions open with
+            // AssociatedTokenAccount::CreateIdempotent
+            common.v1.SolanaAccountId fee_account_owner = 19 [(validate.rules).message.required = true];
+
+            message VmMemoryAccountInitialization {
+                // The memory account address. Client should verify that it matches
+                // the address derived from the VM and name.
+                common.v1.SolanaAccountId address = 1 [(validate.rules).message.required = true];
+
+                // The name provided to VM::InitMemory
+                string name = 2 [(validate.rules).string = {
+                    min_len: 1,
+                    max_len: 32,
+                }];
+
+                // The number of virtual accounts provided to VM::InitMemory
+                uint32 num_accounts = 3 [(validate.rules).uint32.gt = 0];
+
+                // The virtual account size provided to VM::InitMemory
+                uint32 account_size = 4 [(validate.rules).uint32 = {
+                    gt: 0,
+                    lte: 65535,
+                }];
+
+                // The account sizes provided to successive VM::ResizeMemory instructions,
+                // in order. The last is the memory account's full capacity.
+                repeated uint32 resize_sizes = 5 [(validate.rules).repeated = {
+                    min_items: 1,
+                    max_items: 32, // Arbitrary
+                }];
+
+                // Lamports the authority transfers to the memory account with
+                // System::Transfer after VM::InitMemory. They cover the rent for the
+                // account's final size beyond what VM::InitMemory paid.
+                uint64 rent_top_up_lamports = 6 [(validate.rules).uint64.gt = 0];
+            }
         }
 
         // Server parameters when executing stateful swap flows against the
         // Coinbase Stable Swapper program.
         //
-        // Supported Solana transaction version: v0
+        // Supported Solana transaction versions: v0, or v1 when transaction_config
+        // is set. ComputeBudget instructions are always omitted from v1 transactions.
         //
         // Instruction format:
         //  1. System::AdvanceNonce
@@ -694,6 +802,11 @@ message StatefulSwapResponse {
             // sourced from the on-chain LiquidityPool account. Required by the
             // CoinbaseStableSwapper::Swap instruction.
             common.v1.SolanaAccountId pool_fee_recipient = 9 [(validate.rules).message.required = true];
+
+            // Set only when the transaction must be constructed as v1. When set,
+            // alts is empty, compute_unit_limit and compute_unit_price are 0, and
+            // the transaction is built as v1 without ALTs using this config.
+            common.v1.SolanaTransactionConfig transaction_config = 10;
         }
     }
 
@@ -767,6 +880,12 @@ message StatelessSwapRequest {
         // this field set using the private key of the owner account. This
         // provides an authentication mechanism to the RPC.
         common.v1.Signature signature = 4 [(validate.rules).message.required = true];
+
+        // The Solana transaction version the client supports constructing for the
+        // swap. 0 (unset) is v0 with ALTs. 1 is v1, which is only used when the
+        // server returns ServerParameters with transaction_config set. Clients
+        // that request v1 must still support v0 server parameters.
+        uint32 transaction_version = 5 [(validate.rules).uint32.lte = 1];
     }
 
     message SubmitSignatures {
@@ -797,7 +916,8 @@ message StatelessSwapResponse {
         // Server parameters for executing stateless swap flows against the
         // Coinbase Stable Swapper program.
         //
-        // Supported Solana transaction version: v0
+        // Supported Solana transaction versions: v0, or v1 when transaction_config
+        // is set. ComputeBudget instructions are always omitted from v1 transactions.
         //
         // Instruction format:
         //  1. [Optional] ComputeBudget::SetComputeUnitLimit
@@ -832,6 +952,11 @@ message StatelessSwapResponse {
             // sourced from the on-chain LiquidityPool account. Required by the
             // CoinbaseStableSwapper::Swap instruction.
             common.v1.SolanaAccountId pool_fee_recipient = 7 [(validate.rules).message.required = true];
+
+            // Set only when the transaction must be constructed as v1. When set,
+            // alts is empty, compute_unit_limit and compute_unit_price are 0, and
+            // the transaction is built as v1 without ALTs using this config.
+            common.v1.SolanaTransactionConfig transaction_config = 8;
         }
     }
 
