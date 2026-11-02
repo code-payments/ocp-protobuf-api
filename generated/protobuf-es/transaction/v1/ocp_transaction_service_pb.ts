@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
-import { AccountType, Blockhash, Hash, IntentId, Signature, SolanaAccountId, SolanaAddressLookupTable, SwapId, Transaction } from "../../common/v1/model_pb";
+import { AccountType, Blockhash, Hash, IntentId, Signature, SolanaAccountId, SolanaAddressLookupTable, SolanaTransactionConfig, SwapId, Transaction } from "../../common/v1/model_pb";
 import { VerifiedCoreMintFiatExchangeRate, VerifiedLaunchpadCurrencyReserveState } from "../../currency/v1/ocp_currency_service_pb";
 
 /**
@@ -1091,6 +1091,16 @@ export class StatefulSwapRequest_Initiate extends Message<StatefulSwapRequest_In
    */
   signature?: Signature;
 
+  /**
+   * The Solana transaction version the client supports constructing for the
+   * swap. 0 (unset) is v0 with ALTs. 1 is v1, which is only used when the
+   * server returns ServerParameters with transaction_config set. Clients
+   * that request v1 must still support v0 server parameters.
+   *
+   * @generated from field: uint32 transaction_version = 13;
+   */
+  transactionVersion = 0;
+
   constructor(data?: PartialMessage<StatefulSwapRequest_Initiate>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1105,6 +1115,7 @@ export class StatefulSwapRequest_Initiate extends Message<StatefulSwapRequest_In
     { no: 10, name: "swap_authority", kind: "message", T: SolanaAccountId },
     { no: 11, name: "proof_signature", kind: "message", T: Signature },
     { no: 12, name: "signature", kind: "message", T: Signature },
+    { no: 13, name: "transaction_version", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapRequest_Initiate {
@@ -1505,7 +1516,8 @@ export class StatefulSwapResponse_ServerParameters extends Message<StatefulSwapR
  * Server parameters when executing stateful buy/sell flows against the
  * Reserve contract against an existing currency
  *
- * Supported Solana transaction version: v0
+ * Supported Solana transaction versions: v0, or v1 when transaction_config
+ * is set. ComputeBudget instructions are always omitted from v1 transactions.
  *
  * Instruction formats:
  *
@@ -1634,6 +1646,15 @@ export class StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServer
    */
   feeDestination?: SolanaAccountId;
 
+  /**
+   * Set only when the transaction must be constructed as v1. When set,
+   * alts is empty, compute_unit_limit and compute_unit_price are 0, and
+   * the transaction is built as v1 without ALTs using this config.
+   *
+   * @generated from field: ocp.common.v1.SolanaTransactionConfig transaction_config = 11;
+   */
+  transactionConfig?: SolanaTransactionConfig;
+
   constructor(data?: PartialMessage<StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1652,6 +1673,7 @@ export class StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServer
     { no: 8, name: "memory_account", kind: "message", T: SolanaAccountId },
     { no: 9, name: "memory_index", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 10, name: "fee_destination", kind: "message", T: SolanaAccountId },
+    { no: 11, name: "transaction_config", kind: "message", T: SolanaTransactionConfig },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParameters {
@@ -1676,7 +1698,8 @@ export class StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServer
  * Reserve contract against a new currency. Only the creator of the
  * currency will be able to execute this flow.
  *
- * Supported Solana transaction version: v0
+ * Supported Solana transaction versions: v0, or v1 when transaction_config
+ * is set. ComputeBudget instructions are always omitted from v1 transactions.
  *
  * Instruction format (paying with Core Mint):
  *  1. System::AdvanceNonce
@@ -1702,9 +1725,42 @@ export class StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServer
  *  7. Reserve::SellTokens (limited sell of the full swap + fee amount, transferring the Core Mint value into the fee destination)
  *  8. Reserve::BuyTokens (limited buy funded by the treasury's Core Mint ATA, transferring to_mint tokens into the to_mint VM Deposit ATA)
  *
- * Note: The currency, VM and to_mint VM Deposit ATA will be initialized prior to
- *       executing this transaction. Atomicity cannot be guaranteed due to transaction
- *       size limits, which will be revisited when the v1 transaction format is released.
+ * Note: For v0 transactions in all other cases, the currency, VM and to_mint VM Deposit
+ *       ATA will be initialized prior to executing this transaction, so atomicity cannot
+ *       be guaranteed.
+ *
+ * v1 instruction format (paying with Core Mint):
+ *  1. System::AdvanceNonce
+ *  2. [Optional] Memo::Memo
+ *  3. Reserve::InitializeCurrency
+ *  4. Reserve::InitializePool
+ *  5. VM::InitializeVm
+ *  6. AssociatedTokenAccount::CreateIdempotent (open owner's Core Mint ATA, paid by authority)
+ *  7. AssociatedTokenAccount::CreateIdempotent (open owner's to_mint VM Deposit ATA, paid by authority)
+ *  8. VM::TransferForSwapWithFee (Core Mint VM swap ATA -> owner's Core Mint ATA (swap amount) and fee destination (fee amount))
+ *  9. Reserve::BuyTokens (limited buy transferring to_mint tokens into the to_mint VM Deposit ATA)
+ * 10. Token::CloseAccount (closes owner's Core Mint ATA)
+ * 11. Reserve::InitializeMetadata
+ * 12. VM::InitMemory, for each of memory_accounts in order
+ * 13. AssociatedTokenAccount::CreateIdempotent (open fee_account_owner's to_mint ATA, paid by authority)
+ *
+ * v1 instruction format (all other cases):
+ *  1. System::AdvanceNonce
+ *  2. [Optional] Memo::Memo
+ *  3. Reserve::InitializeCurrency
+ *  4. Reserve::InitializePool
+ *  5. VM::InitializeVm
+ *  6. AssociatedTokenAccount::CreateIdempotent (open owner's to_mint VM Deposit ATA, paid by authority)
+ *  7. AssociatedTokenAccount::CreateIdempotent (open treasury's from_mint ATA, paid by authority)
+ *  8. VM::TransferForSwapWithFee (from_mint VM swap ATA -> treasury's from_mint ATA (swap + fee amount))
+ *  9. Reserve::SellTokens (limited sell of the full swap + fee amount, transferring the Core Mint value into the fee destination)
+ * 10. Reserve::BuyTokens (limited buy funded by the treasury's Core Mint ATA, transferring to_mint tokens into the to_mint VM Deposit ATA)
+ * 11. Reserve::InitializeMetadata
+ * 12. VM::InitMemory, for each of memory_accounts in order
+ * 13. AssociatedTokenAccount::CreateIdempotent (open fee_account_owner's to_mint ATA, paid by authority)
+ *
+ * Note: v1 transactions are atomic in all cases. Nothing is initialized prior to
+ *       executing the transaction.
  *
  * Note: Client should verify that the new currency's mint address matches that derived
  *       from using these server parameters.
@@ -1829,6 +1885,32 @@ export class StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParam
    */
   treasuryPurchaseAmount = protoInt64.zero;
 
+  /**
+   * Set only when the transaction must be constructed as v1. When set,
+   * alts is empty, compute_unit_limit and compute_unit_price are 0, and
+   * the transaction is built as v1 without ALTs using this config.
+   *
+   * @generated from field: ocp.common.v1.SolanaTransactionConfig transaction_config = 17;
+   */
+  transactionConfig?: SolanaTransactionConfig;
+
+  /**
+   * VM memory accounts initialized within the transaction, in instruction
+   * order. The server resizes them to full capacity after the transaction.
+   * Only set when transaction_config is set.
+   *
+   * @generated from field: repeated ocp.transaction.v1.StatefulSwapResponse.ServerParameters.ReserveNewCurrencyServerParameter.VmMemoryAccountInitialization memory_accounts = 18;
+   */
+  memoryAccounts: StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization[] = [];
+
+  /**
+   * Owner of the to_mint fee account, which v1 transactions open with
+   * AssociatedTokenAccount::CreateIdempotent
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId fee_account_owner = 19;
+   */
+  feeAccountOwner?: SolanaAccountId;
+
   constructor(data?: PartialMessage<StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1853,6 +1935,9 @@ export class StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParam
     { no: 14, name: "fee_destination", kind: "message", T: SolanaAccountId },
     { no: 15, name: "treasury", kind: "message", T: SolanaAccountId },
     { no: 16, name: "treasury_purchase_amount", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 17, name: "transaction_config", kind: "message", T: SolanaTransactionConfig },
+    { no: 18, name: "memory_accounts", kind: "message", T: StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization, repeated: true },
+    { no: 19, name: "fee_account_owner", kind: "message", T: SolanaAccountId },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter {
@@ -1873,10 +1958,75 @@ export class StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParam
 }
 
 /**
+ * @generated from message ocp.transaction.v1.StatefulSwapResponse.ServerParameters.ReserveNewCurrencyServerParameter.VmMemoryAccountInitialization
+ */
+export class StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization extends Message<StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization> {
+  /**
+   * The memory account address. Client should verify that it matches
+   * the address derived from the VM and name.
+   *
+   * @generated from field: ocp.common.v1.SolanaAccountId address = 1;
+   */
+  address?: SolanaAccountId;
+
+  /**
+   * The name provided to VM::InitMemory
+   *
+   * @generated from field: string name = 2;
+   */
+  name = "";
+
+  /**
+   * The number of virtual accounts provided to VM::InitMemory
+   *
+   * @generated from field: uint32 num_accounts = 3;
+   */
+  numAccounts = 0;
+
+  /**
+   * The virtual account size provided to VM::InitMemory
+   *
+   * @generated from field: uint32 account_size = 4;
+   */
+  accountSize = 0;
+
+  constructor(data?: PartialMessage<StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.transaction.v1.StatefulSwapResponse.ServerParameters.ReserveNewCurrencyServerParameter.VmMemoryAccountInitialization";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "address", kind: "message", T: SolanaAccountId },
+    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "num_accounts", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 4, name: "account_size", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization {
+    return new StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization {
+    return new StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization {
+    return new StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization | PlainMessage<StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization> | undefined, b: StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization | PlainMessage<StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization> | undefined): boolean {
+    return proto3.util.equals(StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization, a, b);
+  }
+}
+
+/**
  * Server parameters when executing stateful swap flows against the
  * Coinbase Stable Swapper program.
  *
- * Supported Solana transaction version: v0
+ * Supported Solana transaction versions: v0, or v1 when transaction_config
+ * is set. ComputeBudget instructions are always omitted from v1 transactions.
  *
  * Instruction format:
  *  1. System::AdvanceNonce
@@ -1960,6 +2110,15 @@ export class StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerPa
    */
   poolFeeRecipient?: SolanaAccountId;
 
+  /**
+   * Set only when the transaction must be constructed as v1. When set,
+   * alts is empty, compute_unit_limit and compute_unit_price are 0, and
+   * the transaction is built as v1 without ALTs using this config.
+   *
+   * @generated from field: ocp.common.v1.SolanaTransactionConfig transaction_config = 10;
+   */
+  transactionConfig?: SolanaTransactionConfig;
+
   constructor(data?: PartialMessage<StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter>) {
     super();
     proto3.util.initPartial(data, this);
@@ -1977,6 +2136,7 @@ export class StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerPa
     { no: 7, name: "memo_value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 8, name: "fee_destination", kind: "message", T: SolanaAccountId },
     { no: 9, name: "pool_fee_recipient", kind: "message", T: SolanaAccountId },
+    { no: 10, name: "transaction_config", kind: "message", T: SolanaTransactionConfig },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter {
@@ -2214,6 +2374,16 @@ export class StatelessSwapRequest_Initiate extends Message<StatelessSwapRequest_
    */
   signature?: Signature;
 
+  /**
+   * The Solana transaction version the client supports constructing for the
+   * swap. 0 (unset) is v0 with ALTs. 1 is v1, which is only used when the
+   * server returns ServerParameters with transaction_config set. Clients
+   * that request v1 must still support v0 server parameters.
+   *
+   * @generated from field: uint32 transaction_version = 5;
+   */
+  transactionVersion = 0;
+
   constructor(data?: PartialMessage<StatelessSwapRequest_Initiate>) {
     super();
     proto3.util.initPartial(data, this);
@@ -2226,6 +2396,7 @@ export class StatelessSwapRequest_Initiate extends Message<StatelessSwapRequest_
     { no: 2, name: "owner", kind: "message", T: SolanaAccountId },
     { no: 3, name: "wait_for_finalization", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 4, name: "signature", kind: "message", T: Signature },
+    { no: 5, name: "transaction_version", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatelessSwapRequest_Initiate {
@@ -2457,7 +2628,8 @@ export class StatelessSwapResponse_ServerParameters extends Message<StatelessSwa
  * Server parameters for executing stateless swap flows against the
  * Coinbase Stable Swapper program.
  *
- * Supported Solana transaction version: v0
+ * Supported Solana transaction versions: v0, or v1 when transaction_config
+ * is set. ComputeBudget instructions are always omitted from v1 transactions.
  *
  * Instruction format:
  *  1. [Optional] ComputeBudget::SetComputeUnitLimit
@@ -2524,6 +2696,15 @@ export class StatelessSwapResponse_ServerParameters_CoinbaseStableSwapperServerP
    */
   poolFeeRecipient?: SolanaAccountId;
 
+  /**
+   * Set only when the transaction must be constructed as v1. When set,
+   * alts is empty, compute_unit_limit and compute_unit_price are 0, and
+   * the transaction is built as v1 without ALTs using this config.
+   *
+   * @generated from field: ocp.common.v1.SolanaTransactionConfig transaction_config = 8;
+   */
+  transactionConfig?: SolanaTransactionConfig;
+
   constructor(data?: PartialMessage<StatelessSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter>) {
     super();
     proto3.util.initPartial(data, this);
@@ -2539,6 +2720,7 @@ export class StatelessSwapResponse_ServerParameters_CoinbaseStableSwapperServerP
     { no: 5, name: "compute_unit_price", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
     { no: 6, name: "memo_value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 7, name: "pool_fee_recipient", kind: "message", T: SolanaAccountId },
+    { no: 8, name: "transaction_config", kind: "message", T: SolanaTransactionConfig },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StatelessSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameter {
