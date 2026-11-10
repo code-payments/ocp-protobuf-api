@@ -5629,6 +5629,13 @@ func (m *StatefulSwapRequest_Initiate) Validate() error {
 		}
 	}
 
+	if m.GetTransactionVersion() > 1 {
+		return StatefulSwapRequest_InitiateValidationError{
+			field:  "TransactionVersion",
+			reason: "value must be less than or equal to 1",
+		}
+	}
+
 	switch m.Kind.(type) {
 
 	case *StatefulSwapRequest_Initiate_Reserve:
@@ -6544,6 +6551,16 @@ func (m *StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerPara
 		}
 	}
 
+	if v, ok := interface{}(m.GetTransactionConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_ReserveExistingCurrencyServerParametersValidationError{
+				field:  "TransactionConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	return nil
 }
 
@@ -6790,6 +6807,55 @@ func (m *StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter
 
 	// no validation rules for TreasuryPurchaseAmount
 
+	if v, ok := interface{}(m.GetTransactionConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+				field:  "TransactionConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(m.GetMemoryAccounts()) > 8 {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+			field:  "MemoryAccounts",
+			reason: "value must contain no more than 8 item(s)",
+		}
+	}
+
+	for idx, item := range m.GetMemoryAccounts() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+					field:  fmt.Sprintf("MemoryAccounts[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.GetFeeAccountOwner() == nil {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+			field:  "FeeAccountOwner",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetFeeAccountOwner()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameterValidationError{
+				field:  "FeeAccountOwner",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	return nil
 }
 
@@ -6979,6 +7045,16 @@ func (m *StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParame
 		}
 	}
 
+	if v, ok := interface{}(m.GetTransactionConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
+				field:  "TransactionConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	return nil
 }
 
@@ -7048,6 +7124,136 @@ var _ interface {
 	ErrorName() string
 } = StatefulSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{}
 
+// Validate checks the field values on
+// StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, an error is returned.
+func (m *StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetAddress() == nil {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError{
+			field:  "Address",
+			reason: "value is required",
+		}
+	}
+
+	if v, ok := interface{}(m.GetAddress()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError{
+				field:  "Address",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if l := utf8.RuneCountInString(m.GetName()); l < 1 || l > 32 {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError{
+			field:  "Name",
+			reason: "value length must be between 1 and 32 runes, inclusive",
+		}
+	}
+
+	if m.GetNumAccounts() <= 0 {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError{
+			field:  "NumAccounts",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	if val := m.GetAccountSize(); val <= 0 || val > 65535 {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError{
+			field:  "AccountSize",
+			reason: "value must be inside range (0, 65535]",
+		}
+	}
+
+	if l := len(m.GetResizeSizes()); l < 1 || l > 32 {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError{
+			field:  "ResizeSizes",
+			reason: "value must contain between 1 and 32 items, inclusive",
+		}
+	}
+
+	if m.GetRentTopUpLamports() <= 0 {
+		return StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError{
+			field:  "RentTopUpLamports",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	return nil
+}
+
+// StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError
+// is the validation error returned by
+// StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization.Validate
+// if the designated constraints aren't met.
+type StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError) ErrorName() string {
+	return "StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sStatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitialization.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = StatefulSwapResponse_ServerParameters_ReserveNewCurrencyServerParameter_VmMemoryAccountInitializationValidationError{}
+
 // Validate checks the field values on StatelessSwapRequest_Initiate with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
@@ -7089,6 +7295,13 @@ func (m *StatelessSwapRequest_Initiate) Validate() error {
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
+		}
+	}
+
+	if m.GetTransactionVersion() > 1 {
+		return StatelessSwapRequest_InitiateValidationError{
+			field:  "TransactionVersion",
+			reason: "value must be less than or equal to 1",
 		}
 	}
 
@@ -7732,6 +7945,16 @@ func (m *StatelessSwapResponse_ServerParameters_CoinbaseStableSwapperServerParam
 		if err := v.Validate(); err != nil {
 			return StatelessSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
 				field:  "PoolFeeRecipient",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetTransactionConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return StatelessSwapResponse_ServerParameters_CoinbaseStableSwapperServerParameterValidationError{
+				field:  "TransactionConfig",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}

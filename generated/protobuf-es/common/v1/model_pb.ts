@@ -4,7 +4,7 @@
 // @ts-nocheck
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
-import { Duration, Message, proto3, Timestamp } from "@bufbuild/protobuf";
+import { Duration, Message, proto3, protoInt64, Timestamp } from "@bufbuild/protobuf";
 
 /**
  * AccountType associates a type to an account, which infers how an account is used
@@ -182,13 +182,90 @@ export class SolanaAddressLookupTable extends Message<SolanaAddressLookupTable> 
 }
 
 /**
+ * Fee and resource configuration for a Solana v1 transaction message
+ * (SIMD-0385). It replaces ComputeBudget instructions, which are ignored in
+ * v1 transactions.
+ *
+ * The config is part of the signed message, so it must be encoded exactly:
+ * compute_unit_limit, loaded_accounts_data_size_limit and priority_fee_lamports
+ * are always present in the transaction config (including when
+ * priority_fee_lamports is 0), and heap_size is present only when non-zero.
+ *
+ * @generated from message ocp.common.v1.SolanaTransactionConfig
+ */
+export class SolanaTransactionConfig extends Message<SolanaTransactionConfig> {
+  /**
+   * The compute unit limit for the transaction
+   *
+   * @generated from field: uint32 compute_unit_limit = 1;
+   */
+  computeUnitLimit = 0;
+
+  /**
+   * The loaded accounts data size limit for the transaction, in bytes
+   *
+   * @generated from field: uint32 loaded_accounts_data_size_limit = 2;
+   */
+  loadedAccountsDataSizeLimit = 0;
+
+  /**
+   * The total priority fee for the transaction, in lamports. Unlike
+   * ComputeBudget::SetComputeUnitPrice, this is not a per compute unit price.
+   *
+   * @generated from field: uint64 priority_fee_lamports = 3;
+   */
+  priorityFeeLamports = protoInt64.zero;
+
+  /**
+   * The requested heap size in bytes. When 0, it's omitted from the
+   * transaction config and the runtime default is used. Otherwise, it must
+   * be a multiple of 1024 between 32 KiB and 256 KiB.
+   *
+   * @generated from field: uint32 heap_size = 4;
+   */
+  heapSize = 0;
+
+  constructor(data?: PartialMessage<SolanaTransactionConfig>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "ocp.common.v1.SolanaTransactionConfig";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "compute_unit_limit", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 2, name: "loaded_accounts_data_size_limit", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 3, name: "priority_fee_lamports", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 4, name: "heap_size", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SolanaTransactionConfig {
+    return new SolanaTransactionConfig().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SolanaTransactionConfig {
+    return new SolanaTransactionConfig().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SolanaTransactionConfig {
+    return new SolanaTransactionConfig().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: SolanaTransactionConfig | PlainMessage<SolanaTransactionConfig> | undefined, b: SolanaTransactionConfig | PlainMessage<SolanaTransactionConfig> | undefined): boolean {
+    return proto3.util.equals(SolanaTransactionConfig, a, b);
+  }
+}
+
+/**
  * Transaction is a raw binary Solana transaction
  *
  * @generated from message ocp.common.v1.Transaction
  */
 export class Transaction extends Message<Transaction> {
   /**
-   * Maximum size taken from: https://github.com/solana-labs/solana/blob/39b3ac6a8d29e14faa1de73d8b46d390ad41797b/sdk/src/packet.rs#L9-L13
+   * Maximum size is that of a v1 transaction taken from: https://github.com/solana-foundation/solana-improvement-documents/blob/main/proposals/0296-larger-transactions.md
+   *
+   * Note: Legacy and v0 transactions are limited to 1232 bytes.
    *
    * @generated from field: bytes value = 1;
    */

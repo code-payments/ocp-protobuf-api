@@ -211,6 +211,96 @@ var _ interface {
 	ErrorName() string
 } = SolanaAddressLookupTableValidationError{}
 
+// Validate checks the field values on SolanaTransactionConfig with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *SolanaTransactionConfig) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if val := m.GetComputeUnitLimit(); val <= 0 || val > 1400000 {
+		return SolanaTransactionConfigValidationError{
+			field:  "ComputeUnitLimit",
+			reason: "value must be inside range (0, 1400000]",
+		}
+	}
+
+	if val := m.GetLoadedAccountsDataSizeLimit(); val <= 0 || val > 67108864 {
+		return SolanaTransactionConfigValidationError{
+			field:  "LoadedAccountsDataSizeLimit",
+			reason: "value must be inside range (0, 67108864]",
+		}
+	}
+
+	// no validation rules for PriorityFeeLamports
+
+	if m.GetHeapSize() > 262144 {
+		return SolanaTransactionConfigValidationError{
+			field:  "HeapSize",
+			reason: "value must be less than or equal to 262144",
+		}
+	}
+
+	return nil
+}
+
+// SolanaTransactionConfigValidationError is the validation error returned by
+// SolanaTransactionConfig.Validate if the designated constraints aren't met.
+type SolanaTransactionConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SolanaTransactionConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SolanaTransactionConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SolanaTransactionConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SolanaTransactionConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SolanaTransactionConfigValidationError) ErrorName() string {
+	return "SolanaTransactionConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SolanaTransactionConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSolanaTransactionConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SolanaTransactionConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SolanaTransactionConfigValidationError{}
+
 // Validate checks the field values on Transaction with the rules defined in
 // the proto definition for this message. If any rules are violated, an error
 // is returned.
@@ -219,10 +309,10 @@ func (m *Transaction) Validate() error {
 		return nil
 	}
 
-	if l := len(m.GetValue()); l < 1 || l > 1232 {
+	if l := len(m.GetValue()); l < 1 || l > 4096 {
 		return TransactionValidationError{
 			field:  "Value",
-			reason: "value length must be between 1 and 1232 bytes, inclusive",
+			reason: "value length must be between 1 and 4096 bytes, inclusive",
 		}
 	}
 
