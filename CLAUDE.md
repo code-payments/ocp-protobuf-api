@@ -73,62 +73,26 @@ Import dependency graph (relevant when adding cross-service types):
 - `generated/protobuf-es/` - TypeScript via Protobuf-ES/Connect-ES with index.ts barrels
 
 ### Releases
-Consumers pin by git tag (`vX.Y.Z`, semver, published as GitHub releases). `main` is often a few commits ahead of the latest tag (v1.16.0 as of Sept 2026); tagging is a separate step from merging and is not something to do unprompted. Commits are squash-merged PRs whose titles carry the `(#N)` suffix, so the PR title is the commit message.
+Consumers pin by git tag (`vX.Y.Z`, semver, published as GitHub releases). `main` is often a few commits ahead of the latest tag (see `git tag`); tagging is a separate step from merging and is not something to do unprompted. Commits are squash-merged PRs whose titles carry the `(#N)` suffix, so the PR title is the commit message.
 
 ## Architecture
 
-### Common Types (proto/common/v1/model.proto)
-- **AccountType enum**: how an account is used (PRIMARY, REMOTE_SEND_GIFT_CARD, SWAP, ASSOCIATED_TOKEN_ACCOUNT, POOL)
-- **Solana primitives**: SolanaAccountId (32-byte Ed25519 key), SolanaAddressLookupTable (ALTs for versioned transactions, 1-256 entries), Transaction (1-4096 bytes; legacy and v0 are limited to 1232), SolanaTransactionConfig (v1 transaction compute unit limit, loaded accounts data size limit, priority fee and heap size, replacing ComputeBudget instructions), Blockhash (32 bytes), Signature (64 bytes)
-- **OCP primitives**: IntentId and SwapId (client-generated, 32 bytes), Hash (32 bytes), UUID (16 bytes)
-- **Generic RPC wrappers**: Request/Response with versioning
-- **ServerPing/ClientPong**: keepalive protocol used by streaming RPCs (currency live data, messaging keepalive streams). Ping carries the delay before the next ping so clients can detect unhealthy streams.
-- **Interval enum**: RAW/SECOND/MINUTE/HOUR/DAY/WEEK
+The proto comments are the contract (RPC semantics, action specs, Solana instruction lists, keepalive protocols); read them for detail. What follows is orientation.
 
-### Account Service (2 RPCs)
-- `IsOcpAccount` - whether an owner account is an OCP account (can fail with UNLOCKED_TIMELOCK_ACCOUNT)
-- `GetTokenAccountInfos` - token account metadata for an owner, with an optional `oneof Filter` (token address, account type, mint). `TokenAccountInfo` carries balance source (blockchain vs cache; cache is only reliable when LOCKED), management state (NONE/LOCKING/LOCKED/UNLOCKING/UNLOCKED/CLOSING/CLOSED, reflecting OCP's co-signing authority over timelock accounts), blockchain state, gift card claim state, `original_exchange_data` (from `transaction`), mint metadata and live launchpad reserve state (from `currency`), `created_at`, and USD cost basis. Supports a secondary `requesting_owner` + signature for cases like a user inspecting a gift card account (sets `is_gift_card_issuer`).
+| Service | RPCs | Purpose |
+|---|---|---|
+| `common` | none | Shared types: `AccountType`, Solana primitives (account IDs, ALTs, transactions, `SolanaTransactionConfig`), `IntentId`/`SwapId`, `ServerPing`/`ClientPong` keepalive, `Interval` |
+| `account` | 2 | `IsOcpAccount`, `GetTokenAccountInfos` (balance source, management state, gift card state, cost basis) |
+| `balance` | 1 | `GetBalances`: unauthenticated, many owners, per-mint breakdown |
+| `currency` | 8 | Launchpad and market data: mints, historical/live data streams, `Launch`, `UpdateIcon`/`UpdateMetadata` (moderation attestations), `Discover`, `CheckAvailability` |
+| `transaction` | 9 | Intents (`SubmitIntent`) and swaps (`StatefulSwap`, `StatelessSwap`), plus limits, withdrawals, gift card voiding |
+| `messaging` | 5 | Rendezvous-key message streams for the bill give/grab scan-code flow |
 
-### Balance Service (1 RPC)
-- `GetBalances` - core-mint-denominated balances for a set of `owners` (1-1024), optionally filtered by a `mints` list (empty means every mint each owner holds). Unauthenticated (no `signature` field) because balances are public blockchain state. Returns `balances_by_owner` (map of owner address to `OwnerBalance`, which carries the owner's aggregate `core_mint_value` in quarks and `balances_by_mint`, a map of mint address to `MintBalance`). `Result` is OK/DENIED. The earlier single-owner `GetBalance` RPC was removed in PR #66.
-
-### Currency Service (8 RPCs) — launchpad + market data
-- `GetMints` - mint metadata by address (1-1024). `Mint` includes decimals, name/symbol/description, image, social links (Website/X/Telegram/Discord), bill customization (1-3 hex colors), `HolderMetrics` and `MarketCapMetrics` (current value plus up to 4 `PredefinedRange` deltas; only populated where needed, e.g. `Discover`), `VmMetadata` (VM address/authority/omnibus; only currencies with a VM are usable for payments; lock duration is `const = 21` days), and `LaunchpadMetadata` (currency config, liquidity pool, seed, vaults, bonding-curve supply, `sell_fee_bps` `const = 100`, USD price, market cap).
-- `GetHistoricalMintData` / `StreamLiveMintData` - historical market cap for a `PredefinedRange`, and live streamed data (batches of verified core-mint fiat exchange rates and launchpad reserve states) with ping/pong keepalive. To change the streamed mint set, close and reopen the stream.
-- `Launch` - launch a new currency on the launchpad. Name/symbol are printable-ASCII validated (name pattern `^[!-~]([ -~]*[!-~])?$`, i.e. no leading/trailing spaces); icon up to 1 MB. Name requires a `ModerationAttestation`; symbol, description, and icon accept one (opaque server-verifiable proof that content passed moderation).
-- `UpdateIcon` / `UpdateMetadata` - mutate icon, description, bill customization, social links (with moderation attestations). Each field of `UpdateMetadata` is wrapped in its own `*Update` message so "not provided" is distinguishable from "set to empty".
-- `Discover` - server-streamed currency discovery (POPULAR/NEW categories).
-- `CheckAvailability` - check whether a currency name is available before launch.
-
-**Verified data pattern**: `VerifiedCoreMintFiatExchangeRate` and `VerifiedLaunchpadCurrencyReserveState` wrap data with a server signature so clients can later submit them as proofs in payment/swap flows (e.g. `VerifiedExchangeData` in intents). New price/state data that feeds payments should follow this pattern.
-
-### Transaction Service (9 RPCs) — intents and swaps
-
-**Intent system** (`SubmitIntent`): client and server never exchange transactions/instructions directly. They exchange required accounts and arguments, and each side independently constructs and validates transactions (or Code VM virtual instructions). The streaming RPC bundles two unary calls for DB-level transaction semantics: client sends `SubmitActions` (intent ID, owner, metadata, ordered actions, auth signature) → server validates and returns `ServerParameters` (one per action, in action order, including durable nonces/blockhashes) → client constructs locally, validates, signs → client sends `SubmitSignatures` → server verifies against its own locally constructed transactions and returns `Success` or `Error` (DENIED/INVALID_INTENT/SIGNATURE_ERROR/STALE_STATE with structured `ErrorDetails`, e.g. the expected transaction or virtual instruction hash on signature mismatch). If no client signatures are needed, server returns `Success` directly after step 1.
-
-Intent metadata types (each proto comment documents its exact "Action Spec"; keep those in sync with behaviour changes):
-- `OpenAccountsMetadata` - open user (PRIMARY) or POOL accounts
-- `SendPublicPaymentMetadata` - payments, withdrawals (with optional CREATE_ON_SEND_WITHDRAWAL fee split out as a `FeePaymentAction`), and **indirect sends** (gift card creation with auto-return). "Indirect send" is the current term (renamed from "remote send" in PR #54); the account type is still `REMOTE_SEND_GIFT_CARD` and the field is `is_indirect_send`.
-- `ReceivePaymentsPubliclyMetadata` - claim a gift card (closes the account; `is_indirect_send` is `const = true`)
-- `PublicDistributionMetadata` - distribute all of a pool's funds and close it (last distribution is a `NoPrivacyWithdrawAction`)
-- `SendPublicMultiPaymentMetadata` - pay multiple OCP primary accounts from the user's primary account in one intent (one `NoPrivacyTransferAction` per payment, per-payment exchange data, server auto-opens missing destination primaries when `destination_owner` is set; no withdrawals, indirect sends or fees)
-- Optional `AppMetadata` (opaque app-level bytes, 1-4096) can be attached to any intent
-
-Action types: `OpenAccountAction` (no client signature), `NoPrivacyTransferAction`, `NoPrivacyWithdrawAction` (`should_close` `const = true`), `FeePaymentAction`. `Action.id` must equal its index in the actions list. Every action/metadata carries the `mint` it operates against (multi-mint support). New-intent submissions use `VerifiedExchangeData` (proof-backed via verified exchange rate, plus reserve state for launchpad currencies); server returns plain `ExchangeData` for submitted intents.
-
-**Swaps** sit outside the intent system because they're time-sensitive and unreliable; transactions are submitted best-effort outside the Code sequencer and balance changes apply after finalization:
-- `StatefulSwap` - non-custodial state-managed swaps. Mirrors SubmitIntent flow (Initiate → ServerParameters → SubmitSignatures, 1-2 signatures: owner at index 0, `swap_authority` at index 1). `Initiate` also carries a `proof_signature` over `VerifiedSwapMetadata`. Two client parameter kinds:
-  - **Reserve** (launchpad bonding-curve buy/sell/swap). Funding via SUBMIT_INTENT, EXTERNAL_WALLET, or COINBASE_ONRAMP (`funding_id` semantics differ per source). Optional `fee_amount` (buys pay a 1% fee routed to `fee_destination` via `VM::TransferForSwapWithFee`, PR #61). `full_amount_exchange_data` is required when creating a new reserve currency with a non-core mint.
-  - **CoinbaseStableSwapper** (stablecoin swaps; from-mint is always the core mint, SUBMIT_INTENT funding only, fee must equal `CanWithdrawToAccountResponse.fee_amount`).
-  - Server parameter variants: `ReserveExistingCurrencyServerParameters` (buy with/without fee, sell, launchpad-to-launchpad swap), `ReserveNewCurrencyServerParameter` (creator-only; one instruction list when paying with core mint, another treasury-funded sell+buy list for any other mint; for v0 treasury-funded creation the currency, VM and deposit ATA are initialized *before* the transaction, so it is not atomic; v1 creation is atomic and also initializes metadata and the VM memory accounts listed in `memory_accounts`, tops up each one's rent with `rent_top_up_lamports` and resizes it through `resize_sizes`, which keeps the transaction within the runtime's 64-instruction limit including CPIs), and `CoinbaseStableSwapperServerParameter`. Each documents the exact Solana instruction list in proto comments; update those comments when a flow changes.
-  - **Transaction version**: `Initiate.transaction_version` (on both `StatefulSwap` and `StatelessSwap`) lets a client opt into v1 transactions. The server returns v1 parameters only when it sets `transaction_config` on the server parameters; then `alts` is empty, `compute_unit_limit`/`compute_unit_price` are 0, and the client builds a v1 transaction without ALTs. Clients that request v1 must still handle v0 parameters.
-  - Swap state machine: CREATED → FUNDING → FUNDED → SUBMITTING → FINALIZED / FAILED / CANCELLING / CANCELLED.
-- `StatelessSwap` - like StatefulSwap but with no state management; currently CoinbaseStableSwapper only, single owner signature, regular blockhash (no durable nonce), optional `wait_for_finalization` (Success code SUBMITTED vs FINALIZED; TRANSACTION_FAILED only when waiting).
-- `GetSwap` / `GetPendingSwaps` - swap metadata and swaps pending client action. `SwapMetadata` wraps `VerifiedSwapMetadata` signed by the owner so state can't be tampered with.
-- Also: `GetIntentMetadata` (signable by owner or rendezvous key), `GetLimits` (identity-aware send limits by currency; client supplies `consumed_since` as local start-of-day), `CanWithdrawToAccount` (destination type hints + `requires_initialization` + fee), `VoidGiftCard` (idempotent).
-
-### Messaging Service (5 RPCs)
-Messages are routed via a **rendezvous key**: a keypair typically derived from a scan code payload, establishing an anonymous channel between payment participants. RPCs: `OpenMessageStream`, `OpenMessageStreamWithKeepAlive` (ping/pong protocol), `PollMessages` (temporary polling alternative), `AckMessages`, `SendMessage`. Message kinds: `RequestToGiveBill` (sender specifies mint + verified exchange data; server attaches `Mint` metadata as `AdditionalServerContext`) and `RequestToGrabBill` (recipient provides destination). Server injects message IDs and echoes the sender's request signature so recipients can detect MITM tampering. `OpenMessageStreamRequest.signature` is still optional pending client migration. The bill give/grab scan-code flow is documented step-by-step in the `OpenMessageStream` comment.
+Concepts worth knowing before editing:
+- **Intents never exchange transactions.** Client and server exchange accounts and arguments, each builds the transaction (or Code VM instruction) independently, and the server verifies the client's signatures against its own. `SubmitIntent` is a bidirectional stream: `SubmitActions` → `ServerParameters` (one per action, in order) → `SubmitSignatures` → `Success`/`Error`. `Action.id` must equal its index. Every action and metadata carries its `mint`.
+- **Intent metadata types** (`OpenAccounts`, `SendPublicPayment`, `ReceivePaymentsPublicly`, `PublicDistribution`, `SendPublicMultiPayment`) each document an exact "Action Spec" in their comments; keep it in sync with behaviour. Any intent may carry opaque `AppMetadata` (1–4096 bytes). "Indirect send" is the current term for what the account type and some fields still call remote send/gift card.
+- **Verified data pattern:** `VerifiedCoreMintFiatExchangeRate` and `VerifiedLaunchpadCurrencyReserveState` are server-signed so clients can submit them back as proofs (`VerifiedExchangeData`). New price or state data that feeds payments should follow it.
+- **Swaps sit outside the intent system** (submitted best effort, balances applied after finalization). Server parameter variants document their Solana instruction lists in comments; update those when a flow changes. Clients that request v1 transactions (`transaction_version`) must still handle v0 parameters.
 
 ## Conventions
 
@@ -143,7 +107,4 @@ Messages are routed via a **rendezvous key**: a keypair typically derived from a
 
 ## Dependencies
 
-- **Buf**: config only (`proto/buf.yaml`, `buf.lock`); remote deps `buf.build/envoyproxy/protoc-gen-validate`, `buf.build/googleapis/googleapis`. Not run by the Makefile.
-- **protoc-gen-validate**: v0.1.0 plugin in the Go image; v1.2.1 Go runtime in `go.mod`
-- Go 1.25, grpc v1.71, protobuf v1.36 (see `go.mod`)
-- **Protobuf-ES v1 / Connect-ES** (`@bufbuild/*` package names) for TypeScript generation
+Go 1.25, grpc v1.71, protobuf v1.36 (see `go.mod`). Buf config (`proto/buf.yaml`, `buf.lock`) pulls `protoc-gen-validate` and `googleapis` but nothing runs buf.
